@@ -1,3 +1,5 @@
+package model;
+
 import java.awt.*;
 
 public class Player {
@@ -8,7 +10,7 @@ public class Player {
     public Player() {
         x = 288;
         y = 256;
-    } // **** end Player() constructor ****
+    } // **** end model.Player() constructor ****
 
     public void tick() {
         move();
@@ -37,4 +39,4 @@ public class Player {
         this.yFuture = yFuture;
     }
 
-} // **** end Player class ****
+} // **** end model.Player class ****

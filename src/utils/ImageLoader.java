@@ -1,3 +1,5 @@
+package utils;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -13,4 +15,4 @@ public class ImageLoader {
         return null;
     }
 
-} // **** end ImageLoader class ****
+} // **** end utils.ImageLoader class ****

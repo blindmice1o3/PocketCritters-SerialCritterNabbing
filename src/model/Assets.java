@@ -1,3 +1,7 @@
+package model;
+
+import utils.ImageLoader;
+
 import java.awt.image.BufferedImage;
 
 public class Assets {

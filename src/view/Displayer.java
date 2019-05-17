@@ -1,3 +1,8 @@
+package view;
+
+import main.Handler;
+import model.Assets;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -43,7 +48,11 @@ public class Displayer {
             super.paintComponent(g);
 
             g.drawImage(Assets.world, 0, 0, 320*2, 270*2,
-                    960, 3184, 1279, 3455, null);
+                    (int)(960 - handler.getGame().getGameCamera().getxOffset()),
+                    (int)(3184 - handler.getGame().getGameCamera().getyOffset()),
+                    (int)(1279 - handler.getGame().getGameCamera().getxOffset()),
+                    (int)(3455 - handler.getGame().getGameCamera().getyOffset()),
+                    null);
             g.setColor(Color.YELLOW);
             g.drawString("Pocket Critters - Serial Critter Nabbing!!!", 10, 10);
 
@@ -53,13 +62,21 @@ public class Displayer {
         @Override
         public void keyPressed(KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_A) {
-                handler.getGame().getPlayer().setXFuture(-32);
+                handler.getGame().getGameCamera().setxOffset(
+                        handler.getGame().getGameCamera().getxOffset()+32
+                );
             } else if (e.getKeyCode() == KeyEvent.VK_D) {
-                handler.getGame().getPlayer().setXFuture(32);
+                handler.getGame().getGameCamera().setxOffset(
+                        handler.getGame().getGameCamera().getxOffset()-32
+                );
             } else if (e.getKeyCode() == KeyEvent.VK_W) {
-                handler.getGame().getPlayer().setYFuture(-32);
+                handler.getGame().getGameCamera().setyOffset(
+                        handler.getGame().getGameCamera().getyOffset()+32
+                );
             } else if (e.getKeyCode() == KeyEvent.VK_S) {
-                handler.getGame().getPlayer().setYFuture(32);
+                handler.getGame().getGameCamera().setyOffset(
+                        handler.getGame().getGameCamera().getyOffset()-32
+                );
             }
         }
 
@@ -75,4 +92,4 @@ public class Displayer {
 
     } // **** end MyPanel inner-class ****
 
-} // **** end Displayer class ****
+} // **** end view.Displayer class ****
