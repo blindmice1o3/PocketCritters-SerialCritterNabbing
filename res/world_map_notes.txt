@@ -1,0 +1,13 @@
+pokemon-gsc-kanto.png
+
+WIDTH
+4480 / 16 = 280
+
+HEIGHT
+4320 / 16 = 270
+
+TOP LEFT starting town's blue border tile.
+(960, 3184)
+
+960 / 16 = 60
+3184 / 16 =199

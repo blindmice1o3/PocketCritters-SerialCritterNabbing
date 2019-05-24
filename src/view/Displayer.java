@@ -57,6 +57,8 @@ public class Displayer {
             g.drawString("Pocket Critters - Serial Critter Nabbing!!!", 10, 10);
 
             handler.getGame().getPlayer().render(g);
+            handler.getGame().getJames().render(g);
+            handler.getGame().getJessie().render(g);
         }
 
         @Override

@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Player {
 
-    private int x, y;
+    protected int x, y;
     private int xFuture, yFuture;
 
     public Player() {
