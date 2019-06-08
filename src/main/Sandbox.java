@@ -17,7 +17,14 @@ public class Sandbox {
 
     public static void main(String[] args) {
         //Hopefully creating a NON-null File object that will be overwritten from Team Rocket to hard-coded RGB world map.
-        File file = new File("/throwAwayImage.png");
+        File file = null;
+        try {
+            file = File.createTempFile("outputter",".png");
+            System.out.println("Creating a new File object probably successful.");
+        } catch (IOException e) {
+            System.out.println("Catch-clause of creating a File object.");
+            e.printStackTrace();
+        }
 
         try {
             if (ImageIO.write(overwriter, ".png", file)) {
