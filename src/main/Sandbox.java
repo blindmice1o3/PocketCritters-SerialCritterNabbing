@@ -20,7 +20,7 @@ public class Sandbox {
         File file = new File("/throwAwayImage.png");
 
         try {
-            if (ImageIO.write(overwriter, "png", file)) {
+            if (ImageIO.write(overwriter, ".png", file)) {
                 System.out.println("Woohoo! ImageIO.write() probably successfully overwritten throwAwayImage.png.");
             } else {
                 System.out.println("Awww, looks like ImageIO.write() did NOT work as intended.");
