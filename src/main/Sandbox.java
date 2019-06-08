@@ -6,6 +6,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -13,11 +14,13 @@ public class Sandbox {
     // Team Rocket w Jessie and James.
     public static BufferedImage outputImage = ImageLoader.loadImage("/throwAwayImage.png");
     // Beginning of hard-coded RGB world map.
-    public static BufferedImage overwriter = ImageLoader.loadImage("/world map (rgb).png");
+    public static RenderedImage overwriter = ImageLoader.loadImage("/world map (rgb).png");
 
     public static void main(String[] args) {
         //Hopefully creating a NON-null File object that will be overwritten from Team Rocket to hard-coded RGB world map.
-        File file = null;
+        File file = new File("/res/throwAwayImage.png");
+
+        /*
         try {
             file = File.createTempFile("outputter",".png");
             System.out.println("Creating a new File object probably successful.");
@@ -25,9 +28,12 @@ public class Sandbox {
             System.out.println("Catch-clause of creating a File object.");
             e.printStackTrace();
         }
+        */
 
         try {
+            //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
             if (ImageIO.write(overwriter, ".png", file)) {
+            //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
                 System.out.println("Woohoo! ImageIO.write() probably successfully overwritten throwAwayImage.png.");
             } else {
                 System.out.println("Awww, looks like ImageIO.write() did NOT work as intended.");
