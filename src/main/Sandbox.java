@@ -1,6 +1,8 @@
 package main;
 
+import model.Assets;
 import utils.ImageLoader;
+import utils.TileSpriteToRGBConverter;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -17,8 +19,13 @@ public class Sandbox {
     public static RenderedImage overwriter = ImageLoader.loadImage("/world map (rgb).png");
 
     public static void main(String[] args) {
+        TileSpriteToRGBConverter tester = new TileSpriteToRGBConverter();
+        tester.testConsoleOutput( tester.translateTileSpriteToRGBImage() );
+
+        /*
         //Hopefully creating a NON-null File object that will be overwritten from Team Rocket to hard-coded RGB world map.
         File file = new File("/res/throwAwayImage.png");
+        */
 
         /*
         try {
@@ -30,6 +37,7 @@ public class Sandbox {
         }
         */
 
+        /*
         try {
             //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
             if (ImageIO.write(overwriter, ".png", file)) {
@@ -42,6 +50,8 @@ public class Sandbox {
             System.out.println("Inside the catch-clause while attempting ImageIO.write().");
             e.printStackTrace();
         }
+        */
+
 
         /*
         JFrame frame = new JFrame("sandbox tester");
@@ -66,6 +76,53 @@ public class Sandbox {
     }
 
 } // **** end Sandbox class ****
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Revelation: my mom will be the number one woman in my life, sorry ladies you'll have to settle for number 2... *cross
 // out ladies and replace with lady* *find a way to indicate a message: my momma taught me better than that or something
