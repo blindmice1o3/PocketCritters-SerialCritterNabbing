@@ -10,10 +10,10 @@ public class TileSpriteToRGBConverter {
 
     public TileSpriteToRGBConverter() {
         worldMapAsTileSprites = ImageLoader.loadImage("/pokemon-gsc-kanto.png");
-        initCollectionTileSpriteTarget();
+        initNonWalkableTileSpriteTargets();
     }
 
-    private void initCollectionTileSpriteTarget() {
+    private void initNonWalkableTileSpriteTargets() {
         nonWalkableTileSpriteTargets = new ArrayList<BufferedImage>();
 
         //SOLID TILES
