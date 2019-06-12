@@ -1,7 +1,5 @@
 package utils;
 
-import model.Assets;
-
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -18,8 +16,31 @@ public class TileSpriteToRGBConverter {
     private void initCollectionTileSpriteTarget() {
         collectionTileSpriteTarget = new ArrayList<BufferedImage>();
 
+        //SOLID TILES
         collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(960, 3376, 16, 16) ); //fence-blue
         collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1024, 3312, 16, 16) ); //fence-brown
+        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1072, 3312, 16, 16) ); //sign-post
+        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1024, 3392, 16, 16) ); //NW-shore
+        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1040, 3392, 16, 16) ); //N-shore
+        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1072, 3392, 16, 16) ); //NE-shore
+        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1024, 3408, 16, 16) ); //W-shore
+        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1072, 3408, 16, 16) ); //E-shore
+        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(976, 3152, 16, 16) ); //Bush
+
+        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1024, 3216, 16, 16) ); //home0x0
+        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1040, 3216, 16, 16) ); //home0x1
+        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1056, 3216, 16, 16) ); //home0x2
+        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1072, 3216, 16, 16) ); //home0x3
+        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1024, 3232, 16, 16) ); //home1x0
+        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1040, 3232, 16, 16) ); //home1x1
+        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1056, 3232, 16, 16) ); //home1x2
+        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1072, 3232, 16, 16) ); //home1x3
+        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1024, 3248, 16, 16) ); //home2x0
+        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1040, 3248, 16, 16) ); //home2x1
+        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1056, 3248, 16, 16) ); //home2x2
+        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1072, 3248, 16, 16) ); //home2x3
+
+
     }
 
     /**
