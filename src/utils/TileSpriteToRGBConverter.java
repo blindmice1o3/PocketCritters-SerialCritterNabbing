@@ -46,15 +46,15 @@ public class TileSpriteToRGBConverter {
                 pullMultipleTiles(1024, 3216, 4, 3)
         );
 
-        //TODO: building_store, starting at x == 1120, y == 3296, width/number_of_columns == 6, height/number_of_rows == 4.
+        // building_home_roofTopOfSecondHome.
+        nonWalkableTileSpriteTargets.addAll(
+                pullMultipleTiles(1152, 3216, 4, 1)
+        );
+
+        //building_store, starting at x == 1120, y == 3296, width/number_of_columns == 6, height/number_of_rows == 4.
         nonWalkableTileSpriteTargets.addAll(
                 pullMultipleTiles(1120, 3296, 6, 4)
         );
-        /*
-        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1120, 3296, 16, 16) ); //store0x0
-        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1136, 3296, 16, 16) ); //store0x1
-        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1152, 3296, 16, 16) ); //store0x2
-        */
     }
 
     private ArrayList<BufferedImage> pullMultipleTiles(int xInit, int yInit, int numOfCols, int numOfRows) {
