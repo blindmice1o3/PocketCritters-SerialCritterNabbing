@@ -42,24 +42,35 @@ public class TileSpriteToRGBConverter {
                 worldMapAsTileSprites.getSubimage(976, 3152, TILE_WIDTH, TILE_HEIGHT) ); //Bush
 
         // building_home, starting at x == 1024, y == 3216, width/number_of_columns == 4, height/number_of_rows == 3.
-        int xInit = 1024;
-        int yInit = 3216;
-        int numOfCols = 4;
-        int numOfRows = 3;
+        nonWalkableTileSpriteTargets.addAll(
+                pullMultipleTiles(1024, 3216, 4, 3)
+        );
+
+        //TODO: building_store, starting at x == 1120, y == 3296, width/number_of_columns == 6, height/number_of_rows == 4.
+        nonWalkableTileSpriteTargets.addAll(
+                pullMultipleTiles(1120, 3296, 6, 4)
+        );
+        /*
+        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1120, 3296, 16, 16) ); //store0x0
+        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1136, 3296, 16, 16) ); //store0x1
+        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1152, 3296, 16, 16) ); //store0x2
+        */
+    }
+
+    private ArrayList<BufferedImage> pullMultipleTiles(int xInit, int yInit, int numOfCols, int numOfRows) {
+        ArrayList<BufferedImage> returner = new ArrayList<BufferedImage>();
+
         for (int yy = 0; yy < numOfRows; yy++) {
             int yOffset = yy * TILE_HEIGHT;
             for (int xx = 0; xx < numOfCols; xx++) {
                 int xOffset = xx * TILE_WIDTH;
-                nonWalkableTileSpriteTargets.add(
+                returner.add(
                         worldMapAsTileSprites.getSubimage((xInit + xOffset), (yInit + yOffset), TILE_WIDTH, TILE_HEIGHT)
                 );
             }
         }
 
-        //TODO: building_store, starting at x == 1120, y == 3296, width/number_of_columns == 6, height/number_of_rows == 4.
-        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1120, 3296, 16, 16) ); //store0x0
-        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1136, 3296, 16, 16) ); //store0x1
-        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1152, 3296, 16, 16) ); //store0x2
+        return returner;
     }
 
     /**
