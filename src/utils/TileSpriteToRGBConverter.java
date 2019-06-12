@@ -5,42 +5,44 @@ import java.util.ArrayList;
 
 public class TileSpriteToRGBConverter {
 
-    private ArrayList<BufferedImage> collectionTileSpriteTarget;
-    BufferedImage tileSpriteImage;
+    private ArrayList<BufferedImage> nonWalkableTileSpriteTargets;
+    BufferedImage worldMapAsTileSprites;
 
     public TileSpriteToRGBConverter() {
-        tileSpriteImage = ImageLoader.loadImage("/pokemon-gsc-kanto.png");
+        worldMapAsTileSprites = ImageLoader.loadImage("/pokemon-gsc-kanto.png");
         initCollectionTileSpriteTarget();
     }
 
     private void initCollectionTileSpriteTarget() {
-        collectionTileSpriteTarget = new ArrayList<BufferedImage>();
+        nonWalkableTileSpriteTargets = new ArrayList<BufferedImage>();
 
         //SOLID TILES
-        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(960, 3376, 16, 16) ); //fence-blue
-        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1024, 3312, 16, 16) ); //fence-brown
-        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1072, 3312, 16, 16) ); //sign-post
-        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1024, 3392, 16, 16) ); //NW-shore
-        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1040, 3392, 16, 16) ); //N-shore
-        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1072, 3392, 16, 16) ); //NE-shore
-        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1024, 3408, 16, 16) ); //W-shore
-        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1072, 3408, 16, 16) ); //E-shore
-        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(976, 3152, 16, 16) ); //Bush
+        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(960, 3376, 16, 16) ); //fence-blue
+        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1024, 3312, 16, 16) ); //fence-brown
+        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1072, 3312, 16, 16) ); //sign-post
+        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1024, 3392, 16, 16) ); //NW-shore
+        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1040, 3392, 16, 16) ); //N-shore
+        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1072, 3392, 16, 16) ); //NE-shore
+        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1024, 3408, 16, 16) ); //W-shore
+        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1072, 3408, 16, 16) ); //E-shore
+        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(976, 3152, 16, 16) ); //Bush
 
-        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1024, 3216, 16, 16) ); //home0x0
-        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1040, 3216, 16, 16) ); //home0x1
-        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1056, 3216, 16, 16) ); //home0x2
-        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1072, 3216, 16, 16) ); //home0x3
-        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1024, 3232, 16, 16) ); //home1x0
-        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1040, 3232, 16, 16) ); //home1x1
-        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1056, 3232, 16, 16) ); //home1x2
-        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1072, 3232, 16, 16) ); //home1x3
-        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1024, 3248, 16, 16) ); //home2x0
-        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1040, 3248, 16, 16) ); //home2x1
-        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1056, 3248, 16, 16) ); //home2x2
-        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1072, 3248, 16, 16) ); //home2x3
+        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1024, 3216, 16, 16) ); //home0x0
+        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1040, 3216, 16, 16) ); //home0x1
+        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1056, 3216, 16, 16) ); //home0x2
+        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1072, 3216, 16, 16) ); //home0x3
+        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1024, 3232, 16, 16) ); //home1x0
+        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1040, 3232, 16, 16) ); //home1x1
+        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1056, 3232, 16, 16) ); //home1x2
+        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1072, 3232, 16, 16) ); //home1x3
+        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1024, 3248, 16, 16) ); //home2x0
+        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1040, 3248, 16, 16) ); //home2x1
+        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1056, 3248, 16, 16) ); //home2x2
+        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1072, 3248, 16, 16) ); //home2x3
 
-
+        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1120, 3296, 16, 16) ); //store0x0
+        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1136, 3296, 16, 16) ); //store0x1
+        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1152, 3296, 16, 16) ); //store0x2
     }
 
     /**
@@ -87,8 +89,8 @@ public class TileSpriteToRGBConverter {
     public static final int TILE_WIDTH = 16;
     public static final int TILE_HEIGHT = 16;
     public int[][][] translateTileSpriteToRGBImage() {
-        int widthNumberOfTile = (tileSpriteImage.getWidth() / TILE_WIDTH);
-        int heightNumberOfTile = (tileSpriteImage.getHeight() / TILE_HEIGHT);
+        int widthNumberOfTile = (worldMapAsTileSprites.getWidth() / TILE_WIDTH);
+        int heightNumberOfTile = (worldMapAsTileSprites.getHeight() / TILE_HEIGHT);
 
         int[][][] returner = new int[heightNumberOfTile][widthNumberOfTile][1];
 
@@ -109,7 +111,7 @@ public class TileSpriteToRGBConverter {
                 for (int yy = 0; yy < TILE_HEIGHT; yy++) {
                     for (int xx = 0; xx < TILE_WIDTH; xx++) {
 
-                        int pixel = tileSpriteImage.getRGB((xOffset + xx), (yOffset + yy));
+                        int pixel = worldMapAsTileSprites.getRGB((xOffset + xx), (yOffset + yy));
                         int red = (pixel >> 16) & 0xff;
                         int green = (pixel >> 8) & 0xff;
                         int blue = (pixel) & 0xff;
@@ -154,10 +156,10 @@ public class TileSpriteToRGBConverter {
 
                 //if non-blank (equals 0)...
                 if (returner[y][x][0] == 0) {
-                    for (BufferedImage tileSpriteTarget : collectionTileSpriteTarget) {
+                    for (BufferedImage tileSpriteTarget : nonWalkableTileSpriteTargets) {
 
                         //it is the same as one of the target.
-                        if ( compareTile(tileSpriteImage.getSubimage(xOffset, yOffset, 16, 16), tileSpriteTarget) ) {
+                        if ( compareTile(worldMapAsTileSprites.getSubimage(xOffset, yOffset, 16, 16), tileSpriteTarget) ) {
                             returner[y][x][0] = 1;
                             break;
                         }
