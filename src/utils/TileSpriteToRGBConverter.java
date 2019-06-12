@@ -5,41 +5,58 @@ import java.util.ArrayList;
 
 public class TileSpriteToRGBConverter {
 
+    // CONSTANTS
+    public static final int TILE_WIDTH = 16;
+    public static final int TILE_HEIGHT = 16;
+
+    // MEMBER VARIABLES
     private ArrayList<BufferedImage> nonWalkableTileSpriteTargets;
-    BufferedImage worldMapAsTileSprites;
+    private BufferedImage worldMapAsTileSprites;
 
     public TileSpriteToRGBConverter() {
         worldMapAsTileSprites = ImageLoader.loadImage("/pokemon-gsc-kanto.png");
         initNonWalkableTileSpriteTargets();
-    }
+    } // **** end TileSpriteToRGBConverter() constructor ****
 
     private void initNonWalkableTileSpriteTargets() {
         nonWalkableTileSpriteTargets = new ArrayList<BufferedImage>();
 
         //SOLID TILES
-        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(960, 3376, 16, 16) ); //fence-blue
-        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1024, 3312, 16, 16) ); //fence-brown
-        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1072, 3312, 16, 16) ); //sign-post
-        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1024, 3392, 16, 16) ); //NW-shore
-        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1040, 3392, 16, 16) ); //N-shore
-        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1072, 3392, 16, 16) ); //NE-shore
-        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1024, 3408, 16, 16) ); //W-shore
-        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1072, 3408, 16, 16) ); //E-shore
-        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(976, 3152, 16, 16) ); //Bush
+        nonWalkableTileSpriteTargets.add(
+                worldMapAsTileSprites.getSubimage(960, 3376, TILE_WIDTH, TILE_HEIGHT) ); //fence-blue
+        nonWalkableTileSpriteTargets.add(
+                worldMapAsTileSprites.getSubimage(1024, 3312, TILE_WIDTH, TILE_HEIGHT) ); //fence-brown
+        nonWalkableTileSpriteTargets.add(
+                worldMapAsTileSprites.getSubimage(1072, 3312, TILE_WIDTH, TILE_HEIGHT) ); //sign-post
+        nonWalkableTileSpriteTargets.add(
+                worldMapAsTileSprites.getSubimage(1024, 3392, TILE_WIDTH, TILE_HEIGHT) ); //NW-shore
+        nonWalkableTileSpriteTargets.add(
+                worldMapAsTileSprites.getSubimage(1040, 3392, TILE_WIDTH, TILE_HEIGHT) ); //N-shore
+        nonWalkableTileSpriteTargets.add(
+                worldMapAsTileSprites.getSubimage(1072, 3392, TILE_WIDTH, TILE_HEIGHT) ); //NE-shore
+        nonWalkableTileSpriteTargets.add(
+                worldMapAsTileSprites.getSubimage(1024, 3408, TILE_WIDTH, TILE_HEIGHT) ); //W-shore
+        nonWalkableTileSpriteTargets.add(
+                worldMapAsTileSprites.getSubimage(1072, 3408, TILE_WIDTH, TILE_HEIGHT) ); //E-shore
+        nonWalkableTileSpriteTargets.add(
+                worldMapAsTileSprites.getSubimage(976, 3152, TILE_WIDTH, TILE_HEIGHT) ); //Bush
 
-        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1024, 3216, 16, 16) ); //home0x0
-        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1040, 3216, 16, 16) ); //home0x1
-        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1056, 3216, 16, 16) ); //home0x2
-        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1072, 3216, 16, 16) ); //home0x3
-        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1024, 3232, 16, 16) ); //home1x0
-        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1040, 3232, 16, 16) ); //home1x1
-        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1056, 3232, 16, 16) ); //home1x2
-        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1072, 3232, 16, 16) ); //home1x3
-        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1024, 3248, 16, 16) ); //home2x0
-        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1040, 3248, 16, 16) ); //home2x1
-        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1056, 3248, 16, 16) ); //home2x2
-        nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1072, 3248, 16, 16) ); //home2x3
+        // building_home, starting at x == 1024, y == 3216, width/number_of_columns == 4, height/number_of_rows == 3.
+        int xInit = 1024;
+        int yInit = 3216;
+        int numOfCols = 4;
+        int numOfRows = 3;
+        for (int yy = 0; yy < numOfRows; yy++) {
+            int yOffset = yy * TILE_HEIGHT;
+            for (int xx = 0; xx < numOfCols; xx++) {
+                int xOffset = xx * TILE_WIDTH;
+                nonWalkableTileSpriteTargets.add(
+                        worldMapAsTileSprites.getSubimage((xInit + xOffset), (yInit + yOffset), TILE_WIDTH, TILE_HEIGHT)
+                );
+            }
+        }
 
+        //TODO: building_store, starting at x == 1120, y == 3296, width/number_of_columns == 6, height/number_of_rows == 4.
         nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1120, 3296, 16, 16) ); //store0x0
         nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1136, 3296, 16, 16) ); //store0x1
         nonWalkableTileSpriteTargets.add( worldMapAsTileSprites.getSubimage(1152, 3296, 16, 16) ); //store0x2
@@ -86,8 +103,6 @@ public class TileSpriteToRGBConverter {
         return rgbArrayRelativeToMap;
     } // **** end int[][][] transcribeRGBFromImage(BufferedImage) method ****
 
-    public static final int TILE_WIDTH = 16;
-    public static final int TILE_HEIGHT = 16;
     public int[][][] translateTileSpriteToRGBImage() {
         int widthNumberOfTile = (worldMapAsTileSprites.getWidth() / TILE_WIDTH);
         int heightNumberOfTile = (worldMapAsTileSprites.getHeight() / TILE_HEIGHT);
