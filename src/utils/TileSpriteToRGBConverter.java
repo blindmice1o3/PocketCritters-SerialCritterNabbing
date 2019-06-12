@@ -3,8 +3,24 @@ package utils;
 import model.Assets;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class TileSpriteToRGBConverter {
+
+    private ArrayList<BufferedImage> collectionTileSpriteTarget;
+    BufferedImage tileSpriteImage;
+
+    public TileSpriteToRGBConverter() {
+        tileSpriteImage = ImageLoader.loadImage("/pokemon-gsc-kanto.png");
+        initCollectionTileSpriteTarget();
+    }
+
+    private void initCollectionTileSpriteTarget() {
+        collectionTileSpriteTarget = new ArrayList<BufferedImage>();
+
+        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(960, 3376, 16, 16) ); //fence-blue
+        collectionTileSpriteTarget.add( tileSpriteImage.getSubimage(1024, 3312, 16, 16) ); //fence-brown
+    }
 
     /**
      *  Load world by reading RGB values from BufferedImage object and writing to int[][][].
@@ -50,7 +66,6 @@ public class TileSpriteToRGBConverter {
     public static final int TILE_WIDTH = 16;
     public static final int TILE_HEIGHT = 16;
     public int[][][] translateTileSpriteToRGBImage() {
-        BufferedImage tileSpriteImage = ImageLoader.loadImage("/pokemon-gsc-kanto.png");
         int widthNumberOfTile = (tileSpriteImage.getWidth() / TILE_WIDTH);
         int heightNumberOfTile = (tileSpriteImage.getHeight() / TILE_HEIGHT);
 
@@ -62,10 +77,10 @@ public class TileSpriteToRGBConverter {
 
                 int xOffset = (x * TILE_WIDTH);
                 int yOffset = (y * TILE_HEIGHT);
-                //(figure out if blank tile or not).
-                boolean filledTile = true;
-                //check each individual pixel within each of the 64x64-pixeled tile.
+                boolean blankTile = true;
 
+                //!!!CHECK TILE - BLANK VERSUS FILLED!!!
+                //check each individual pixel within each of the 64x64-pixeled tile.
                 //@@@@@
                 //label for outer-loop in case I can break out early.
                 //@@@@@
@@ -78,11 +93,11 @@ public class TileSpriteToRGBConverter {
                         int green = (pixel >> 8) & 0xff;
                         int blue = (pixel) & 0xff;
 
-                        //if blank tile OR not other blank tile
-                        if ( ((red == 255) && (green == 255) && (blue == 255)) ||
+                        //if non-blank tile
+                        if ( !((red == 255) && (green == 255) && (blue == 255)) &&
                                 //!!!THERE WERE OTHER RGB values FOR BLANK!!!
-                                ((red == 254) && (green == 254) && (blue == 254)) ) {
-                            filledTile = false;
+                                !((red == 254) && (green == 254) && (blue == 254)) ) {
+                            blankTile = false;
                             //@@@@@@@@@@@@@@
                             break outerloop;
                             //@@@@@@@@@@@@@@
@@ -90,19 +105,77 @@ public class TileSpriteToRGBConverter {
                     }
                 }
 
-                // filled tile will be set to have a value of 1.
-                if (filledTile) {
-                    returner[y][x][0] = 1;
+                // blank tile will be set to have a value of 9.
+                if (blankTile) {
+                    returner[y][x][0] = 9;
                 }
-                // blank tile will be set to have a value of 0.
+                // non-blank tile will be set to have a value of 0.
                 else {
                     returner[y][x][0] = 0;
+
+
+                    //CHECK NON-BLANK TILE using collection of target (16x16pixels) tiles.
+                    //target tiles - a collection of IWalkable tile sprite (16x16pixels).
+                        //returner[y][x][0] = 0;
+
+
+                }
+            }
+        }
+
+
+        //CHECK TARGET TILE IMAGE TO DETERMINE IWALKABLE.
+        for (int y = 0; y < heightNumberOfTile; y++) {
+            for (int x = 0; x < widthNumberOfTile; x++) {
+
+                int xOffset = (x * TILE_WIDTH);
+                int yOffset = (y * TILE_HEIGHT);
+
+                //if non-blank (equals 0)...
+                if (returner[y][x][0] == 0) {
+                    for (BufferedImage tileSpriteTarget : collectionTileSpriteTarget) {
+
+                        //it is the same as one of the target.
+                        if ( compareTile(tileSpriteImage.getSubimage(xOffset, yOffset, 16, 16), tileSpriteTarget) ) {
+                            returner[y][x][0] = 1;
+                            break;
+                        }
+                    }
                 }
             }
         }
 
         return returner;
     } // **** end BufferedImage translateTileSpriteToRGBImage(BufferedImage) method ****
+
+
+
+    private boolean compareTile(BufferedImage tileSpriteImage, BufferedImage tileSpriteTarget) {
+        boolean sameImage = true;
+
+        outerloop:
+        for (int yy = 0; yy < TILE_HEIGHT; yy++) {
+            for (int xx = 0; xx < TILE_WIDTH; xx++) {
+                int pixelImage = tileSpriteImage.getRGB(xx, yy);
+                int redImage = (pixelImage >> 16) & 0xff;
+                int greenImage = (pixelImage >> 8) & 0xff;
+                int blueImage = (pixelImage) & 0xff;
+
+                int pixelTarget = tileSpriteTarget.getRGB(xx, yy);
+                int redTarget = (pixelTarget >> 16) & 0xff;
+                int greenTarget = (pixelTarget >> 8) & 0xff;
+                int blueTarget = (pixelTarget) & 0xff;
+
+                //if one pixel is not the same... sameImage set to false.
+                if ( !((redImage == redTarget) && (greenImage == greenTarget) && (blueImage == blueTarget)) ) {
+                    sameImage = false;
+                    break outerloop;
+                }
+            }
+        }
+
+        return sameImage;
+    }
 
     public void testConsoleOutput(int[][][] rgbImage) {
         for (int y = 0; y < rgbImage.length; y++) {
