@@ -1,10 +1,14 @@
 package model;
 
+import main.Handler;
+
 import java.awt.*;
 
 public class James extends Player {
 
-    public James() {
+    public James(Handler handler) {
+        super(handler);
+
         x = 288-32-8;
         y = 256-32-32;
     }

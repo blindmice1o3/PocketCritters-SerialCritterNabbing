@@ -25,7 +25,7 @@ public class Displayer {
         frame.setLocationRelativeTo(null);
 
         panel = new MyPanel();
-        panel.setFocusable(true);
+        panel.setFocusable(false);
         frame.setContentPane(panel);
 
         frame.setVisible(true);
@@ -33,15 +33,12 @@ public class Displayer {
 
     // GETTERS & SETTERS
 
+    public JFrame getFrame() { return frame; }
     public JPanel getPanel() {
         return panel;
     }
 
-    class MyPanel extends JPanel implements KeyListener {
-
-        public MyPanel() {
-            addKeyListener(this);
-        }
+    class MyPanel extends JPanel {
 
         @Override
         public void paintComponent(Graphics g) {
@@ -61,6 +58,7 @@ public class Displayer {
             handler.getGame().getJessie().render(g);
         }
 
+        /*
         @Override
         public void keyPressed(KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_A) {
@@ -91,6 +89,7 @@ public class Displayer {
         public void keyTyped(KeyEvent e) {
 
         }
+        */
 
     } // **** end MyPanel inner-class ****
 

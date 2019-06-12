@@ -1,10 +1,14 @@
 package model;
 
+import main.Handler;
+
 import java.awt.*;
 
 public class Jessie extends Player {
 
-    public Jessie() {
+    public Jessie(Handler handler) {
+        super(handler);
+
         x = 288+8;
         y = 256-32-32;
     }
