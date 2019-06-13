@@ -1,6 +1,7 @@
 package model;
 
 import main.Handler;
+import tiles.Tile;
 
 import java.awt.*;
 
@@ -46,8 +47,12 @@ public class Player {
     }
 
     public void move() {
-        x += xFuture;
-        y += yFuture;
+        Tile[][] worldMap = handler.getGame().getWorldMapTileCollisionDetection();
+
+        if ( !worldMap[(int)((y+3184 + yFuture) / 16)][(int)((x+960 + xFuture) / 16)].isSolid() ) {
+            x += xFuture;
+            y += yFuture;
+        }
     }
 
     public void render(Graphics g) {

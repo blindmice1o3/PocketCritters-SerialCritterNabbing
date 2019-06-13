@@ -47,6 +47,10 @@ public class Game {
         gameLoop();
     } // **** end main.Game() constructor ****
 
+    public Tile[][] getWorldMapTileCollisionDetection() {
+        return worldMapTileCollisionDetection;
+    }
+
     public void gameLoop() {
 
         int fps = 60;
