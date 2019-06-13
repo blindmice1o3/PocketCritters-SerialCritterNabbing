@@ -28,6 +28,11 @@ public class Game {
     public Game() {
         Assets.init();
 
+        //@@@@@
+        tileSpriteToRGBConverter = new TileSpriteToRGBConverter();
+        worldMapTileCollisionDetection = tileSpriteToRGBConverter.generateWorldMapTileCollisionDetection(Assets.world);
+        //@@@@@
+
         handler = new Handler(this);
         keyManager = new KeyManager();
         gameCamera = new GameCamera(960, 3184, 1279, 3455);
@@ -39,11 +44,6 @@ public class Game {
         james = new James(handler);
         jessie = new Jessie(handler);
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-        //@@@@@
-        tileSpriteToRGBConverter = new TileSpriteToRGBConverter();
-        worldMapTileCollisionDetection = tileSpriteToRGBConverter.generateWorldMapTileCollisionDetection(Assets.world);
-        //@@@@@
 
         initStateManager();
 
