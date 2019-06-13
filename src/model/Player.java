@@ -9,18 +9,18 @@ public class Player {
 
     private Handler handler;
     protected int x, y;
-    private int xFuture, yFuture;
+    private int xDelta, yDelta;
 
     public Player(Handler handler) {
         this.handler = handler;
 
-        x = 288;
-        y = 256;
+        x = 1104;
+        y = 3312;
     } // **** end model.Player() constructor ****
 
     public void tick() {
-        xFuture = 0;
-        yFuture = 0;
+        xDelta = 0;
+        yDelta = 0;
 
         checkInput();
 
@@ -30,34 +30,37 @@ public class Player {
     public void checkInput() {
         //UP
         if (handler.getGame().getKeyManager().up) {
-            yFuture = -3;
+            yDelta = -3;
         }
         //DOWN
         else if (handler.getGame().getKeyManager().down) {
-            yFuture = 3;
+            yDelta = 3;
         }
         //LEFT
         else if (handler.getGame().getKeyManager().left) {
-            xFuture = -3;
+            xDelta = -3;
         }
         //RIGHT
         else if (handler.getGame().getKeyManager().right) {
-            xFuture = 3;
+            xDelta = 3;
         }
     }
 
     public void move() {
         Tile[][] worldMap = handler.getGame().getWorldMapTileCollisionDetection();
 
-        if ( !worldMap[(int)((y+3184 + yFuture) / 16)][(int)((x+960 + xFuture) / 16)].isSolid() ) {
-            x += xFuture;
-            y += yFuture;
+        //System.out.println("Player.move() before if-conditional block");
+        if ( !(worldMap[ ((y+yDelta) / 16) ][ ((x+xDelta) / 16) ].isSolid()) ) {
+            x += xDelta;
+            y += yDelta;
+            handler.getGame().getGameCamera().move(xDelta, yDelta);
+            //System.out.println("Player.move() WITHIN if-conditional block");
         }
     }
 
     public void render(Graphics g) {
         g.drawImage(Assets.player,
-                x, y, (x + 32), (y + 32),
+                288, 256, (288 + 32), (256 + 32),
                 0, 0, 196, 257,
                 null);
     }
@@ -65,11 +68,11 @@ public class Player {
     // GETTERS & SETTERS
 
     public void setXFuture(int xFuture) {
-        this.xFuture = xFuture;
+        this.xDelta = xFuture;
     }
 
     public void setYFuture(int yFuture) {
-        this.yFuture = yFuture;
+        this.yDelta = yFuture;
     }
 
 } // **** end model.Player class ****
