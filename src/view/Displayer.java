@@ -15,16 +15,16 @@ public class Displayer {
     private JFrame frame;
     private JPanel panel;
 
-    public Displayer(Handler handler, String title) {
+    public Displayer(Handler handler, String title, int widthScreen, int heightScreen) {
         this.handler = handler;
 
         frame = new JFrame(title);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(640, 540);
+        frame.setSize(widthScreen, heightScreen);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
 
-        panel = new MyPanel();
+        panel = new MyPanel(widthScreen, heightScreen);
         panel.setFocusable(false);
         frame.setContentPane(panel);
 
@@ -40,15 +40,22 @@ public class Displayer {
 
     class MyPanel extends JPanel {
 
+        int widthScreen, heightScreen;
+
+        public MyPanel(int widthScreen, int heightScreen) {
+            this.widthScreen = widthScreen;
+            this.heightScreen = heightScreen;
+        } // **** end MyPanel(int, int) constructor ****
+
         @Override
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
 
-            g.drawImage(Assets.world, 0, 0, 320*2, 270*2,
-                    (int)(960 - handler.getGame().getGameCamera().getxOffset()),
-                    (int)(3184 - handler.getGame().getGameCamera().getyOffset()),
-                    (int)(1279 - handler.getGame().getGameCamera().getxOffset()),
-                    (int)(3455 - handler.getGame().getGameCamera().getyOffset()),
+            g.drawImage(Assets.world, 0, 0, widthScreen, heightScreen,
+                    (int)(handler.getGame().getGameCamera().getxOffset0()),
+                    (int)(handler.getGame().getGameCamera().getyOffset0()),
+                    (int)(handler.getGame().getGameCamera().getxOffset1()),
+                    (int)(handler.getGame().getGameCamera().getyOffset1()),
                     null);
             g.setColor(Color.YELLOW);
             g.drawString("Pocket Critters - Serial Critter Nabbing!!!", 10, 10);

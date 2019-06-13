@@ -27,8 +27,8 @@ public class Game {
 
         handler = new Handler(this);
         keyManager = new KeyManager();
-        gameCamera = new GameCamera(0, 0);
-        displayer = new Displayer(handler, "Pocket Critters - Serial Critter Nabbing");
+        gameCamera = new GameCamera(960, 3184, 1279, 3455);
+        displayer = new Displayer(handler, "Pocket Critters - Serial Critter Nabbing", 640, 540);
         displayer.getFrame().addKeyListener(keyManager);
 
         player = new Player(handler);
