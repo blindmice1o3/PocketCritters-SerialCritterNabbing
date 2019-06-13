@@ -2,6 +2,11 @@ package tiles;
 
 public class Tile {
 
+    //CONSTANTS
+    public static final int WIDTH = 16;
+    public static final int HEIGHT = 16;
+
+    //MEMBER FIELDS
     private boolean solid;
     private int x, y;
 
