@@ -9,6 +9,7 @@ public class Player {
 
     private Handler handler;
     protected int x, y;
+    //protected Rectangle bounds;
     private int xDelta, yDelta;
     private int moveSpeed;
 
@@ -19,6 +20,8 @@ public class Player {
 
         x = 1104;
         y = 3312;
+
+        //bounds = new Rectangle(2, 2, 12, 12);
 
         moveSpeed = 2;
     } // **** end model.Player() constructor ****
@@ -52,12 +55,12 @@ public class Player {
     }
 
     public void move() {
-        if (worldMap == null) { worldMap = handler.getGame().getWorldMapTileCollisionDetection(); }
-
+        if (worldMap == null) {
+            worldMap = handler.getGame().getWorldMapTileCollisionDetection();
+        }
 
         moveX();
         moveY();
-
 
         /*
         //System.out.println("Player.move() before if-conditional block");
@@ -72,22 +75,22 @@ public class Player {
     }
 
     private void moveX() {
-        //LEFT
+        //MOVING LEFT
         if (xDelta < 0) {
-            int tx = (int)((x+xDelta) / Tile.WIDTH);
+            int tx = (int)((x+xDelta) / Tile.WIDTH);                                        //LEFT
 
-            if ( !(worldMap[((y+yDelta) / Tile.HEIGHT)][tx].isSolid()) &&
-                    !(worldMap[((y+yDelta+Tile.HEIGHT) / Tile.HEIGHT)][tx].isSolid()) ) {
+            if ( !(worldMap[((y+yDelta) / Tile.HEIGHT)][tx].isSolid()) &&                   //TOP-LEFT
+                    !(worldMap[((y+yDelta+Tile.HEIGHT) / Tile.HEIGHT)][tx].isSolid()) ) {   //BOTTOM-LEFT
                 x += xDelta;
                 handler.getGame().getGameCamera().move(xDelta, 0);
             }
         }
-        //RIGHT
+        //MOVING RIGHT
         else if (xDelta > 0) {
-            int tx = (int)((x+xDelta+Tile.WIDTH) / Tile.WIDTH);
+            int tx = (int)((x+xDelta+Tile.WIDTH) / Tile.WIDTH);                             //RIGHT
 
-            if ( !(worldMap[((y+yDelta) / Tile.HEIGHT)][tx].isSolid()) &&
-                    !(worldMap[((y+yDelta+Tile.HEIGHT) / Tile.HEIGHT)][tx].isSolid()) ) {
+            if ( !(worldMap[((y+yDelta) / Tile.HEIGHT)][tx].isSolid()) &&                   //TOP-RIGHT
+                    !(worldMap[((y+yDelta+Tile.HEIGHT) / Tile.HEIGHT)][tx].isSolid()) ) {   //BOTTOM-RIGHT
                 x += xDelta;
                 handler.getGame().getGameCamera().move(xDelta, 0);
             }
@@ -95,22 +98,22 @@ public class Player {
     }
 
     private void moveY() {
-        //UP
+        //MOVING UP
         if (yDelta < 0) {
-            int ty = (int)((y+yDelta) / Tile.HEIGHT);
+            int ty = (int)((y+yDelta) / Tile.HEIGHT);                                       //TOP
 
-            if ( !(worldMap[ty][((x+xDelta) / Tile.WIDTH)].isSolid()) &&
-                    !(worldMap[ty][((x+xDelta+Tile.WIDTH) / Tile.WIDTH)].isSolid()) ) {
+            if ( !(worldMap[ty][((x+xDelta) / Tile.WIDTH)].isSolid()) &&                    //TOP-LEFT
+                    !(worldMap[ty][((x+xDelta+Tile.WIDTH) / Tile.WIDTH)].isSolid()) ) {     //TOP-RIGHT
                 y += yDelta;
                 handler.getGame().getGameCamera().move(0, yDelta);
             }
         }
-        //DOWN
+        //MOVING DOWN
         else if (yDelta > 0) {
-            int ty = (int)((y+yDelta+Tile.HEIGHT) / Tile.HEIGHT);
+            int ty = (int)((y+yDelta+Tile.HEIGHT) / Tile.HEIGHT);                           //BOTTOM
 
-            if ( !(worldMap[ty][((x+xDelta) / Tile.WIDTH)].isSolid()) &&
-                    !(worldMap[ty][((x+xDelta+Tile.WIDTH) / Tile.WIDTH)].isSolid()) ) {
+            if ( !(worldMap[ty][((x+xDelta) / Tile.WIDTH)].isSolid()) &&                    //BOTTOM-LEFT
+                    !(worldMap[ty][((x+xDelta+Tile.WIDTH) / Tile.WIDTH)].isSolid()) ) {     //BOTTOM-RIGHT
                 y += yDelta;
                 handler.getGame().getGameCamera().move(0, yDelta);
             }
