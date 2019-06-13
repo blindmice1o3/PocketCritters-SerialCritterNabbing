@@ -1,16 +1,13 @@
 package main;
 
-import model.Assets;
-import utils.ImageLoader;
-import utils.TileSpriteToRGBConverter;
+import main.gfx.Assets;
+import main.utils.ImageLoader;
+import main.utils.TileSpriteToRGBConverter;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class Sandbox {
     // Team Rocket w Jessie and James.

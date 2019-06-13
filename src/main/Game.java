@@ -1,13 +1,16 @@
 package main;
 
-import gfx.GameCamera;
-import input.KeyManager;
-import model.Assets;
-import model.James;
-import model.Jessie;
-import model.Player;
-import tiles.Tile;
-import utils.TileSpriteToRGBConverter;
+import main.gfx.GameCamera;
+import main.input.KeyManager;
+import main.gfx.Assets;
+import model.entities.James;
+import model.entities.Jessie;
+import model.entities.Player;
+import model.states.BattleState;
+import model.states.GameState;
+import model.states.StateManager;
+import model.tiles.Tile;
+import main.utils.TileSpriteToRGBConverter;
 import view.Displayer;
 
 public class Game {
@@ -42,10 +45,19 @@ public class Game {
         worldMapTileCollisionDetection = tileSpriteToRGBConverter.generateWorldMapTileCollisionDetection(Assets.world);
         //@@@@@
 
+        initStateManager();
+
         gameOver = false;
 
         gameLoop();
     } // **** end main.Game() constructor ****
+
+    private void initStateManager() {
+        StateManager.add("GameState", new GameState());
+        StateManager.add("BattleState", new BattleState());
+
+        StateManager.change( "GameState", null );
+    }
 
     public Tile[][] getWorldMapTileCollisionDetection() {
         return worldMapTileCollisionDetection;
