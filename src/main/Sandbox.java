@@ -20,7 +20,7 @@ public class Sandbox {
 
     public static void main(String[] args) {
         TileSpriteToRGBConverter tester = new TileSpriteToRGBConverter();
-        tester.testConsoleOutput( tester.translateTileSpriteToRGBImage() );
+        tester.testConsoleOutput( tester.translateTileSpriteToRGBImage(Assets.world) );
 
         /*
         //Hopefully creating a NON-null File object that will be overwritten from Team Rocket to hard-coded RGB world map.

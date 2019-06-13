@@ -6,6 +6,8 @@ import model.Assets;
 import model.James;
 import model.Jessie;
 import model.Player;
+import tiles.Tile;
+import utils.TileSpriteToRGBConverter;
 import view.Displayer;
 
 public class Game {
@@ -15,7 +17,8 @@ public class Game {
     private GameCamera gameCamera;
     private Displayer displayer;
 
-
+    private TileSpriteToRGBConverter tileSpriteToRGBConverter;
+    private Tile[][] worldMapTileCollisionDetection;
     private Player player, james, jessie;
     private boolean gameOver;
 
@@ -33,6 +36,11 @@ public class Game {
         james = new James(handler);
         jessie = new Jessie(handler);
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+        //@@@@@
+        tileSpriteToRGBConverter = new TileSpriteToRGBConverter();
+        worldMapTileCollisionDetection = tileSpriteToRGBConverter.generateWorldMapTileCollisionDetection(Assets.world);
+        //@@@@@
 
         gameOver = false;
 

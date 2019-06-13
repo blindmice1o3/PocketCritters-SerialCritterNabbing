@@ -1,5 +1,10 @@
 package utils;
 
+import tiles.NonSolidTile;
+import tiles.NullTile;
+import tiles.SolidTile;
+import tiles.Tile;
+
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -10,8 +15,8 @@ public class TileSpriteToRGBConverter {
     public static final int TILE_HEIGHT = 16;
 
     // MEMBER VARIABLES
-    private ArrayList<BufferedImage> nonWalkableTileSpriteTargets;
-    private BufferedImage worldMapAsTileSprites;
+    private static ArrayList<BufferedImage> nonWalkableTileSpriteTargets;
+    private static BufferedImage worldMapAsTileSprites;
 
     public TileSpriteToRGBConverter() {
         worldMapAsTileSprites = ImageLoader.loadImage("/pokemon-gsc-kanto.png");
@@ -114,7 +119,7 @@ public class TileSpriteToRGBConverter {
         return rgbArrayRelativeToMap;
     } // **** end int[][][] transcribeRGBFromImage(BufferedImage) method ****
 
-    public int[][][] translateTileSpriteToRGBImage() {
+    public int[][][] translateTileSpriteToRGBImage(BufferedImage worldMapAsTileSprites) {
         int widthNumberOfTile = (worldMapAsTileSprites.getWidth() / TILE_WIDTH);
         int heightNumberOfTile = (worldMapAsTileSprites.getHeight() / TILE_HEIGHT);
 
@@ -226,9 +231,33 @@ public class TileSpriteToRGBConverter {
         return sameImage;
     }
 
+    public Tile[][] generateWorldMapTileCollisionDetection(BufferedImage worldMapAsTileSprites) {
+        int[][][] rgbImage = translateTileSpriteToRGBImage(worldMapAsTileSprites);
+        int widthWorld = rgbImage[0].length;
+        int heightWorld = rgbImage.length;
+
+        Tile[][] returner = new Tile[heightWorld][widthWorld];
+
+        for (int y = 0; y < rgbImage.length; y++) {
+            for (int x = 0; x <rgbImage[y].length; x++) {
+                if (rgbImage[y][x][0] == 1) {
+                    returner[y][x] = new SolidTile(x, y);
+                } else if (rgbImage[y][x][0] == 0) {
+                    returner[y][x] = new NonSolidTile(x, y);
+                } else if (rgbImage[y][x][0] == 9) {
+                    returner[y][x] = new NullTile(x, y);
+                }
+            }
+        }
+
+        return returner;
+    }
+
     public void testConsoleOutput(int[][][] rgbImage) {
         for (int y = 0; y < rgbImage.length; y++) {
             for (int x = 0; x <rgbImage[y].length; x++) {
+                //figure out if NOT last element in its group of columns,
+                // otherwise it's the last element in its group of columns.
                 if (x != (rgbImage[y].length-1)) {
                     System.out.print(Integer.toString(rgbImage[y][x][0]) + " ");
                 } else {

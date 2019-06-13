@@ -1,12 +1,13 @@
 package tiles;
 
-public class SolidGenericTile {
+public class Tile {
 
     private boolean solid;
+    private int x, y;
 
-    public SolidGenericTile() {
-        solid = true;
-    } // **** end SolidGenericTile() constructor ****
+    public Tile(boolean solid, int x, int y) {
+        this.solid = solid;
+    } // **** end Tile(boolean, int, int) constructor ****
 
     // GETTERS AND SETTERS
 
@@ -18,4 +19,4 @@ public class SolidGenericTile {
         this.solid = solid;
     }
 
-} // **** end SolidGenericTile class ****
+} // **** end Tile class *****
