@@ -43,6 +43,8 @@ public class Displayer {
         int widthScreen, heightScreen;
 
         public MyPanel(int widthScreen, int heightScreen) {
+            super(true);
+
             this.widthScreen = widthScreen;
             this.heightScreen = heightScreen;
         } // **** end MyPanel(int, int) constructor ****
@@ -57,8 +59,8 @@ public class Displayer {
                     (int)(handler.getGame().getGameCamera().getxOffset1()),
                     (int)(handler.getGame().getGameCamera().getyOffset1()),
                     null);
-            g.setColor(Color.YELLOW);
-            g.drawString("Pocket Critters - Serial Critter Nabbing!!!", 10, 10);
+            //g.setColor(Color.YELLOW);
+            //g.drawString("Pocket Critters - Serial Critter Nabbing!!!", 10, 10);
 
             handler.getGame().getPlayer().render(g);
             handler.getGame().getJames().render(g);

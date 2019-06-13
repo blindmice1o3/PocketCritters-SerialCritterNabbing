@@ -1,5 +1,6 @@
 package utils;
 
+import model.Assets;
 import tiles.NonSolidTile;
 import tiles.NullTile;
 import tiles.SolidTile;
@@ -19,12 +20,22 @@ public class TileSpriteToRGBConverter {
     private static BufferedImage worldMapAsTileSprites;
 
     public TileSpriteToRGBConverter() {
-        worldMapAsTileSprites = ImageLoader.loadImage("/pokemon-gsc-kanto.png");
-        initNonWalkableTileSpriteTargets();
+
     } // **** end TileSpriteToRGBConverter() constructor ****
 
-    private void initNonWalkableTileSpriteTargets() {
+    private void initNonWalkableTileSpriteTargets(BufferedImage worldMapAsTileSprites) {
+        ///////////////////////////////////////////////////
+        this.worldMapAsTileSprites = worldMapAsTileSprites;
+        ///////////////////////////////////////////////////
+
         nonWalkableTileSpriteTargets = new ArrayList<BufferedImage>();
+
+        //@@@@@@@@@@@@@@@@@@@
+        //@ NON-SOLID TILES @
+        //@@@@@@@@@@@@@@@@@@@
+        //Tall-Grass -> possible PocketMonster Encounter!
+        //worldMapAsTileSprites.getSubimage(1088, 3184, TILE_WIDTH, TILE_HEIGHT);
+
 
         //SOLID TILES
         nonWalkableTileSpriteTargets.add(
@@ -120,6 +131,10 @@ public class TileSpriteToRGBConverter {
     } // **** end int[][][] transcribeRGBFromImage(BufferedImage) method ****
 
     public int[][][] translateTileSpriteToRGBImage(BufferedImage worldMapAsTileSprites) {
+        ////////////////////////////////////////////////////////
+        initNonWalkableTileSpriteTargets(worldMapAsTileSprites); //Used in final for-loop.
+        ////////////////////////////////////////////////////////
+
         int widthNumberOfTile = (worldMapAsTileSprites.getWidth() / TILE_WIDTH);
         int heightNumberOfTile = (worldMapAsTileSprites.getHeight() / TILE_HEIGHT);
 
@@ -232,7 +247,9 @@ public class TileSpriteToRGBConverter {
     }
 
     public Tile[][] generateWorldMapTileCollisionDetection(BufferedImage worldMapAsTileSprites) {
+        //////////////////////////////////////////////////////////////////////////
         int[][][] rgbImage = translateTileSpriteToRGBImage(worldMapAsTileSprites);
+        //////////////////////////////////////////////////////////////////////////
         int widthWorld = rgbImage[0].length;
         int heightWorld = rgbImage.length;
 
