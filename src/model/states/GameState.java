@@ -2,38 +2,64 @@ package model.states;
 
 import main.Handler;
 import main.gfx.Assets;
-import view.BasePanel;
+import model.entities.James;
+import model.entities.Jessie;
+import model.entities.Player;
 
-import javax.swing.*;
 import java.awt.*;
 
 public class GameState implements IState {
 
     private Handler handler;
-    private int widthScreen, heightScreen;
 
-    private JPanel panel;
+    private Player player, james, jessie;
 
-    public GameState(Handler handler, int widthScreen, int heightScreen) {
+    public GameState(Handler handler) {
         this.handler = handler;
-        this.widthScreen = widthScreen;
-        this.heightScreen = heightScreen;
-
-        panel = new GamePanel(handler, widthScreen, heightScreen);
     } // **** end GameState(Handler, int, int) constructor ****
 
     @Override
     public void tick() {
-
+        player.tick();
+        james.tick();
+        jessie.tick();
     }
 
     @Override
-    public void handleInput() {
+    public void render(Graphics g) {
+        renderBackground(g);
+        renderEntities(g);
+    }
 
+    private void renderBackground(Graphics g) {
+        g.drawImage(Assets.world, 0, 0, handler.getGame().getWidth(), handler.getGame().getHeight(),
+                (int)(handler.getGame().getGameCamera().getxOffset0()),
+                (int)(handler.getGame().getGameCamera().getyOffset0()),
+                (int)(handler.getGame().getGameCamera().getxOffset1()),
+                (int)(handler.getGame().getGameCamera().getyOffset1()),
+                null);
+        //g.setColor(Color.YELLOW);
+        //g.drawString("Pocket Critters - Serial Critter Nabbing!!!", 10, 10);
+    }
+
+    private void renderEntities(Graphics g) {
+        player.render(g);
+        james.render(g);
+        jessie.render(g);
     }
 
     @Override
     public void enter(Object[] args) {
+        //if first time entering GameState... set the player, james, and jessie reference variables.
+        if ( (player == null) && (james == null) && (jessie == null) ) {
+            if ((args[0] instanceof Player) &&
+                    (args[1] instanceof James) &&
+                    (args[2] instanceof Jessie)) {
+                this.player = (Player) args[0];
+                this.james = (James) args[1];
+                this.jessie = (Jessie) args[2];
+            }
+        }
 
     }
 
@@ -41,41 +67,5 @@ public class GameState implements IState {
     public void exit() {
 
     }
-
-    @Override
-    public JPanel getPanel() {
-        return panel;
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////
-    private class GamePanel extends BasePanel {
-
-        public GamePanel(Handler handler, int widthScreen, int heightScreen) {
-            super(handler, widthScreen, heightScreen);
-        } // **** end GamePanel(Handler, int, int) constructor ****
-
-        @Override
-        protected void render(Graphics g) {
-            renderBackground(g);
-            renderEntities(g);
-        }
-        private void renderBackground(Graphics g) {
-            g.drawImage(Assets.world, 0, 0, widthScreen, heightScreen,
-                    (int)(handler.getGame().getGameCamera().getxOffset0()),
-                    (int)(handler.getGame().getGameCamera().getyOffset0()),
-                    (int)(handler.getGame().getGameCamera().getxOffset1()),
-                    (int)(handler.getGame().getGameCamera().getyOffset1()),
-                    null);
-            //g.setColor(Color.YELLOW);
-            //g.drawString("Pocket Critters - Serial Critter Nabbing!!!", 10, 10);
-        }
-
-        private void renderEntities(Graphics g) {
-            handler.getGame().getPlayer().render(g);
-            handler.getGame().getJames().render(g);
-            handler.getGame().getJessie().render(g);
-        }
-    }
-    ////////////////////////////////////////////////////////////////////////////////
 
 } // **** end GameState class ****

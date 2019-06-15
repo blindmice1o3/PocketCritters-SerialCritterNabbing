@@ -104,10 +104,14 @@ public class Game implements Runnable {
     }
 
     private void initStateManager() {
-        StateManager.add("GameState", new GameState(handler, width, height));
+        StateManager.add("GameState", new GameState(handler));
         StateManager.add("BattleState", new BattleState());
 
-        StateManager.change( "GameState", null );
+        //////////////////////////////////////////
+        Object[] args = { player, james, jessie };
+        //////////////////////////////////////////
+
+        StateManager.change( "GameState", args );
     }
 
     public Tile[][] getWorldMapTileCollisionDetection() {
@@ -151,28 +155,21 @@ public class Game implements Runnable {
     }
 
     public void tick() {
-        keyManager.tick();
-        player.tick();
+        keyManager.tick();                          //getInput();
+
+        StateManager.getCurrentState().tick();      //update();
     }
 
     public void render() {
-       displayer.getCurrentPanel().repaint();
+       displayer.getPanel().repaint();              //render();
     }
 
     // GETTERS & SETTERS
 
-    public Player getPlayer() {
-        return player;
-    }
-    public Player getJames() {
-        return james;
-    }
-    public Player getJessie() {
-        return jessie;
-    }
-
     public KeyManager getKeyManager() { return keyManager; }
     public GameCamera getGameCamera() { return gameCamera; }
+    public int getWidth() { return width; }
+    public int getHeight() { return height; }
 
     // |+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|
 

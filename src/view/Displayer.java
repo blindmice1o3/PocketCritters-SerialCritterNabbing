@@ -7,8 +7,6 @@ import model.states.StateManager;
 import javax.swing.*;
 import java.awt.*;
 
-import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
-
 public class Displayer {
 
     private Handler handler;
@@ -17,7 +15,7 @@ public class Displayer {
     private int width, height;
 
     private JFrame frame;
-    private JPanel currentPanel;
+    private JPanel panel;
 
     public Displayer(Handler handler, KeyManager keyManager, String title, int width, int height) {
         this.handler = handler;
@@ -40,21 +38,45 @@ public class Displayer {
         frame.addKeyListener(keyManager);
         /////////////////////////////////
 
-        currentPanel = StateManager.getCurrentState().getPanel();
-        frame.add(BorderLayout.CENTER, currentPanel);
+        panel = new BasePanel();
+        frame.add(BorderLayout.CENTER, panel);
         frame.setVisible(true);
 
-        //frame.setContentPane(currentPanel);
+        //frame.setContentPane(panel);
 
-        //frame.add(currentPanel);
+        //frame.add(panel);
         //frame.pack();
     }
 
     // GETTERS & SETTERS
 
-    public JPanel getCurrentPanel() {
-        return currentPanel;
+    public JPanel getPanel() {
+        return panel;
     }
-    public void setCurrentPanel(JPanel currentPanel) { this.currentPanel = currentPanel; }
+    public void setPanel(JPanel panel) { this.panel = panel; }
+
+    /////////////////////////////////////////////////////////////////////
+    private class BasePanel extends JPanel {
+
+        public BasePanel() {
+            //@@@@@ SET DOUBLE-BUFFERED TO TRUE @@@@@
+            super(true);
+            //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+            setPreferredSize( new Dimension(width, height) );
+            setMaximumSize( new Dimension(width, height) );
+            setMinimumSize( new Dimension(width, height) );
+            setFocusable(false);
+        } // **** end BasePanel(Handler, int, int) constructor ****
+
+        @Override
+        public void paintComponent(Graphics g) {
+            //super.paintComponent(g);
+
+            StateManager.getCurrentState().render(g);
+        }
+
+    } // **** end BasePanel inner-class ****
+    ////////////////////////////////////////////////////////////////////
 
 } // **** end view.Displayer class ****

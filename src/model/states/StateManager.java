@@ -28,8 +28,6 @@ public class StateManager {
         currentState = nextState;
     }
 
-    public static IState getCurrentState() {
-        return currentState;
-    }
+    public static IState getCurrentState() { return currentState; }
 
 } // **** end StateManager class ****

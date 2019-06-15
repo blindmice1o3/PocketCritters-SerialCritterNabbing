@@ -1,17 +1,15 @@
 package model.states;
 
-import javax.swing.*;
+import java.awt.*;
 
 public interface IState {
 
     void tick();
 
-    void handleInput();
+    void render(Graphics G);
 
     void enter(Object[] args);
 
     void exit();
-
-    JPanel getPanel();
 
 }

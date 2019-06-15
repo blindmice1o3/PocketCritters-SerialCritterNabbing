@@ -1,6 +1,6 @@
 package model.states;
 
-import javax.swing.*;
+import java.awt.*;
 
 public class EmptyState implements IState {
 
@@ -10,7 +10,7 @@ public class EmptyState implements IState {
     }
 
     @Override
-    public void handleInput() {
+    public void render(Graphics g) {
 
     }
 
@@ -22,11 +22,6 @@ public class EmptyState implements IState {
     @Override
     public void exit() {
 
-    }
-
-    @Override
-    public JPanel getPanel() {
-        return null;
     }
 
 } // **** end EmptyState class ****

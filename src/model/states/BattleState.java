@@ -1,6 +1,6 @@
 package model.states;
 
-import javax.swing.*;
+import java.awt.*;
 
 public class BattleState implements IState {
 
@@ -10,7 +10,7 @@ public class BattleState implements IState {
     }
 
     @Override
-    public void handleInput() {
+    public void render(Graphics g) {
 
     }
 
@@ -22,11 +22,6 @@ public class BattleState implements IState {
     @Override
     public void exit() {
 
-    }
-
-    @Override
-    public JPanel getPanel() {
-        return null;
     }
 
 } // **** end BattleState class ****
