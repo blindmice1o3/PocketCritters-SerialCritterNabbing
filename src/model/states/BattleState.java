@@ -1,8 +1,8 @@
 package model.states;
 
+import javax.swing.*;
+
 public class BattleState implements IState {
-
-
 
     @Override
     public void tick() {
@@ -22,6 +22,11 @@ public class BattleState implements IState {
     @Override
     public void exit() {
 
+    }
+
+    @Override
+    public JPanel getPanel() {
+        return null;
     }
 
 } // **** end BattleState class ****

@@ -1,22 +1,27 @@
 package view;
 
 import main.Handler;
-import main.gfx.Assets;
+import main.input.KeyManager;
+import model.states.StateManager;
 
 import javax.swing.*;
 import java.awt.*;
 
+import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
+
 public class Displayer {
 
     private Handler handler;
+    private KeyManager keyManager;
     private String title;
     private int width, height;
 
     private JFrame frame;
-    private JPanel panel;
+    private JPanel currentPanel;
 
-    public Displayer(Handler handler, String title, int width, int height) {
+    public Displayer(Handler handler, KeyManager keyManager, String title, int width, int height) {
         this.handler = handler;
+        this.keyManager = keyManager;
         this.title = title;
         this.width = width;
         this.height = height;
@@ -31,87 +36,25 @@ public class Displayer {
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
 
-        panel = new MyPanel(width, height);
-        panel.setPreferredSize( new Dimension(width, height) );
-        panel.setMaximumSize( new Dimension(width, height) );
-        panel.setMinimumSize( new Dimension(width, height) );
-        panel.setFocusable(false);
+        /////////////////////////////////
+        frame.addKeyListener(keyManager);
+        /////////////////////////////////
 
-        frame.setContentPane(panel);
-        //frame.add(panel);
-        //frame.pack();
+        currentPanel = StateManager.getCurrentState().getPanel();
+        frame.add(BorderLayout.CENTER, currentPanel);
         frame.setVisible(true);
+
+        //frame.setContentPane(currentPanel);
+
+        //frame.add(currentPanel);
+        //frame.pack();
     }
 
     // GETTERS & SETTERS
 
-    public JFrame getFrame() { return frame; }
-    public JPanel getPanel() {
-        return panel;
+    public JPanel getCurrentPanel() {
+        return currentPanel;
     }
-
-    class MyPanel extends JPanel {
-
-        int widthScreen, heightScreen;
-
-        public MyPanel(int widthScreen, int heightScreen) {
-            super(true);
-
-            this.widthScreen = widthScreen;
-            this.heightScreen = heightScreen;
-        } // **** end MyPanel(int, int) constructor ****
-
-        @Override
-        public void paintComponent(Graphics g) {
-            super.paintComponent(g);
-
-            g.drawImage(Assets.world, 0, 0, widthScreen, heightScreen,
-                    (int)(handler.getGame().getGameCamera().getxOffset0()),
-                    (int)(handler.getGame().getGameCamera().getyOffset0()),
-                    (int)(handler.getGame().getGameCamera().getxOffset1()),
-                    (int)(handler.getGame().getGameCamera().getyOffset1()),
-                    null);
-            //g.setColor(Color.YELLOW);
-            //g.drawString("Pocket Critters - Serial Critter Nabbing!!!", 10, 10);
-
-            handler.getGame().getPlayer().render(g);
-            handler.getGame().getJames().render(g);
-            handler.getGame().getJessie().render(g);
-        }
-
-        /*
-        @Override
-        public void keyPressed(KeyEvent e) {
-            if (e.getKeyCode() == KeyEvent.VK_A) {
-                handler.getGame().getGameCamera().setxOffset(
-                        handler.getGame().getGameCamera().getxOffset()+32
-                );
-            } else if (e.getKeyCode() == KeyEvent.VK_D) {
-                handler.getGame().getGameCamera().setxOffset(
-                        handler.getGame().getGameCamera().getxOffset()-32
-                );
-            } else if (e.getKeyCode() == KeyEvent.VK_W) {
-                handler.getGame().getGameCamera().setyOffset(
-                        handler.getGame().getGameCamera().getyOffset()+32
-                );
-            } else if (e.getKeyCode() == KeyEvent.VK_S) {
-                handler.getGame().getGameCamera().setyOffset(
-                        handler.getGame().getGameCamera().getyOffset()-32
-                );
-            }
-        }
-
-        @Override
-        public void keyReleased(KeyEvent e) {
-
-        }
-
-        @Override
-        public void keyTyped(KeyEvent e) {
-
-        }
-        */
-
-    } // **** end MyPanel inner-class ****
+    public void setCurrentPanel(JPanel currentPanel) { this.currentPanel = currentPanel; }
 
 } // **** end view.Displayer class ****

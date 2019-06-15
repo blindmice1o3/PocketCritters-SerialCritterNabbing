@@ -16,20 +16,23 @@ import view.Displayer;
 public class Game implements Runnable {
 
     private Handler handler;
+    private KeyManager keyManager;
+
     private Thread thread;
     private boolean running = false;
 
-    private KeyManager keyManager;
     private GameCamera gameCamera;
     private Displayer displayer;
 
+    private int width, height;
     private TileSpriteToRGBConverter tileSpriteToRGBConverter;
     private Tile[][] worldMapTileCollisionDetection;
     private Player player, james, jessie;
 
-    public Game() {
-
-    } // **** end Game() constructor ****
+    public Game(int width, int height) {
+        this.width = width;
+        this.height = height;
+    } // **** end Game(int, int) constructor ****
 
     public synchronized void start() {
         //In case the game is already running and this start() method gets accidentally called somewhere.
@@ -62,7 +65,7 @@ public class Game implements Runnable {
     private void init() {
         handler = new Handler(this);
         Assets.init();
-        keyManager = new KeyManager();
+
         gameCamera = new GameCamera(960, 3184, 1279, 3455);
 
         //@@@@@ Initializing Tile[][] worldMapTileCollisionDetection @@@@@
@@ -78,8 +81,9 @@ public class Game implements Runnable {
 
         initStateManager();
 
-        displayer = new Displayer(handler, "Pocket Critters - Serial Critter Nabbing", 640, 540);
-        displayer.getFrame().addKeyListener(keyManager);
+        keyManager = new KeyManager();
+        displayer = new Displayer(handler, keyManager,
+                "Pocket Critters - Serial Critter Nabbing", width, height);
     }
 
     public synchronized void stop() {
@@ -100,7 +104,7 @@ public class Game implements Runnable {
     }
 
     private void initStateManager() {
-        StateManager.add("GameState", new GameState());
+        StateManager.add("GameState", new GameState(handler, width, height));
         StateManager.add("BattleState", new BattleState());
 
         StateManager.change( "GameState", null );
@@ -152,7 +156,7 @@ public class Game implements Runnable {
     }
 
     public void render() {
-       displayer.getPanel().repaint();
+       displayer.getCurrentPanel().repaint();
     }
 
     // GETTERS & SETTERS
@@ -173,7 +177,7 @@ public class Game implements Runnable {
     // |+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|
 
     public static void main(String[] args) {
-        Game game = new Game();
+        Game game = new Game(640, 540);
         game.start();
     }
 

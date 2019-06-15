@@ -52,7 +52,7 @@ public class Sandbox {
 
         /*
         JFrame frame = new JFrame("sandbox tester");
-        MyPanel panel = new MyPanel();
+        BasePanel panel = new BasePanel();
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600, 480);

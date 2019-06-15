@@ -18,18 +18,14 @@ public class StateManager {
 
     public static void change(String key, Object[] args) {
         //current IState object "closes down shop for the night".
-        getCurrentState().exit();
+        currentState.exit();
 
         //future IState object "opens up shop for the day".
         IState nextState = stateHashMap.get(key);
         nextState.enter(args);
 
         //when closing AND opening preparations are complete, switch future IState to become current IState.
-        setCurrentState(nextState);
-    }
-
-    public static void setCurrentState(IState IState) {
-        currentState = IState;
+        currentState = nextState;
     }
 
     public static IState getCurrentState() {
