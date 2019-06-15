@@ -13,9 +13,12 @@ import model.tiles.Tile;
 import main.utils.TileSpriteToRGBConverter;
 import view.Displayer;
 
-public class Game {
+public class Game implements Runnable {
 
     private Handler handler;
+    private Thread thread;
+    private boolean running = false;
+
     private KeyManager keyManager;
     private GameCamera gameCamera;
     private Displayer displayer;
@@ -23,34 +26,78 @@ public class Game {
     private TileSpriteToRGBConverter tileSpriteToRGBConverter;
     private Tile[][] worldMapTileCollisionDetection;
     private Player player, james, jessie;
-    private boolean gameOver;
 
     public Game() {
-        Assets.init();
 
-        //@@@@@
-        tileSpriteToRGBConverter = new TileSpriteToRGBConverter();
-        worldMapTileCollisionDetection = tileSpriteToRGBConverter.generateWorldMapTileCollisionDetection(Assets.world);
-        //@@@@@
+    } // **** end Game() constructor ****
 
+    public synchronized void start() {
+        //In case the game is already running and this start() method gets accidentally called somewhere.
+        if (running) {
+            return;
+        }   //To prevent re-initializing the thread.
+
+        //running controls the while-loop in gameLoop() method.
+        running = true;
+
+        //Pass a Runnable object to Thread class's constructor.
+        thread = new Thread(this);   //Game class is a Runnable.
+        thread.start();                     //Thread class's start() method calls the Runnable's run() method.
+        //The Runnable's run() method is where the majority of our game code will go.
+    }
+
+    //THIS IS CALLED BY Thread class's start() method... !!!TO BE RUN IN A SEPARATE THREAD!!!
+    @Override
+    public void run() {
+
+        init();
+
+        gameLoop();
+
+        //In case stop() doesn't get called inside the while-loop of gameLoop() method.
+        stop();
+
+    }
+
+    private void init() {
         handler = new Handler(this);
+        Assets.init();
         keyManager = new KeyManager();
         gameCamera = new GameCamera(960, 3184, 1279, 3455);
-        displayer = new Displayer(handler, "Pocket Critters - Serial Critter Nabbing", 640, 540);
-        displayer.getFrame().addKeyListener(keyManager);
 
-        player = new Player(handler);
+        //@@@@@ Initializing Tile[][] worldMapTileCollisionDetection @@@@@
+        tileSpriteToRGBConverter = new TileSpriteToRGBConverter();
+        worldMapTileCollisionDetection = tileSpriteToRGBConverter.generateWorldMapTileCollisionDetection(Assets.world);
+        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        player = new Player(handler);
         james = new James(handler);
         jessie = new Jessie(handler);
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
         initStateManager();
 
-        gameOver = false;
+        displayer = new Displayer(handler, "Pocket Critters - Serial Critter Nabbing", 640, 540);
+        displayer.getFrame().addKeyListener(keyManager);
+    }
 
-        gameLoop();
-    } // **** end main.Game() constructor ****
+    public synchronized void stop() {
+        //In case the game is already stopped and this stop() method gets accidentally called somewhere.
+        if (!running) {
+            return;
+        }   //Prevents error, in case the game is already stopped and (it will seem like) we're trying to stop it again.
+
+        //running controls the while-loop in gameLoop() method.
+        running = false;
+
+        //Safely joins/stops the thread.
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
     private void initStateManager() {
         StateManager.add("GameState", new GameState());
@@ -74,7 +121,8 @@ public class Game {
         long timer = 0;
         int ticks = 0;
 
-        while(!gameOver) {
+        ////////////////////////////////////////////////////////
+        while(running) {
             now = System.nanoTime();
             delta += (now - lastTime) / timePerTick;
             timer += (now - lastTime);
@@ -95,6 +143,7 @@ public class Game {
                 timer = 0;
             }
         }
+        ////////////////////////////////////////////////////////
     }
 
     public void tick() {
@@ -124,7 +173,8 @@ public class Game {
     // |+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|
 
     public static void main(String[] args) {
-        new Game();
+        Game game = new Game();
+        game.start();
     }
 
 } // **** end main.Game class ****

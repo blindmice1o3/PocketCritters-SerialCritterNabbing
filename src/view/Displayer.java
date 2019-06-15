@@ -9,23 +9,37 @@ import java.awt.*;
 public class Displayer {
 
     private Handler handler;
+    private String title;
+    private int width, height;
 
     private JFrame frame;
     private JPanel panel;
 
-    public Displayer(Handler handler, String title, int widthScreen, int heightScreen) {
+    public Displayer(Handler handler, String title, int width, int height) {
         this.handler = handler;
+        this.title = title;
+        this.width = width;
+        this.height = height;
 
+        initDisplayer();
+    }
+
+    private void initDisplayer() {
         frame = new JFrame(title);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(widthScreen, heightScreen);
+        frame.setSize(width, height);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
 
-        panel = new MyPanel(widthScreen, heightScreen);
+        panel = new MyPanel(width, height);
+        panel.setPreferredSize( new Dimension(width, height) );
+        panel.setMaximumSize( new Dimension(width, height) );
+        panel.setMinimumSize( new Dimension(width, height) );
         panel.setFocusable(false);
-        frame.setContentPane(panel);
 
+        frame.setContentPane(panel);
+        //frame.add(panel);
+        //frame.pack();
         frame.setVisible(true);
     }
 
