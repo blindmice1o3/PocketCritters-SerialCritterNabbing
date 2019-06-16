@@ -6,7 +6,7 @@ import java.awt.event.KeyListener;
 public class KeyManager implements KeyListener {
 
     private boolean[] keys;
-    public boolean up, down, left, right;
+    public boolean up, down, left, right, aButton, bButton, startButton, selectButton;
 
     public KeyManager() {
         keys = new boolean[256];
@@ -17,6 +17,11 @@ public class KeyManager implements KeyListener {
         down = keys[KeyEvent.VK_S];
         left = keys[KeyEvent.VK_A];
         right = keys[KeyEvent.VK_D];
+
+        aButton = keys[KeyEvent.VK_COMMA];
+        bButton = keys[KeyEvent.VK_PERIOD];
+        startButton = keys[KeyEvent.VK_ENTER];
+        selectButton = keys[KeyEvent.VK_SHIFT];
     }
 
     @Override

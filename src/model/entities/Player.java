@@ -14,6 +14,8 @@ public class Player {
     private int xDelta, yDelta;
     private int moveSpeed;
 
+
+
     public Player(Handler handler) {
         this.handler = handler;
 
