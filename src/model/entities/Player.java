@@ -27,7 +27,7 @@ public class Player {
 
         bounds = new Rectangle(2, 2, 12, 12);
 
-        moveSpeed = 2;
+        moveSpeed = 16;
     } // **** end model.entities.Player() constructor ****
 
     public void tick() {

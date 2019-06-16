@@ -8,21 +8,15 @@ import java.awt.*;
 
 public class BattleState implements IState {
 
-    //private enum Phase { INTRO, GAME_LOOP, OUTRO; }
-    //private Phase currentPhase;
-    //private Phase nextPhase;
-
     private Handler handler;
-
     private Player player;
 
     public BattleState(Handler handler) {
         this.handler = handler;
 
-        //currentPhase = Phase.INTRO;
-        //nextPhase = Phase.INTRO;
-
+        ////////////////////
         initStateManager();
+        ////////////////////
     } // **** end BattleState(Handler) constructor ****
 
     private void initStateManager() {
@@ -36,93 +30,14 @@ public class BattleState implements IState {
     }
 
     @Override
-    public void updateInput() {
-
-        /*
-        //@@@@@INTRO@@@@@
-        if (currentPhase == Phase.INTRO) {
-
-        }
-        //@@@@@GAME_LOOP@@@@@
-        else if (currentPhase == Phase.GAME_LOOP) {
-
-        }
-        //@@@@@OUTRO@@@@@
-        else if (currentPhase == Phase.OUTRO) {
-
-        }
-        */
-
-    }
-
-    @Override
     public void tick() {
-
+        ///////////////////////////////
         StateManager.change("BattleStateIntro", null);
-
-        /*
-        //@@@@@INTRO@@@@@
-        if (currentPhase == Phase.INTRO) {
-            System.out.println("1BattleState.tick() with currentPhase == Phase.INTRO");
-
-            if (nextPhase == Phase.GAME_LOOP) {
-                ///////////////////////////////
-                currentPhase = nextPhase;
-                ///////////////////////////////
-            }
-        }
-        //@@@@@GAME_LOOP@@@@@
-        else if (currentPhase == Phase.GAME_LOOP) {
-            System.out.println("1BattleState.tick() with currentPhase == Phase.GAME_LOOP");
-            //DO STUFF... check player1's input, player1 do stuff, check player2's input, player2 do stuff... loop.
-
-            //end of while loop... nextPhase = Phase.OUTRO;
-
-            //After a winner is determined.
-            if (nextPhase == Phase.OUTRO) {
-                ///////////////////////////////
-                currentPhase = nextPhase;
-                ///////////////////////////////
-            }
-        }
-        //@@@@@OUTRO@@@@@
-        else if (currentPhase == Phase.OUTRO) {
-            System.out.println("1BattleState.tick() with currentPhase == Phase.OUTRO");
-            //DO STUFF...
-
-            if (nextPhase == Phase.INTRO) {
-                ///////////////////////////////
-                currentPhase = nextPhase;
-                ///////////////////////////////
-                ///////////////////////////////
-                StateManager.change("GameState", null);
-                ///////////////////////////////
-            }
-        }
-        */
-
+        ///////////////////////////////
     }
 
     @Override
     public void render(Graphics g) {
-
-        /*
-        //@@@@@INTRO@@@@@
-        if (currentPhase == Phase.INTRO) {
-            //NEED TO FINE-TUNE COORDINATES!
-
-        }
-        //@@@@@GAME_LOOP@@@@@
-        else if (currentPhase == Phase.GAME_LOOP) {
-            //NEED TO FINE-TUNE COORDINATES!
-
-        }
-        //@@@@OUTRO@@@@@
-        else if (currentPhase == Phase.OUTRO) {
-            //NEED TO FINE-TUNE COORDINATES!
-
-        }
-        */
 
     }
 
@@ -150,11 +65,6 @@ public class BattleState implements IState {
         public BattleStateIntro(Handler handler) {
             this.handler = handler;
         } // **** end BattleStateIntro(Handler) constructor ****
-
-        @Override
-        public void updateInput() {
-
-        }
 
         @Override
         public void tick() {
@@ -199,11 +109,6 @@ public class BattleState implements IState {
         } // **** end BattleStateMenu(Handler) constructor ****
 
         @Override
-        public void updateInput() {
-
-        }
-
-        @Override
         public void tick() {
             System.out.println("BattleStateMenu.tick()");
             //UP
@@ -234,7 +139,7 @@ public class BattleState implements IState {
                     xIndex++;
                 }
             }
-            //delete later
+            //delete later.... use aButton to execute selection of (xIndex, yIndex).
             else if (handler.getKeyManager().bButton) {
                 System.out.println("BattleStateMenu.tick()... bButton");
                 ///////////////////////////////
@@ -272,11 +177,6 @@ public class BattleState implements IState {
         } // **** end BattleStateFight(Handler) constructor ****
 
         @Override
-        public void updateInput() {
-
-        }
-
-        @Override
         public void tick() {
 
         }
@@ -307,11 +207,6 @@ public class BattleState implements IState {
         public BattleStateItem(Handler handler) {
             this.handler = handler;
         } // **** end BattleStateItem(Handler) constructor ****
-
-        @Override
-        public void updateInput() {
-
-        }
 
         @Override
         public void tick() {
@@ -346,11 +241,6 @@ public class BattleState implements IState {
         } // **** end BattleStateMonsterBeltList(Handler) constructor ****
 
         @Override
-        public void updateInput() {
-
-        }
-
-        @Override
         public void tick() {
 
         }
@@ -383,11 +273,6 @@ public class BattleState implements IState {
         } // **** end BattleStateRun(Handler) constructor ****
 
         @Override
-        public void updateInput() {
-
-        }
-
-        @Override
         public void tick() {
 
         }
@@ -418,11 +303,6 @@ public class BattleState implements IState {
         public BattleStateOutro(Handler handler) {
             this.handler = handler;
         } // **** end BattleStateOutro(Handler) constructor ****
-
-        @Override
-        public void updateInput() {
-
-        }
 
         @Override
         public void tick() {

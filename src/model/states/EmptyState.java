@@ -5,11 +5,6 @@ import java.awt.*;
 public class EmptyState implements IState {
 
     @Override
-    public void updateInput() {
-
-    }
-
-    @Override
     public void tick() {
 
     }

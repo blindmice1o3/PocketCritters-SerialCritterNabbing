@@ -7,6 +7,7 @@ import model.entities.Jessie;
 import model.entities.Player;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public class GameState implements IState {
 
@@ -19,27 +20,26 @@ public class GameState implements IState {
     } // **** end GameState(Handler, int, int) constructor ****
 
     @Override
-    public void updateInput() {
+    public void tick() {
+        //getInput()
         //UP
-        if (handler.getKeyManager().up) {
+        if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {
             player.setYDelta( -player.getMoveSpeed() );
         }
         //DOWN
-        else if (handler.getKeyManager().down) {
+        else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) {
             player.setYDelta( player.getMoveSpeed() );
         }
         //LEFT
-        else if (handler.getKeyManager().left) {
+        else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_A)) {
             player.setXDelta( -player.getMoveSpeed() );
         }
         //RIGHT
-        else if (handler.getKeyManager().right) {
+        else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_D)) {
             player.setXDelta( player.getMoveSpeed() );
         }
-    }
 
-    @Override
-    public void tick() {
+        //update()
         player.tick();
         james.tick();
         jessie.tick();
@@ -47,6 +47,7 @@ public class GameState implements IState {
 
     @Override
     public void render(Graphics g) {
+        //render()
         renderBackground(g);
         renderEntities(g);
     }
