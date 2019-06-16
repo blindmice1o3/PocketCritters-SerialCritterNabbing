@@ -139,6 +139,7 @@ public class Game implements Runnable {
 
             if (delta >= 1) {
                 //@@@@@@@@
+                updateInput();
                 tick();
                 render();
                 //@@@@@@@@
@@ -155,13 +156,16 @@ public class Game implements Runnable {
         ////////////////////////////////////////////////////////
     }
 
-    public void tick() {
-        keyManager.tick();                          //getInput();
+    private void updateInput() {
+        keyManager.updateInput();                   //getInput();
+        StateManager.getCurrentState().updateInput();
+    }
 
+    private void tick() {
         StateManager.getCurrentState().tick();      //move();
     }
 
-    public void render() {
+    private void render() {
        displayer.getPanel().repaint();              //render();
     }
 

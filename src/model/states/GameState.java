@@ -19,18 +19,7 @@ public class GameState implements IState {
     } // **** end GameState(Handler, int, int) constructor ****
 
     @Override
-    public void tick() {
-        updateInput();
-
-        player.tick();
-        james.tick();
-        jessie.tick();
-    }
-
     public void updateInput() {
-        player.setXDelta(0);
-        player.setYDelta(0);
-
         //UP
         if (handler.getKeyManager().up) {
             player.setYDelta( -player.getMoveSpeed() );
@@ -47,6 +36,13 @@ public class GameState implements IState {
         else if (handler.getKeyManager().right) {
             player.setXDelta( player.getMoveSpeed() );
         }
+    }
+
+    @Override
+    public void tick() {
+        player.tick();
+        james.tick();
+        jessie.tick();
     }
 
     @Override

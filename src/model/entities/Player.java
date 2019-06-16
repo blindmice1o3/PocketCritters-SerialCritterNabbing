@@ -28,6 +28,9 @@ public class Player {
     public void tick() {
         moveX();
         moveY();
+
+        xDelta = 0;
+        yDelta = 0;
     }
 
     private void moveX() {

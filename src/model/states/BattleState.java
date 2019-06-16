@@ -7,40 +7,50 @@ import java.awt.*;
 
 public class BattleState implements IState {
 
+
+
     private Handler handler;
+
+    private int xIndex, yIndex;
 
     private Player player;
 
     public BattleState(Handler handler) {
         this.handler = handler;
+        xIndex = 0;
+        yIndex = 0;
     } // **** end BattleState(Handler) constructor ****
 
     @Override
-    public void tick() {
-        getInput();
-        update();
-    }
-
-    private void getInput() {
+    public void updateInput() {
         //UP
         if (handler.getKeyManager().up) {
-            //upButtomPressed();
+            if (yIndex > 0) {
+                yIndex--;
+            }
         }
         //DOWN
         else if (handler.getKeyManager().down) {
-            //downButtonPressed();
+            if (yIndex == 0) {
+                yIndex++;
+            }
         }
         //LEFT
         else if (handler.getKeyManager().left) {
-            //leftButtonPressed();
+            if (xIndex > 0) {
+                xIndex--;
+            }
         }
         //RIGHT
         else if (handler.getKeyManager().right) {
-            //rightButtonPressed();
+            if (xIndex == 0) {
+                xIndex++;
+            }
         }
     }
 
-    private void update() {
+    @Override
+    public void tick() {
 
     }
 
