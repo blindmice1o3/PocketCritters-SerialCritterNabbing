@@ -8,7 +8,7 @@ public interface IState {
 
     void tick();
 
-    void render(Graphics G);
+    void render(Graphics g);
 
     void enter(Object[] args);
 
