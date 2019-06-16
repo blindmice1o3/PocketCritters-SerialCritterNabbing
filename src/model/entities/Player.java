@@ -2,15 +2,18 @@ package model.entities;
 
 import main.Handler;
 import main.gfx.Assets;
+import model.states.StateManager;
+import model.tiles.TallGrassTile;
 import model.tiles.Tile;
 
 import java.awt.*;
+import java.util.Random;
 
 public class Player {
 
     private Handler handler;
     protected int x, y;
-    //protected Rectangle bounds;
+    protected Rectangle bounds;
     private int xDelta, yDelta;
     private int moveSpeed;
 
@@ -22,7 +25,7 @@ public class Player {
         x = 1104;
         y = 3312;
 
-        //bounds = new Rectangle(2, 2, 12, 12);
+        bounds = new Rectangle(4, 4, 8, 8);
 
         moveSpeed = 2;
     } // **** end model.entities.Player() constructor ****
@@ -33,6 +36,20 @@ public class Player {
 
         xDelta = 0;
         yDelta = 0;
+    }
+
+    private void checkTallGrassTileCollision(TallGrassTile tile) {
+        if (bounds.intersects(tile.getBounds())) {
+            if (tile.getCurrentPhase() == TallGrassTile.Phase.ACTIVE) {
+                Random r = new Random();
+
+                if (r.nextInt(4) < 1) {
+                    StateManager.change("BattleState", null);
+                }
+
+                tile.setCurrentPhase(TallGrassTile.Phase.INACTIVE);
+            }
+        }
     }
 
     private void moveX() {
@@ -49,6 +66,15 @@ public class Player {
                 x += xDelta;
                 //moves GameCamera's x-position.
                 handler.getGameCamera().move(xDelta, 0);
+
+
+
+                if ( worldMap[((y+yDelta) / Tile.HEIGHT)][tx] instanceof TallGrassTile ) {
+                    checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+yDelta) / Tile.HEIGHT)][tx] );
+                } else if ( worldMap[((y+yDelta+Tile.HEIGHT) / Tile.HEIGHT)][tx] instanceof TallGrassTile ) {
+                    checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+yDelta+Tile.HEIGHT) / Tile.HEIGHT)][tx] );
+                }
+
             }
         }
         //MOVING RIGHT

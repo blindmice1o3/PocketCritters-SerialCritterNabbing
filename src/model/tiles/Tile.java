@@ -1,5 +1,7 @@
 package model.tiles;
 
+import java.awt.*;
+
 public class Tile {
 
     //CONSTANTS
@@ -9,9 +11,11 @@ public class Tile {
     //MEMBER FIELDS
     private boolean solid;
     private int x, y;
+    private Rectangle bounds;
 
     public Tile(boolean solid, int x, int y) {
         this.solid = solid;
+        bounds = new Rectangle(x+(WIDTH/4), y+(HEIGHT/4), (WIDTH/2), (HEIGHT/2));
     } // **** end Tile(boolean, int, int) constructor ****
 
     // GETTERS AND SETTERS
@@ -23,5 +27,7 @@ public class Tile {
     public void setSolid(boolean solid) {
         this.solid = solid;
     }
+
+    public Rectangle getBounds() { return bounds; }
 
 } // **** end Tile class *****
