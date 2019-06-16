@@ -1,12 +1,16 @@
 package main.gfx;
 
+import main.utils.FontGrabber;
 import main.utils.ImageLoader;
 
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+import java.util.Map;
 
 public class Assets {
+
+    public static Map<String, BufferedImage> fontHashMap;
 
     public static BufferedImage world, player, teamRocket, battleStateSpriteSheet;
     public static BufferedImage[] jamesDown, jamesUp, jamesLeft, jamesRight,
@@ -17,6 +21,8 @@ public class Assets {
         player = ImageLoader.loadImage("/butters_profchaos.jpg");
         teamRocket = ImageLoader.loadImage("/TeamRocket.png");
         battleStateSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Yellow - Battle Interface.png");
+
+        fontHashMap = FontGrabber.initFont();   //this line must come AFTER battleStateSpriteSheet gets initiated.
 
         jamesDown = new BufferedImage[2];
         jamesDown[0] = teamRocket.getSubimage(236, 24, 12, 16);
