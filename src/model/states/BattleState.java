@@ -31,54 +31,54 @@ public class BattleState implements IState {
     @Override
     public void updateInput() {
         if (currentPhase == Phase.INTRO) {
-            System.out.println("BattleState.updateInput() with currentPhase == Phase.INTRO");
+            System.out.println("0BattleState.updateInput() with currentPhase == Phase.INTRO");
             if (handler.getKeyManager().aButton) {
-                System.out.println("BattleState.updateInput() with currentPhase == Phase.INTRO... aButton");
+                System.out.println("0BattleState.updateInput() with currentPhase == Phase.INTRO... aButton");
                 ///////////////////////////////
                 nextPhase = Phase.GAME_LOOP;
                 ///////////////////////////////
             }
         } else if (currentPhase == Phase.GAME_LOOP) {
-            System.out.println("BattleState.updateInput() with currentPhase == Phase.GAME_LOOP");
+            System.out.println("0BattleState.updateInput() with currentPhase == Phase.GAME_LOOP");
             //UP
             if (handler.getKeyManager().up) {
-                System.out.println("BattleState.updateInput() with currentPhase == Phase.GAME_LOOP... up");
+                System.out.println("7BattleState.updateInput() with currentPhase == Phase.GAME_LOOP... up");
                 if (yIndex > 0) {
                     yIndex--;
                 }
             }
             //DOWN
             else if (handler.getKeyManager().down) {
-                System.out.println("BattleState.updateInput() with currentPhase == Phase.GAME_LOOP... down");
+                System.out.println("7BattleState.updateInput() with currentPhase == Phase.GAME_LOOP... down");
                 if (yIndex == 0) {
                     yIndex++;
                 }
             }
             //LEFT
             else if (handler.getKeyManager().left) {
-                System.out.println("BattleState.updateInput() with currentPhase == Phase.GAME_LOOP... left");
+                System.out.println("7BattleState.updateInput() with currentPhase == Phase.GAME_LOOP... left");
                 if (xIndex > 0) {
                     xIndex--;
                 }
             }
             //RIGHT
             else if (handler.getKeyManager().right) {
-                System.out.println("BattleState.updateInput() with currentPhase == Phase.GAME_LOOP... right");
+                System.out.println("7BattleState.updateInput() with currentPhase == Phase.GAME_LOOP... right");
                 if (xIndex == 0) {
                     xIndex++;
                 }
             }
             //delete later
-            else if (handler.getKeyManager().aButton) {
-                System.out.println("BattleState.updateInput() with currentPhase == Phase.GAME_LOOP... aButton");
+            else if (handler.getKeyManager().bButton) {
+                System.out.println("0BattleState.updateInput() with currentPhase == Phase.GAME_LOOP... bButton");
                 ///////////////////////////////
                 nextPhase = Phase.OUTRO;
                 ///////////////////////////////
             }
         } else if (currentPhase == Phase.OUTRO) {
-            System.out.println("BattleState.updateInput() with currentPhase == Phase.OUTRO");
-            if (handler.getKeyManager().aButton) {
-                System.out.println("BattleState.updateInput() with currentPhase == Phase.OUTRO... aButton");
+            System.out.println("0BattleState.updateInput() with currentPhase == Phase.OUTRO");
+            if (handler.getKeyManager().startButton) {
+                System.out.println("0BattleState.updateInput() with currentPhase == Phase.OUTRO... startButton");
                 ///////////////////////////////
                 nextPhase = Phase.INTRO;
                 ///////////////////////////////
@@ -89,28 +89,37 @@ public class BattleState implements IState {
     @Override
     public void tick() {
         if (currentPhase == Phase.INTRO) {
-            System.out.println("BattleState.tick() with currentPhase == Phase.INTRO");
-            ///////////////////////////////
-            currentPhase = nextPhase;
-            ///////////////////////////////
+            System.out.println("1BattleState.tick() with currentPhase == Phase.INTRO");
+
+            if (nextPhase == Phase.GAME_LOOP) {
+                ///////////////////////////////
+                currentPhase = nextPhase;
+                ///////////////////////////////
+            }
         } else if (currentPhase == Phase.GAME_LOOP) {
-            System.out.println("BattleState.tick() with currentPhase == Phase.GAME_LOOP");
+            System.out.println("1BattleState.tick() with currentPhase == Phase.GAME_LOOP");
             //DO STUFF... check player1's input, player1 do stuff, check player2's input, player2 do stuff... loop.
 
             //end of while loop... nextPhase = Phase.OUTRO;
 
             //After a winner is determined.
-            ///////////////////////////////
-            currentPhase = nextPhase;
-            ///////////////////////////////
+            if (nextPhase == Phase.OUTRO) {
+                ///////////////////////////////
+                currentPhase = nextPhase;
+                ///////////////////////////////
+            }
         } else if (currentPhase == Phase.OUTRO) {
-            System.out.println("BattleState.tick() with currentPhase == Phase.OUTRO");
+            System.out.println("1BattleState.tick() with currentPhase == Phase.OUTRO");
             //DO STUFF...
 
-
-            ///////////////////////////////
-            StateManager.change("GameState", null);
-            ///////////////////////////////
+            if (nextPhase == Phase.INTRO) {
+                ///////////////////////////////
+                currentPhase = nextPhase;
+                ///////////////////////////////
+                ///////////////////////////////
+                StateManager.change("GameState", null);
+                ///////////////////////////////
+            }
         }
     }
 

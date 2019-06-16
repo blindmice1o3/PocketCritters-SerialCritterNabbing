@@ -40,6 +40,10 @@ public class Player {
 
     private void checkTallGrassTileCollision(TallGrassTile tile) {
         if (tile.getCurrentPhase() == TallGrassTile.Phase.ACTIVE) {
+            ///////////////////////////////////////////////////
+            tile.setCurrentPhase(TallGrassTile.Phase.INACTIVE);
+            ///////////////////////////////////////////////////
+
             //Random r = new Random();
 
             //if (r.nextInt(4) < 1) {
@@ -48,8 +52,6 @@ public class Player {
             StateManager.change("BattleState", args);
             //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
             //}
-
-            tile.setCurrentPhase(TallGrassTile.Phase.INACTIVE);
         }
     }
     private void moveX() {
