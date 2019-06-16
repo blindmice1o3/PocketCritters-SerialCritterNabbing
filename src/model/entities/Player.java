@@ -25,7 +25,7 @@ public class Player {
         x = 1104;
         y = 3312;
 
-        bounds = new Rectangle(4, 4, 8, 8);
+        bounds = new Rectangle(2, 2, 12, 12);
 
         moveSpeed = 2;
     } // **** end model.entities.Player() constructor ****
@@ -39,51 +39,64 @@ public class Player {
     }
 
     private void checkTallGrassTileCollision(TallGrassTile tile) {
-        if (bounds.intersects(tile.getBounds())) {
-            if (tile.getCurrentPhase() == TallGrassTile.Phase.ACTIVE) {
-                Random r = new Random();
+        if (tile.getCurrentPhase() == TallGrassTile.Phase.ACTIVE) {
+            //Random r = new Random();
 
-                if (r.nextInt(4) < 1) {
-                    StateManager.change("BattleState", null);
-                }
+            //if (r.nextInt(4) < 1) {
+            Object[] args = { this };
+            //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+            StateManager.change("BattleState", args);
+            //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+            //}
 
-                tile.setCurrentPhase(TallGrassTile.Phase.INACTIVE);
-            }
+            tile.setCurrentPhase(TallGrassTile.Phase.INACTIVE);
         }
     }
-
     private void moveX() {
         Tile[][] worldMap = handler.getWorldMapTileCollisionDetection();
 
         //MOVING LEFT
         if (xDelta < 0) {
-            int tx = (int)((x+xDelta) / Tile.WIDTH);                                        //LEFT
+            int tx = (int)((x+bounds.x+xDelta) / Tile.WIDTH);                                        //LEFT
 
             //if top-LEFT AND bottom-LEFT corners of player-sprite moving into NOT solid tile, do stuff.
-            if ( !(worldMap[((y+yDelta) / Tile.HEIGHT)][tx].isSolid()) &&                   //TOP-LEFT
-                    !(worldMap[((y+yDelta+Tile.HEIGHT) / Tile.HEIGHT)][tx].isSolid()) ) {   //BOTTOM-LEFT
+            if ( !(worldMap[((y+bounds.y+yDelta) / Tile.HEIGHT)][tx].isSolid()) &&                   //TOP-LEFT
+                    !(worldMap[((y+bounds.y+bounds.height+yDelta) / Tile.HEIGHT)][tx].isSolid()) ) {   //BOTTOM-LEFT
+
+
+                if ( worldMap[((y+bounds.y+yDelta) / Tile.HEIGHT)][tx] instanceof TallGrassTile ) {
+                    System.out.println("Checking grass tile to player's top-LEFT.");
+                    checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+bounds.y+yDelta) / Tile.HEIGHT)][tx] );
+                } else if ( worldMap[((y+bounds.y+bounds.height+yDelta) / Tile.HEIGHT)][tx] instanceof TallGrassTile ) {
+                    System.out.println("Checking grass tile to player's bottom-LEFT.");
+                    checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+bounds.y+bounds.height+yDelta) / Tile.HEIGHT)][tx] );
+                }
+
+
                 //moves Player's x-position.
                 x += xDelta;
                 //moves GameCamera's x-position.
                 handler.getGameCamera().move(xDelta, 0);
-
-
-
-                if ( worldMap[((y+yDelta) / Tile.HEIGHT)][tx] instanceof TallGrassTile ) {
-                    checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+yDelta) / Tile.HEIGHT)][tx] );
-                } else if ( worldMap[((y+yDelta+Tile.HEIGHT) / Tile.HEIGHT)][tx] instanceof TallGrassTile ) {
-                    checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+yDelta+Tile.HEIGHT) / Tile.HEIGHT)][tx] );
-                }
-
             }
         }
         //MOVING RIGHT
         else if (xDelta > 0) {
-            int tx = (int)((x+xDelta+Tile.WIDTH) / Tile.WIDTH);                             //RIGHT
+            int tx = (int)((x+bounds.x+bounds.width+xDelta) / Tile.WIDTH);                             //RIGHT
 
             //if top-RIGHT AND bottom-RIGHT corners of player-sprite moving into NOT solid tile, do stuff.
-            if ( !(worldMap[((y+yDelta) / Tile.HEIGHT)][tx].isSolid()) &&                   //TOP-RIGHT
-                    !(worldMap[((y+yDelta+Tile.HEIGHT) / Tile.HEIGHT)][tx].isSolid()) ) {   //BOTTOM-RIGHT
+            if ( !(worldMap[((y+bounds.y+yDelta) / Tile.HEIGHT)][tx].isSolid()) &&                   //TOP-RIGHT
+                    !(worldMap[((y+bounds.y+bounds.height+yDelta) / Tile.HEIGHT)][tx].isSolid()) ) {   //BOTTOM-RIGHT
+
+
+                if ( worldMap[((y+bounds.y+yDelta) / Tile.HEIGHT)][tx] instanceof TallGrassTile ) {
+                    System.out.println("Checking grass tile to player's top-RIGHT.");
+                    checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+bounds.y+yDelta) / Tile.HEIGHT)][tx] );
+                } else if ( worldMap[((y+bounds.y+bounds.height+yDelta) / Tile.HEIGHT)][tx] instanceof TallGrassTile ) {
+                    System.out.println("Checking grass tile to player's bottom-RIGHT.");
+                    checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+bounds.y+bounds.height+yDelta) / Tile.HEIGHT)][tx] );
+                }
+
+
                 //moves Player's x-position.
                 x += xDelta;
                 //moves GameCamera's x-position.
@@ -97,11 +110,22 @@ public class Player {
 
         //MOVING UP
         if (yDelta < 0) {
-            int ty = (int)((y+yDelta) / Tile.HEIGHT);                                       //TOP
+            int ty = (int)((y+bounds.y+yDelta) / Tile.HEIGHT);                                       //TOP
 
             //if TOP-left AND TOP-right corners of player-sprite moving into NOT solid tile, do stuff.
-            if ( !(worldMap[ty][((x+xDelta) / Tile.WIDTH)].isSolid()) &&                    //TOP-LEFT
-                    !(worldMap[ty][((x+xDelta+Tile.WIDTH) / Tile.WIDTH)].isSolid()) ) {     //TOP-RIGHT
+            if ( !(worldMap[ty][((x+bounds.x+xDelta) / Tile.WIDTH)].isSolid()) &&                    //TOP-LEFT
+                    !(worldMap[ty][((x+bounds.x+bounds.width+xDelta) / Tile.WIDTH)].isSolid()) ) {     //TOP-RIGHT
+
+
+                if ( worldMap[ty][((x+bounds.x+xDelta) / Tile.WIDTH)] instanceof TallGrassTile ) {
+                    System.out.println("Checking grass tile to player's TOP-left.");
+                    checkTallGrassTileCollision( (TallGrassTile)worldMap[ty][((x+bounds.x+xDelta) / Tile.WIDTH)] );
+                } else if ( worldMap[ty][((x+bounds.x+bounds.width+xDelta) / Tile.WIDTH)] instanceof TallGrassTile ) {
+                    System.out.println("Checking grass tile to player's TOP-right.");
+                    checkTallGrassTileCollision( (TallGrassTile)worldMap[ty][((x+bounds.x+bounds.width+xDelta) / Tile.WIDTH)] );
+                }
+
+
                 //moves Player's y-position.
                 y += yDelta;
                 //moves GameCamera's y-position.
@@ -110,11 +134,22 @@ public class Player {
         }
         //MOVING DOWN
         else if (yDelta > 0) {
-            int ty = (int)((y+yDelta+Tile.HEIGHT) / Tile.HEIGHT);                           //BOTTOM
+            int ty = (int)((y+bounds.y+bounds.height+yDelta) / Tile.HEIGHT);                           //BOTTOM
 
             //if BOTTOM-left AND BOTTOM-right corners of player-sprite moving into NOT solid tile, do stuff.
-            if ( !(worldMap[ty][((x+xDelta) / Tile.WIDTH)].isSolid()) &&                    //BOTTOM-LEFT
-                    !(worldMap[ty][((x+xDelta+Tile.WIDTH) / Tile.WIDTH)].isSolid()) ) {     //BOTTOM-RIGHT
+            if ( !(worldMap[ty][((x+bounds.x+xDelta) / Tile.WIDTH)].isSolid()) &&                    //BOTTOM-LEFT
+                    !(worldMap[ty][((x+bounds.x+bounds.width+xDelta) / Tile.WIDTH)].isSolid()) ) {     //BOTTOM-RIGHT
+
+
+                if ( worldMap[ty][((x+bounds.x+xDelta) / Tile.WIDTH)] instanceof TallGrassTile ) {
+                    System.out.println("Checking grass tile to player's BOTTOM-left.");
+                    checkTallGrassTileCollision( (TallGrassTile)worldMap[ty][((x+bounds.x+xDelta) / Tile.WIDTH)] );
+                } else if ( worldMap[ty][((x+bounds.x+bounds.width+xDelta) / Tile.WIDTH)] instanceof TallGrassTile ) {
+                    System.out.println("Checking grass tile to player's BOTTOM-right.");
+                    checkTallGrassTileCollision( (TallGrassTile)worldMap[ty][((x+bounds.x+bounds.width+xDelta) / Tile.WIDTH)] );
+                }
+
+
                 //moves Player's y-position.
                 y += yDelta;
                 //moves GameCamera's y-position.

@@ -15,7 +15,7 @@ public class Tile {
 
     public Tile(boolean solid, int x, int y) {
         this.solid = solid;
-        bounds = new Rectangle(x+(WIDTH/4), y+(HEIGHT/4), (WIDTH/2), (HEIGHT/2));
+        bounds = new Rectangle(x, y, WIDTH, HEIGHT);
     } // **** end Tile(boolean, int, int) constructor ****
 
     // GETTERS AND SETTERS

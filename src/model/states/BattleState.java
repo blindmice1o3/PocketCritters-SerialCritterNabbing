@@ -1,6 +1,7 @@
 package model.states;
 
 import main.Handler;
+import main.gfx.Assets;
 import model.entities.Player;
 
 import java.awt.*;
@@ -30,38 +31,54 @@ public class BattleState implements IState {
     @Override
     public void updateInput() {
         if (currentPhase == Phase.INTRO) {
+            System.out.println("BattleState.updateInput() with currentPhase == Phase.INTRO");
             if (handler.getKeyManager().aButton) {
+                System.out.println("BattleState.updateInput() with currentPhase == Phase.INTRO... aButton");
                 ///////////////////////////////
-                Phase nextPhase = Phase.GAME_LOOP;
+                nextPhase = Phase.GAME_LOOP;
                 ///////////////////////////////
             }
         } else if (currentPhase == Phase.GAME_LOOP) {
+            System.out.println("BattleState.updateInput() with currentPhase == Phase.GAME_LOOP");
             //UP
             if (handler.getKeyManager().up) {
+                System.out.println("BattleState.updateInput() with currentPhase == Phase.GAME_LOOP... up");
                 if (yIndex > 0) {
                     yIndex--;
                 }
             }
             //DOWN
             else if (handler.getKeyManager().down) {
+                System.out.println("BattleState.updateInput() with currentPhase == Phase.GAME_LOOP... down");
                 if (yIndex == 0) {
                     yIndex++;
                 }
             }
             //LEFT
             else if (handler.getKeyManager().left) {
+                System.out.println("BattleState.updateInput() with currentPhase == Phase.GAME_LOOP... left");
                 if (xIndex > 0) {
                     xIndex--;
                 }
             }
             //RIGHT
             else if (handler.getKeyManager().right) {
+                System.out.println("BattleState.updateInput() with currentPhase == Phase.GAME_LOOP... right");
                 if (xIndex == 0) {
                     xIndex++;
                 }
             }
+            //delete later
+            else if (handler.getKeyManager().aButton) {
+                System.out.println("BattleState.updateInput() with currentPhase == Phase.GAME_LOOP... aButton");
+                ///////////////////////////////
+                nextPhase = Phase.OUTRO;
+                ///////////////////////////////
+            }
         } else if (currentPhase == Phase.OUTRO) {
+            System.out.println("BattleState.updateInput() with currentPhase == Phase.OUTRO");
             if (handler.getKeyManager().aButton) {
+                System.out.println("BattleState.updateInput() with currentPhase == Phase.OUTRO... aButton");
                 ///////////////////////////////
                 nextPhase = Phase.INTRO;
                 ///////////////////////////////
@@ -72,10 +89,12 @@ public class BattleState implements IState {
     @Override
     public void tick() {
         if (currentPhase == Phase.INTRO) {
+            System.out.println("BattleState.tick() with currentPhase == Phase.INTRO");
             ///////////////////////////////
             currentPhase = nextPhase;
             ///////////////////////////////
         } else if (currentPhase == Phase.GAME_LOOP) {
+            System.out.println("BattleState.tick() with currentPhase == Phase.GAME_LOOP");
             //DO STUFF... check player1's input, player1 do stuff, check player2's input, player2 do stuff... loop.
 
             //end of while loop... nextPhase = Phase.OUTRO;
@@ -85,6 +104,7 @@ public class BattleState implements IState {
             currentPhase = nextPhase;
             ///////////////////////////////
         } else if (currentPhase == Phase.OUTRO) {
+            System.out.println("BattleState.tick() with currentPhase == Phase.OUTRO");
             //DO STUFF...
 
 
@@ -96,7 +116,7 @@ public class BattleState implements IState {
 
     @Override
     public void render(Graphics g) {
-
+        g.drawImage(Assets.battleStateSpriteSheet, 0, 0, null);
     }
 
     @Override
