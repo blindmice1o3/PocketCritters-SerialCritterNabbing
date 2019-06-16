@@ -20,9 +20,33 @@ public class GameState implements IState {
 
     @Override
     public void tick() {
+        updateInput();
+
         player.tick();
         james.tick();
         jessie.tick();
+    }
+
+    public void updateInput() {
+        player.setXDelta(0);
+        player.setYDelta(0);
+
+        //UP
+        if (handler.getKeyManager().up) {
+            player.setYDelta( -player.getMoveSpeed() );
+        }
+        //DOWN
+        else if (handler.getKeyManager().down) {
+            player.setYDelta( player.getMoveSpeed() );
+        }
+        //LEFT
+        else if (handler.getKeyManager().left) {
+            player.setXDelta( -player.getMoveSpeed() );
+        }
+        //RIGHT
+        else if (handler.getKeyManager().right) {
+            player.setXDelta( player.getMoveSpeed() );
+        }
     }
 
     @Override

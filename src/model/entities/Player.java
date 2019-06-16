@@ -14,8 +14,6 @@ public class Player {
     private int xDelta, yDelta;
     private int moveSpeed;
 
-    Tile[][] worldMap;
-
     public Player(Handler handler) {
         this.handler = handler;
 
@@ -28,95 +26,68 @@ public class Player {
     } // **** end model.entities.Player() constructor ****
 
     public void tick() {
-        xDelta = 0;
-        yDelta = 0;
-
-        checkInput();
-
-        move();
-    }
-
-    public void checkInput() {
-        //UP
-        if (handler.getGame().getKeyManager().up) {
-            yDelta = -moveSpeed;
-        }
-        //DOWN
-        else if (handler.getGame().getKeyManager().down) {
-            yDelta = moveSpeed;
-        }
-        //LEFT
-        else if (handler.getGame().getKeyManager().left) {
-            xDelta = -moveSpeed;
-        }
-        //RIGHT
-        else if (handler.getGame().getKeyManager().right) {
-            xDelta = moveSpeed;
-        }
-    }
-
-    public void move() {
-        if (worldMap == null) {
-            worldMap = handler.getGame().getWorldMapTileCollisionDetection();
-        }
-
         moveX();
         moveY();
-
-        /*
-        //System.out.println("Player.move() before if-conditional block");
-        //CHECKS TOP-LEFT corner of player sprite.
-        if ( !(worldMap[ ((y+yDelta) / Tile.HEIGHT) ][ ((x+xDelta) / Tile.WIDTH) ].isSolid()) ) {
-            x += xDelta;
-            y += yDelta;
-            handler.getGame().getGameCamera().move(xDelta, yDelta);
-            //System.out.println("Player.move() WITHIN if-conditional block");
-        }
-        */
     }
 
     private void moveX() {
+        Tile[][] worldMap = handler.getWorldMapTileCollisionDetection();
+
         //MOVING LEFT
         if (xDelta < 0) {
             int tx = (int)((x+xDelta) / Tile.WIDTH);                                        //LEFT
 
+            //if top-LEFT AND bottom-LEFT corners of player-sprite moving into NOT solid tile, do stuff.
             if ( !(worldMap[((y+yDelta) / Tile.HEIGHT)][tx].isSolid()) &&                   //TOP-LEFT
                     !(worldMap[((y+yDelta+Tile.HEIGHT) / Tile.HEIGHT)][tx].isSolid()) ) {   //BOTTOM-LEFT
+                //moves Player's x-position.
                 x += xDelta;
-                handler.getGame().getGameCamera().move(xDelta, 0);
+                //moves GameCamera's x-position.
+                handler.getGameCamera().move(xDelta, 0);
             }
         }
         //MOVING RIGHT
         else if (xDelta > 0) {
             int tx = (int)((x+xDelta+Tile.WIDTH) / Tile.WIDTH);                             //RIGHT
 
+            //if top-RIGHT AND bottom-RIGHT corners of player-sprite moving into NOT solid tile, do stuff.
             if ( !(worldMap[((y+yDelta) / Tile.HEIGHT)][tx].isSolid()) &&                   //TOP-RIGHT
                     !(worldMap[((y+yDelta+Tile.HEIGHT) / Tile.HEIGHT)][tx].isSolid()) ) {   //BOTTOM-RIGHT
+                //moves Player's x-position.
                 x += xDelta;
-                handler.getGame().getGameCamera().move(xDelta, 0);
+                //moves GameCamera's x-position.
+                handler.getGameCamera().move(xDelta, 0);
             }
         }
     }
 
     private void moveY() {
+        Tile[][] worldMap = handler.getWorldMapTileCollisionDetection();
+
         //MOVING UP
         if (yDelta < 0) {
             int ty = (int)((y+yDelta) / Tile.HEIGHT);                                       //TOP
 
+            //if TOP-left AND TOP-right corners of player-sprite moving into NOT solid tile, do stuff.
             if ( !(worldMap[ty][((x+xDelta) / Tile.WIDTH)].isSolid()) &&                    //TOP-LEFT
                     !(worldMap[ty][((x+xDelta+Tile.WIDTH) / Tile.WIDTH)].isSolid()) ) {     //TOP-RIGHT
+                //moves Player's y-position.
                 y += yDelta;
-                handler.getGame().getGameCamera().move(0, yDelta);
+                //moves GameCamera's y-position.
+                handler.getGameCamera().move(0, yDelta);
             }
         }
         //MOVING DOWN
         else if (yDelta > 0) {
             int ty = (int)((y+yDelta+Tile.HEIGHT) / Tile.HEIGHT);                           //BOTTOM
 
+            //if BOTTOM-left AND BOTTOM-right corners of player-sprite moving into NOT solid tile, do stuff.
             if ( !(worldMap[ty][((x+xDelta) / Tile.WIDTH)].isSolid()) &&                    //BOTTOM-LEFT
                     !(worldMap[ty][((x+xDelta+Tile.WIDTH) / Tile.WIDTH)].isSolid()) ) {     //BOTTOM-RIGHT
+                //moves Player's y-position.
                 y += yDelta;
-                handler.getGame().getGameCamera().move(0, yDelta);
+                //moves GameCamera's y-position.
+                handler.getGameCamera().move(0, yDelta);
             }
         }
     }
@@ -130,12 +101,14 @@ public class Player {
 
     // GETTERS & SETTERS
 
-    public void setXFuture(int xFuture) {
-        this.xDelta = xFuture;
+    public void setXDelta(int xDelta) {
+        this.xDelta = xDelta;
     }
 
-    public void setYFuture(int yFuture) {
-        this.yDelta = yFuture;
+    public void setYDelta(int yDelta) {
+        this.yDelta = yDelta;
     }
+
+    public int getMoveSpeed() { return moveSpeed; }
 
 } // **** end model.entities.Player class ****

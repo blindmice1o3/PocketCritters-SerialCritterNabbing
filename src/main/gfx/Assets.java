@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 
 public class Assets {
 
-    public static BufferedImage world, player, teamRocket;
+    public static BufferedImage world, player, teamRocket, battleStateSpriteSheet;
     public static BufferedImage[] jamesDown, jamesUp, jamesLeft, jamesRight,
             jessieDown, jessieUp, jessieLeft, jessieRight;
 
@@ -16,6 +16,7 @@ public class Assets {
         world = ImageLoader.loadImage("/pokemon-gsc-kanto.png");
         player = ImageLoader.loadImage("/butters_profchaos.jpg");
         teamRocket = ImageLoader.loadImage("/TeamRocket.png");
+        battleStateSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Yellow - Battle Interface.png");
 
         jamesDown = new BufferedImage[2];
         jamesDown[0] = teamRocket.getSubimage(236, 24, 12, 16);

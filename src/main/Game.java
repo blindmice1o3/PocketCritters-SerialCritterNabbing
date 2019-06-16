@@ -63,15 +63,17 @@ public class Game implements Runnable {
     }
 
     private void init() {
-        handler = new Handler(this);
         Assets.init();
 
+        keyManager = new KeyManager();
         gameCamera = new GameCamera(960, 3184, 1279, 3455);
 
         //@@@@@ Initializing Tile[][] worldMapTileCollisionDetection @@@@@
         tileSpriteToRGBConverter = new TileSpriteToRGBConverter();
         worldMapTileCollisionDetection = tileSpriteToRGBConverter.generateWorldMapTileCollisionDetection(Assets.world);
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+        handler = new Handler(this);
 
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@
         player = new Player(handler);
@@ -81,7 +83,6 @@ public class Game implements Runnable {
 
         initStateManager();
 
-        keyManager = new KeyManager();
         displayer = new Displayer(handler, keyManager,
                 "Pocket Critters - Serial Critter Nabbing", width, height);
     }
@@ -105,7 +106,7 @@ public class Game implements Runnable {
 
     private void initStateManager() {
         StateManager.add("GameState", new GameState(handler));
-        StateManager.add("BattleState", new BattleState());
+        StateManager.add("BattleState", new BattleState(handler));
 
         //////////////////////////////////////////
         Object[] args = { player, james, jessie };
@@ -157,7 +158,7 @@ public class Game implements Runnable {
     public void tick() {
         keyManager.tick();                          //getInput();
 
-        StateManager.getCurrentState().tick();      //update();
+        StateManager.getCurrentState().tick();      //move();
     }
 
     public void render() {
