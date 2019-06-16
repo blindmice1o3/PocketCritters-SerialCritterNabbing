@@ -39,13 +39,10 @@ public class Displayer {
         /////////////////////////////////
 
         panel = new BasePanel();
-        frame.add(BorderLayout.CENTER, panel);
-        frame.setVisible(true);
-
         //frame.setContentPane(panel);
-
-        //frame.add(panel);
-        //frame.pack();
+        frame.add(BorderLayout.CENTER, panel);
+        frame.pack();
+        frame.setVisible(true);
     }
 
     // GETTERS & SETTERS
