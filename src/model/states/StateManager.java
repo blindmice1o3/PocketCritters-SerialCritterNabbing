@@ -15,6 +15,8 @@ public class StateManager {
         stateHashMap.remove(key);
     }
 
+    public static IState get(String key) { return stateHashMap.get(key); }
+
 
     public static void change(String key, Object[] args) {
         //current IState object "closes down shop for the night".

@@ -5,6 +5,7 @@ import main.gfx.Assets;
 import model.entities.Player;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public class BattleState implements IState {
 
@@ -69,11 +70,34 @@ public class BattleState implements IState {
         @Override
         public void tick() {
             System.out.println("BattleStateIntro.tick()");
-            if (handler.getKeyManager().aButton) {
+
+            //UP
+            if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {
+                System.out.println("BattleStateIntro.tick()... up");
+            }
+            //DOWN
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) {
+                System.out.println("BattleStateIntro.tick()... down");
+            }
+            //LEFT
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_A)) {
+                System.out.println("BattleStateIntro.tick()... left");
+            }
+            //RIGHT
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_D)) {
+                System.out.println("BattleStateIntro.tick()... right");
+            }
+            //aButton
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_COMMA)) {
                 System.out.println("BattleStateIntro.tick()... aButton");
+
                 ///////////////////////////////
                 StateManager.change("BattleStateMenu", null);
                 ///////////////////////////////
+            }
+            //bButton
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_PERIOD)) {
+                System.out.println("BattleStateIntro.tick()... bButton");
             }
         }
 
@@ -101,51 +125,68 @@ public class BattleState implements IState {
 
         private Handler handler;
         private int xIndex, yIndex;
+        private String[][] menuMatrix;
 
         public BattleStateMenu(Handler handler) {
             this.handler = handler;
             xIndex = 0;
             yIndex = 0;
+            menuMatrix = new String[2][2];
+            menuMatrix[0][0] = "BattleStateFight";
+            menuMatrix[0][1] = "BattleStateMonsterBeltList";
+            menuMatrix[1][0] = "BattleStateItem";
+            menuMatrix[1][1] = "BattleStateRun";
         } // **** end BattleStateMenu(Handler) constructor ****
 
         @Override
         public void tick() {
             System.out.println("BattleStateMenu.tick()");
+
             //UP
-            if (handler.getKeyManager().up) {
+            if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {
                 System.out.println("BattleStateMenu.tick()... up");
-                if (yIndex > 0) {
+                if (yIndex == 1) {
                     yIndex--;
                 }
             }
             //DOWN
-            else if (handler.getKeyManager().down) {
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) {
                 System.out.println("BattleStateMenu.tick()... down");
                 if (yIndex == 0) {
                     yIndex++;
                 }
             }
             //LEFT
-            else if (handler.getKeyManager().left) {
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_A)) {
                 System.out.println("BattleStateMenu.tick()... left");
-                if (xIndex > 0) {
+                if (xIndex == 1) {
                     xIndex--;
                 }
             }
             //RIGHT
-            else if (handler.getKeyManager().right) {
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_D)) {
                 System.out.println("BattleStateMenu.tick()... right");
                 if (xIndex == 0) {
                     xIndex++;
                 }
             }
-            //delete later.... use aButton to execute selection of (xIndex, yIndex).
-            else if (handler.getKeyManager().bButton) {
-                System.out.println("BattleStateMenu.tick()... bButton");
-                ///////////////////////////////
-                StateManager.change("BattleStateOutro", null);
-                ///////////////////////////////
+            //aButton
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_COMMA)) {
+                System.out.println("BattleStateMenu.tick()... aButton");
+
+                ////////////////////////////////////////////////////////////
+                StateManager.change(menuMatrix[yIndex][xIndex], null);
+                ////////////////////////////////////////////////////////////
             }
+            //bButton
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_PERIOD)) {
+                System.out.println("BattleStateMenu.tick()... bButton");
+            }
+        }
+
+        public void resetIndexForBattleStateMenu() {
+            xIndex = 0;
+            yIndex = 0;
         }
 
         @Override
@@ -178,12 +219,42 @@ public class BattleState implements IState {
 
         @Override
         public void tick() {
+            System.out.println("BattleStateFight.tick()");
 
+            //UP
+            if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {
+                System.out.println("BattleStateFight.tick()... up");
+            }
+            //DOWN
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) {
+                System.out.println("BattleStateFight.tick()... down");
+            }
+            //LEFT
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_A)) {
+                System.out.println("BattleStateFight.tick()... left");
+            }
+            //RIGHT
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_D)) {
+                System.out.println("BattleStateFight.tick()... right");
+            }
+            //aButton
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_COMMA)) {
+                System.out.println("BattleStateFight.tick()... aButton");
+            }
+            //bButton
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_PERIOD)) {
+                System.out.println("BattleStateFight.tick()... bButton");
+
+                ///////////////////////////////
+                StateManager.change("BattleStateMenu", null);
+                ///////////////////////////////
+            }
         }
 
         @Override
         public void render(Graphics g) {
-
+            g.drawImage(Assets.battleStateSpriteSheet, 0, 0, handler.getGame().getWidth(),
+                    handler.getGame().getHeight(), 161, 146, 161+159, 146+145, null);
         }
 
         @Override
@@ -210,12 +281,42 @@ public class BattleState implements IState {
 
         @Override
         public void tick() {
+            System.out.println("BattleStateItem.tick()");
 
+            //UP
+            if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {
+                System.out.println("BattleStateItem.tick()... up");
+            }
+            //DOWN
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) {
+                System.out.println("BattleStateItem.tick()... down");
+            }
+            //LEFT
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_A)) {
+                System.out.println("BattleStateItem.tick()... left");
+            }
+            //RIGHT
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_D)) {
+                System.out.println("BattleStateItem.tick()... right");
+            }
+            //aButton
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_COMMA)) {
+                System.out.println("BattleStateItem.tick()... aButton");
+            }
+            //bButton
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_PERIOD)) {
+                System.out.println("BattleStateItem.tick()... bButton");
+
+                ///////////////////////////////
+                StateManager.change("BattleStateMenu", null);
+                ///////////////////////////////
+            }
         }
 
         @Override
         public void render(Graphics g) {
-
+            g.drawImage(Assets.battleStateSpriteSheet, 0, 0, handler.getGame().getWidth(),
+                    handler.getGame().getHeight(), 2, 146, 2+159, 146+145, null);
         }
 
         @Override
@@ -242,12 +343,42 @@ public class BattleState implements IState {
 
         @Override
         public void tick() {
+            System.out.println("BattleStateMonsterBeltList.tick()");
 
+            //UP
+            if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {
+                System.out.println("BattleStateMonsterBeltList.tick()... up");
+            }
+            //DOWN
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) {
+                System.out.println("BattleStateMonsterBeltList.tick()... down");
+            }
+            //LEFT
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_A)) {
+                System.out.println("BattleStateMonsterBeltList.tick()... left");
+            }
+            //RIGHT
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_D)) {
+                System.out.println("BattleStateMonsterBeltList.tick()... right");
+            }
+            //aButton
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_COMMA)) {
+                System.out.println("BattleStateMonsterBeltList.tick()... aButton");
+            }
+            //bButton
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_PERIOD)) {
+                System.out.println("BattleStateMonsterBeltList.tick()... bButton");
+
+                ///////////////////////////////
+                StateManager.change("BattleStateMenu", null);
+                ///////////////////////////////
+            }
         }
 
         @Override
         public void render(Graphics g) {
-
+            g.drawImage(Assets.battleStateSpriteSheet, 0, 0, handler.getGame().getWidth(),
+                    handler.getGame().getHeight(), 320, 2, 320+159, 2+145, null);
         }
 
         @Override
@@ -274,7 +405,40 @@ public class BattleState implements IState {
 
         @Override
         public void tick() {
+            System.out.println("BattleStateRun.tick()");
 
+            //UP
+            if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {
+                System.out.println("BattleStateRun.tick()... up");
+            }
+            //DOWN
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) {
+                System.out.println("BattleStateRun.tick()... down");
+            }
+            //LEFT
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_A)) {
+                System.out.println("BattleStateRun.tick()... left");
+            }
+            //RIGHT
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_D)) {
+                System.out.println("BattleStateRun.tick()... right");
+            }
+            //aButton
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_COMMA)) {
+                System.out.println("BattleStateRun.tick()... aButton");
+
+                ///////////////////////////////
+                StateManager.change("BattleStateOutro", null);
+                ///////////////////////////////
+            }
+            //bButton
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_PERIOD)) {
+                System.out.println("BattleStateRun.tick()... bButton");
+
+                ///////////////////////////////
+                StateManager.change("BattleStateMenu", null);
+                ///////////////////////////////
+            }
         }
 
         @Override
@@ -307,18 +471,42 @@ public class BattleState implements IState {
         @Override
         public void tick() {
             System.out.println("BattleStateOutro.tick()");
-            if (handler.getKeyManager().startButton) {
-                System.out.println("BattleStateOutro.tick()... startButton");
+
+            //UP
+            if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {
+                System.out.println("BattleStateOutro.tick()... up");
+            }
+            //DOWN
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) {
+                System.out.println("BattleStateOutro.tick()... down");
+            }
+            //LEFT
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_A)) {
+                System.out.println("BattleStateOutro.tick()... left");
+            }
+            //RIGHT
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_D)) {
+                System.out.println("BattleStateOutro.tick()... right");
+            }
+            //aButton
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_COMMA)) {
+                System.out.println("BattleStateOutro.tick()... aButton");
+
                 ///////////////////////////////
+                ((BattleStateMenu)StateManager.get("BattleStateMenu")).resetIndexForBattleStateMenu();
                 StateManager.change("GameState", null);
                 ///////////////////////////////
+            }
+            //bButton
+            else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_PERIOD)) {
+                System.out.println("BattleStateOutro.tick()... bButton");
             }
         }
 
         @Override
         public void render(Graphics g) {
             g.drawImage(Assets.battleStateSpriteSheet, 0, 0, handler.getGame().getWidth(),
-                    handler.getGame().getHeight(), 320, 2, 320+159, 2+145, null);
+                    handler.getGame().getHeight(), 320, 146, 320+159, 146+145, null);
         }
 
         @Override
