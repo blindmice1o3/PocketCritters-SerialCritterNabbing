@@ -2,6 +2,7 @@ package model.states;
 
 import main.Handler;
 import main.gfx.Assets;
+import main.utils.FontGrabber;
 import model.entities.nabbers.Player;
 
 import java.awt.*;
@@ -102,30 +103,35 @@ public class BattleState implements IState {
             }
         }
 
-        private void renderString(Graphics g, String text, int x, int y) {
-            int xOffset = 0;
-            for (int i = 0; i < text.length(); i++) {
-                g.drawImage(Assets.fontHashMap.get(text.substring(i, i+1)), x+xOffset, y,
-                        40, 40, null);
-                xOffset += 40;
-            }
-        }
+
 
         @Override
         public void render(Graphics g) {
             g.drawImage(Assets.battleStateSpriteSheet, 0, 0, handler.getGame().getWidth(),
                     handler.getGame().getHeight(), 2, 2, 2+159, 2+145, null);
 
-            renderString(g, "789NMmn012zxcZXCCritter Nabbing", 10, 200);
+            FontGrabber.renderString(g, "Cannabis", 190, 411, 40, 40);
 
-            g.drawImage(Assets.fontHashMap.get("C"), 200, 420, 10*4, 10*4, null);
-            g.drawImage(Assets.fontHashMap.get("a"), 240, 420, 10*4, 10*4, null);
-            g.drawImage(Assets.fontHashMap.get("n"), 280, 420, 10*4, 10*4, null);
-            g.drawImage(Assets.fontHashMap.get("n"), 320, 420, 10*4, 10*4, null);
-            g.drawImage(Assets.fontHashMap.get("a"), 360, 420, 10*4, 10*4, null);
-            g.drawImage(Assets.fontHashMap.get("b"), 400, 420, 10*4, 10*4, null);
-            g.drawImage(Assets.fontHashMap.get("i"), 440, 420, 10*4, 10*4, null);
-            g.drawImage(Assets.fontHashMap.get("s"), 480, 420, 10*4, 10*4, null);
+            g.drawImage(Assets.fontHashMap.get("6"), 10, 200, 10*4, 10*4, null);
+            g.drawImage(Assets.fontHashMap.get("7"), 50, 200, 10*4, 10*4, null);
+            g.drawImage(Assets.fontHashMap.get("8"), 90, 200, 10*4, 10*4, null);
+            g.drawImage(Assets.fontHashMap.get("M"), 130, 200, 10*4, 10*4, null);
+            g.drawImage(Assets.fontHashMap.get("m"), 170, 200, 10*4, 10*4, null);
+            g.drawImage(Assets.fontHashMap.get("z"), 210, 200, 10*4, 10*4, null);
+            g.drawImage(Assets.fontHashMap.get("C"), 250, 200, 10*4, 10*4, null);
+            g.drawImage(Assets.fontHashMap.get("r"), 290, 200, 10*4, 10*4, null);
+            g.drawImage(Assets.fontHashMap.get("i"), 330, 200, 10*4, 10*4, null);
+            g.drawImage(Assets.fontHashMap.get("t"), 370, 200, 10*4, 10*4, null);
+            g.drawImage(Assets.fontHashMap.get("t"), 410, 200, 10*4, 10*4, null);
+            g.drawImage(Assets.fontHashMap.get("e"), 450, 200, 10*4, 10*4, null);
+            g.drawImage(Assets.fontHashMap.get("r"), 490, 200, 10*4, 10*4, null);
+            g.drawImage(Assets.fontHashMap.get("N"), 530, 200, 10*4, 10*4, null);
+            g.drawImage(Assets.fontHashMap.get("a"), 570, 200, 10*4, 10*4, null);
+            g.drawImage(Assets.fontHashMap.get("b"), 610, 200, 10*4, 10*4, null);
+            g.drawImage(Assets.fontHashMap.get("b"), 650, 200, 10*4, 10*4, null);
+            g.drawImage(Assets.fontHashMap.get("i"), 690, 200, 10*4, 10*4, null);
+            g.drawImage(Assets.fontHashMap.get("i"), 730, 200, 10*4, 10*4, null);
+            g.drawImage(Assets.fontHashMap.get("g"), 770, 200, 10*4, 10*4, null);
 
             //First monsterCapsuleIcon (index == 0).
             g.drawImage(Assets.monsterCapsuleIcon, 90*4, 76*4, 7*4, 7*4, null);

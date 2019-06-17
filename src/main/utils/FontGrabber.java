@@ -2,6 +2,7 @@ package main.utils;
 
 import main.gfx.Assets;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
@@ -123,4 +124,12 @@ public class FontGrabber {
         return fontHashMap;
     }
 
+    public static void renderString(Graphics g, String text, int x, int y, int width, int height) {
+        int xOffset = 0;
+        for (int i = 0; i < text.length(); i++) {
+            g.drawImage(Assets.fontHashMap.get(text.substring(i, i+1)), x+xOffset, y,
+                    width, height, null);
+            xOffset += width;
+        }
+    }
 }
