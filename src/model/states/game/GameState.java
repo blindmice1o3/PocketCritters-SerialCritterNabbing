@@ -1,10 +1,12 @@
-package model.states;
+package model.states.game;
 
 import main.Handler;
 import main.gfx.Assets;
 import model.entities.nabbers.James;
 import model.entities.nabbers.Jessie;
 import model.entities.nabbers.Player;
+import model.states.IState;
+import model.states.StateManager;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -12,7 +14,6 @@ import java.awt.event.KeyEvent;
 public class GameState implements IState {
 
     private Handler handler;
-
     private Player player, james, jessie;
 
     public GameState(Handler handler) {
@@ -37,6 +38,15 @@ public class GameState implements IState {
         //RIGHT
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_D)) {
             player.setXDelta( player.getMoveSpeed() );
+        }
+        //startButton
+        else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
+            System.out.println("GameState.tick()... startButton pressed (VK_ENTER).");
+
+            /////////////////////////////////////////////
+            Object[] args = { player };
+            StateManager.change("MenuState", args);
+            /////////////////////////////////////////////
         }
 
         //update()

@@ -53,8 +53,8 @@ public class Player {
             //Random r = new Random();
 
             //if (r.nextInt(4) < 1) {
-            Object[] args = { this };
             //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+            Object[] args = { this };
             StateManager.change("BattleState", args);
             //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
             //}

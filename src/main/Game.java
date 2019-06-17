@@ -6,9 +6,10 @@ import main.gfx.Assets;
 import model.entities.nabbers.James;
 import model.entities.nabbers.Jessie;
 import model.entities.nabbers.Player;
-import model.states.BattleState;
-import model.states.GameState;
+import model.states.battle.BattleState;
+import model.states.game.GameState;
 import model.states.StateManager;
+import model.states.menu.MenuState;
 import model.tiles.Tile;
 import main.utils.TileSpriteToRGBConverter;
 import view.Displayer;
@@ -106,7 +107,8 @@ public class Game implements Runnable {
 
     private void initStateManager() {
         StateManager.add("GameState", new GameState(handler));
-        StateManager.add("BattleState", new BattleState(handler));
+        StateManager.add("BattleState", new BattleState(handler, player));
+        StateManager.add("MenuState", new MenuState(handler, player));
 
         //////////////////////////////////////////
         Object[] args = { player, james, jessie };
