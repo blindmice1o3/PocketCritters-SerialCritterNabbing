@@ -21,7 +21,8 @@ public class ImageLoader {
 
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < cols; x++) {
-                sprites[y][x] = spriteSheet.getSubimage((x*width)+(x*xOffset), (y*height)+(y*yOffset), width, height);
+                sprites[y][x] = spriteSheet.getSubimage((x*width)+(x*xOffset)+xOffset,
+                        (y*height)+(y*yOffset)+yOffset, width, height);
             }
         }
 

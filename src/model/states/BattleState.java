@@ -517,17 +517,19 @@ public class BattleState implements IState {
             counter++;
 
             if (counter == counterTarget) {
+                g.clearRect(0, 0, handler.getGame().getWidth(), handler.getGame().getHeight());
+
                 for (int y = 0; y < 13; y++) {
                     for (int x = 0; x < 12; x++) {
                         g.drawImage(Assets.crittersBufferedImageNestedArray[y][x],
-                                (x * 56) + (x * 1), (y * 56) + (y * 1), null);
+                                (x * 56) + (x * 1) + 1, (y * 56) + (y * 1) + 1, null);
                     }
                 }
 
                 xCol++;
                 for (int y = 0; y < 13; y++) {
                     g.drawImage(Assets.crittersBufferedImageNestedArray[8][7],
-                            (xCol * 56) + (xCol * 1), (y * 56) + (y * 1), null);
+                            (xCol * 56) + (xCol * 1) + 1, (y * 56) + (y * 1) + 1, null);
                 }
                 if (xCol >= 12) {
                     xCol = 0;
@@ -536,7 +538,7 @@ public class BattleState implements IState {
                 yRow++;
                 for (int x = 0; x < 12; x++) {
                     g.drawImage(Assets.crittersBufferedImageNestedArray[8][7],
-                            (x * 56) + (x * 1), (yRow * 56) + (yRow * 1), null);
+                            (x * 56) + (x * 1) + 1, (yRow * 56) + (yRow * 1) + 1, null);
                 }
                 if (yRow >= 13) {
                     yRow = 0;
@@ -608,6 +610,15 @@ public class BattleState implements IState {
         public void render(Graphics g) {
             g.drawImage(Assets.battleStateSpriteSheet, 0, 0, handler.getGame().getWidth(),
                     handler.getGame().getHeight(), 320, 146, 320+159, 146+145, null);
+
+            //@@@@@@@@@@@@@@TESTER for Assets.nabbersBufferedImageNestedArray@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+            for (int y = 0; y < 6; y++) {
+                for (int x = 0; x < 8; x++) {
+                    g.drawImage(Assets.nabbersBufferedImageNestedArray[y][x],
+                            (x * 68) + (x * 1) + 1, (y * 64) + (y * 2) + 2, null);
+                }
+            }
+            //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         }
 
         @Override

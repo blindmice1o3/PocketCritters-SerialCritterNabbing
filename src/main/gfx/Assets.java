@@ -12,6 +12,7 @@ public class Assets {
 
     public static Map<String, BufferedImage> fontHashMap;
     public static BufferedImage[][] crittersBufferedImageNestedArray;
+    public static BufferedImage[][] nabbersBufferedImageNestedArray;
 
     public static BufferedImage world, player, teamRocket, critterSpriteSheet, nabberSpriteSheet,
             battleStateSpriteSheet, menuStateInfoSpriteSheet, monsterCapsuleIcon, cursor;
@@ -29,6 +30,8 @@ public class Assets {
 
         crittersBufferedImageNestedArray = ImageLoader.cropSpriteFromSpriteSheet(12, 13,
                 56, 56, 1, 1, critterSpriteSheet);
+        nabbersBufferedImageNestedArray = ImageLoader.cropSpriteFromSpriteSheet(8, 6,
+                68, 64, 1, 2, nabberSpriteSheet);
         fontHashMap = FontGrabber.initFont();   //this line must come AFTER battleStateSpriteSheet gets initiated.
         monsterCapsuleIcon = battleStateSpriteSheet.getSubimage(324, 269, 7, 7);
         cursor = battleStateSpriteSheet.getSubimage(331, 270, 7, 7);

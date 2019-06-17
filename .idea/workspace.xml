@@ -2,6 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fb96119b-76aa-4531-8c73-0e06b445031b" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PocketCritters-SerialCritterNabbing/main/gfx/Assets.class" afterPath="$PROJECT_DIR$/out/production/PocketCritters-SerialCritterNabbing/main/gfx/Assets.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PocketCritters-SerialCritterNabbing/main/utils/ImageLoader.class" afterPath="$PROJECT_DIR$/out/production/PocketCritters-SerialCritterNabbing/main/utils/ImageLoader.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PocketCritters-SerialCritterNabbing/model/states/BattleState$BattleStateOutro.class" afterPath="$PROJECT_DIR$/out/production/PocketCritters-SerialCritterNabbing/model/states/BattleState$BattleStateOutro.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PocketCritters-SerialCritterNabbing/model/states/BattleState$BattleStateRun.class" afterPath="$PROJECT_DIR$/out/production/PocketCritters-SerialCritterNabbing/model/states/BattleState$BattleStateRun.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/gfx/Assets.java" afterPath="$PROJECT_DIR$/src/main/gfx/Assets.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/utils/ImageLoader.java" afterPath="$PROJECT_DIR$/src/main/utils/ImageLoader.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/states/BattleState.java" afterPath="$PROJECT_DIR$/src/model/states/BattleState.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -14,11 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="BattleState.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BattleState.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/states/BattleState.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="532" column="29" lean-forward="true" selection-start-line="532" selection-start-column="29" selection-end-line="532" selection-end-column="29" />
+            <state relative-caret-position="493">
+              <caret line="617" column="35" lean-forward="false" selection-start-line="617" selection-start-column="35" selection-end-line="617" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -26,11 +33,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Assets.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Assets.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/gfx/Assets.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+            <state relative-caret-position="357">
+              <caret line="33" column="18" lean-forward="false" selection-start-line="33" selection-start-column="18" selection-end-line="33" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -52,8 +59,8 @@
       <file leaf-file-name="ImageLoader.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/utils/ImageLoader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="19" column="5" lean-forward="true" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+            <state relative-caret-position="357">
+              <caret line="24" column="24" lean-forward="false" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -174,7 +181,6 @@
         <option value="$PROJECT_DIR$/src/main/utils/TileSpriteToRGBConverter.java" />
         <option value="$PROJECT_DIR$/src/main/Sandbox.java" />
         <option value="$PROJECT_DIR$/src/model/tiles/Tile.java" />
-        <option value="$PROJECT_DIR$/src/view/Displayer.java" />
         <option value="$PROJECT_DIR$/src/model/states/IState.java" />
         <option value="$PROJECT_DIR$/src/model/states/EmptyState.java" />
         <option value="$PROJECT_DIR$/src/main/Game.java" />
@@ -187,8 +193,9 @@
         <option value="$PROJECT_DIR$/src/model/entities/Player.java" />
         <option value="$PROJECT_DIR$/src/model/entities/critters/Critter.java" />
         <option value="$PROJECT_DIR$/src/model/entities/nabbers/Player.java" />
-        <option value="$PROJECT_DIR$/src/main/gfx/Assets.java" />
         <option value="$PROJECT_DIR$/src/main/utils/ImageLoader.java" />
+        <option value="$PROJECT_DIR$/src/view/Displayer.java" />
+        <option value="$PROJECT_DIR$/src/main/gfx/Assets.java" />
         <option value="$PROJECT_DIR$/src/model/states/BattleState.java" />
       </list>
     </option>
@@ -497,7 +504,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36601308" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36601308" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5114379" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16111952" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
@@ -688,6 +695,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="119" column="7" lean-forward="true" selection-start-line="119" selection-start-column="7" selection-end-line="119" selection-end-column="7" />
+          <folding>
+            <element signature="e#2857#2858#0" expanded="false" />
+            <element signature="e#2913#2914#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -695,6 +706,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="194">
           <caret line="696" column="16" lean-forward="false" selection-start-line="696" selection-start-column="16" selection-end-line="696" selection-end-column="16" />
+          <folding>
+            <element signature="e#24496#24497#0" expanded="false" />
+            <element signature="e#24553#24554#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -772,14 +787,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/view/Displayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="71" column="0" lean-forward="true" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -893,29 +900,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/gfx/Assets.java">
+    <entry file="file://$PROJECT_DIR$/src/view/Displayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/utils/ImageLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="19" column="5" lean-forward="true" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+        <state relative-caret-position="346">
+          <caret line="70" column="14" lean-forward="false" selection-start-line="70" selection-start-column="14" selection-end-line="70" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/states/BattleState.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="532" column="29" lean-forward="true" selection-start-line="532" selection-start-column="29" selection-end-line="532" selection-end-column="29" />
+        <state relative-caret-position="493">
+          <caret line="617" column="35" lean-forward="false" selection-start-line="617" selection-start-column="35" selection-end-line="617" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/utils/ImageLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="24" column="24" lean-forward="false" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/gfx/Assets.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="33" column="18" lean-forward="false" selection-start-line="33" selection-start-column="18" selection-end-line="33" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>
