@@ -102,12 +102,23 @@ public class BattleState implements IState {
             }
         }
 
+        private void renderString(Graphics g, String text, int x, int y) {
+            int xOffset = 0;
+            for (int i = 0; i < text.length(); i++) {
+                g.drawImage(Assets.fontHashMap.get(text.substring(i, i+1)), x+xOffset, y,
+                        40, 40, null);
+                xOffset += 40;
+            }
+        }
+
         @Override
         public void render(Graphics g) {
             g.drawImage(Assets.battleStateSpriteSheet, 0, 0, handler.getGame().getWidth(),
                     handler.getGame().getHeight(), 2, 2, 2+159, 2+145, null);
 
-            g.drawImage(Assets.fontHashMap.get("C"), 200, 410, 10*4, 10*4, null);
+            renderString(g, "789NMmn012zxcZXCCritter Nabbing", 10, 200);
+
+            g.drawImage(Assets.fontHashMap.get("C"), 200, 420, 10*4, 10*4, null);
             g.drawImage(Assets.fontHashMap.get("a"), 240, 420, 10*4, 10*4, null);
             g.drawImage(Assets.fontHashMap.get("n"), 280, 420, 10*4, 10*4, null);
             g.drawImage(Assets.fontHashMap.get("n"), 320, 420, 10*4, 10*4, null);

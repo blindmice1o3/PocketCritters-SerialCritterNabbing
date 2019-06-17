@@ -21,6 +21,13 @@ public class FontGrabber {
         BufferedImage[][] font = new BufferedImage[rows][cols];
 
         for (int y = 0; y < rows; y++) {
+            if (y == 3) {
+                yInit = yInit-2;
+            } else if (y == 6) {
+                yInit = yInit-2;
+            }
+
+
             for (int x = 0; x < cols; x++) {
                 font[y][x] = Assets.battleStateSpriteSheet.getSubimage(xInit+(x*(widthFont+xOffset)),
                         yInit+(y*(heightFont+yOffset)), widthFont, heightFont);
@@ -100,7 +107,7 @@ public class FontGrabber {
         fontHashMap.put("y", fontNestedArray[5][6]);
         fontHashMap.put("z", fontNestedArray[5][7]);
         fontHashMap.put("null6", fontNestedArray[5][8]);
-        fontHashMap.put("null7", fontNestedArray[5][9]);
+        fontHashMap.put(" ", fontNestedArray[5][9]);
 
         fontHashMap.put("0", fontNestedArray[6][0]);
         fontHashMap.put("1", fontNestedArray[6][1]);

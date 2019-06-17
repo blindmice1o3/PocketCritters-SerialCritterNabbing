@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fb96119b-76aa-4531-8c73-0e06b445031b" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/utils/FontGrabber.java" afterPath="$PROJECT_DIR$/src/main/utils/FontGrabber.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/states/BattleState.java" afterPath="$PROJECT_DIR$/src/model/states/BattleState.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -14,13 +15,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="BattleState.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BattleState.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/states/BattleState.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="621" column="35" lean-forward="false" selection-start-line="621" selection-start-column="35" selection-end-line="621" selection-end-column="35" />
+            <state relative-caret-position="323">
+              <caret line="118" column="39" lean-forward="false" selection-start-line="118" selection-start-column="39" selection-end-line="118" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FontGrabber.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/utils/FontGrabber.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="26" column="31" lean-forward="false" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1170#1193#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -166,7 +180,6 @@
         <option value="$PROJECT_DIR$/src/main/Game.java" />
         <option value="$PROJECT_DIR$/src/main/input/KeyManager.java" />
         <option value="$PROJECT_DIR$/src/model/states/StateManager.java" />
-        <option value="$PROJECT_DIR$/src/main/utils/FontGrabber.java" />
         <option value="$PROJECT_DIR$/src/model/items/Item.java" />
         <option value="$PROJECT_DIR$/src/model/states/GameState.java" />
         <option value="$PROJECT_DIR$/src/main/Handler.java" />
@@ -177,6 +190,7 @@
         <option value="$PROJECT_DIR$/src/view/Displayer.java" />
         <option value="$PROJECT_DIR$/src/main/gfx/Assets.java" />
         <option value="$PROJECT_DIR$/src/model/states/BattleState.java" />
+        <option value="$PROJECT_DIR$/src/main/utils/FontGrabber.java" />
       </list>
     </option>
   </component>
@@ -877,17 +891,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/utils/FontGrabber.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="22" lean-forward="true" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1029#1052#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/gfx/Assets.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -906,10 +909,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/states/BattleState.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="621" column="35" lean-forward="false" selection-start-line="621" selection-start-column="35" selection-end-line="621" selection-end-column="35" />
+        <state relative-caret-position="323">
+          <caret line="118" column="39" lean-forward="false" selection-start-line="118" selection-start-column="39" selection-end-line="118" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/utils/FontGrabber.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="26" column="31" lean-forward="false" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1170#1193#0" expanded="true" />
           </folding>
         </state>
       </provider>
