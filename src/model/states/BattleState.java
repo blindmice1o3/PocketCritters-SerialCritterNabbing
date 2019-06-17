@@ -105,14 +105,17 @@ public class BattleState implements IState {
         public void render(Graphics g) {
             g.drawImage(Assets.battleStateSpriteSheet, 0, 0, handler.getGame().getWidth(),
                     handler.getGame().getHeight(), 2, 2, 2+159, 2+145, null);
-            g.drawImage(Assets.fontHashMap.get("C"), 200, 100, 10, 10, null);
-            g.drawImage(Assets.fontHashMap.get("a"), 200, 110, 10, 10, null);
-            g.drawImage(Assets.fontHashMap.get("n"), 200, 120, 10, 10, null);
-            g.drawImage(Assets.fontHashMap.get("n"), 200, 130, 10, 10, null);
-            g.drawImage(Assets.fontHashMap.get("a"), 200, 140, 10, 10, null);
-            g.drawImage(Assets.fontHashMap.get("b"), 200, 150, 10, 10, null);
-            g.drawImage(Assets.fontHashMap.get("i"), 200, 160, 10, 10, null);
-            g.drawImage(Assets.fontHashMap.get("s"), 200, 170, 10, 10, null);
+
+            g.drawImage(Assets.fontHashMap.get("C"), 200, 410, 10*4, 10*4, null);
+            g.drawImage(Assets.fontHashMap.get("a"), 240, 420, 10*4, 10*4, null);
+            g.drawImage(Assets.fontHashMap.get("n"), 280, 420, 10*4, 10*4, null);
+            g.drawImage(Assets.fontHashMap.get("n"), 320, 420, 10*4, 10*4, null);
+            g.drawImage(Assets.fontHashMap.get("a"), 360, 420, 10*4, 10*4, null);
+            g.drawImage(Assets.fontHashMap.get("b"), 400, 420, 10*4, 10*4, null);
+            g.drawImage(Assets.fontHashMap.get("i"), 440, 420, 10*4, 10*4, null);
+            g.drawImage(Assets.fontHashMap.get("s"), 480, 420, 10*4, 10*4, null);
+
+            g.drawImage(Assets.monsterCapsuleIcon, 130*4, 76*4, 7*4, 7*4, null);
         }
 
         @Override

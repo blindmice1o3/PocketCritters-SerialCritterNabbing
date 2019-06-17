@@ -12,7 +12,7 @@ public class Assets {
 
     public static Map<String, BufferedImage> fontHashMap;
 
-    public static BufferedImage world, player, teamRocket, battleStateSpriteSheet;
+    public static BufferedImage world, player, teamRocket, battleStateSpriteSheet, monsterCapsuleIcon;
     public static BufferedImage[] jamesDown, jamesUp, jamesLeft, jamesRight,
             jessieDown, jessieUp, jessieLeft, jessieRight;
 
@@ -23,6 +23,7 @@ public class Assets {
         battleStateSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Yellow - Battle Interface.png");
 
         fontHashMap = FontGrabber.initFont();   //this line must come AFTER battleStateSpriteSheet gets initiated.
+        monsterCapsuleIcon = battleStateSpriteSheet.getSubimage(324, 269, 7, 7);
 
         jamesDown = new BufferedImage[2];
         jamesDown[0] = teamRocket.getSubimage(236, 24, 12, 16);
