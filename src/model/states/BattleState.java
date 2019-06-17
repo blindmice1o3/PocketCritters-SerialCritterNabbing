@@ -103,8 +103,6 @@ public class BattleState implements IState {
             }
         }
 
-
-
         @Override
         public void render(Graphics g) {
             g.drawImage(Assets.battleStateSpriteSheet, 0, 0, handler.getGame().getWidth(),
@@ -133,18 +131,18 @@ public class BattleState implements IState {
             g.drawImage(Assets.fontHashMap.get("i"), 730, 200, 10*4, 10*4, null);
             g.drawImage(Assets.fontHashMap.get("g"), 770, 200, 10*4, 10*4, null);
 
-            //First monsterCapsuleIcon (index == 0).
-            g.drawImage(Assets.monsterCapsuleIcon, 90*4, 76*4, 7*4, 7*4, null);
-            //Second monsterCapsuleIcon (index == 1).
-            g.drawImage(Assets.monsterCapsuleIcon, 98*4, 76*4, 7*4, 7*4, null);
-            //Third monsterCapsuleIcon (index == 2).
-            g.drawImage(Assets.monsterCapsuleIcon, 106*4, 76*4, 7*4, 7*4, null);
-            //Fourth monsterCapsuleIcon (index == 3).
-            //g.drawImage(Assets.monsterCapsuleIcon, 114*4, 76*4, 7*4, 7*4, null);
-            //Fifth monsterCapsuleIcon (index == 4).
-            //g.drawImage(Assets.monsterCapsuleIcon, 122*4, 76*4, 7*4, 7*4, null);
-            //Sixth monsterCapsuleIcon (index == 5).
-            //g.drawImage(Assets.monsterCapsuleIcon, 130*4, 76*4, 7*4, 7*4, null);
+            //First critterBallSprite (index == 0).
+            g.drawImage(Assets.critterBallSprite, 90*4, 76*4, 7*4, 7*4, null);
+            //Second critterBallSprite (index == 1).
+            g.drawImage(Assets.critterBallSprite, 98*4, 76*4, 7*4, 7*4, null);
+            //Third critterBallSprite (index == 2).
+            g.drawImage(Assets.critterBallSprite, 106*4, 76*4, 7*4, 7*4, null);
+            //Fourth critterBallSprite (index == 3).
+            g.drawImage(Assets.critterBallSprite, 114*4, 76*4, 7*4, 7*4, null);
+            //Fifth critterBallSprite (index == 4).
+            //g.drawImage(Assets.critterBallSprite, 122*4, 76*4, 7*4, 7*4, null);
+            //Sixth critterBallSprite (index == 5).
+            //g.drawImage(Assets.critterBallSprite, 130*4, 76*4, 7*4, 7*4, null);
         }
 
         @Override
@@ -235,13 +233,13 @@ public class BattleState implements IState {
                     handler.getGame().getHeight(), 161, 2, 161+159, 2+145, null);
 
             if (menuMatrix[yIndex][xIndex].equals("BattleStateFight")) {
-                g.drawImage(Assets.cursor, 291, 423, 7 * 4, 7 * 4, null);
+                g.drawImage(Assets.cursorSprite, 291, 423, 7 * 4, 7 * 4, null);
             } else if (menuMatrix[yIndex][xIndex].equals("BattleStateCritterBeltList")) {
-                g.drawImage(Assets.cursor, 484, 423, 7 * 4, 7 * 4, null);
+                g.drawImage(Assets.cursorSprite, 484, 423, 7 * 4, 7 * 4, null);
             } else if (menuMatrix[yIndex][xIndex].equals("BattleStateItem")) {
-                g.drawImage(Assets.cursor, 291, 484, 7 * 4, 7 * 4, null);
+                g.drawImage(Assets.cursorSprite, 291, 484, 7 * 4, 7 * 4, null);
             } else if (menuMatrix[yIndex][xIndex].equals("BattleStateRun")) {
-                g.drawImage(Assets.cursor, 484, 484, 7 * 4, 7 * 4, null);
+                g.drawImage(Assets.cursorSprite, 484, 484, 7 * 4, 7 * 4, null);
             }
         }
 

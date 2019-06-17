@@ -15,7 +15,7 @@ public class Assets {
     public static BufferedImage[][] nabbersBufferedImageNestedArray;
 
     public static BufferedImage world, player, teamRocket, critterSpriteSheet, nabberSpriteSheet,
-            battleStateSpriteSheet, menuStateInfoSpriteSheet, monsterCapsuleIcon, cursor;
+            battleStateSpriteSheet, menuStateInfoSpriteSheet, critterBallSprite, cursorSprite;
     public static BufferedImage[] jamesDown, jamesUp, jamesLeft, jamesRight,
             jessieDown, jessieUp, jessieLeft, jessieRight;
 
@@ -33,8 +33,8 @@ public class Assets {
         nabbersBufferedImageNestedArray = ImageLoader.cropSpriteFromSpriteSheet(8, 6,
                 68, 64, 1, 2, nabberSpriteSheet);
         fontHashMap = FontGrabber.initFont();   //this line must come AFTER battleStateSpriteSheet gets initiated.
-        monsterCapsuleIcon = battleStateSpriteSheet.getSubimage(324, 269, 7, 7);
-        cursor = battleStateSpriteSheet.getSubimage(331, 270, 7, 7);
+        critterBallSprite = battleStateSpriteSheet.getSubimage(324, 269, 7, 7);
+        cursorSprite = battleStateSpriteSheet.getSubimage(331, 270, 7, 7);
 
         jamesDown = new BufferedImage[2];
         jamesDown[0] = teamRocket.getSubimage(236, 24, 12, 16);
