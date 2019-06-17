@@ -634,6 +634,7 @@ public class BattleState implements IState {
             if (counter == counterTarget) {
                 //g.drawImage(Assets.battleStateSpriteSheet, 0, 0, handler.getGame().getWidth(),
                 //        handler.getGame().getHeight(), 320, 146, 320 + 159, 146 + 145, null);
+                g.clearRect(0, 0, handler.getGame().getWidth(), handler.getGame().getHeight());
 
                 //@@@@@@@@@@@@@@TESTER for Assets.nabbersBufferedImageNestedArray@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
                 for (int y = 0; y < 6; y++) {
@@ -643,6 +644,16 @@ public class BattleState implements IState {
                     }
                 }
 
+                //HORIZONTAL-row moving down-until-resetting
+                for (int x = 0; x < 8; x++) {
+                    g.drawImage(Assets.nabbersBufferedImageNestedArray[yRand][xRand],
+                            (x * 68) + (x * 1) + (1), (rowIndex * 64) + (rowIndex * 2) + (2), null);
+                }
+                rowIndex++;
+                if (rowIndex >= 6) {
+                    rowIndex = 0;
+                }
+                //VERTICAL-column moving right-until-resetting
                 for (int y = 0; y < 6; y++) {
                     g.drawImage(Assets.nabbersBufferedImageNestedArray[yRand][xRand],
                             (colIndex * 68) + (colIndex * 1) + (1), (y * 64) + (y * 2) + (2), null);
@@ -652,15 +663,6 @@ public class BattleState implements IState {
                     colIndex = 0;
                     xRand = rand.nextInt(8);
                     yRand = rand.nextInt(6);
-                }
-
-                for (int x = 0; x < 8; x++) {
-                    g.drawImage(Assets.nabbersBufferedImageNestedArray[3][6],
-                            (x * 68) + (x * 1) + (1), (rowIndex * 64) + (rowIndex * 2) + (2), null);
-                }
-                rowIndex++;
-                if (rowIndex >= 6) {
-                    rowIndex = 0;
                 }
 
                 counter = 0;
