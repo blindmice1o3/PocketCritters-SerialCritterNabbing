@@ -2,7 +2,7 @@ package model.states;
 
 import main.Handler;
 import main.gfx.Assets;
-import model.entities.Player;
+import model.entities.nabbers.Player;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -25,7 +25,7 @@ public class BattleState implements IState {
         StateManager.add("BattleStateMenu", new BattleStateMenu(handler));
         StateManager.add("BattleStateFight", new BattleStateFight(handler));
         StateManager.add("BattleStateItem", new BattleStateItem(handler));
-        StateManager.add("BattleStateMonsterBeltList", new BattleStateMonsterBeltList(handler));
+        StateManager.add("BattleStateCritterBeltList", new BattleStateCritterBeltList(handler));
         StateManager.add("BattleStateRun", new BattleStateRun(handler));
         StateManager.add("BattleStateOutro", new BattleStateOutro(handler));
     }
@@ -155,7 +155,7 @@ public class BattleState implements IState {
             yIndex = 0;
             menuMatrix = new String[2][2];
             menuMatrix[0][0] = "BattleStateFight";
-            menuMatrix[0][1] = "BattleStateMonsterBeltList";
+            menuMatrix[0][1] = "BattleStateCritterBeltList";
             menuMatrix[1][0] = "BattleStateItem";
             menuMatrix[1][1] = "BattleStateRun";
         } // **** end BattleStateMenu(Handler) constructor ****
@@ -218,7 +218,7 @@ public class BattleState implements IState {
 
             if (menuMatrix[yIndex][xIndex].equals("BattleStateFight")) {
                 g.drawImage(Assets.cursor, 291, 423, 7 * 4, 7 * 4, null);
-            } else if (menuMatrix[yIndex][xIndex].equals("BattleStateMonsterBeltList")) {
+            } else if (menuMatrix[yIndex][xIndex].equals("BattleStateCritterBeltList")) {
                 g.drawImage(Assets.cursor, 484, 423, 7 * 4, 7 * 4, null);
             } else if (menuMatrix[yIndex][xIndex].equals("BattleStateItem")) {
                 g.drawImage(Assets.cursor, 291, 484, 7 * 4, 7 * 4, null);
@@ -249,6 +249,7 @@ public class BattleState implements IState {
             this.handler = handler;
         } // **** end BattleStateFight(Handler) constructor ****
 
+        //while-loop and track whose turn it is.
         @Override
         public void tick() {
             System.out.println("BattleStateFight.tick()");
@@ -306,6 +307,7 @@ public class BattleState implements IState {
     private class BattleStateItem implements IState {
 
         private Handler handler;
+        private int index = 0;
 
         public BattleStateItem(Handler handler) {
             this.handler = handler;
@@ -318,10 +320,22 @@ public class BattleState implements IState {
             //UP
             if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {
                 System.out.println("BattleStateItem.tick()... up");
+
+                index--;
+
+                if (index < 0) {
+                    index = (player.getInventory().size()-1);
+                }
             }
             //DOWN
             else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) {
                 System.out.println("BattleStateItem.tick()... down");
+
+                index++;
+
+                if (index >= player.getInventory().size()) {
+                    index = 0;
+                }
             }
             //LEFT
             else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_A)) {
@@ -334,6 +348,8 @@ public class BattleState implements IState {
             //aButton
             else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_COMMA)) {
                 System.out.println("BattleStateItem.tick()... aButton");
+
+                System.out.println( "Item selected for use: " + player.getInventory().get(index) );
             }
             //bButton
             else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_PERIOD)) {
@@ -365,41 +381,41 @@ public class BattleState implements IState {
 
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-    private class BattleStateMonsterBeltList implements IState {
+    private class BattleStateCritterBeltList implements IState {
 
         private Handler handler;
 
-        public BattleStateMonsterBeltList(Handler handler) {
+        public BattleStateCritterBeltList(Handler handler) {
             this.handler = handler;
-        } // **** end BattleStateMonsterBeltList(Handler) constructor ****
+        } // **** end BattleStateCritterBeltList(Handler) constructor ****
 
         @Override
         public void tick() {
-            System.out.println("BattleStateMonsterBeltList.tick()");
+            System.out.println("BattleStateCritterBeltList.tick()");
 
             //UP
             if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {
-                System.out.println("BattleStateMonsterBeltList.tick()... up");
+                System.out.println("BattleStateCritterBeltList.tick()... up");
             }
             //DOWN
             else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) {
-                System.out.println("BattleStateMonsterBeltList.tick()... down");
+                System.out.println("BattleStateCritterBeltList.tick()... down");
             }
             //LEFT
             else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_A)) {
-                System.out.println("BattleStateMonsterBeltList.tick()... left");
+                System.out.println("BattleStateCritterBeltList.tick()... left");
             }
             //RIGHT
             else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_D)) {
-                System.out.println("BattleStateMonsterBeltList.tick()... right");
+                System.out.println("BattleStateCritterBeltList.tick()... right");
             }
             //aButton
             else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_COMMA)) {
-                System.out.println("BattleStateMonsterBeltList.tick()... aButton");
+                System.out.println("BattleStateCritterBeltList.tick()... aButton");
             }
             //bButton
             else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_PERIOD)) {
-                System.out.println("BattleStateMonsterBeltList.tick()... bButton");
+                System.out.println("BattleStateCritterBeltList.tick()... bButton");
 
                 ///////////////////////////////
                 StateManager.change("BattleStateMenu", null);
@@ -423,7 +439,7 @@ public class BattleState implements IState {
 
         }
 
-    } // **** end BattleStateMonsterBeltList inner-class ****
+    } // **** end BattleStateCritterBeltList inner-class ****
 
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

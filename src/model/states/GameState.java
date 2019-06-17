@@ -2,9 +2,9 @@ package model.states;
 
 import main.Handler;
 import main.gfx.Assets;
-import model.entities.James;
-import model.entities.Jessie;
-import model.entities.Player;
+import model.entities.nabbers.James;
+import model.entities.nabbers.Jessie;
+import model.entities.nabbers.Player;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

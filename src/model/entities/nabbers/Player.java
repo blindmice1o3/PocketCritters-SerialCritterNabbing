@@ -1,13 +1,15 @@
-package model.entities;
+package model.entities.nabbers;
 
 import main.Handler;
 import main.gfx.Assets;
+import model.entities.critters.Critter;
+import model.items.Item;
 import model.states.StateManager;
 import model.tiles.TallGrassTile;
 import model.tiles.Tile;
 
 import java.awt.*;
-import java.util.Random;
+import java.util.ArrayList;
 
 public class Player {
 
@@ -17,7 +19,8 @@ public class Player {
     private int xDelta, yDelta;
     private int moveSpeed;
 
-
+    private ArrayList<Item> inventory;
+    private Critter[] critterBeltList;
 
     public Player(Handler handler) {
         this.handler = handler;
@@ -27,8 +30,11 @@ public class Player {
 
         bounds = new Rectangle(2, 2, 12, 12);
 
-        moveSpeed = 16;
-    } // **** end model.entities.Player() constructor ****
+        moveSpeed = Tile.WIDTH;
+
+        inventory = new ArrayList<Item>();
+        critterBeltList = new Critter[6];
+    } // **** end model.entities.nabbers.Player() constructor ****
 
     public void tick() {
         moveX();
@@ -179,4 +185,6 @@ public class Player {
 
     public int getMoveSpeed() { return moveSpeed; }
 
-} // **** end model.entities.Player class ****
+    public ArrayList<Item> getInventory() { return inventory; }
+
+} // **** end model.entities.nabbers.Player class ****

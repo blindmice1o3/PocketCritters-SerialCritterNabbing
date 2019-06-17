@@ -1,4 +1,4 @@
-package model.entities;
+package model.entities.nabbers;
 
 import main.Handler;
 import main.gfx.Assets;
