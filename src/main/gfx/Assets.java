@@ -11,8 +11,10 @@ import java.util.Map;
 public class Assets {
 
     public static Map<String, BufferedImage> fontHashMap;
+    public static BufferedImage[][] crittersBufferedImageNestedArray;
 
-    public static BufferedImage world, player, teamRocket, battleStateSpriteSheet, monsterCapsuleIcon, cursor;
+    public static BufferedImage world, player, teamRocket, critterSpriteSheet, nabberSpriteSheet,
+            battleStateSpriteSheet, menuStateInfoSpriteSheet, monsterCapsuleIcon, cursor;
     public static BufferedImage[] jamesDown, jamesUp, jamesLeft, jamesRight,
             jessieDown, jessieUp, jessieLeft, jessieRight;
 
@@ -20,8 +22,13 @@ public class Assets {
         world = ImageLoader.loadImage("/pokemon-gsc-kanto.png");
         player = ImageLoader.loadImage("/butters_profchaos.jpg");
         teamRocket = ImageLoader.loadImage("/TeamRocket.png");
+        critterSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Yellow - Pokemon.png");
+        nabberSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Yellow - Trainers.png");
         battleStateSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Yellow - Battle Interface.png");
+        menuStateInfoSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Yellow - Trainer Card.png");
 
+        crittersBufferedImageNestedArray = ImageLoader.cropSpriteFromSpriteSheet(12, 13,
+                56, 56, 1, 1, critterSpriteSheet);
         fontHashMap = FontGrabber.initFont();   //this line must come AFTER battleStateSpriteSheet gets initiated.
         monsterCapsuleIcon = battleStateSpriteSheet.getSubimage(324, 269, 7, 7);
         cursor = battleStateSpriteSheet.getSubimage(331, 270, 7, 7);

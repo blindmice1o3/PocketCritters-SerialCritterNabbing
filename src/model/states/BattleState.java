@@ -384,9 +384,11 @@ public class BattleState implements IState {
     private class BattleStateCritterBeltList implements IState {
 
         private Handler handler;
+        private int index;
 
         public BattleStateCritterBeltList(Handler handler) {
             this.handler = handler;
+            index = 0;
         } // **** end BattleStateCritterBeltList(Handler) constructor ****
 
         @Override
@@ -396,10 +398,22 @@ public class BattleState implements IState {
             //UP
             if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {
                 System.out.println("BattleStateCritterBeltList.tick()... up");
+
+                index--;
+
+                if (index < 0) {
+                    index = (player.getCritterBeltList().length-1);
+                }
             }
             //DOWN
             else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) {
                 System.out.println("BattleStateCritterBeltList.tick()... down");
+
+                index++;
+
+                if (index >= player.getCritterBeltList().length) {
+                    index = 0;
+                }
             }
             //LEFT
             else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_A)) {
@@ -412,6 +426,8 @@ public class BattleState implements IState {
             //aButton
             else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_COMMA)) {
                 System.out.println("BattleStateCritterBeltList.tick()... aButton");
+
+                System.out.println( "Critter selected: " + player.getCritterBeltList()[index] );
             }
             //bButton
             else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_PERIOD)) {
@@ -491,7 +507,14 @@ public class BattleState implements IState {
 
         @Override
         public void render(Graphics g) {
-
+            //@@@@@ImageLoader.cropSpriteFromSpriteSheet(int, int, int, int, int, int, BufferedImage) tester@@@@@
+            for (int y = 0; y < 13; y++) {
+                for (int x = 0; x < 12; x++) {
+                    g.drawImage(Assets.crittersBufferedImageNestedArray[8][7],
+                            (x*56)+(x*1), (y*56)+(y*1), null);
+                }
+            }
+            //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         }
 
         @Override

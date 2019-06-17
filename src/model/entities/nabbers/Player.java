@@ -187,4 +187,6 @@ public class Player {
 
     public ArrayList<Item> getInventory() { return inventory; }
 
+    public Critter[] getCritterBeltList() { return critterBeltList; }
+
 } // **** end model.entities.nabbers.Player class ****
