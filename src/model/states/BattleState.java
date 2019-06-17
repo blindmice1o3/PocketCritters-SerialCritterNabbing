@@ -215,6 +215,16 @@ public class BattleState implements IState {
         public void render(Graphics g) {
             g.drawImage(Assets.battleStateSpriteSheet, 0, 0, handler.getGame().getWidth(),
                     handler.getGame().getHeight(), 161, 2, 161+159, 2+145, null);
+
+            if (menuMatrix[yIndex][xIndex].equals("BattleStateFight")) {
+                g.drawImage(Assets.cursor, 291, 423, 7 * 4, 7 * 4, null);
+            } else if (menuMatrix[yIndex][xIndex].equals("BattleStateMonsterBeltList")) {
+                g.drawImage(Assets.cursor, 484, 423, 7 * 4, 7 * 4, null);
+            } else if (menuMatrix[yIndex][xIndex].equals("BattleStateItem")) {
+                g.drawImage(Assets.cursor, 291, 484, 7 * 4, 7 * 4, null);
+            } else if (menuMatrix[yIndex][xIndex].equals("BattleStateRun")) {
+                g.drawImage(Assets.cursor, 484, 484, 7 * 4, 7 * 4, null);
+            }
         }
 
         @Override
