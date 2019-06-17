@@ -606,18 +606,42 @@ public class BattleState implements IState {
             }
         }
 
+        int counter = 0;
+        int counterTarget = 60;
+        int colIndex = 0;
+        int xRand = 0;
+        int yRand = 0;
+        Random rand = new Random();
         @Override
         public void render(Graphics g) {
-            g.drawImage(Assets.battleStateSpriteSheet, 0, 0, handler.getGame().getWidth(),
-                    handler.getGame().getHeight(), 320, 146, 320+159, 146+145, null);
+            counter++;
+            if (counter == counterTarget) {
+                g.drawImage(Assets.battleStateSpriteSheet, 0, 0, handler.getGame().getWidth(),
+                        handler.getGame().getHeight(), 320, 146, 320 + 159, 146 + 145, null);
 
-            //@@@@@@@@@@@@@@TESTER for Assets.nabbersBufferedImageNestedArray@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-            for (int y = 0; y < 6; y++) {
-                for (int x = 0; x < 8; x++) {
-                    g.drawImage(Assets.nabbersBufferedImageNestedArray[y][x],
-                            (x * 68) + (x * 1) + 1, (y * 64) + (y * 2) + 2, null);
+                //@@@@@@@@@@@@@@TESTER for Assets.nabbersBufferedImageNestedArray@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                for (int y = 0; y < 6; y++) {
+                    for (int x = 0; x < 8; x++) {
+                        g.drawImage(Assets.nabbersBufferedImageNestedArray[y][x],
+                                (x * 68) + (x * 1) + 1, (y * 64) + (y * 2) + 2, null);
+                    }
                 }
+
+                for (int y = 0; y < 6; y++) {
+                    g.drawImage(Assets.nabbersBufferedImageNestedArray[yRand][xRand],
+                            (colIndex * 68) + (colIndex * 1) + (1), (y * 64) + (y * 2) + (2), null);
+                }
+                colIndex++;
+                if (colIndex >= 8) {
+                    colIndex = 0;
+                    xRand = rand.nextInt(8);
+                    yRand = rand.nextInt(6);
+                }
+
+                counter = 0;
             }
+
+
             //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         }
 
