@@ -6,6 +6,7 @@ import model.entities.nabbers.Player;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.Random;
 
 public class BattleState implements IState {
 
@@ -505,14 +506,43 @@ public class BattleState implements IState {
             }
         }
 
+        int xCol = 0;
+        int yRow = 0;
+        Random rand = new Random();
+        int counter = 0;
+        int counterTarget = 60;
         @Override
         public void render(Graphics g) {
             //@@@@@ImageLoader.cropSpriteFromSpriteSheet(int, int, int, int, int, int, BufferedImage) tester@@@@@
-            for (int y = 0; y < 13; y++) {
+            counter++;
+
+            if (counter == counterTarget) {
+                for (int y = 0; y < 13; y++) {
+                    for (int x = 0; x < 12; x++) {
+                        g.drawImage(Assets.crittersBufferedImageNestedArray[y][x],
+                                (x * 56) + (x * 1), (y * 56) + (y * 1), null);
+                    }
+                }
+
+                xCol++;
+                for (int y = 0; y < 13; y++) {
+                    g.drawImage(Assets.crittersBufferedImageNestedArray[8][7],
+                            (xCol * 56) + (xCol * 1), (y * 56) + (y * 1), null);
+                }
+                if (xCol >= 12) {
+                    xCol = 0;
+                }
+
+                yRow++;
                 for (int x = 0; x < 12; x++) {
                     g.drawImage(Assets.crittersBufferedImageNestedArray[8][7],
-                            (x*56)+(x*1), (y*56)+(y*1), null);
+                            (x * 56) + (x * 1), (yRow * 56) + (yRow * 1), null);
                 }
+                if (yRow >= 13) {
+                    yRow = 0;
+                }
+
+                counter = 0;
             }
             //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         }
