@@ -543,7 +543,7 @@ public class BattleState implements IState {
 
                 xCol++;
                 for (int y = 0; y < 13; y++) {
-                    g.drawImage(Assets.crittersBufferedImageNestedArray[8][7],
+                    g.drawImage(Assets.nabbersBufferedImageNestedArray[3][6],
                             (xCol * 56) + (xCol * 1) + 1, (y * 56) + (y * 1) + 1, null);
                 }
                 if (xCol >= 12) {
@@ -552,7 +552,7 @@ public class BattleState implements IState {
 
                 yRow++;
                 for (int x = 0; x < 12; x++) {
-                    g.drawImage(Assets.crittersBufferedImageNestedArray[8][7],
+                    g.drawImage(Assets.nabbersBufferedImageNestedArray[3][6],
                             (x * 56) + (x * 1) + 1, (yRow * 56) + (yRow * 1) + 1, null);
                 }
                 if (yRow >= 13) {
@@ -624,6 +624,7 @@ public class BattleState implements IState {
         int counter = 0;
         int counterTarget = 60;
         int colIndex = 0;
+        int rowIndex = 0;
         int xRand = 0;
         int yRand = 0;
         Random rand = new Random();
@@ -631,8 +632,8 @@ public class BattleState implements IState {
         public void render(Graphics g) {
             counter++;
             if (counter == counterTarget) {
-                g.drawImage(Assets.battleStateSpriteSheet, 0, 0, handler.getGame().getWidth(),
-                        handler.getGame().getHeight(), 320, 146, 320 + 159, 146 + 145, null);
+                //g.drawImage(Assets.battleStateSpriteSheet, 0, 0, handler.getGame().getWidth(),
+                //        handler.getGame().getHeight(), 320, 146, 320 + 159, 146 + 145, null);
 
                 //@@@@@@@@@@@@@@TESTER for Assets.nabbersBufferedImageNestedArray@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
                 for (int y = 0; y < 6; y++) {
@@ -651,6 +652,15 @@ public class BattleState implements IState {
                     colIndex = 0;
                     xRand = rand.nextInt(8);
                     yRand = rand.nextInt(6);
+                }
+
+                for (int x = 0; x < 8; x++) {
+                    g.drawImage(Assets.nabbersBufferedImageNestedArray[3][6],
+                            (x * 68) + (x * 1) + (1), (rowIndex * 64) + (rowIndex * 2) + (2), null);
+                }
+                rowIndex++;
+                if (rowIndex >= 6) {
+                    rowIndex = 0;
                 }
 
                 counter = 0;
