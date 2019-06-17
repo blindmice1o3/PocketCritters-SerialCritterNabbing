@@ -115,7 +115,18 @@ public class BattleState implements IState {
             g.drawImage(Assets.fontHashMap.get("i"), 440, 420, 10*4, 10*4, null);
             g.drawImage(Assets.fontHashMap.get("s"), 480, 420, 10*4, 10*4, null);
 
-            g.drawImage(Assets.monsterCapsuleIcon, 130*4, 76*4, 7*4, 7*4, null);
+            //First monsterCapsuleIcon (index == 0).
+            g.drawImage(Assets.monsterCapsuleIcon, 90*4, 76*4, 7*4, 7*4, null);
+            //Second monsterCapsuleIcon (index == 1).
+            g.drawImage(Assets.monsterCapsuleIcon, 98*4, 76*4, 7*4, 7*4, null);
+            //Third monsterCapsuleIcon (index == 2).
+            g.drawImage(Assets.monsterCapsuleIcon, 106*4, 76*4, 7*4, 7*4, null);
+            //Fourth monsterCapsuleIcon (index == 3).
+            //g.drawImage(Assets.monsterCapsuleIcon, 114*4, 76*4, 7*4, 7*4, null);
+            //Fifth monsterCapsuleIcon (index == 4).
+            //g.drawImage(Assets.monsterCapsuleIcon, 122*4, 76*4, 7*4, 7*4, null);
+            //Sixth monsterCapsuleIcon (index == 5).
+            //g.drawImage(Assets.monsterCapsuleIcon, 130*4, 76*4, 7*4, 7*4, null);
         }
 
         @Override
