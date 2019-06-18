@@ -13,11 +13,16 @@ import java.util.ArrayList;
 
 public class Player {
 
-    private Handler handler;
+    public enum DirectionFacing { LEFT, RIGHT, UP, DOWN; }
+
+    protected Handler handler;
+
     protected int x, y;
-    protected Rectangle bounds;
-    private int xDelta, yDelta;
+    protected int xDelta, yDelta;
     private int moveSpeed;
+
+    protected DirectionFacing directionFacing;
+    protected Rectangle bounds;
 
     private ArrayList<Item> inventory;
     private Critter[] critterBeltList;
@@ -28,6 +33,7 @@ public class Player {
         x = 1104;
         y = 3312;
 
+        directionFacing = DirectionFacing.DOWN;
         bounds = new Rectangle(2, 2, 12, 12);
 
         moveSpeed = Tile.WIDTH;
@@ -175,15 +181,23 @@ public class Player {
 
     // GETTERS & SETTERS
 
+    public int getXDelta() { return xDelta; }
+
     public void setXDelta(int xDelta) {
         this.xDelta = xDelta;
     }
+
+    public int getYDelta() { return yDelta; }
 
     public void setYDelta(int yDelta) {
         this.yDelta = yDelta;
     }
 
     public int getMoveSpeed() { return moveSpeed; }
+
+    public DirectionFacing getDirectionFacing() { return directionFacing; }
+
+    public void setDirectionFacing(DirectionFacing directionFacing) { this.directionFacing = directionFacing; }
 
     public ArrayList<Item> getInventory() { return inventory; }
 

@@ -26,18 +26,30 @@ public class GameState implements IState {
         //UP
         if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {
             player.setYDelta( -player.getMoveSpeed() );
+            //player.setDirectionFacing(Player.DirectionFacing.UP);
+            james.setDirectionFacing(Player.DirectionFacing.UP);
+            jessie.setDirectionFacing(Player.DirectionFacing.UP);
         }
         //DOWN
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) {
             player.setYDelta( player.getMoveSpeed() );
+            //player.setDirectionFacing(Player.DirectionFacing.DOWN);
+            james.setDirectionFacing(Player.DirectionFacing.DOWN);
+            jessie.setDirectionFacing(Player.DirectionFacing.DOWN);
         }
         //LEFT
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_A)) {
             player.setXDelta( -player.getMoveSpeed() );
+            //player.setDirectionFacing(Player.DirectionFacing.LEFT);
+            james.setDirectionFacing(Player.DirectionFacing.LEFT);
+            jessie.setDirectionFacing(Player.DirectionFacing.LEFT);
         }
         //RIGHT
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_D)) {
             player.setXDelta( player.getMoveSpeed() );
+            //player.setDirectionFacing(Player.DirectionFacing.RIGHT);
+            james.setDirectionFacing(Player.DirectionFacing.RIGHT);
+            jessie.setDirectionFacing(Player.DirectionFacing.RIGHT);
         }
         //startButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
