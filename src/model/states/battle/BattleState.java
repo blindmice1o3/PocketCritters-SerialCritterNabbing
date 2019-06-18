@@ -46,12 +46,7 @@ public class BattleState implements IState {
 
     @Override
     public void enter(Object[] args) {
-        //if first time entering BattleState... set the player reference variables.
-        if (player == null) {
-            if (args[0] instanceof Player) {
-                this.player = (Player)args[0];
-            }
-        }
+
     }
 
     @Override

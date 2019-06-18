@@ -23,7 +23,8 @@ public class MenuState implements IState {
 
     private void initStateManager() {
         StateManager.add("MenuStateMenu", new MenuStateMenu(handler, player));
-        StateManager.add("MenuStateCritterList", new MenuStateCritterList(handler, player));
+        StateManager.add("MenuStateCritterDex", new MenuStateCritterDex(handler, player));
+        StateManager.add("MenuStateCritterBeltList", new MenuStateCritterBeltList(handler, player));
         StateManager.add("MenuStateItemList", new MenuStateItemList(handler, player));
         StateManager.add("MenuStatePlayerStats", new MenuStatePlayerStats(handler, player));
         StateManager.add("MenuStateSave", new MenuStateSave(handler, player));
@@ -37,6 +38,8 @@ public class MenuState implements IState {
         Object[] args = { player };
         StateManager.change("MenuStateMenu", null);
         ///////////////////////////////
+
+
     }
 
     @Override
@@ -46,12 +49,7 @@ public class MenuState implements IState {
 
     @Override
     public void enter(Object[] args) {
-        //if first time entering MenuState... set the player reference variables.
-        if (player == null) {
-            if (args[0] instanceof Player) {
-                this.player = (Player)args[0];
-            }
-        }
+
     }
 
     @Override

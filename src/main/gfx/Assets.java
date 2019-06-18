@@ -15,7 +15,8 @@ public class Assets {
     public static BufferedImage[][] nabbersBufferedImageNestedArray;
 
     public static BufferedImage world, player, teamRocket, critterSpriteSheet, nabberSpriteSheet,
-            battleStateSpriteSheet, menuStateInfoSpriteSheet, critterBallSprite, cursorSprite;
+            battleStateSpriteSheet, menuStateSpriteSheet, menuStateInfoSpriteSheet,
+            critterBallSprite, cursorSprite;
     public static BufferedImage[] jamesDown, jamesUp, jamesLeft, jamesRight,
             jessieDown, jessieUp, jessieLeft, jessieRight;
 
@@ -26,6 +27,7 @@ public class Assets {
         critterSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Yellow - Pokemon.png");
         nabberSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Yellow - Trainers.png");
         battleStateSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Yellow - Battle Interface.png");
+        menuStateSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Crystal - Start Menu.png");
         menuStateInfoSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Yellow - Trainer Card.png");
 
         crittersBufferedImageNestedArray = ImageLoader.cropSpriteFromSpriteSheet(12, 13,

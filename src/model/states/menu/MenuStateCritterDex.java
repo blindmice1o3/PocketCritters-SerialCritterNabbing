@@ -6,15 +6,15 @@ import model.states.IState;
 
 import java.awt.*;
 
-public class MenuStateCritterList implements IState {
+public class MenuStateCritterDex implements IState {
 
     private Handler handler;
     private Player player;
 
-    public MenuStateCritterList(Handler handler, Player player) {
+    public MenuStateCritterDex(Handler handler, Player player) {
         this.handler = handler;
         this.player = player;
-    } // **** end MenuStateCritterList(Handler, Player) constructor ****
+    } // **** end MenuStateCritterDex(Handler, Player) constructor ****
 
     @Override
     public void tick() {
@@ -36,4 +36,4 @@ public class MenuStateCritterList implements IState {
 
     }
 
-} // **** end MenuStateCritterList class ****
+} // **** end MenuStateCritterDex class ****
