@@ -19,7 +19,7 @@ public class Player {
 
     protected int x, y;
     protected int xDelta, yDelta;
-    private int moveSpeed;
+    protected int moveSpeed;
 
     protected DirectionFacing directionFacing;
     protected Rectangle bounds;
@@ -66,7 +66,7 @@ public class Player {
             //}
         }
     }
-    private void moveX() {
+    protected void moveX() {
         Tile[][] worldMap = handler.getWorldMapTileCollisionDetection();
 
         //MOVING LEFT
@@ -119,7 +119,7 @@ public class Player {
         }
     }
 
-    private void moveY() {
+    protected void moveY() {
         Tile[][] worldMap = handler.getWorldMapTileCollisionDetection();
 
         //MOVING UP
