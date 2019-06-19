@@ -43,7 +43,7 @@ public class James extends Player {
         anim.put("right", new Animation(150, Assets.jamesRight));
     }
 
-    int targetTime = 1000;
+    int targetTime = 4000;
     long lastTime = System.currentTimeMillis();
     long nowTime = lastTime;
     int elapsedTime;
@@ -53,6 +53,7 @@ public class James extends Player {
             animation.tick();
         }
 
+        //AUTO-MOVEMENT (random)
         nowTime = System.currentTimeMillis();
         elapsedTime += (int)(nowTime - lastTime);
         if (elapsedTime >= targetTime) {
@@ -72,18 +73,28 @@ public class James extends Player {
                 directionFacing = DirectionFacing.DOWN;
             }
 
+            //auto-movement based on rand.nextInt(4) method call.
             moveX();
             moveY();
-
-            if ( (x < handler.getGameCamera().getxOffset0()) || (x > handler.getGameCamera().getxOffset1()) ||
-                    (y < handler.getGameCamera().getyOffset0()) || (y > handler.getGameCamera().getyOffset1()) ) {
-                x = super.x - 32;
-                y = super.y - 32;
-            }
 
             elapsedTime = 0;
         }
         lastTime = nowTime;
+
+        //USER-CONTROLLED-MOVEMENT (from GameState.tick()'s setXDelta()/setYDelta() based on KeyManager's input)
+        if (xDelta < 0) {
+            directionFacing = DirectionFacing.LEFT;
+        } else if (xDelta > 0) {
+            directionFacing = DirectionFacing.RIGHT;
+        } else if (yDelta < 0) {
+            directionFacing = DirectionFacing.UP;
+        } else if (yDelta > 0) {
+            directionFacing = DirectionFacing.DOWN;
+        }
+        xScreenPosition +=(2*xDelta);
+        moveX();
+        yScreenPosition += (2*yDelta);
+        moveY();
 
         xDelta = 0;
         yDelta = 0;
@@ -92,6 +103,11 @@ public class James extends Player {
     @Override
     protected void moveX() {
         Tile[][] worldMap = handler.getWorldMapTileCollisionDetection();
+
+        if ( (worldMap[x/Tile.WIDTH][x/Tile.HEIGHT].isSolid()) ||
+                (worldMap[x/Tile.WIDTH][x/Tile.HEIGHT] == null) ) {
+            return;
+        }
 
         //MOVING LEFT
         if (xDelta < 0) {
@@ -103,7 +119,18 @@ public class James extends Player {
 
                 //moves Player's x-position.
                 x += xDelta;
-                xScreenPosition +=(2*xDelta);
+
+                //check within game screen
+                if ( ((x+xDelta+bounds.x) < handler.getGameCamera().getxOffset0()) ||
+                        ((x+xDelta+bounds.x+bounds.width) > handler.getGameCamera().getxOffset1()) ||
+                        ((y+yDelta+bounds.y) < handler.getGameCamera().getyOffset0()) ||
+                        ((y+yDelta+bounds.y+bounds.height) > handler.getGameCamera().getyOffset1()) ) {
+                    x = super.x - 32;
+                    y = super.y - 32;
+                    xScreenPosition = super.xScreenPosition - 64;
+                    yScreenPosition = super.yScreenPosition - 64;
+                }
+
             }
         }
         //MOVING RIGHT
@@ -116,7 +143,18 @@ public class James extends Player {
 
                 //moves Player's x-position.
                 x += xDelta;
-                xScreenPosition += (2*xDelta);
+
+                //check within game screen
+                if ( ((x+xDelta+bounds.x) < handler.getGameCamera().getxOffset0()) ||
+                        ((x+xDelta+bounds.x+bounds.width) > handler.getGameCamera().getxOffset1()) ||
+                        ((y+yDelta+bounds.y) < handler.getGameCamera().getyOffset0()) ||
+                        ((y+yDelta+bounds.y+bounds.height) > handler.getGameCamera().getyOffset1()) ) {
+                    x = super.x - 32;
+                    y = super.y - 32;
+                    xScreenPosition = super.xScreenPosition - 64;
+                    yScreenPosition = super.yScreenPosition - 64;
+                }
+
             }
         }
     }
@@ -135,7 +173,18 @@ public class James extends Player {
 
                 //moves Player's y-position.
                 y += yDelta;
-                yScreenPosition += (2*yDelta);
+
+                //check within game screen
+                if ( ((x+xDelta+bounds.x) < handler.getGameCamera().getxOffset0()) ||
+                        ((x+xDelta+bounds.x+bounds.width) > handler.getGameCamera().getxOffset1()) ||
+                        ((y+yDelta+bounds.y) < handler.getGameCamera().getyOffset0()) ||
+                        ((y+yDelta+bounds.y+bounds.height) > handler.getGameCamera().getyOffset1()) ) {
+                    x = super.x - 32;
+                    y = super.y - 32;
+                    xScreenPosition = super.xScreenPosition - 64;
+                    yScreenPosition = super.yScreenPosition - 64;
+                }
+
             }
         }
         //MOVING DOWN
@@ -148,7 +197,18 @@ public class James extends Player {
 
                 //moves Player's y-position.
                 y += yDelta;
-                yScreenPosition += (2*yDelta);
+
+                //check within game screen
+                if ( ((x+xDelta+bounds.x) < handler.getGameCamera().getxOffset0()) ||
+                        ((x+xDelta+bounds.x+bounds.width) > handler.getGameCamera().getxOffset1()) ||
+                        ((y+yDelta+bounds.y) < handler.getGameCamera().getyOffset0()) ||
+                        ((y+yDelta+bounds.y+bounds.height) > handler.getGameCamera().getyOffset1()) ) {
+                    x = super.x - 32;
+                    y = super.y - 32;
+                    xScreenPosition = super.xScreenPosition - 64;
+                    yScreenPosition = super.yScreenPosition - 64;
+                }
+
             }
         }
     }

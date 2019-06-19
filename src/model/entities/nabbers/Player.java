@@ -25,7 +25,7 @@ public class Player {
     protected int x, y;
     protected int xDelta, yDelta;
     protected int moveSpeed;
-    private int xScreenPosition, yScreenPosition;
+    protected int xScreenPosition, yScreenPosition;
 
     protected DirectionFacing directionFacing;
     protected Rectangle bounds;
