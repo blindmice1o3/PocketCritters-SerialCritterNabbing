@@ -13,12 +13,15 @@ public class Assets {
     public static Map<String, BufferedImage> fontHashMap;
     public static BufferedImage[][] crittersBufferedImageNestedArray;
     public static BufferedImage[][] nabbersBufferedImageNestedArray;
+    public static BufferedImage[][] overworldSpritesBufferedImageNestedArray;
 
     public static BufferedImage world, player, teamRocket, critterSpriteSheet, nabberSpriteSheet,
+            overworldSpritesSpriteSheet,
             battleStateSpriteSheet, menuStateSpriteSheet, menuStateInfoSpriteSheet,
             critterBallSprite, cursorSprite;
     public static BufferedImage[] jamesDown, jamesUp, jamesLeft, jamesRight,
-            jessieDown, jessieUp, jessieLeft, jessieRight;
+            jessieDown, jessieUp, jessieLeft, jessieRight,
+            pikachuDown, pikachuUp, pikachuLeft, pikachuRight;
 
     public static void init() {
         world = ImageLoader.loadImage("/pokemon-gsc-kanto.png");
@@ -26,6 +29,7 @@ public class Assets {
         teamRocket = ImageLoader.loadImage("/TeamRocket.png");
         critterSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Yellow - Pokemon.png");
         nabberSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Yellow - Trainers.png");
+        overworldSpritesSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Yellow - Overworld Characters.png");
         battleStateSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Yellow - Battle Interface.png");
         menuStateSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Crystal - Start Menu.png");
         menuStateInfoSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Yellow - Trainer Card.png");
@@ -34,10 +38,13 @@ public class Assets {
                 56, 56, 1, 1, critterSpriteSheet);
         nabbersBufferedImageNestedArray = ImageLoader.cropSpriteFromSpriteSheet(8, 6,
                 68, 64, 1, 2, nabberSpriteSheet);
+        overworldSpritesBufferedImageNestedArray = ImageLoader.cropSpriteFromSpriteSheet(8, 44,
+                16, 16, 0, 0, overworldSpritesSpriteSheet);
         fontHashMap = FontGrabber.initFont();   //this line must come AFTER battleStateSpriteSheet gets initiated.
         critterBallSprite = battleStateSpriteSheet.getSubimage(324, 269, 7, 7);
         cursorSprite = battleStateSpriteSheet.getSubimage(331, 270, 7, 7);
 
+        ///////////////////////////////////////////////////////////////////////////
         jamesDown = new BufferedImage[2];
         jamesDown[0] = teamRocket.getSubimage(236, 24, 12, 16);
         jamesDown[1] = teamRocket.getSubimage(236, 42, 12, 15);
@@ -53,8 +60,9 @@ public class Assets {
         jamesRight = new BufferedImage[2];
         jamesRight[0] = flipHorizontally(jamesLeft[0]);
         jamesRight[1] = flipHorizontally(jamesLeft[1]);
+        ///////////////////////////////////////////////////////////////////////////
 
-
+        ///////////////////////////////////////////////////////////////////////////
         jessieDown = new BufferedImage[2];
         jessieDown[0] = teamRocket.getSubimage(235, 93, 15, 16);
         jessieDown[1] = teamRocket.getSubimage(235, 111, 15, 15);
@@ -70,7 +78,25 @@ public class Assets {
         jessieRight = new BufferedImage[2];
         jessieRight[0] = flipHorizontally(jessieLeft[0]);
         jessieRight[1] = flipHorizontally(jessieLeft[1]);
+        ///////////////////////////////////////////////////////////////////////////
 
+        ///////////////////////////////////////////////////////////////////////////
+        pikachuDown = new BufferedImage[2];
+        pikachuDown[0] = Assets.overworldSpritesBufferedImageNestedArray[38][6];
+        pikachuDown[1] = Assets.overworldSpritesBufferedImageNestedArray[39][1];
+
+        pikachuUp = new BufferedImage[2];
+        pikachuUp[0] = Assets.overworldSpritesBufferedImageNestedArray[38][7];
+        pikachuUp[1] = Assets.overworldSpritesBufferedImageNestedArray[39][2];
+
+        pikachuLeft = new BufferedImage[2];
+        pikachuLeft[0] = Assets.overworldSpritesBufferedImageNestedArray[39][0];
+        pikachuLeft[1] = Assets.overworldSpritesBufferedImageNestedArray[39][3];
+
+        pikachuRight = new BufferedImage[2];
+        pikachuRight[0] = Assets.flipHorizontally( Assets.overworldSpritesBufferedImageNestedArray[39][0] );
+        pikachuRight[1] = Assets.flipHorizontally( Assets.overworldSpritesBufferedImageNestedArray[39][3] );
+        ///////////////////////////////////////////////////////////////////////////
     }
 
     public static BufferedImage flipHorizontally(BufferedImage image) {

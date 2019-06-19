@@ -1,6 +1,7 @@
 package model.entities.nabbers;
 
 import main.Handler;
+import main.gfx.Animation;
 import main.gfx.Assets;
 import model.entities.critters.Critter;
 import model.items.Item;
@@ -9,17 +10,22 @@ import model.tiles.TallGrassTile;
 import model.tiles.Tile;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Player {
 
     public enum DirectionFacing { LEFT, RIGHT, UP, DOWN; }
 
     protected Handler handler;
+    private Map<String, Animation> anim;
 
     protected int x, y;
     protected int xDelta, yDelta;
     protected int moveSpeed;
+    private int xScreenPosition, yScreenPosition;
 
     protected DirectionFacing directionFacing;
     protected Rectangle bounds;
@@ -30,8 +36,12 @@ public class Player {
     public Player(Handler handler) {
         this.handler = handler;
 
+        initAnimations();
+
         x = 1104;
         y = 3312;
+        xScreenPosition = 288;
+        yScreenPosition = 256;
 
         directionFacing = DirectionFacing.DOWN;
         bounds = new Rectangle(2, 2, 12, 12);
@@ -42,7 +52,30 @@ public class Player {
         critterBeltList = new Critter[6];
     } // **** end model.entities.nabbers.Player() constructor ****
 
+    private void initAnimations() {
+        anim = new HashMap<String, Animation>();
+
+        anim.put("down", new Animation(120, Assets.pikachuDown));
+        anim.put("up", new Animation(120, Assets.pikachuUp));
+        anim.put("left", new Animation(120, Assets.pikachuLeft));
+        anim.put("right", new Animation(120, Assets.pikachuRight));
+    }
+
     public void tick() {
+        for (Animation animation : anim.values()) {
+            animation.tick();
+        }
+
+        if (xDelta < 0) {
+            directionFacing = DirectionFacing.LEFT;
+        } else if (xDelta > 0) {
+            directionFacing = DirectionFacing.RIGHT;
+        } else if (yDelta < 0) {
+            directionFacing = DirectionFacing.UP;
+        } else if (yDelta > 0) {
+            directionFacing = DirectionFacing.DOWN;
+        }
+
         moveX();
         moveY();
 
@@ -173,10 +206,26 @@ public class Player {
     }
 
     public void render(Graphics g) {
-        g.drawImage(Assets.player,
-                288, 256, (288 + 32), (256 + 32),
-                0, 0, 196, 257,
+        g.drawImage(currentAnimationFrame(),
+                xScreenPosition, yScreenPosition, (2*Tile.WIDTH), (2*Tile.HEIGHT),
                 null);
+    }
+
+    private BufferedImage currentAnimationFrame() {
+        //getInput()
+        if (directionFacing == DirectionFacing.UP) {
+            return anim.get("up").getCurrentFrame();
+        } else if (directionFacing == DirectionFacing.DOWN) {
+            return anim.get("down").getCurrentFrame();
+        } else if (directionFacing == DirectionFacing.LEFT) {
+            return anim.get("left").getCurrentFrame();
+        } else if (directionFacing == DirectionFacing.RIGHT) {
+            return anim.get("right").getCurrentFrame();
+        }
+        //STANDING-STILL
+        else {
+            return Assets.pikachuDown[0];
+        }
     }
 
     // GETTERS & SETTERS

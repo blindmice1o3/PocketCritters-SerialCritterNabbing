@@ -3,6 +3,8 @@ package model.entities.nabbers;
 import main.Handler;
 import main.gfx.Animation;
 import main.gfx.Assets;
+import model.states.StateManager;
+import model.states.game.GameState;
 import model.tiles.TallGrassTile;
 import model.tiles.Tile;
 
@@ -17,14 +19,15 @@ public class James extends Player {
 
     private Map<String, Animation> anim;
     private Random rand;
-    int xScreenPosition = 288-32-32gi;
-    int yScreenPosition = 256-32-32;
+    private int xScreenPosition, yScreenPosition;
 
     public James(Handler handler) {
         super(handler);
 
-        x = 1104-16-16;
-        y = 3312-16-16;
+        x = 1104-Tile.WIDTH-Tile.WIDTH;
+        y = 3312-Tile.HEIGHT-Tile.HEIGHT;
+        xScreenPosition = 288-(2*Tile.WIDTH)-(2*Tile.HEIGHT);
+        yScreenPosition = 256-(2*Tile.WIDTH)-(2*Tile.HEIGHT);
 
         initAnimations();
 
@@ -71,6 +74,12 @@ public class James extends Player {
 
             moveX();
             moveY();
+
+            if ( (x < handler.getGameCamera().getxOffset0()) || (x > handler.getGameCamera().getxOffset1()) ||
+                    (y < handler.getGameCamera().getyOffset0()) || (y > handler.getGameCamera().getyOffset1()) ) {
+                x = super.x - 32;
+                y = super.y - 32;
+            }
 
             elapsedTime = 0;
         }
@@ -146,7 +155,9 @@ public class James extends Player {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(currentAnimationFrame(), xScreenPosition, yScreenPosition, 32, 32, null);
+        g.drawImage(currentAnimationFrame(),
+                xScreenPosition, yScreenPosition, (2*Tile.WIDTH), (2*Tile.HEIGHT),
+                null);
     }
 
     private BufferedImage currentAnimationFrame() {

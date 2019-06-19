@@ -16,7 +16,8 @@ public class ImageLoader {
     }
 
     public static BufferedImage[][] cropSpriteFromSpriteSheet(int cols, int rows, int width, int height,
-                                                              int xOffset, int yOffset, BufferedImage spriteSheet) {
+                                                              int xOffset, int yOffset,
+                                                              BufferedImage spriteSheet) {
         BufferedImage[][] sprites = new BufferedImage[rows][cols];
 
         for (int y = 0; y < rows; y++) {
