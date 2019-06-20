@@ -3,14 +3,16 @@ package model.entities.nabbers;
 import main.Handler;
 import main.gfx.Animation;
 import main.gfx.Assets;
+import model.entities.Player;
+import model.entities.critters.Critter;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Jessie extends Player {
+public class Jessie extends Player
+        implements INabber {
 
     private Map<String, Animation> anim;
 
@@ -61,4 +63,13 @@ public class Jessie extends Player {
         }
     }
 
+    @Override
+    public void nab(Critter critter) {
+
+    }
+
+    @Override
+    public void regroup() {
+
+    }
 } // **** end Jessie class ****

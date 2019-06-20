@@ -4,7 +4,7 @@ import main.Handler;
 import main.gfx.Assets;
 import model.entities.nabbers.James;
 import model.entities.nabbers.Jessie;
-import model.entities.nabbers.Player;
+import model.entities.Player;
 import model.states.IState;
 import model.states.StateManager;
 
@@ -29,6 +29,7 @@ public class GameState implements IState {
             james.setYDelta( -james.getMoveSpeed() );
             //player.setDirectionFacing(Player.DirectionFacing.UP);
             jessie.setDirectionFacing(Player.DirectionFacing.UP);
+            handler.getGameCamera().setYDelta( player.getYDelta() );
         }
         //DOWN
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) {
@@ -36,6 +37,7 @@ public class GameState implements IState {
             james.setYDelta( james.getMoveSpeed() );
             //player.setDirectionFacing(Player.DirectionFacing.DOWN);
             jessie.setDirectionFacing(Player.DirectionFacing.DOWN);
+            handler.getGameCamera().setYDelta( player.getYDelta() );
         }
         //LEFT
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_A)) {
@@ -43,6 +45,7 @@ public class GameState implements IState {
             james.setXDelta( -james.getMoveSpeed() );
             //player.setDirectionFacing(Player.DirectionFacing.LEFT);
             jessie.setDirectionFacing(Player.DirectionFacing.LEFT);
+            handler.getGameCamera().setXDelta( player.getXDelta() );
         }
         //RIGHT
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_D)) {
@@ -50,6 +53,7 @@ public class GameState implements IState {
             james.setXDelta( james.getMoveSpeed() );
             //player.setDirectionFacing(Player.DirectionFacing.RIGHT);
             jessie.setDirectionFacing(Player.DirectionFacing.RIGHT);
+            handler.getGameCamera().setXDelta( player.getXDelta() );
         }
         //startButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
@@ -63,8 +67,7 @@ public class GameState implements IState {
 
         //update()
         player.tick();
-        james.tick();
-        jessie.tick();
+        handler.getGameCamera().move();
     }
 
     @Override
@@ -87,8 +90,6 @@ public class GameState implements IState {
 
     private void renderEntities(Graphics g) {
         player.render(g);
-        james.render(g);
-        jessie.render(g);
     }
 
     @Override

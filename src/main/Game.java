@@ -3,9 +3,10 @@ package main;
 import main.gfx.GameCamera;
 import main.input.KeyManager;
 import main.gfx.Assets;
+import model.entities.nabbers.INabber;
 import model.entities.nabbers.James;
 import model.entities.nabbers.Jessie;
-import model.entities.nabbers.Player;
+import model.entities.Player;
 import model.states.battle.BattleState;
 import model.states.game.GameState;
 import model.states.StateManager;
@@ -80,6 +81,8 @@ public class Game implements Runnable {
         player = new Player(handler);
         james = new James(handler);
         jessie = new Jessie(handler);
+        player.addINabber((INabber)james);
+        player.addINabber((INabber)jessie);
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
         initStateManager();

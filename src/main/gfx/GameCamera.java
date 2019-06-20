@@ -5,13 +5,29 @@ public class GameCamera {
     private float xOffset0, yOffset0;
     private float xOffset1, yOffset1;
 
+    private int xDelta, yDelta;
+
     public GameCamera(float xOffset0, float yOffset0, float xOffset1, float yOffset1) {
         this.xOffset0 = xOffset0;
         this.yOffset0 = yOffset0;
 
         this.xOffset1 = xOffset1;
         this.yOffset1 = yOffset1;
+
+        xDelta = 0;
+        yDelta = 0;
     } // **** end GameCamera(float, float, float, float) constructor
+
+    public void move() {
+        xOffset0 += xDelta;
+        yOffset0 += yDelta;
+
+        xOffset1 += xDelta;
+        yOffset1 += yDelta;
+
+        xDelta = 0;
+        yDelta = 0;
+    }
 
     public void move(float xAmt, float yAmt) {
         xOffset0 += xAmt;
@@ -54,5 +70,13 @@ public class GameCamera {
     public void setyOffset1(float yOffset1) {
         this.yOffset1 = yOffset1;
     }
+
+    public int getXDelta() { return xDelta; }
+
+    public void setXDelta(int xDelta) { this.xDelta = xDelta; }
+
+    public int getYDelta() { return yDelta; }
+
+    public void setYDelta(int yDelta) { this.yDelta = yDelta; }
 
 } // **** end GameCamera class ****

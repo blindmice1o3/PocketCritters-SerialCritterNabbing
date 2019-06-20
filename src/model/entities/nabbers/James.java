@@ -3,19 +3,18 @@ package model.entities.nabbers;
 import main.Handler;
 import main.gfx.Animation;
 import main.gfx.Assets;
-import model.states.StateManager;
-import model.states.game.GameState;
-import model.tiles.TallGrassTile;
+import model.entities.Player;
+import model.entities.critters.Critter;
 import model.tiles.Tile;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class James extends Player {
+public class James extends Player
+        implements INabber {
 
     private Map<String, Animation> anim;
     private Random rand;
@@ -237,4 +236,13 @@ public class James extends Player {
         }
     }
 
+    @Override
+    public void nab(Critter critter) {
+
+    }
+
+    @Override
+    public void regroup() {
+
+    }
 } // **** end James class ****

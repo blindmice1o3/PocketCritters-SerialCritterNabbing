@@ -1,7 +1,7 @@
 package model.states.menu;
 
 import main.Handler;
-import model.entities.nabbers.Player;
+import model.entities.Player;
 import model.states.IState;
 
 import java.awt.*;

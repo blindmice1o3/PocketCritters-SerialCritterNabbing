@@ -1,9 +1,10 @@
-package model.entities.nabbers;
+package model.entities;
 
 import main.Handler;
 import main.gfx.Animation;
 import main.gfx.Assets;
 import model.entities.critters.Critter;
+import model.entities.nabbers.INabber;
 import model.items.Item;
 import model.states.StateManager;
 import model.tiles.TallGrassTile;
@@ -32,6 +33,16 @@ public class Player {
 
     private ArrayList<Item> inventory;
     private Critter[] critterBeltList;
+    //////////////////////////////////////
+    private ArrayList<INabber> nabberList;
+    //////////////////////////////////////
+
+    public void addINabber(INabber nabber) {
+        nabberList.add(nabber);
+    }
+    public void removeINabber(INabber nabber) {
+        nabberList.remove(nabber);
+    }
 
     public Player(Handler handler) {
         this.handler = handler;
@@ -50,7 +61,8 @@ public class Player {
 
         inventory = new ArrayList<Item>();
         critterBeltList = new Critter[6];
-    } // **** end model.entities.nabbers.Player() constructor ****
+        nabberList = new ArrayList<INabber>();
+    } // **** end model.entities.Player() constructor ****
 
     private void initAnimations() {
         anim = new HashMap<String, Animation>();
@@ -64,6 +76,9 @@ public class Player {
     public void tick() {
         for (Animation animation : anim.values()) {
             animation.tick();
+        }
+        for (INabber nabber : nabberList) {
+            nabber.tick();
         }
 
         if (xDelta < 0) {
@@ -123,7 +138,7 @@ public class Player {
                 //moves Player's x-position.
                 x += xDelta;
                 //moves GameCamera's x-position.
-                handler.getGameCamera().move(xDelta, 0);
+                //handler.getGameCamera().move(xDelta, 0);
             }
         }
         //MOVING RIGHT
@@ -147,7 +162,7 @@ public class Player {
                 //moves Player's x-position.
                 x += xDelta;
                 //moves GameCamera's x-position.
-                handler.getGameCamera().move(xDelta, 0);
+                //handler.getGameCamera().move(xDelta, 0);
             }
         }
     }
@@ -176,7 +191,7 @@ public class Player {
                 //moves Player's y-position.
                 y += yDelta;
                 //moves GameCamera's y-position.
-                handler.getGameCamera().move(0, yDelta);
+                //handler.getGameCamera().move(0, yDelta);
             }
         }
         //MOVING DOWN
@@ -200,7 +215,7 @@ public class Player {
                 //moves Player's y-position.
                 y += yDelta;
                 //moves GameCamera's y-position.
-                handler.getGameCamera().move(0, yDelta);
+                //handler.getGameCamera().move(0, yDelta);
             }
         }
     }
@@ -209,6 +224,11 @@ public class Player {
         g.drawImage(currentAnimationFrame(),
                 xScreenPosition, yScreenPosition, (2*Tile.WIDTH), (2*Tile.HEIGHT),
                 null);
+        ////////////////////////////////////
+        for (INabber nabber : nabberList) {
+            nabber.render(g);
+        }
+        ////////////////////////////////////
     }
 
     private BufferedImage currentAnimationFrame() {
@@ -252,4 +272,4 @@ public class Player {
 
     public Critter[] getCritterBeltList() { return critterBeltList; }
 
-} // **** end model.entities.nabbers.Player class ****
+} // **** end model.entities.Player class ****

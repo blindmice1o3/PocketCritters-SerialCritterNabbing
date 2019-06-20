@@ -2,7 +2,7 @@ package model.states.battle;
 
 import main.Handler;
 import main.gfx.Assets;
-import model.entities.nabbers.Player;
+import model.entities.Player;
 import model.states.IState;
 import model.states.StateManager;
 
