@@ -26,33 +26,33 @@ public class GameState implements IState {
         //UP
         if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {
             player.setYDelta( -player.getMoveSpeed() );
-            james.setYDelta( -james.getMoveSpeed() );
+            //james.setYDelta( -james.getMoveSpeed() );
             //player.setDirectionFacing(Player.DirectionFacing.UP);
-            jessie.setDirectionFacing(Player.DirectionFacing.UP);
+            //jessie.setDirectionFacing(Player.DirectionFacing.UP);
             handler.getGameCamera().setYDelta( player.getYDelta() );
         }
         //DOWN
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) {
             player.setYDelta( player.getMoveSpeed() );
-            james.setYDelta( james.getMoveSpeed() );
+            //james.setYDelta( james.getMoveSpeed() );
             //player.setDirectionFacing(Player.DirectionFacing.DOWN);
-            jessie.setDirectionFacing(Player.DirectionFacing.DOWN);
+            //jessie.setDirectionFacing(Player.DirectionFacing.DOWN);
             handler.getGameCamera().setYDelta( player.getYDelta() );
         }
         //LEFT
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_A)) {
             player.setXDelta( -player.getMoveSpeed() );
-            james.setXDelta( -james.getMoveSpeed() );
+            //james.setXDelta( -james.getMoveSpeed() );
             //player.setDirectionFacing(Player.DirectionFacing.LEFT);
-            jessie.setDirectionFacing(Player.DirectionFacing.LEFT);
+            //jessie.setDirectionFacing(Player.DirectionFacing.LEFT);
             handler.getGameCamera().setXDelta( player.getXDelta() );
         }
         //RIGHT
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_D)) {
             player.setXDelta( player.getMoveSpeed() );
-            james.setXDelta( james.getMoveSpeed() );
+            //james.setXDelta( james.getMoveSpeed() );
             //player.setDirectionFacing(Player.DirectionFacing.RIGHT);
-            jessie.setDirectionFacing(Player.DirectionFacing.RIGHT);
+            //jessie.setDirectionFacing(Player.DirectionFacing.RIGHT);
             handler.getGameCamera().setXDelta( player.getXDelta() );
         }
         //startButton

@@ -5,6 +5,7 @@ import main.gfx.Animation;
 import main.gfx.Assets;
 import model.entities.Player;
 import model.entities.critters.Critter;
+import model.tiles.Tile;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -39,11 +40,32 @@ public class Jessie extends Player
         for (Animation animation : anim.values()) {
             animation.tick();
         }
+
+        if (xDelta < 0) {
+            directionFacing = DirectionFacing.LEFT;
+        } else if (xDelta > 0) {
+            directionFacing = DirectionFacing.RIGHT;
+        } else if (yDelta < 0) {
+            directionFacing = DirectionFacing.UP;
+        } else if (yDelta > 0) {
+            directionFacing = DirectionFacing.DOWN;
+        }
+
+        xDelta = 0;
+        yDelta = 0;
     }
 
     @Override
     public void render(Graphics g) {
         g.drawImage(currentAnimationFrame(), x, y, 32, 32, null);
+
+        //////////////////////////////////////////////////////////////////////////////
+        g.setColor(Color.RED);
+        g.fillRect(xScreenPosition, yScreenPosition, (2* Tile.WIDTH), (2*Tile.HEIGHT));
+
+        g.setColor(Color.GREEN);
+        g.fillRect(x, y, Tile.WIDTH, Tile.HEIGHT);
+        //////////////////////////////////////////////////////////////////////////////
     }
 
     private BufferedImage currentAnimationFrame() {
@@ -66,6 +88,15 @@ public class Jessie extends Player
     @Override
     public void nab(Critter critter) {
 
+    }
+
+    @Override
+    public void setXDelta(int xDelta) {
+        this.xDelta = xDelta;
+    }
+
+    @Override public void setYDelta(int yDelta) {
+        this.yDelta = yDelta;
     }
 
     @Override

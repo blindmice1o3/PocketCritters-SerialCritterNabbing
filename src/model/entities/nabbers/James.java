@@ -73,7 +73,9 @@ public class James extends Player
             }
 
             //auto-movement based on rand.nextInt(4) method call.
+            xScreenPosition +=(2*xDelta);
             moveX();
+            yScreenPosition += (2*yDelta);
             moveY();
 
             elapsedTime = 0;
@@ -90,9 +92,9 @@ public class James extends Player
         } else if (yDelta > 0) {
             directionFacing = DirectionFacing.DOWN;
         }
-        xScreenPosition +=(2*xDelta);
+        //xScreenPosition +=(2*xDelta);
         moveX();
-        yScreenPosition += (2*yDelta);
+        //yScreenPosition += (2*yDelta);
         moveY();
 
         xDelta = 0;
@@ -119,6 +121,7 @@ public class James extends Player
                 //moves Player's x-position.
                 x += xDelta;
 
+                /*
                 //check within game screen
                 if ( ((x+xDelta+bounds.x) < handler.getGameCamera().getxOffset0()) ||
                         ((x+xDelta+bounds.x+bounds.width) > handler.getGameCamera().getxOffset1()) ||
@@ -129,7 +132,7 @@ public class James extends Player
                     xScreenPosition = super.xScreenPosition - 64;
                     yScreenPosition = super.yScreenPosition - 64;
                 }
-
+                */
             }
         }
         //MOVING RIGHT
@@ -143,6 +146,7 @@ public class James extends Player
                 //moves Player's x-position.
                 x += xDelta;
 
+                /*
                 //check within game screen
                 if ( ((x+xDelta+bounds.x) < handler.getGameCamera().getxOffset0()) ||
                         ((x+xDelta+bounds.x+bounds.width) > handler.getGameCamera().getxOffset1()) ||
@@ -153,7 +157,7 @@ public class James extends Player
                     xScreenPosition = super.xScreenPosition - 64;
                     yScreenPosition = super.yScreenPosition - 64;
                 }
-
+                */
             }
         }
     }
@@ -173,6 +177,7 @@ public class James extends Player
                 //moves Player's y-position.
                 y += yDelta;
 
+                /*
                 //check within game screen
                 if ( ((x+xDelta+bounds.x) < handler.getGameCamera().getxOffset0()) ||
                         ((x+xDelta+bounds.x+bounds.width) > handler.getGameCamera().getxOffset1()) ||
@@ -183,7 +188,7 @@ public class James extends Player
                     xScreenPosition = super.xScreenPosition - 64;
                     yScreenPosition = super.yScreenPosition - 64;
                 }
-
+                */
             }
         }
         //MOVING DOWN
@@ -197,6 +202,7 @@ public class James extends Player
                 //moves Player's y-position.
                 y += yDelta;
 
+                /*
                 //check within game screen
                 if ( ((x+xDelta+bounds.x) < handler.getGameCamera().getxOffset0()) ||
                         ((x+xDelta+bounds.x+bounds.width) > handler.getGameCamera().getxOffset1()) ||
@@ -207,7 +213,7 @@ public class James extends Player
                     xScreenPosition = super.xScreenPosition - 64;
                     yScreenPosition = super.yScreenPosition - 64;
                 }
-
+                */
             }
         }
     }
@@ -217,6 +223,14 @@ public class James extends Player
         g.drawImage(currentAnimationFrame(),
                 xScreenPosition, yScreenPosition, (2*Tile.WIDTH), (2*Tile.HEIGHT),
                 null);
+
+        //////////////////////////////////////////////////////////////////////////////
+        g.setColor(Color.RED);
+        g.fillRect(xScreenPosition, yScreenPosition, (2*Tile.WIDTH), (2*Tile.HEIGHT));
+
+        g.setColor(Color.GREEN);
+        g.fillRect(x, y, Tile.WIDTH, Tile.HEIGHT);
+        //////////////////////////////////////////////////////////////////////////////
     }
 
     private BufferedImage currentAnimationFrame() {
@@ -239,6 +253,15 @@ public class James extends Player
     @Override
     public void nab(Critter critter) {
 
+    }
+
+    @Override
+    public void setXDelta(int xDelta) {
+        this.xDelta = xDelta;
+    }
+
+    @Override public void setYDelta(int yDelta) {
+        this.yDelta = yDelta;
     }
 
     @Override

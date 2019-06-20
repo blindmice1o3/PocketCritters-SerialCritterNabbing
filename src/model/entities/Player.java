@@ -77,18 +77,35 @@ public class Player {
         for (Animation animation : anim.values()) {
             animation.tick();
         }
-        for (INabber nabber : nabberList) {
-            nabber.tick();
-        }
 
         if (xDelta < 0) {
             directionFacing = DirectionFacing.LEFT;
+
+            for (INabber nabber : nabberList) {
+                nabber.setXDelta(xDelta);
+            }
         } else if (xDelta > 0) {
             directionFacing = DirectionFacing.RIGHT;
+
+            for (INabber nabber : nabberList) {
+                nabber.setXDelta(xDelta);
+            }
         } else if (yDelta < 0) {
             directionFacing = DirectionFacing.UP;
+
+            for (INabber nabber : nabberList) {
+                nabber.setYDelta(yDelta);
+            }
         } else if (yDelta > 0) {
             directionFacing = DirectionFacing.DOWN;
+
+            for (INabber nabber : nabberList) {
+                nabber.setYDelta(yDelta);
+            }
+        }
+
+        for (INabber nabber : nabberList) {
+            nabber.tick();
         }
 
         moveX();
@@ -224,6 +241,15 @@ public class Player {
         g.drawImage(currentAnimationFrame(),
                 xScreenPosition, yScreenPosition, (2*Tile.WIDTH), (2*Tile.HEIGHT),
                 null);
+
+        //////////////////////////////////////////////////////////////////////////////
+        g.setColor(Color.RED);
+        g.fillRect(xScreenPosition, yScreenPosition, (2*Tile.WIDTH), (2*Tile.HEIGHT));
+
+        g.setColor(Color.GREEN);
+        g.fillRect(x, y, Tile.WIDTH, Tile.HEIGHT);
+        //////////////////////////////////////////////////////////////////////////////
+
         ////////////////////////////////////
         for (INabber nabber : nabberList) {
             nabber.render(g);
