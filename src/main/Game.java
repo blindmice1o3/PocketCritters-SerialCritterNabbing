@@ -3,6 +3,7 @@ package main;
 import main.gfx.GameCamera;
 import main.input.KeyManager;
 import main.gfx.Assets;
+import main.utils.SerializationDoer;
 import model.entities.nabbers.INabber;
 import model.entities.nabbers.James;
 import model.entities.nabbers.Jessie;
@@ -18,6 +19,7 @@ import view.Displayer;
 public class Game implements Runnable {
 
     private Handler handler;
+    private SerializationDoer serializationDoer;
     private KeyManager keyManager;
 
     private Thread thread;
@@ -173,13 +175,20 @@ public class Game implements Runnable {
 
     public KeyManager getKeyManager() { return keyManager; }
     public GameCamera getGameCamera() { return gameCamera; }
+    public void setGameCamera(GameCamera gameCamera) { this.gameCamera = gameCamera; }
     public int getWidth() { return width; }
     public int getHeight() { return height; }
+    public Player getPlayer() { return player; }
+    public void setPlayer(Player player) { this.player = player; }
+    public Player getJames() { return james; }
+    public void setJames(Player james) { this.james = james; }
+    public Player getJessie() { return jessie; }
+    public void setJessie(Player jessie) { this.jessie = jessie; }
 
     // |+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|
 
     public static void main(String[] args) {
-        Game game = new Game(640, 540);
+        Game game = new Game(640, 540); //640x540
         game.start();
     }
 

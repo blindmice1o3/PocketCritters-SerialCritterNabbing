@@ -15,7 +15,7 @@ import java.util.Map;
 public class Jessie extends Player
         implements INabber {
 
-    private Map<String, Animation> anim;
+    private transient Map<String, Animation> anim;
 
     public Jessie(Handler handler) {
         super(handler);

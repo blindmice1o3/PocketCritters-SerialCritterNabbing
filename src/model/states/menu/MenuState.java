@@ -28,7 +28,8 @@ public class MenuState implements IState {
         StateManager.add("MenuStateItemList", new MenuStateItemList(handler, player));
         StateManager.add("MenuStatePlayerStats", new MenuStatePlayerStats(handler, player));
         StateManager.add("MenuStateSave", new MenuStateSave(handler, player));
-        StateManager.add("MenuStateOption", new MenuStateOption(handler, player));
+        StateManager.add( "MenuStateLoad", new MenuStateLoad(handler, player));
+        //StateManager.add("MenuStateOption", new MenuStateOption(handler, player));
         StateManager.add("MenuStateExit", new MenuStateExit(handler, player));
     }
 

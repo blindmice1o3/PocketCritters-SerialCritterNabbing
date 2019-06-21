@@ -16,8 +16,12 @@ public class Sandbox {
     public static RenderedImage overwriter = ImageLoader.loadImage("/world map (rgb).png");
 
     public static void main(String[] args) {
-        TileSpriteToRGBConverter tester = new TileSpriteToRGBConverter();
-        tester.testConsoleOutput( tester.translateTileSpriteToRGBImage() );
+        //TileSpriteToRGBConverter tester = new TileSpriteToRGBConverter();
+        //tester.testConsoleOutput( tester.translateTileSpriteToRGBImage() );
+
+        int counter = 1;
+        String formattedString = String.format("%05d", counter);
+        System.out.println(formattedString);
 
         /*
         //Hopefully creating a NON-null File object that will be overwritten from Team Rocket to hard-coded RGB world map.

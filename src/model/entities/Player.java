@@ -12,16 +12,18 @@ import model.tiles.Tile;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Player {
+public class Player
+        implements Serializable {
 
     public enum DirectionFacing { LEFT, RIGHT, UP, DOWN; }
 
-    protected Handler handler;
-    private Map<String, Animation> anim;
+    protected transient Handler handler;
+    private transient Map<String, Animation> anim;
 
     protected int x, y;
     protected int xDelta, yDelta;
@@ -31,10 +33,10 @@ public class Player {
     protected DirectionFacing directionFacing;
     protected Rectangle bounds;
 
-    private ArrayList<Item> inventory;
-    private Critter[] critterBeltList;
+    private transient ArrayList<Item> inventory;
+    private transient Critter[] critterBeltList;
     //////////////////////////////////////
-    private ArrayList<INabber> nabberList;
+    private transient ArrayList<INabber> nabberList;
     //////////////////////////////////////
 
     public void addINabber(INabber nabber) {

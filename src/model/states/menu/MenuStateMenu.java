@@ -17,7 +17,8 @@ public class MenuStateMenu implements IState {
     private int indexMenu;
     private String[] menuList = { "MenuStateCritterDex", "MenuStateCritterBeltList",
             "MenuStateItemList", "MenuStatePlayerStats",
-            "MenuStateSave", "MenuStateOption", "MenuStateExit" };
+            "MenuStateSave", "MenuStateLoad", "MenuStateExit" };
+    //SWITCHING MenuStateOption for MenuStateLoad for now.
 
     public MenuStateMenu(Handler handler, Player player) {
         this.handler = handler;
@@ -28,7 +29,7 @@ public class MenuStateMenu implements IState {
 
     @Override
     public void tick() {
-        System.out.println("MenuStateMenu.tick()");
+        //System.out.println("MenuStateMenu.tick()");
 
         //UP
         if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {
@@ -105,9 +106,18 @@ public class MenuStateMenu implements IState {
             g.drawImage(Assets.cursorSprite, 345, 271, 7 * 4, 7 * 4, null);
         } else if (menuList[indexMenu].equals("MenuStateSave")) {
             g.drawImage(Assets.cursorSprite, 345, 338, 7 * 4, 7 * 4, null);
-        } else if (menuList[indexMenu].equals("MenuStateOption")) {
+        }
+        else if (menuList[indexMenu].equals("MenuStateLoad")) {
             g.drawImage(Assets.cursorSprite, 345, 405, 7 * 4, 7 * 4, null);
-        } else if (menuList[indexMenu].equals("MenuStateExit")) {
+            g.setColor(Color.BLUE);
+            g.drawString("LOADING, not option", 360, 405);
+        }
+        /*
+        else if (menuList[indexMenu].equals("MenuStateOption")) {
+            g.drawImage(Assets.cursorSprite, 345, 405, 7 * 4, 7 * 4, null);
+        }
+        */
+        else if (menuList[indexMenu].equals("MenuStateExit")) {
             g.drawImage(Assets.cursorSprite, 345, 472, 7 * 4, 7 * 4, null);
         }
     }

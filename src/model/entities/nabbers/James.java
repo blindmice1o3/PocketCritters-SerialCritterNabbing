@@ -16,8 +16,8 @@ import java.util.Random;
 public class James extends Player
         implements INabber {
 
-    private Map<String, Animation> anim;
-    private Random rand;
+    private transient Map<String, Animation> anim;
+    private transient Random rand;
     private int xScreenPosition, yScreenPosition;
 
     public James(Handler handler) {

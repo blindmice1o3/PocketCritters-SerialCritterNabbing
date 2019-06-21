@@ -1,6 +1,9 @@
 package main.gfx;
 
-public class GameCamera {
+import java.io.Serializable;
+
+public class GameCamera
+        implements Serializable {
 
     private float xOffset0, yOffset0;
     private float xOffset1, yOffset1;

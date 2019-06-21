@@ -9,16 +9,16 @@ import model.states.StateManager;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-public class MenuStateSave implements IState {
+public class MenuStateLoad implements IState {
 
     private Handler handler;
     private Player player;
     private boolean pressed = false;
 
-    public MenuStateSave(Handler handler, Player player) {
+    public MenuStateLoad(Handler handler, Player player) {
         this.handler = handler;
         this.player = player;
-    } // **** end MenuStateSave(Handler, Player) constructor ****
+    } // **** end MenuStateLoad(Handler, Player) constructor ****
 
     @Override
     public void tick() {
@@ -28,8 +28,8 @@ public class MenuStateSave implements IState {
             ///////////////
 
 
-            SerializationDoer writer = new SerializationDoer(handler);
-            writer.saveWriteToFile();
+            SerializationDoer loader = new SerializationDoer(handler);
+            loader.loadReadFromFile();
 
 
             ///////////////////////////////
@@ -42,7 +42,6 @@ public class MenuStateSave implements IState {
             StateManager.change("MenuStateMenu", args);
             ///////////////////////////////
         }
-
     }
 
     @Override
@@ -51,9 +50,9 @@ public class MenuStateSave implements IState {
         g.fillRect(100, 100, 200, 100);
         g.setColor(Color.BLACK);
         if (pressed) {
-            g.drawString("Saving...", 140, 140);
+            g.drawString("Loading...", 140, 140);
         } else {
-            g.drawString("Press aButton to save game.", 120, 120);
+            g.drawString("Press aButton to load game.", 120, 120);
             g.drawString("Press bButton to return to menu.", 120, 140);
         }
     }
@@ -68,4 +67,4 @@ public class MenuStateSave implements IState {
         pressed = false;
     }
 
-} // **** end MenuStateSave class ****
+} // **** end MenuStateLoad class ****
