@@ -29,7 +29,7 @@ public class GameState implements IState {
             //james.setYDelta( -james.getMoveSpeed() );
             //player.setDirectionFacing(Player.DirectionFacing.UP);
             //jessie.setDirectionFacing(Player.DirectionFacing.UP);
-            handler.getGameCamera().setYDelta( player.getYDelta() );
+            //handler.getGameCamera().setYDelta( player.getYDelta() );
         }
         //DOWN
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) {
@@ -37,7 +37,7 @@ public class GameState implements IState {
             //james.setYDelta( james.getMoveSpeed() );
             //player.setDirectionFacing(Player.DirectionFacing.DOWN);
             //jessie.setDirectionFacing(Player.DirectionFacing.DOWN);
-            handler.getGameCamera().setYDelta( player.getYDelta() );
+            //handler.getGameCamera().setYDelta( player.getYDelta() );
         }
         //LEFT
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_A)) {
@@ -45,7 +45,7 @@ public class GameState implements IState {
             //james.setXDelta( -james.getMoveSpeed() );
             //player.setDirectionFacing(Player.DirectionFacing.LEFT);
             //jessie.setDirectionFacing(Player.DirectionFacing.LEFT);
-            handler.getGameCamera().setXDelta( player.getXDelta() );
+            //handler.getGameCamera().setXDelta( player.getXDelta() );
         }
         //RIGHT
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_D)) {
@@ -53,7 +53,7 @@ public class GameState implements IState {
             //james.setXDelta( james.getMoveSpeed() );
             //player.setDirectionFacing(Player.DirectionFacing.RIGHT);
             //jessie.setDirectionFacing(Player.DirectionFacing.RIGHT);
-            handler.getGameCamera().setXDelta( player.getXDelta() );
+            //handler.getGameCamera().setXDelta( player.getXDelta() );
         }
         //startButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
@@ -67,7 +67,6 @@ public class GameState implements IState {
 
         //update()
         player.tick();
-        handler.getGameCamera().move();
     }
 
     @Override

@@ -57,7 +57,7 @@ public class Player
         yScreenPosition = 256;
 
         directionFacing = DirectionFacing.DOWN;
-        bounds = new Rectangle(2, 2, 12, 12);
+        bounds = new Rectangle(0, 0, Tile.WIDTH, Tile.HEIGHT);
 
         moveSpeed = Tile.WIDTH;
 
@@ -80,38 +80,13 @@ public class Player
             animation.tick();
         }
 
-        if (xDelta < 0) {
-            directionFacing = DirectionFacing.LEFT;
-
-            for (INabber nabber : nabberList) {
-                nabber.setXDelta(xDelta);
-            }
-        } else if (xDelta > 0) {
-            directionFacing = DirectionFacing.RIGHT;
-
-            for (INabber nabber : nabberList) {
-                nabber.setXDelta(xDelta);
-            }
-        } else if (yDelta < 0) {
-            directionFacing = DirectionFacing.UP;
-
-            for (INabber nabber : nabberList) {
-                nabber.setYDelta(yDelta);
-            }
-        } else if (yDelta > 0) {
-            directionFacing = DirectionFacing.DOWN;
-
-            for (INabber nabber : nabberList) {
-                nabber.setYDelta(yDelta);
-            }
-        }
+        moveX();    //this sets xDelta for ArrayList<INabber> nabber and game camera.
+        moveY();    //this sets yDelta for ArrayList<INabber> nabber and game camera.
 
         for (INabber nabber : nabberList) {
             nabber.tick();
         }
-
-        moveX();
-        moveY();
+        handler.getGameCamera().move();
 
         xDelta = 0;
         yDelta = 0;
@@ -144,6 +119,12 @@ public class Player
             if ( !(worldMap[((y+bounds.y+yDelta) / Tile.HEIGHT)][tx].isSolid()) &&                   //TOP-LEFT
                     !(worldMap[((y+bounds.y+bounds.height+yDelta) / Tile.HEIGHT)][tx].isSolid()) ) {   //BOTTOM-LEFT
 
+                /////////////////////////////////////////////
+                handler.getGameCamera().setXDelta(xDelta);
+                for (INabber nabber : nabberList) {
+                    nabber.setXDelta(xDelta);
+                }
+                ////////////////////////////////////////////
 
                 if ( worldMap[((y+bounds.y+yDelta) / Tile.HEIGHT)][tx] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's top-LEFT.");
@@ -153,9 +134,11 @@ public class Player
                     checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+bounds.y+bounds.height+yDelta) / Tile.HEIGHT)][tx] );
                 }
 
-
+                /////////////////////////////////////////
                 //moves Player's x-position.
                 x += xDelta;
+                directionFacing = DirectionFacing.LEFT;
+                /////////////////////////////////////////
                 //moves GameCamera's x-position.
                 //handler.getGameCamera().move(xDelta, 0);
             }
@@ -168,6 +151,13 @@ public class Player
             if ( !(worldMap[((y+bounds.y+yDelta) / Tile.HEIGHT)][tx].isSolid()) &&                   //TOP-RIGHT
                     !(worldMap[((y+bounds.y+bounds.height+yDelta) / Tile.HEIGHT)][tx].isSolid()) ) {   //BOTTOM-RIGHT
 
+                ////////////////////////////////////////////
+                handler.getGameCamera().setXDelta(xDelta);
+
+                for (INabber nabber : nabberList) {
+                    nabber.setXDelta(xDelta);
+                }
+                ////////////////////////////////////////////
 
                 if ( worldMap[((y+bounds.y+yDelta) / Tile.HEIGHT)][tx] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's top-RIGHT.");
@@ -177,9 +167,11 @@ public class Player
                     checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+bounds.y+bounds.height+yDelta) / Tile.HEIGHT)][tx] );
                 }
 
-
+                ///////////////////////////////////////////
                 //moves Player's x-position.
                 x += xDelta;
+                directionFacing = DirectionFacing.RIGHT;
+                ///////////////////////////////////////////
                 //moves GameCamera's x-position.
                 //handler.getGameCamera().move(xDelta, 0);
             }
@@ -197,6 +189,13 @@ public class Player
             if ( !(worldMap[ty][((x+bounds.x+xDelta) / Tile.WIDTH)].isSolid()) &&                    //TOP-LEFT
                     !(worldMap[ty][((x+bounds.x+bounds.width+xDelta) / Tile.WIDTH)].isSolid()) ) {     //TOP-RIGHT
 
+                /////////////////////////////////////////////
+                handler.getGameCamera().setYDelta(yDelta);
+
+                for (INabber nabber : nabberList) {
+                    nabber.setYDelta(yDelta);
+                }
+                /////////////////////////////////////////////
 
                 if ( worldMap[ty][((x+bounds.x+xDelta) / Tile.WIDTH)] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's TOP-left.");
@@ -206,9 +205,11 @@ public class Player
                     checkTallGrassTileCollision( (TallGrassTile)worldMap[ty][((x+bounds.x+bounds.width+xDelta) / Tile.WIDTH)] );
                 }
 
-
+                //////////////////////////////////////
                 //moves Player's y-position.
                 y += yDelta;
+                directionFacing = DirectionFacing.UP;
+                //////////////////////////////////////
                 //moves GameCamera's y-position.
                 //handler.getGameCamera().move(0, yDelta);
             }
@@ -221,6 +222,12 @@ public class Player
             if ( !(worldMap[ty][((x+bounds.x+xDelta) / Tile.WIDTH)].isSolid()) &&                    //BOTTOM-LEFT
                     !(worldMap[ty][((x+bounds.x+bounds.width+xDelta) / Tile.WIDTH)].isSolid()) ) {     //BOTTOM-RIGHT
 
+                //////////////////////////////////////////////
+                handler.getGameCamera().setYDelta(yDelta);
+                for (INabber nabber : nabberList) {
+                    nabber.setYDelta(yDelta);
+                }
+                //////////////////////////////////////////////
 
                 if ( worldMap[ty][((x+bounds.x+xDelta) / Tile.WIDTH)] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's BOTTOM-left.");
@@ -230,9 +237,11 @@ public class Player
                     checkTallGrassTileCollision( (TallGrassTile)worldMap[ty][((x+bounds.x+bounds.width+xDelta) / Tile.WIDTH)] );
                 }
 
-
+                ////////////////////////////////////////
                 //moves Player's y-position.
                 y += yDelta;
+                directionFacing = DirectionFacing.DOWN;
+                ////////////////////////////////////////
                 //moves GameCamera's y-position.
                 //handler.getGameCamera().move(0, yDelta);
             }
