@@ -18,15 +18,21 @@ public class James extends Player
 
     private transient Map<String, Animation> anim;
     private transient Random rand;
+
+    private int x, y;
     private int xScreenPosition, yScreenPosition;
+
+    private DirectionFacing directionFacing;
 
     public James(Handler handler) {
         super(handler);
 
-        x = 1104-Tile.WIDTH-Tile.WIDTH;
-        y = 3312-Tile.HEIGHT-Tile.HEIGHT;
-        xScreenPosition = 288-(2*Tile.WIDTH)-(2*Tile.HEIGHT);
-        yScreenPosition = 256-(2*Tile.WIDTH)-(2*Tile.HEIGHT);
+        x = 1104-Tile.WIDTH;
+        y = 3312-Tile.HEIGHT;
+        xScreenPosition = 288-(2*Tile.WIDTH);
+        yScreenPosition = 256-(2*Tile.HEIGHT);
+
+        directionFacing = DirectionFacing.DOWN;
 
         initAnimations();
 
@@ -92,6 +98,7 @@ public class James extends Player
         } else if (yDelta > 0) {
             directionFacing = DirectionFacing.DOWN;
         }
+
         //xScreenPosition +=(2*xDelta);
         moveX();
         //yScreenPosition += (2*yDelta);
@@ -105,59 +112,33 @@ public class James extends Player
     protected void moveX() {
         Tile[][] worldMap = handler.getWorldMapTileCollisionDetection();
 
-        if ( (worldMap[x/Tile.WIDTH][x/Tile.HEIGHT].isSolid()) ||
-                (worldMap[x/Tile.WIDTH][x/Tile.HEIGHT] == null) ) {
+        if ( (worldMap[y/Tile.HEIGHT][x/Tile.WIDTH].isSolid()) ||
+                (worldMap[y/Tile.HEIGHT][x/Tile.WIDTH] == null) ) {
             return;
         }
 
         //MOVING LEFT
         if (xDelta < 0) {
-            int tx = (int)((x+bounds.x+xDelta) / Tile.WIDTH);                                        //LEFT
+            int tx = (int)((x+bounds.x+xDelta) / Tile.WIDTH);                                           //LEFT
 
-            //if top-LEFT AND bottom-LEFT corners of player-sprite moving into NOT solid tile, do stuff.
-            if ( !(worldMap[((y+bounds.y+yDelta) / Tile.HEIGHT)][tx].isSolid()) &&                   //TOP-LEFT
-                    !(worldMap[((y+bounds.y+bounds.height+yDelta) / Tile.HEIGHT)][tx].isSolid()) ) {   //BOTTOM-LEFT
+            //if top-LEFT AND bottom-LEFT corners of sprite is moving into a NOT solid tile, do stuff.
+            if ( !(worldMap[((y+bounds.y+yDelta) / Tile.HEIGHT)][tx].isSolid()) &&                      //TOP-LEFT
+                    !(worldMap[((y+bounds.y+bounds.height+yDelta) / Tile.HEIGHT)][tx].isSolid()) ) {    //BOTTOM-LEFT
 
-                //moves Player's x-position.
+                //moves (back-end) x-position.
                 x += xDelta;
-
-                /*
-                //check within game screen
-                if ( ((x+xDelta+bounds.x) < handler.getGameCamera().getxOffset0()) ||
-                        ((x+xDelta+bounds.x+bounds.width) > handler.getGameCamera().getxOffset1()) ||
-                        ((y+yDelta+bounds.y) < handler.getGameCamera().getyOffset0()) ||
-                        ((y+yDelta+bounds.y+bounds.height) > handler.getGameCamera().getyOffset1()) ) {
-                    x = super.x - 32;
-                    y = super.y - 32;
-                    xScreenPosition = super.xScreenPosition - 64;
-                    yScreenPosition = super.yScreenPosition - 64;
-                }
-                */
             }
         }
         //MOVING RIGHT
         else if (xDelta > 0) {
-            int tx = (int)((x+bounds.x+bounds.width+xDelta) / Tile.WIDTH);                             //RIGHT
+            int tx = (int)((x+bounds.x+bounds.width+xDelta) / Tile.WIDTH);                              //RIGHT
 
-            //if top-RIGHT AND bottom-RIGHT corners of player-sprite moving into NOT solid tile, do stuff.
-            if ( !(worldMap[((y+bounds.y+yDelta) / Tile.HEIGHT)][tx].isSolid()) &&                   //TOP-RIGHT
-                    !(worldMap[((y+bounds.y+bounds.height+yDelta) / Tile.HEIGHT)][tx].isSolid()) ) {   //BOTTOM-RIGHT
+            //if top-RIGHT AND bottom-RIGHT corners of sprite is moving into a NOT solid tile, do stuff.
+            if ( !(worldMap[((y+bounds.y+yDelta) / Tile.HEIGHT)][tx].isSolid()) &&                      //TOP-RIGHT
+                    !(worldMap[((y+bounds.y+bounds.height+yDelta) / Tile.HEIGHT)][tx].isSolid()) ) {    //BOTTOM-RIGHT
 
-                //moves Player's x-position.
+                //moves (back-end) x-position.
                 x += xDelta;
-
-                /*
-                //check within game screen
-                if ( ((x+xDelta+bounds.x) < handler.getGameCamera().getxOffset0()) ||
-                        ((x+xDelta+bounds.x+bounds.width) > handler.getGameCamera().getxOffset1()) ||
-                        ((y+yDelta+bounds.y) < handler.getGameCamera().getyOffset0()) ||
-                        ((y+yDelta+bounds.y+bounds.height) > handler.getGameCamera().getyOffset1()) ) {
-                    x = super.x - 32;
-                    y = super.y - 32;
-                    xScreenPosition = super.xScreenPosition - 64;
-                    yScreenPosition = super.yScreenPosition - 64;
-                }
-                */
             }
         }
     }
@@ -166,54 +147,33 @@ public class James extends Player
     protected void moveY() {
         Tile[][] worldMap = handler.getWorldMapTileCollisionDetection();
 
+        if ( (worldMap[y/Tile.HEIGHT][x/Tile.WIDTH].isSolid()) ||
+                (worldMap[y/Tile.HEIGHT][x/Tile.WIDTH] == null) ) {
+            return;
+        }
+
         //MOVING UP
         if (yDelta < 0) {
-            int ty = (int)((y+bounds.y+yDelta) / Tile.HEIGHT);                                       //TOP
+            int ty = (int)((y+bounds.y+yDelta) / Tile.HEIGHT);                                          //TOP
 
-            //if TOP-left AND TOP-right corners of player-sprite moving into NOT solid tile, do stuff.
-            if ( !(worldMap[ty][((x+bounds.x+xDelta) / Tile.WIDTH)].isSolid()) &&                    //TOP-LEFT
-                    !(worldMap[ty][((x+bounds.x+bounds.width+xDelta) / Tile.WIDTH)].isSolid()) ) {     //TOP-RIGHT
+            //if TOP-left AND TOP-right corners of sprite is moving into a NOT solid tile, do stuff.
+            if ( !(worldMap[ty][((x+bounds.x+xDelta) / Tile.WIDTH)].isSolid()) &&                       //TOP-LEFT
+                    !(worldMap[ty][((x+bounds.x+bounds.width+xDelta) / Tile.WIDTH)].isSolid()) ) {      //TOP-RIGHT
 
-                //moves Player's y-position.
+                //moves (back-end) y-position.
                 y += yDelta;
-
-                /*
-                //check within game screen
-                if ( ((x+xDelta+bounds.x) < handler.getGameCamera().getxOffset0()) ||
-                        ((x+xDelta+bounds.x+bounds.width) > handler.getGameCamera().getxOffset1()) ||
-                        ((y+yDelta+bounds.y) < handler.getGameCamera().getyOffset0()) ||
-                        ((y+yDelta+bounds.y+bounds.height) > handler.getGameCamera().getyOffset1()) ) {
-                    x = super.x - 32;
-                    y = super.y - 32;
-                    xScreenPosition = super.xScreenPosition - 64;
-                    yScreenPosition = super.yScreenPosition - 64;
-                }
-                */
             }
         }
         //MOVING DOWN
         else if (yDelta > 0) {
-            int ty = (int)((y+bounds.y+bounds.height+yDelta) / Tile.HEIGHT);                           //BOTTOM
+            int ty = (int)((y+bounds.y+bounds.height+yDelta) / Tile.HEIGHT);                            //BOTTOM
 
-            //if BOTTOM-left AND BOTTOM-right corners of player-sprite moving into NOT solid tile, do stuff.
-            if ( !(worldMap[ty][((x+bounds.x+xDelta) / Tile.WIDTH)].isSolid()) &&                    //BOTTOM-LEFT
-                    !(worldMap[ty][((x+bounds.x+bounds.width+xDelta) / Tile.WIDTH)].isSolid()) ) {     //BOTTOM-RIGHT
+            //if BOTTOM-left AND BOTTOM-right corners of sprite is moving into a NOT solid tile, do stuff.
+            if ( !(worldMap[ty][((x+bounds.x+xDelta) / Tile.WIDTH)].isSolid()) &&                       //BOTTOM-LEFT
+                    !(worldMap[ty][((x+bounds.x+bounds.width+xDelta) / Tile.WIDTH)].isSolid()) ) {      //BOTTOM-RIGHT
 
-                //moves Player's y-position.
+                //moves (back-end) y-position.
                 y += yDelta;
-
-                /*
-                //check within game screen
-                if ( ((x+xDelta+bounds.x) < handler.getGameCamera().getxOffset0()) ||
-                        ((x+xDelta+bounds.x+bounds.width) > handler.getGameCamera().getxOffset1()) ||
-                        ((y+yDelta+bounds.y) < handler.getGameCamera().getyOffset0()) ||
-                        ((y+yDelta+bounds.y+bounds.height) > handler.getGameCamera().getyOffset1()) ) {
-                    x = super.x - 32;
-                    y = super.y - 32;
-                    xScreenPosition = super.xScreenPosition - 64;
-                    yScreenPosition = super.yScreenPosition - 64;
-                }
-                */
             }
         }
     }
@@ -223,14 +183,6 @@ public class James extends Player
         g.drawImage(currentAnimationFrame(),
                 xScreenPosition, yScreenPosition, (2*Tile.WIDTH), (2*Tile.HEIGHT),
                 null);
-
-        //////////////////////////////////////////////////////////////////////////////
-        g.setColor(Color.RED);
-        g.fillRect(xScreenPosition, yScreenPosition, (2*Tile.WIDTH), (2*Tile.HEIGHT));
-
-        g.setColor(Color.GREEN);
-        g.fillRect(x, y, Tile.WIDTH, Tile.HEIGHT);
-        //////////////////////////////////////////////////////////////////////////////
     }
 
     private BufferedImage currentAnimationFrame() {

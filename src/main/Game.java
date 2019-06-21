@@ -31,7 +31,9 @@ public class Game implements Runnable {
     private int width, height;
     private TileSpriteToRGBConverter tileSpriteToRGBConverter;
     private Tile[][] worldMapTileCollisionDetection;
-    private Player player, james, jessie;
+    private Player player;
+    private James james;
+    private Jessie jessie;
 
     public Game(int width, int height) {
         this.width = width;
@@ -180,10 +182,10 @@ public class Game implements Runnable {
     public int getHeight() { return height; }
     public Player getPlayer() { return player; }
     public void setPlayer(Player player) { this.player = player; }
-    public Player getJames() { return james; }
-    public void setJames(Player james) { this.james = james; }
-    public Player getJessie() { return jessie; }
-    public void setJessie(Player jessie) { this.jessie = jessie; }
+    public James getJames() { return james; }
+    public void setJames(James james) { this.james = james; }
+    public Jessie getJessie() { return jessie; }
+    public void setJessie(Jessie jessie) { this.jessie = jessie; }
 
     // |+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|
 

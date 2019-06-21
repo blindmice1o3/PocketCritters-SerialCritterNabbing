@@ -3,6 +3,8 @@ package main.utils;
 import main.Handler;
 import main.gfx.GameCamera;
 import model.entities.Player;
+import model.entities.nabbers.James;
+import model.entities.nabbers.Jessie;
 
 import java.io.*;
 
@@ -67,8 +69,8 @@ public class SerializationDoer {
 
             handler.getGame().setGameCamera( (GameCamera)os.readObject() );
             handler.getGame().setPlayer( (Player)os.readObject() );
-            handler.getGame().setJames( (Player)os.readObject() );
-            handler.getGame().setJessie( (Player)os.readObject() );
+            handler.getGame().setJames( (James)os.readObject() );
+            handler.getGame().setJessie( (Jessie)os.readObject() );
 
             ////////////
             os.close();

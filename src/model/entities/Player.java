@@ -25,13 +25,13 @@ public class Player
     protected transient Handler handler;
     private transient Map<String, Animation> anim;
 
-    protected int x, y;
-    protected int xDelta, yDelta;
-    protected int moveSpeed;
-    protected int xScreenPosition, yScreenPosition;
+    private int x, y;
+    private int xScreenPosition, yScreenPosition;
+    protected transient int xDelta, yDelta;
+    protected transient int moveSpeed;
 
-    protected DirectionFacing directionFacing;
-    protected Rectangle bounds;
+    private DirectionFacing directionFacing;
+    protected transient Rectangle bounds;
 
     private transient ArrayList<Item> inventory;
     private transient Critter[] critterBeltList;
@@ -243,14 +243,6 @@ public class Player
         g.drawImage(currentAnimationFrame(),
                 xScreenPosition, yScreenPosition, (2*Tile.WIDTH), (2*Tile.HEIGHT),
                 null);
-
-        //////////////////////////////////////////////////////////////////////////////
-        g.setColor(Color.RED);
-        g.fillRect(xScreenPosition, yScreenPosition, (2*Tile.WIDTH), (2*Tile.HEIGHT));
-
-        g.setColor(Color.GREEN);
-        g.fillRect(x, y, Tile.WIDTH, Tile.HEIGHT);
-        //////////////////////////////////////////////////////////////////////////////
 
         ////////////////////////////////////
         for (INabber nabber : nabberList) {

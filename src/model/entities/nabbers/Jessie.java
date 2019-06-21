@@ -17,13 +17,22 @@ public class Jessie extends Player
 
     private transient Map<String, Animation> anim;
 
+    private int x, y;
+    private int xScreenPosition, yScreenPosition;
+
+    private DirectionFacing directionFacing;
+
     public Jessie(Handler handler) {
         super(handler);
 
-        initAnimations();
+        x = 1104;
+        y = 3312-Tile.HEIGHT;
+        xScreenPosition = 288;
+        yScreenPosition = 256-(2*Tile.HEIGHT);
 
-        x = 288+8;
-        y = 256-32-32;
+        directionFacing = DirectionFacing.DOWN;
+
+        initAnimations();
     }
 
     private void initAnimations() {
@@ -51,21 +60,90 @@ public class Jessie extends Player
             directionFacing = DirectionFacing.DOWN;
         }
 
+        //xScreenPosition +=(2*xDelta);
+        moveX();
+        //yScreenPosition += (2*yDelta);
+        moveY();
+
         xDelta = 0;
         yDelta = 0;
     }
 
     @Override
+    protected void moveX() {
+        Tile[][] worldMap = handler.getWorldMapTileCollisionDetection();
+
+        if ( (worldMap[y/Tile.HEIGHT][x/Tile.WIDTH].isSolid()) ||
+                (worldMap[y/Tile.HEIGHT][x/Tile.WIDTH] == null) ) {
+            return;
+        }
+
+        //MOVING LEFT
+        if (xDelta < 0) {
+            int tx = (int)((x+bounds.x+xDelta) / Tile.WIDTH);                                           //LEFT
+
+            //if top-LEFT AND bottom-LEFT corners of sprite is moving into a NOT solid tile, do stuff.
+            if ( !(worldMap[((y+bounds.y+yDelta) / Tile.HEIGHT)][tx].isSolid()) &&                      //TOP-LEFT
+                    !(worldMap[((y+bounds.y+bounds.height+yDelta) / Tile.HEIGHT)][tx].isSolid()) ) {    //BOTTOM-LEFT
+
+                //moves (back-end) x-position.
+                x += xDelta;
+            }
+        }
+        //MOVING RIGHT
+        else if (xDelta > 0) {
+            int tx = (int)((x+bounds.x+bounds.width+xDelta) / Tile.WIDTH);                              //RIGHT
+
+            //if top-RIGHT AND bottom-RIGHT corners of sprite is moving into a NOT solid tile, do stuff.
+            if ( !(worldMap[((y+bounds.y+yDelta) / Tile.HEIGHT)][tx].isSolid()) &&                      //TOP-RIGHT
+                    !(worldMap[((y+bounds.y+bounds.height+yDelta) / Tile.HEIGHT)][tx].isSolid()) ) {    //BOTTOM-RIGHT
+
+                //moves (back-end) x-position.
+                x += xDelta;
+            }
+        }
+    }
+
+    @Override
+    protected void moveY() {
+        Tile[][] worldMap = handler.getWorldMapTileCollisionDetection();
+
+        if ( (worldMap[y/Tile.HEIGHT][x/Tile.WIDTH].isSolid()) ||
+                (worldMap[y/Tile.HEIGHT][x/Tile.WIDTH] == null) ) {
+            return;
+        }
+
+        //MOVING UP
+        if (yDelta < 0) {
+            int ty = (int)((y+bounds.y+yDelta) / Tile.HEIGHT);                                          //TOP
+
+            //if TOP-left AND TOP-right corners of sprite is moving into a NOT solid tile, do stuff.
+            if ( !(worldMap[ty][((x+bounds.x+xDelta) / Tile.WIDTH)].isSolid()) &&                       //TOP-LEFT
+                    !(worldMap[ty][((x+bounds.x+bounds.width+xDelta) / Tile.WIDTH)].isSolid()) ) {      //TOP-RIGHT
+
+                //moves (back-end) y-position.
+                y += yDelta;
+            }
+        }
+        //MOVING DOWN
+        else if (yDelta > 0) {
+            int ty = (int)((y+bounds.y+bounds.height+yDelta) / Tile.HEIGHT);                            //BOTTOM
+
+            //if BOTTOM-left AND BOTTOM-right corners of sprite is moving into a NOT solid tile, do stuff.
+            if ( !(worldMap[ty][((x+bounds.x+xDelta) / Tile.WIDTH)].isSolid()) &&                       //BOTTOM-LEFT
+                    !(worldMap[ty][((x+bounds.x+bounds.width+xDelta) / Tile.WIDTH)].isSolid()) ) {      //BOTTOM-RIGHT
+
+                //moves (back-end) y-position.
+                y += yDelta;
+            }
+        }
+    }
+
+    @Override
     public void render(Graphics g) {
-        g.drawImage(currentAnimationFrame(), x, y, 32, 32, null);
-
-        //////////////////////////////////////////////////////////////////////////////
-        g.setColor(Color.RED);
-        g.fillRect(xScreenPosition, yScreenPosition, (2* Tile.WIDTH), (2*Tile.HEIGHT));
-
-        g.setColor(Color.GREEN);
-        g.fillRect(x, y, Tile.WIDTH, Tile.HEIGHT);
-        //////////////////////////////////////////////////////////////////////////////
+        g.drawImage(currentAnimationFrame(),
+                xScreenPosition, yScreenPosition, (2*Tile.WIDTH), (2*Tile.HEIGHT),
+                null);
     }
 
     private BufferedImage currentAnimationFrame() {
