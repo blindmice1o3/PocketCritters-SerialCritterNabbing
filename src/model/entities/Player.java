@@ -27,7 +27,7 @@ public class Player
 
     private int x, y;
     private int xScreenPosition, yScreenPosition;
-    protected transient int xDelta, yDelta;
+    private transient int xDelta, yDelta;
     protected transient int moveSpeed;
 
     private DirectionFacing directionFacing;
@@ -120,7 +120,6 @@ public class Player
                     !(worldMap[((y+bounds.y+bounds.height+yDelta) / Tile.HEIGHT)][tx].isSolid()) ) {   //BOTTOM-LEFT
 
                 /////////////////////////////////////////////
-                handler.getGameCamera().setXDelta(xDelta);
                 for (INabber nabber : nabberList) {
                     nabber.setXDelta(xDelta);
                 }
@@ -137,6 +136,7 @@ public class Player
                 /////////////////////////////////////////
                 //moves Player's x-position.
                 x += xDelta;
+                handler.getGameCamera().setXDelta( (2*xDelta) );
                 directionFacing = DirectionFacing.LEFT;
                 /////////////////////////////////////////
                 //moves GameCamera's x-position.
@@ -152,8 +152,6 @@ public class Player
                     !(worldMap[((y+bounds.y+bounds.height+yDelta) / Tile.HEIGHT)][tx].isSolid()) ) {   //BOTTOM-RIGHT
 
                 ////////////////////////////////////////////
-                handler.getGameCamera().setXDelta(xDelta);
-
                 for (INabber nabber : nabberList) {
                     nabber.setXDelta(xDelta);
                 }
@@ -170,6 +168,7 @@ public class Player
                 ///////////////////////////////////////////
                 //moves Player's x-position.
                 x += xDelta;
+                handler.getGameCamera().setXDelta( (2*xDelta) );
                 directionFacing = DirectionFacing.RIGHT;
                 ///////////////////////////////////////////
                 //moves GameCamera's x-position.
@@ -190,8 +189,6 @@ public class Player
                     !(worldMap[ty][((x+bounds.x+bounds.width+xDelta) / Tile.WIDTH)].isSolid()) ) {     //TOP-RIGHT
 
                 /////////////////////////////////////////////
-                handler.getGameCamera().setYDelta(yDelta);
-
                 for (INabber nabber : nabberList) {
                     nabber.setYDelta(yDelta);
                 }
@@ -208,6 +205,7 @@ public class Player
                 //////////////////////////////////////
                 //moves Player's y-position.
                 y += yDelta;
+                handler.getGameCamera().setYDelta( (2*yDelta) );
                 directionFacing = DirectionFacing.UP;
                 //////////////////////////////////////
                 //moves GameCamera's y-position.
@@ -223,7 +221,6 @@ public class Player
                     !(worldMap[ty][((x+bounds.x+bounds.width+xDelta) / Tile.WIDTH)].isSolid()) ) {     //BOTTOM-RIGHT
 
                 //////////////////////////////////////////////
-                handler.getGameCamera().setYDelta(yDelta);
                 for (INabber nabber : nabberList) {
                     nabber.setYDelta(yDelta);
                 }
@@ -240,6 +237,7 @@ public class Player
                 ////////////////////////////////////////
                 //moves Player's y-position.
                 y += yDelta;
+                handler.getGameCamera().setYDelta( (2*yDelta) );
                 directionFacing = DirectionFacing.DOWN;
                 ////////////////////////////////////////
                 //moves GameCamera's y-position.

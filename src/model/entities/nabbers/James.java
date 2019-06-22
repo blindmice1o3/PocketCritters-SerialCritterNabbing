@@ -21,6 +21,7 @@ public class James extends Player
 
     private int x, y;
     private int xScreenPosition, yScreenPosition;
+    private transient int xDelta, yDelta;
 
     private DirectionFacing directionFacing;
 
@@ -79,9 +80,9 @@ public class James extends Player
             }
 
             //auto-movement based on rand.nextInt(4) method call.
-            xScreenPosition +=(2*xDelta);
+            //xScreenPosition +=(2*xDelta);
             moveX();
-            yScreenPosition += (2*yDelta);
+            //yScreenPosition += (2*yDelta);
             moveY();
 
             elapsedTime = 0;
@@ -99,7 +100,7 @@ public class James extends Player
             directionFacing = DirectionFacing.DOWN;
         }
 
-        //xScreenPosition +=(2*xDelta);
+        //xScreenPosition += (2*xDelta);
         moveX();
         //yScreenPosition += (2*yDelta);
         moveY();
@@ -127,6 +128,7 @@ public class James extends Player
 
                 //moves (back-end) x-position.
                 x += xDelta;
+                xScreenPosition += (2*xDelta);
             }
         }
         //MOVING RIGHT
@@ -139,6 +141,7 @@ public class James extends Player
 
                 //moves (back-end) x-position.
                 x += xDelta;
+                xScreenPosition += (2*xDelta);
             }
         }
     }
@@ -162,6 +165,7 @@ public class James extends Player
 
                 //moves (back-end) y-position.
                 y += yDelta;
+                yScreenPosition += (2*yDelta);
             }
         }
         //MOVING DOWN
@@ -174,6 +178,7 @@ public class James extends Player
 
                 //moves (back-end) y-position.
                 y += yDelta;
+                yScreenPosition += (2*yDelta);
             }
         }
     }

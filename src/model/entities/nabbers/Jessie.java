@@ -19,6 +19,7 @@ public class Jessie extends Player
 
     private int x, y;
     private int xScreenPosition, yScreenPosition;
+    private transient int xDelta, yDelta;
 
     private DirectionFacing directionFacing;
 
