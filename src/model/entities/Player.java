@@ -57,7 +57,7 @@ public class Player
         yScreenPosition = 256;
 
         directionFacing = DirectionFacing.DOWN;
-        bounds = new Rectangle(0, 0, Tile.WIDTH, Tile.HEIGHT);
+        bounds = new Rectangle(1, 1, 15, 15);
 
         moveSpeed = Tile.WIDTH;
 
@@ -136,7 +136,7 @@ public class Player
                 /////////////////////////////////////////
                 //moves Player's x-position.
                 x += xDelta;
-                handler.getGameCamera().setXDelta( (2*xDelta) );
+                handler.getGameCamera().setXDelta(xDelta);
                 directionFacing = DirectionFacing.LEFT;
                 /////////////////////////////////////////
                 //moves GameCamera's x-position.
@@ -168,7 +168,7 @@ public class Player
                 ///////////////////////////////////////////
                 //moves Player's x-position.
                 x += xDelta;
-                handler.getGameCamera().setXDelta( (2*xDelta) );
+                handler.getGameCamera().setXDelta(xDelta);
                 directionFacing = DirectionFacing.RIGHT;
                 ///////////////////////////////////////////
                 //moves GameCamera's x-position.
@@ -205,7 +205,7 @@ public class Player
                 //////////////////////////////////////
                 //moves Player's y-position.
                 y += yDelta;
-                handler.getGameCamera().setYDelta( (2*yDelta) );
+                handler.getGameCamera().setYDelta(yDelta);
                 directionFacing = DirectionFacing.UP;
                 //////////////////////////////////////
                 //moves GameCamera's y-position.
@@ -237,7 +237,7 @@ public class Player
                 ////////////////////////////////////////
                 //moves Player's y-position.
                 y += yDelta;
-                handler.getGameCamera().setYDelta( (2*yDelta) );
+                handler.getGameCamera().setYDelta(yDelta);
                 directionFacing = DirectionFacing.DOWN;
                 ////////////////////////////////////////
                 //moves GameCamera's y-position.

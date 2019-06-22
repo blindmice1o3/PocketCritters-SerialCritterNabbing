@@ -7,6 +7,8 @@ import model.entities.nabbers.Jessie;
 import model.entities.Player;
 import model.states.IState;
 import model.states.StateManager;
+import model.tiles.SolidTile;
+import model.tiles.Tile;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

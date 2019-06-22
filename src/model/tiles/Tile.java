@@ -15,6 +15,8 @@ public class Tile {
 
     public Tile(boolean solid, int x, int y) {
         this.solid = solid;
+        this.x = x;
+        this.y = y;
         bounds = new Rectangle(x, y, WIDTH, HEIGHT);
     } // **** end Tile(boolean, int, int) constructor ****
 
@@ -23,11 +25,5 @@ public class Tile {
     public boolean isSolid() {
         return solid;
     }
-
-    public void setSolid(boolean solid) {
-        this.solid = solid;
-    }
-
-    public Rectangle getBounds() { return bounds; }
 
 } // **** end Tile class *****
