@@ -57,7 +57,7 @@ public class Player
         yScreenPosition = 256;
 
         directionFacing = DirectionFacing.DOWN;
-        bounds = new Rectangle(1, 1, 15, 15);
+        bounds = new Rectangle(0, 0, Tile.WIDTH, Tile.HEIGHT);
 
         moveSpeed = Tile.WIDTH;
 
