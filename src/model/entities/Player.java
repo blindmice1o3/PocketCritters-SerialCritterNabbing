@@ -57,7 +57,8 @@ public class Player
         yScreenPosition = 256;
 
         directionFacing = DirectionFacing.DOWN;
-        bounds = new Rectangle(0, 0, Tile.WIDTH, Tile.HEIGHT);
+        //bounds = new Rectangle(0, 0, Tile.WIDTH, Tile.HEIGHT);
+        bounds = new Rectangle(0+2, 0+2, Tile.WIDTH-4, Tile.HEIGHT-4);
 
         moveSpeed = Tile.WIDTH;
 
@@ -116,8 +117,8 @@ public class Player
             int tx = (int)((x+bounds.x+xDelta) / Tile.WIDTH);                                        //LEFT
 
             //if top-LEFT AND bottom-LEFT corners of player-sprite moving into NOT solid tile, do stuff.
-            if ( !(worldMap[((y+bounds.y+yDelta) / Tile.HEIGHT)][tx].isSolid()) &&                   //TOP-LEFT
-                    !(worldMap[((y+bounds.y+bounds.height+yDelta) / Tile.HEIGHT)][tx].isSolid()) ) {   //BOTTOM-LEFT
+            if ( !(worldMap[((y+bounds.y) / Tile.HEIGHT)][tx].isSolid()) &&                   //TOP-LEFT
+                    !(worldMap[((y+bounds.y+bounds.height) / Tile.HEIGHT)][tx].isSolid()) ) {   //BOTTOM-LEFT
 
                 /////////////////////////////////////////////
                 for (INabber nabber : nabberList) {
@@ -125,12 +126,12 @@ public class Player
                 }
                 ////////////////////////////////////////////
 
-                if ( worldMap[((y+bounds.y+yDelta) / Tile.HEIGHT)][tx] instanceof TallGrassTile ) {
+                if ( worldMap[((y+bounds.y) / Tile.HEIGHT)][tx] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's top-LEFT.");
-                    checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+bounds.y+yDelta) / Tile.HEIGHT)][tx] );
-                } else if ( worldMap[((y+bounds.y+bounds.height+yDelta) / Tile.HEIGHT)][tx] instanceof TallGrassTile ) {
+                    checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+bounds.y) / Tile.HEIGHT)][tx] );
+                } else if ( worldMap[((y+bounds.y+bounds.height) / Tile.HEIGHT)][tx] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's bottom-LEFT.");
-                    checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+bounds.y+bounds.height+yDelta) / Tile.HEIGHT)][tx] );
+                    checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+bounds.y+bounds.height) / Tile.HEIGHT)][tx] );
                 }
 
                 /////////////////////////////////////////
@@ -148,8 +149,8 @@ public class Player
             int tx = (int)((x+bounds.x+bounds.width+xDelta) / Tile.WIDTH);                             //RIGHT
 
             //if top-RIGHT AND bottom-RIGHT corners of player-sprite moving into NOT solid tile, do stuff.
-            if ( !(worldMap[((y+bounds.y+yDelta) / Tile.HEIGHT)][tx].isSolid()) &&                   //TOP-RIGHT
-                    !(worldMap[((y+bounds.y+bounds.height+yDelta) / Tile.HEIGHT)][tx].isSolid()) ) {   //BOTTOM-RIGHT
+            if ( !(worldMap[((y+bounds.y) / Tile.HEIGHT)][tx].isSolid()) &&                   //TOP-RIGHT
+                    !(worldMap[((y+bounds.y+bounds.height) / Tile.HEIGHT)][tx].isSolid()) ) {   //BOTTOM-RIGHT
 
                 ////////////////////////////////////////////
                 for (INabber nabber : nabberList) {
@@ -157,12 +158,12 @@ public class Player
                 }
                 ////////////////////////////////////////////
 
-                if ( worldMap[((y+bounds.y+yDelta) / Tile.HEIGHT)][tx] instanceof TallGrassTile ) {
+                if ( worldMap[((y+bounds.y) / Tile.HEIGHT)][tx] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's top-RIGHT.");
-                    checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+bounds.y+yDelta) / Tile.HEIGHT)][tx] );
-                } else if ( worldMap[((y+bounds.y+bounds.height+yDelta) / Tile.HEIGHT)][tx] instanceof TallGrassTile ) {
+                    checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+bounds.y) / Tile.HEIGHT)][tx] );
+                } else if ( worldMap[((y+bounds.y+bounds.height) / Tile.HEIGHT)][tx] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's bottom-RIGHT.");
-                    checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+bounds.y+bounds.height+yDelta) / Tile.HEIGHT)][tx] );
+                    checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+bounds.y+bounds.height) / Tile.HEIGHT)][tx] );
                 }
 
                 ///////////////////////////////////////////
@@ -185,8 +186,8 @@ public class Player
             int ty = (int)((y+bounds.y+yDelta) / Tile.HEIGHT);                                       //TOP
 
             //if TOP-left AND TOP-right corners of player-sprite moving into NOT solid tile, do stuff.
-            if ( !(worldMap[ty][((x+bounds.x+xDelta) / Tile.WIDTH)].isSolid()) &&                    //TOP-LEFT
-                    !(worldMap[ty][((x+bounds.x+bounds.width+xDelta) / Tile.WIDTH)].isSolid()) ) {     //TOP-RIGHT
+            if ( !(worldMap[ty][((x+bounds.x) / Tile.WIDTH)].isSolid()) &&                    //TOP-LEFT
+                    !(worldMap[ty][((x+bounds.x+bounds.width) / Tile.WIDTH)].isSolid()) ) {     //TOP-RIGHT
 
                 /////////////////////////////////////////////
                 for (INabber nabber : nabberList) {
@@ -194,12 +195,12 @@ public class Player
                 }
                 /////////////////////////////////////////////
 
-                if ( worldMap[ty][((x+bounds.x+xDelta) / Tile.WIDTH)] instanceof TallGrassTile ) {
+                if ( worldMap[ty][((x+bounds.x) / Tile.WIDTH)] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's TOP-left.");
-                    checkTallGrassTileCollision( (TallGrassTile)worldMap[ty][((x+bounds.x+xDelta) / Tile.WIDTH)] );
-                } else if ( worldMap[ty][((x+bounds.x+bounds.width+xDelta) / Tile.WIDTH)] instanceof TallGrassTile ) {
+                    checkTallGrassTileCollision( (TallGrassTile)worldMap[ty][((x+bounds.x) / Tile.WIDTH)] );
+                } else if ( worldMap[ty][((x+bounds.x+bounds.width) / Tile.WIDTH)] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's TOP-right.");
-                    checkTallGrassTileCollision( (TallGrassTile)worldMap[ty][((x+bounds.x+bounds.width+xDelta) / Tile.WIDTH)] );
+                    checkTallGrassTileCollision( (TallGrassTile)worldMap[ty][((x+bounds.x+bounds.width) / Tile.WIDTH)] );
                 }
 
                 //////////////////////////////////////
@@ -217,8 +218,8 @@ public class Player
             int ty = (int)((y+bounds.y+bounds.height+yDelta) / Tile.HEIGHT);                           //BOTTOM
 
             //if BOTTOM-left AND BOTTOM-right corners of player-sprite moving into NOT solid tile, do stuff.
-            if ( !(worldMap[ty][((x+bounds.x+xDelta) / Tile.WIDTH)].isSolid()) &&                    //BOTTOM-LEFT
-                    !(worldMap[ty][((x+bounds.x+bounds.width+xDelta) / Tile.WIDTH)].isSolid()) ) {     //BOTTOM-RIGHT
+            if ( !(worldMap[ty][((x+bounds.x) / Tile.WIDTH)].isSolid()) &&                    //BOTTOM-LEFT
+                    !(worldMap[ty][((x+bounds.x+bounds.width) / Tile.WIDTH)].isSolid()) ) {     //BOTTOM-RIGHT
 
                 //////////////////////////////////////////////
                 for (INabber nabber : nabberList) {
@@ -226,12 +227,12 @@ public class Player
                 }
                 //////////////////////////////////////////////
 
-                if ( worldMap[ty][((x+bounds.x+xDelta) / Tile.WIDTH)] instanceof TallGrassTile ) {
+                if ( worldMap[ty][((x+bounds.x) / Tile.WIDTH)] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's BOTTOM-left.");
-                    checkTallGrassTileCollision( (TallGrassTile)worldMap[ty][((x+bounds.x+xDelta) / Tile.WIDTH)] );
-                } else if ( worldMap[ty][((x+bounds.x+bounds.width+xDelta) / Tile.WIDTH)] instanceof TallGrassTile ) {
+                    checkTallGrassTileCollision( (TallGrassTile)worldMap[ty][((x+bounds.x) / Tile.WIDTH)] );
+                } else if ( worldMap[ty][((x+bounds.x+bounds.width) / Tile.WIDTH)] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's BOTTOM-right.");
-                    checkTallGrassTileCollision( (TallGrassTile)worldMap[ty][((x+bounds.x+bounds.width+xDelta) / Tile.WIDTH)] );
+                    checkTallGrassTileCollision( (TallGrassTile)worldMap[ty][((x+bounds.x+bounds.width) / Tile.WIDTH)] );
                 }
 
                 ////////////////////////////////////////
@@ -276,6 +277,10 @@ public class Player
     }
 
     // GETTERS & SETTERS
+
+    public int getX() { return x; }
+
+    public int getY() { return y; }
 
     public int getXDelta() { return xDelta; }
 
