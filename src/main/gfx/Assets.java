@@ -15,24 +15,34 @@ public class Assets {
     public static BufferedImage[][] nabbersBufferedImageNestedArray;
     public static BufferedImage[][] overworldSpritesBufferedImageNestedArray;
 
-    public static BufferedImage world, player, teamRocket, critterSpriteSheet, nabberSpriteSheet,
-            overworldSpritesSpriteSheet,
+    public static BufferedImage teamRocket, critterSpriteSheet, nabberSpriteSheet,
+            overworldSpritesSpriteSheet, indoorsHomeAndRoomSpriteSheet,
             battleStateSpriteSheet, menuStateSpriteSheet, menuStateInfoSpriteSheet,
             critterBallSprite, cursorSprite;
+
+    public static BufferedImage world, roomPlayer, homePlayer, homeRival, lab;
+
     public static BufferedImage[] jamesDown, jamesUp, jamesLeft, jamesRight,
             jessieDown, jessieUp, jessieLeft, jessieRight,
             pikachuDown, pikachuUp, pikachuLeft, pikachuRight;
 
     public static void init() {
-        world = ImageLoader.loadImage("/pokemon-gsc-kanto.png");
-        player = ImageLoader.loadImage("/butters_profchaos.jpg");
         teamRocket = ImageLoader.loadImage("/TeamRocket.png");
         critterSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Yellow - Pokemon.png");
         nabberSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Yellow - Trainers.png");
         overworldSpritesSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Yellow - Overworld Characters.png");
+        indoorsHomeAndRoomSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Yellow - Pallet Town.png");
         battleStateSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Yellow - Battle Interface.png");
         menuStateSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Crystal - Start Menu.png");
         menuStateInfoSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Yellow - Trainer Card.png");
+        critterBallSprite = battleStateSpriteSheet.getSubimage(324, 269, 7, 7);
+        cursorSprite = battleStateSpriteSheet.getSubimage(331, 270, 7, 7);
+
+        world = ImageLoader.loadImage("/pokemon-gsc-kanto.png");
+        roomPlayer = indoorsHomeAndRoomSpriteSheet.getSubimage(32, 8, 128, 128);
+        homePlayer = indoorsHomeAndRoomSpriteSheet.getSubimage(168, 8, 128, 128);
+        homeRival = indoorsHomeAndRoomSpriteSheet.getSubimage(304, 9, 128, 128);
+        lab = indoorsHomeAndRoomSpriteSheet.getSubimage(23, 544, 160, 192);
 
         crittersBufferedImageNestedArray = ImageLoader.cropSpriteFromSpriteSheet(12, 13,
                 56, 56, 1, 1, critterSpriteSheet);
@@ -41,8 +51,6 @@ public class Assets {
         overworldSpritesBufferedImageNestedArray = ImageLoader.cropSpriteFromSpriteSheet(8, 44,
                 16, 16, 0, 0, overworldSpritesSpriteSheet);
         fontHashMap = FontGrabber.initFont();   //this line must come AFTER battleStateSpriteSheet gets initiated.
-        critterBallSprite = battleStateSpriteSheet.getSubimage(324, 269, 7, 7);
-        cursorSprite = battleStateSpriteSheet.getSubimage(331, 270, 7, 7);
 
         ///////////////////////////////////////////////////////////////////////////
         jamesDown = new BufferedImage[2];
