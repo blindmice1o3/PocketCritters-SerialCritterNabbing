@@ -20,8 +20,10 @@ public class BattleState implements IState {
     @Override
     public void tick(long timeElapsed) {
         ///////////////////////////////
-        Object[] args = { player };
-        handler.getStateManager().change("BattleStateIntro", null);
+        //Object[] args = { player };
+        handler.getStateManager().push(
+                handler.getStateManager().getIState("BattleStateIntro"),
+                null);
         ///////////////////////////////
     }
 

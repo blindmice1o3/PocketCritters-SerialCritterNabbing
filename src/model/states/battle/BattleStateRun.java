@@ -45,8 +45,9 @@ public class BattleStateRun implements IState {
             System.out.println("BattleStateRun.tick()... aButton");
 
             ///////////////////////////////
-            Object[] args = { player };
-            handler.getStateManager().change("BattleStateOutro", args);
+            handler.getStateManager().push(
+                    handler.getStateManager().getIState("BattleStateOutro"),
+                    null);
             ///////////////////////////////
         }
         //bButton
@@ -54,8 +55,7 @@ public class BattleStateRun implements IState {
             System.out.println("BattleStateRun.tick()... bButton");
 
             ///////////////////////////////
-            Object[] args = { player };
-            handler.getStateManager().change("BattleStateMenu", args);
+            handler.getStateManager().pop();
             ///////////////////////////////
         }
     }

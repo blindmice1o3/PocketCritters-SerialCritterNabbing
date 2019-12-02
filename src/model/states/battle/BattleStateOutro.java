@@ -45,9 +45,18 @@ public class BattleStateOutro implements IState {
             System.out.println("BattleStateOutro.tick()... aButton");
 
             ///////////////////////////////
-            ((BattleStateMenu) handler.getStateManager().get("BattleStateMenu")).resetIndexForBattleStateMenu();
-            Object[] args = { player };
-            handler.getStateManager().change("GameState", args);
+            ((BattleStateMenu) handler.getStateManager().getIState("BattleStateMenu")).resetIndexForBattleStateMenu();
+            //returning to GameState.
+            //pop self (BattleStateOutro).
+            handler.getStateManager().pop();
+            //pop BattleStateRun.
+            handler.getStateManager().pop();
+            //pop BattleStateMenu.
+            handler.getStateManager().pop();
+            //pop BattleStateIntro.
+            handler.getStateManager().pop();
+            //pop BattleState.
+            handler.getStateManager().pop();
             ///////////////////////////////
         }
         //bButton

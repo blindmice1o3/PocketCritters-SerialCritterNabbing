@@ -93,7 +93,9 @@ public class Game implements Runnable {
         stateManager = new StateManager(handler, player);
 
         Object[] args = { player, james, jessie };
-        stateManager.change("GameState", args);
+        stateManager.push(
+                stateManager.getIState("GameState"),
+                args);
 
         displayer = new Displayer(handler, keyManager,
                 "Pocket Critters - Serial Critter Nabbing", width, height);

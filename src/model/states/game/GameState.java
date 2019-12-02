@@ -62,8 +62,10 @@ public class GameState implements IState {
             System.out.println("GameState.tick()... startButton pressed (VK_ENTER).");
 
             /////////////////////////////////////////////
-            Object[] args = { player };
-            handler.getStateManager().change("MenuState", args);
+            //Object[] args = { player };
+            handler.getStateManager().push(
+                    handler.getStateManager().getIState("MenuState"),
+                    null);
             /////////////////////////////////////////////
         }
 

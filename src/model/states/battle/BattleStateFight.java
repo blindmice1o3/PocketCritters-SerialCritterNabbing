@@ -49,8 +49,7 @@ public class BattleStateFight implements IState {
             System.out.println("BattleStateFight.tick()... bButton");
 
             ///////////////////////////////
-            Object[] args = { player };
-            handler.getStateManager().change("BattleStateMenu", args);
+            handler.getStateManager().pop();
             ///////////////////////////////
         }
     }

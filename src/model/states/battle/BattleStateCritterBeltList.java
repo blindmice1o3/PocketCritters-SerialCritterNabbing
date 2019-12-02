@@ -66,8 +66,7 @@ public class BattleStateCritterBeltList implements IState {
             System.out.println("BattleStateCritterBeltList.tick()... bButton");
 
             ///////////////////////////////
-            Object[] args = { player };
-            handler.getStateManager().change("BattleStateMenu", args);
+            handler.getStateManager().pop();
             ///////////////////////////////
         }
     }

@@ -21,7 +21,9 @@ public class MenuState implements IState {
     public void tick(long timeElapsed) {
         ///////////////////////////////
         Object[] args = { player };
-        handler.getStateManager().change("MenuStateMenu", null);
+        handler.getStateManager().push(
+                handler.getStateManager().getIState("MenuStateMenu"),
+                null);
         ///////////////////////////////
 
 

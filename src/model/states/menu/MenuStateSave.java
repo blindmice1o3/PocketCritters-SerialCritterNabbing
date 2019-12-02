@@ -33,13 +33,18 @@ public class MenuStateSave implements IState {
 
 
             ///////////////////////////////
-            Object[] args = { player };
-            handler.getStateManager().change("GameState", args);
+            //returning to GameState.
+            //pop self (MenuStateSave).
+            handler.getStateManager().pop();
+            //pop MenuStateMenu.
+            handler.getStateManager().pop();
+            //pop MenuState.
+            handler.getStateManager().pop();
             ///////////////////////////////
         } else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_PERIOD)) {
             ///////////////////////////////
-            Object[] args = { player };
-            handler.getStateManager().change("MenuStateMenu", args);
+            //Object[] args = { player };
+            handler.getStateManager().pop();
             ///////////////////////////////
         }
 

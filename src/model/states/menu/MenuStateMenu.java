@@ -62,8 +62,11 @@ public class MenuStateMenu implements IState {
             System.out.println("MenuStateMenu.tick()... startButton pressed (VK_ENTER).");
 
             /////////////////////////////////////////////
-            Object[] args = { player };
-            handler.getStateManager().change("GameState", args);
+            //Object[] args = { player };
+            //pop self (MenuStateMenu) off.
+            handler.getStateManager().pop();
+            //pop MenuState off.
+            handler.getStateManager().pop();
             /////////////////////////////////////////////
         }
         //aButton
@@ -71,8 +74,10 @@ public class MenuStateMenu implements IState {
             System.out.println("MenuStateMenu.tick()... aButton");
 
             ///////////////////////////////
-            Object[] args = { player };
-            handler.getStateManager().change(menuList[indexMenu], args);
+            //Object[] args = { player };
+            handler.getStateManager().push(
+                    handler.getStateManager().getIState(menuList[indexMenu]),
+                    null);
             ///////////////////////////////
         }
         //bButton
@@ -80,8 +85,11 @@ public class MenuStateMenu implements IState {
             System.out.println("MenuStateMenu.tick()... bButton");
 
             ///////////////////////////////
-            Object[] args = { player };
-            handler.getStateManager().change("GameState", args);
+            //Object[] args = { player };
+            //pop self (MenuStateMenu) off.
+            handler.getStateManager().pop();
+            //pop MenuState off.
+            handler.getStateManager().pop();
             ///////////////////////////////
         }
     }

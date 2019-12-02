@@ -67,8 +67,10 @@ public class BattleStateMenu implements IState {
             System.out.println("BattleStateMenu.tick()... aButton");
 
             ////////////////////////////////////////////////////////////
-            Object[] args = { player };
-            handler.getStateManager().change(menuMatrix[yIndex][xIndex], args);
+            //Object[] args = { player };
+            handler.getStateManager().push(
+                    handler.getStateManager().getIState(menuMatrix[yIndex][xIndex]),
+                    null);
             ////////////////////////////////////////////////////////////
         }
         //bButton

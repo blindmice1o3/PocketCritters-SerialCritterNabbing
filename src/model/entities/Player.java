@@ -103,8 +103,10 @@ public class Player
 
             //if (r.nextInt(4) < 1) {
             //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-            Object[] args = { this };
-            handler.getStateManager().change("BattleState", args);
+            //Object[] args = { this };
+            handler.getStateManager().push(
+                    handler.getStateManager().getIState("BattleState"),
+                    null);
             //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
             //}
         }
