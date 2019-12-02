@@ -70,7 +70,7 @@ public class Displayer {
         public void paintComponent(Graphics g) {
             //super.paintComponent(g);
 
-            StateManager.getCurrentState().render(g);
+            handler.getStateManager().getCurrentState().render(g);
         }
 
     } // **** end BasePanel inner-class ****

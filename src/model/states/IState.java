@@ -4,7 +4,7 @@ import java.awt.*;
 
 public interface IState {
 
-    void tick();
+    void tick(long timeElapsed);
 
     void render(Graphics g);
 

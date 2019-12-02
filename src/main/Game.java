@@ -25,6 +25,7 @@ public class Game implements Runnable {
     private Thread thread;
     private boolean running = false;
 
+    private StateManager stateManager;
     private GameCamera gameCamera;
     private Displayer displayer;
 
@@ -89,7 +90,10 @@ public class Game implements Runnable {
         player.addINabber((INabber)jessie);
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-        initStateManager();
+        stateManager = new StateManager(handler, player);
+
+        Object[] args = { player, james, jessie };
+        stateManager.change("GameState", args);
 
         displayer = new Displayer(handler, keyManager,
                 "Pocket Critters - Serial Critter Nabbing", width, height);
@@ -112,18 +116,6 @@ public class Game implements Runnable {
         }
     }
 
-    private void initStateManager() {
-        StateManager.add("GameState", new GameState(handler));
-        StateManager.add("BattleState", new BattleState(handler, player));
-        StateManager.add("MenuState", new MenuState(handler, player));
-
-        //////////////////////////////////////////
-        Object[] args = { player, james, jessie };
-        //////////////////////////////////////////
-
-        StateManager.change( "GameState", args );
-    }
-
     public Tile[][] getWorldMapTileCollisionDetection() {
         return worldMapTileCollisionDetection;
     }
@@ -134,6 +126,7 @@ public class Game implements Runnable {
         double timePerTick = 1000000000 / fps;
         double delta = 0;
         long now;
+        long timeElapsed = 0;
         long lastTime = System.nanoTime();
 
         long timer = 0;
@@ -142,13 +135,14 @@ public class Game implements Runnable {
         ////////////////////////////////////////////////////////
         while(running) {
             now = System.nanoTime();
-            delta += (now - lastTime) / timePerTick;
-            timer += (now - lastTime);
+            timeElapsed = now - lastTime;
+            delta += (timeElapsed / timePerTick);
+            timer += timeElapsed;
             lastTime = now;
 
             if (delta >= 1) {
                 //@@@@@@@@
-                tick();
+                tick(timeElapsed);
                 render();
                 //@@@@@@@@
                 ticks++;
@@ -164,9 +158,9 @@ public class Game implements Runnable {
         ////////////////////////////////////////////////////////
     }
 
-    private void tick() {
+    private void tick(long timeElapsed) {
         keyManager.tick();                                      //getInput()
-        StateManager.getCurrentState().tick();                  //update()
+        stateManager.getCurrentState().tick(timeElapsed);       //update()
     }
 
     private void render() {
@@ -177,6 +171,7 @@ public class Game implements Runnable {
 
     public KeyManager getKeyManager() { return keyManager; }
     public GameCamera getGameCamera() { return gameCamera; }
+    public StateManager getStateManager() { return stateManager; }
     public void setGameCamera(GameCamera gameCamera) { this.gameCamera = gameCamera; }
     public int getWidth() { return width; }
     public int getHeight() { return height; }

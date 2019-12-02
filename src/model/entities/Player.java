@@ -58,7 +58,7 @@ public class Player
 
         directionFacing = DirectionFacing.DOWN;
         //bounds = new Rectangle(0, 0, Tile.WIDTH, Tile.HEIGHT);
-        bounds = new Rectangle(0+2, 0+2, Tile.WIDTH-4, Tile.HEIGHT-4);
+        bounds = new Rectangle(0+1, 0+1, Tile.WIDTH-2, Tile.HEIGHT-2);
 
         moveSpeed = Tile.WIDTH;
 
@@ -104,7 +104,7 @@ public class Player
             //if (r.nextInt(4) < 1) {
             //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
             Object[] args = { this };
-            StateManager.change("BattleState", args);
+            handler.getStateManager().change("BattleState", args);
             //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
             //}
         }

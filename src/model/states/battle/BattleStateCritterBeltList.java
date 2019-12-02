@@ -24,7 +24,7 @@ public class BattleStateCritterBeltList implements IState {
     } // **** end BattleStateCritterBeltList(Handler, Player) constructor ****
 
     @Override
-    public void tick() {
+    public void tick(long timeElapsed) {
         System.out.println("BattleStateCritterBeltList.tick()");
 
         //UP
@@ -67,7 +67,7 @@ public class BattleStateCritterBeltList implements IState {
 
             ///////////////////////////////
             Object[] args = { player };
-            StateManager.change("BattleStateMenu", args);
+            handler.getStateManager().change("BattleStateMenu", args);
             ///////////////////////////////
         }
     }

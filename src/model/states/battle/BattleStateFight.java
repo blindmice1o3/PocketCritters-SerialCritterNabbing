@@ -21,7 +21,7 @@ public class BattleStateFight implements IState {
 
     //while-loop and track whose turn it is.
     @Override
-    public void tick() {
+    public void tick(long timeElapsed) {
         System.out.println("BattleStateFight.tick()");
 
         //UP
@@ -50,7 +50,7 @@ public class BattleStateFight implements IState {
 
             ///////////////////////////////
             Object[] args = { player };
-            StateManager.change("BattleStateMenu", args);
+            handler.getStateManager().change("BattleStateMenu", args);
             ///////////////////////////////
         }
     }

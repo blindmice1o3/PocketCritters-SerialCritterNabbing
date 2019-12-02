@@ -17,7 +17,7 @@ public class MenuStateCritterDex implements IState {
     } // **** end MenuStateCritterDex(Handler, Player) constructor ****
 
     @Override
-    public void tick() {
+    public void tick(long timeElapsed) {
 
     }
 

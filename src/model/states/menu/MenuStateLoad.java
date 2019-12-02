@@ -21,7 +21,7 @@ public class MenuStateLoad implements IState {
     } // **** end MenuStateLoad(Handler, Player) constructor ****
 
     @Override
-    public void tick() {
+    public void tick(long timeElapsed) {
         if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_COMMA)) {
             ///////////////
             pressed = true;
@@ -34,12 +34,12 @@ public class MenuStateLoad implements IState {
 
             ///////////////////////////////
             Object[] args = { player };
-            StateManager.change("GameState", args);
+            handler.getStateManager().change("GameState", args);
             ///////////////////////////////
         } else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_PERIOD)) {
             ///////////////////////////////
             Object[] args = { player };
-            StateManager.change("MenuStateMenu", args);
+            handler.getStateManager().change("MenuStateMenu", args);
             ///////////////////////////////
         }
     }

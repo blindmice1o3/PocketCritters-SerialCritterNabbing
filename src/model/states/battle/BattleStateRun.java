@@ -21,7 +21,7 @@ public class BattleStateRun implements IState {
     } // **** end BattleStateRun(Handler, Player) constructor ****
 
     @Override
-    public void tick() {
+    public void tick(long timeElapsed) {
         System.out.println("BattleStateRun.tick()");
 
         //UP
@@ -46,7 +46,7 @@ public class BattleStateRun implements IState {
 
             ///////////////////////////////
             Object[] args = { player };
-            StateManager.change("BattleStateOutro", args);
+            handler.getStateManager().change("BattleStateOutro", args);
             ///////////////////////////////
         }
         //bButton
@@ -55,7 +55,7 @@ public class BattleStateRun implements IState {
 
             ///////////////////////////////
             Object[] args = { player };
-            StateManager.change("BattleStateMenu", args);
+            handler.getStateManager().change("BattleStateMenu", args);
             ///////////////////////////////
         }
     }

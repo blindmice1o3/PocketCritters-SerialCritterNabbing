@@ -22,7 +22,7 @@ public class BattleStateItemList implements IState {
     } // **** end BattleStateItemList(Handler, Player) constructor ****
 
     @Override
-    public void tick() {
+    public void tick(long timeElapsed) {
         System.out.println("BattleStateItemList.tick()");
 
         //UP
@@ -65,7 +65,7 @@ public class BattleStateItemList implements IState {
 
             ///////////////////////////////
             Object[] args = { player };
-            StateManager.change("BattleStateMenu", args);
+            handler.getStateManager().change("BattleStateMenu", args);
             ///////////////////////////////
         }
     }

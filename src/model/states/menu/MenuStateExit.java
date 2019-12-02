@@ -17,7 +17,7 @@ public class MenuStateExit implements IState {
     } // **** end MenuStateExit(Handler, Player) constructor ****
 
     @Override
-    public void tick() {
+    public void tick(long timeElapsed) {
 
     }
 

@@ -5,7 +5,7 @@ import java.awt.*;
 public class EmptyState implements IState {
 
     @Override
-    public void tick() {
+    public void tick(long timeElapsed) {
 
     }
 

@@ -31,7 +31,7 @@ public class BattleStateMenu implements IState {
     } // **** end BattleStateMenu(Handler, Player) constructor ****
 
     @Override
-    public void tick() {
+    public void tick(long timeElapsed) {
         System.out.println("BattleStateMenu.tick()");
 
         //UP
@@ -68,7 +68,7 @@ public class BattleStateMenu implements IState {
 
             ////////////////////////////////////////////////////////////
             Object[] args = { player };
-            StateManager.change(menuMatrix[yIndex][xIndex], args);
+            handler.getStateManager().change(menuMatrix[yIndex][xIndex], args);
             ////////////////////////////////////////////////////////////
         }
         //bButton

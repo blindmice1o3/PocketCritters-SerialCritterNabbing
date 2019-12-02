@@ -21,7 +21,7 @@ public class BattleStateOutro implements IState {
     } // **** end BattleStateOutro(Handler, Player) constructor ****
 
     @Override
-    public void tick() {
+    public void tick(long timeElapsed) {
         System.out.println("BattleStateOutro.tick()");
 
         //UP
@@ -45,9 +45,9 @@ public class BattleStateOutro implements IState {
             System.out.println("BattleStateOutro.tick()... aButton");
 
             ///////////////////////////////
-            ((BattleStateMenu) StateManager.get("BattleStateMenu")).resetIndexForBattleStateMenu();
+            ((BattleStateMenu) handler.getStateManager().get("BattleStateMenu")).resetIndexForBattleStateMenu();
             Object[] args = { player };
-            StateManager.change("GameState", args);
+            handler.getStateManager().change("GameState", args);
             ///////////////////////////////
         }
         //bButton

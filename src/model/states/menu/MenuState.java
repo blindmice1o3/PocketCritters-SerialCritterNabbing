@@ -15,29 +15,13 @@ public class MenuState implements IState {
     public MenuState(Handler handler, Player player) {
         this.handler = handler;
         this.player = player;
-
-        ////////////////////
-        initStateManager();
-        ////////////////////
     } // **** end MenuState(Handler, Player) constructor
 
-    private void initStateManager() {
-        StateManager.add("MenuStateMenu", new MenuStateMenu(handler, player));
-        StateManager.add("MenuStateCritterDex", new MenuStateCritterDex(handler, player));
-        StateManager.add("MenuStateCritterBeltList", new MenuStateCritterBeltList(handler, player));
-        StateManager.add("MenuStateItemList", new MenuStateItemList(handler, player));
-        StateManager.add("MenuStatePlayerStats", new MenuStatePlayerStats(handler, player));
-        StateManager.add("MenuStateSave", new MenuStateSave(handler, player));
-        StateManager.add( "MenuStateLoad", new MenuStateLoad(handler, player));
-        //StateManager.add("MenuStateOption", new MenuStateOption(handler, player));
-        StateManager.add("MenuStateExit", new MenuStateExit(handler, player));
-    }
-
     @Override
-    public void tick() {
+    public void tick(long timeElapsed) {
         ///////////////////////////////
         Object[] args = { player };
-        StateManager.change("MenuStateMenu", null);
+        handler.getStateManager().change("MenuStateMenu", null);
         ///////////////////////////////
 
 

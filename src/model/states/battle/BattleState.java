@@ -15,27 +15,13 @@ public class BattleState implements IState {
     public BattleState(Handler handler, Player player) {
         this.handler = handler;
         this.player = player;
-
-        ////////////////////
-        initStateManager();
-        ////////////////////
     } // **** end BattleState(Handler, Player) constructor ****
 
-    private void initStateManager() {
-        StateManager.add("BattleStateIntro", new BattleStateIntro(handler, player));
-        StateManager.add("BattleStateMenu", new BattleStateMenu(handler, player));
-        StateManager.add("BattleStateFight", new BattleStateFight(handler, player));
-        StateManager.add("BattleStateItemList", new BattleStateItemList(handler, player));
-        StateManager.add("BattleStateCritterBeltList", new BattleStateCritterBeltList(handler, player));
-        StateManager.add("BattleStateRun", new BattleStateRun(handler, player));
-        StateManager.add("BattleStateOutro", new BattleStateOutro(handler, player));
-    }
-
     @Override
-    public void tick() {
+    public void tick(long timeElapsed) {
         ///////////////////////////////
         Object[] args = { player };
-        StateManager.change("BattleStateIntro", null);
+        handler.getStateManager().change("BattleStateIntro", null);
         ///////////////////////////////
     }
 

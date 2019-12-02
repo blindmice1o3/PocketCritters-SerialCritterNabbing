@@ -28,7 +28,7 @@ public class MenuStateMenu implements IState {
     } // **** end MenuStateMenu(Handler, Player) constructor ****
 
     @Override
-    public void tick() {
+    public void tick(long timeElapsed) {
         //System.out.println("MenuStateMenu.tick()");
 
         //UP
@@ -63,7 +63,7 @@ public class MenuStateMenu implements IState {
 
             /////////////////////////////////////////////
             Object[] args = { player };
-            StateManager.change("GameState", args);
+            handler.getStateManager().change("GameState", args);
             /////////////////////////////////////////////
         }
         //aButton
@@ -72,7 +72,7 @@ public class MenuStateMenu implements IState {
 
             ///////////////////////////////
             Object[] args = { player };
-            StateManager.change(menuList[indexMenu], args);
+            handler.getStateManager().change(menuList[indexMenu], args);
             ///////////////////////////////
         }
         //bButton
@@ -81,7 +81,7 @@ public class MenuStateMenu implements IState {
 
             ///////////////////////////////
             Object[] args = { player };
-            StateManager.change("GameState", args);
+            handler.getStateManager().change("GameState", args);
             ///////////////////////////////
         }
     }

@@ -21,7 +21,7 @@ public class BattleStateIntro implements IState {
     } // **** end BattleStateIntro(Handler, Player) constructor ****
 
     @Override
-    public void tick() {
+    public void tick(long timeElapsed) {
         System.out.println("BattleStateIntro.tick()");
 
         //UP
@@ -46,7 +46,7 @@ public class BattleStateIntro implements IState {
 
             ///////////////////////////////
             Object[] args = { player };
-            StateManager.change("BattleStateMenu", args);
+            handler.getStateManager().change("BattleStateMenu", args);
             ///////////////////////////////
         }
         //bButton

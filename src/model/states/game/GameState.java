@@ -20,10 +20,10 @@ public class GameState implements IState {
 
     public GameState(Handler handler) {
         this.handler = handler;
-    } // **** end GameState(Handler, int, int) constructor ****
+    } // **** end GameState(Handler) constructor ****
 
     @Override
-    public void tick() {
+    public void tick(long timeElapsed) {
         //getInput()
         //UP
         if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {
@@ -63,7 +63,7 @@ public class GameState implements IState {
 
             /////////////////////////////////////////////
             Object[] args = { player };
-            StateManager.change("MenuState", args);
+            handler.getStateManager().change("MenuState", args);
             /////////////////////////////////////////////
         }
 

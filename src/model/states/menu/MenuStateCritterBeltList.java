@@ -17,7 +17,7 @@ public class MenuStateCritterBeltList implements IState {
     } // **** end MenuStateCritterBeltList(Handler, Player) constructor ****
 
     @Override
-    public void tick() {
+    public void tick(long timeElapsed) {
 
     }
 
