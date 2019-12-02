@@ -31,7 +31,7 @@ public class BattleState implements IState {
         stateMachine.addIStateToCollection("BattleStateRun", new BattleStateRun(handler, player));
         stateMachine.addIStateToCollection("BattleStateOutro", new BattleStateOutro(handler, player));
 
-        stateMachine.push( stateMachine.getIState("BattleStateIntro"), null);
+        stateMachine.push( stateMachine.getIState("BattleStateIntro"), null );
     }
 
     @Override

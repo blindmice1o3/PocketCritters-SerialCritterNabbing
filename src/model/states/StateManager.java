@@ -27,17 +27,6 @@ public class StateManager {
         stateHashMap.put("BattleState", new BattleState(handler, player));
         stateHashMap.put("MenuState", new MenuState(handler, player));
 
-
-
-        stateHashMap.put("MenuStateMenu", new MenuStateMenu(handler, player));
-        stateHashMap.put("MenuStateCritterDex", new MenuStateCritterDex(handler, player));
-        stateHashMap.put("MenuStateCritterBeltList", new MenuStateCritterBeltList(handler, player));
-        stateHashMap.put("MenuStateItemList", new MenuStateItemList(handler, player));
-        stateHashMap.put("MenuStatePlayerStats", new MenuStatePlayerStats(handler, player));
-        stateHashMap.put("MenuStateSave", new MenuStateSave(handler, player));
-        stateHashMap.put( "MenuStateLoad", new MenuStateLoad(handler, player));
-        stateHashMap.put("MenuStateExit", new MenuStateExit(handler, player));
-
         stateStack = new ArrayList<IState>();
         stateStack.add(stateHashMap.get("GameState"));
     } // **** end StateManager(Handler, Player) constructor ****

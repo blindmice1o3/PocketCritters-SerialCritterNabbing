@@ -47,10 +47,10 @@ public class BattleStateRun implements IState {
             ///////////////////////////////
             if (handler.getStateManager().getCurrentState() instanceof BattleState) {
                 BattleState battleState = (BattleState)handler.getStateManager().getCurrentState();
-                StateMachine state = battleState.getStateMachine();
+                StateMachine stateMachine = battleState.getStateMachine();
 
-                state.push(
-                        state.getIState("BattleStateOutro"), null
+                stateMachine.push(
+                        stateMachine.getIState("BattleStateOutro"), null
                 );
             }
             ///////////////////////////////
@@ -62,9 +62,9 @@ public class BattleStateRun implements IState {
             ///////////////////////////////
             if (handler.getStateManager().getCurrentState() instanceof BattleState) {
                 BattleState battleState = (BattleState)handler.getStateManager().getCurrentState();
-                StateMachine state = battleState.getStateMachine();
+                StateMachine stateMachine = battleState.getStateMachine();
 
-                state.pop();
+                stateMachine.pop();
             }
             ///////////////////////////////
         }

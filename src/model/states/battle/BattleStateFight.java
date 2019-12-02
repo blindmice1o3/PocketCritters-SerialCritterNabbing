@@ -52,9 +52,9 @@ public class BattleStateFight implements IState {
             ///////////////////////////////
             if (handler.getStateManager().getCurrentState() instanceof BattleState) {
                 BattleState battleState = (BattleState)handler.getStateManager().getCurrentState();
-                StateMachine state = battleState.getStateMachine();
+                StateMachine stateMachine = battleState.getStateMachine();
 
-                state.pop();
+                stateMachine.pop();
             }
             ///////////////////////////////
         }

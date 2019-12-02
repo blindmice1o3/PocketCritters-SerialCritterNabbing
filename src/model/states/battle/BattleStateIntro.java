@@ -47,10 +47,10 @@ public class BattleStateIntro implements IState {
             ///////////////////////////////
             if (handler.getStateManager().getCurrentState() instanceof BattleState) {
                 BattleState battleState = (BattleState)handler.getStateManager().getCurrentState();
-                StateMachine state = battleState.getStateMachine();
+                StateMachine stateMachine = battleState.getStateMachine();
 
-                state.push(
-                        state.getIState("BattleStateMenu"), null
+                stateMachine.push(
+                        stateMachine.getIState("BattleStateMenu"), null
                 );
             }
             ///////////////////////////////

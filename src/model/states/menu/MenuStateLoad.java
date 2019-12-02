@@ -4,6 +4,7 @@ import main.Handler;
 import main.utils.SerializationDoer;
 import model.entities.Player;
 import model.states.IState;
+import model.states.StateMachine;
 import model.states.StateManager;
 
 import java.awt.*;
@@ -31,20 +32,29 @@ public class MenuStateLoad implements IState {
             SerializationDoer loader = new SerializationDoer(handler);
             loader.loadReadFromFile();
 
-
-            ///////////////////////////////
             //returning to GameState.
-            //pop self (MenuStateLoad).
-            handler.getStateManager().pop();
-            //pop MenuStateMenu.
-            handler.getStateManager().pop();
-            //pop MenuState.
-            handler.getStateManager().pop();
+            ///////////////////////////////
+            if (handler.getStateManager().getCurrentState() instanceof MenuState) {
+                MenuState menuState = (MenuState)handler.getStateManager().getCurrentState();
+                StateMachine stateMachine = menuState.getStateMachine();
+
+                //pop self (MenuStateLoad).
+                stateMachine.pop();
+                //now MenuStateMenu.
+                //pop MenuState.
+                handler.getStateManager().pop();
+            }
             ///////////////////////////////
         } else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_PERIOD)) {
             ///////////////////////////////
-            //Object[] args = { player };
-            handler.getStateManager().pop();
+            if (handler.getStateManager().getCurrentState() instanceof MenuState) {
+                MenuState menuState = (MenuState)handler.getStateManager().getCurrentState();
+                StateMachine stateMachine = menuState.getStateMachine();
+
+                //pop self (MenuStateLoad).
+                stateMachine.pop();
+                //now MenuStateMenu.
+            }
             ///////////////////////////////
         }
     }

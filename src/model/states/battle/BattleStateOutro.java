@@ -49,14 +49,14 @@ public class BattleStateOutro implements IState {
             ///////////////////////////////
             if (handler.getStateManager().getCurrentState() instanceof BattleState) {
                 BattleState battleState = (BattleState)handler.getStateManager().getCurrentState();
-                StateMachine state = battleState.getStateMachine();
+                StateMachine stateMachine = battleState.getStateMachine();
 
                 //pop self (BattleStateOutro).
-                state.pop();
+                stateMachine.pop();
                 //pop BattleStateRun.
-                state.pop();
+                stateMachine.pop();
                 //pop BattleStateMenu.
-                state.pop();
+                stateMachine.pop();
                 //now at BattleStateIntro for BattleState.state (a state machine using stack structure).
                 //bringing StateManager back to GameState from BattleState.
                 if (handler.getStateManager().getCurrentState() instanceof BattleState) {

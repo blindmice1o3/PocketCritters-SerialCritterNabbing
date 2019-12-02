@@ -3,8 +3,10 @@ package model.states.menu;
 import main.Handler;
 import model.entities.Player;
 import model.states.IState;
+import model.states.StateMachine;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public class MenuStateExit implements IState {
 
@@ -18,7 +20,18 @@ public class MenuStateExit implements IState {
 
     @Override
     public void tick(long timeElapsed) {
+        //returning to GameState.
+        ///////////////////////////////
+        if (handler.getStateManager().getCurrentState() instanceof MenuState) {
+            MenuState menuState = (MenuState)handler.getStateManager().getCurrentState();
+            StateMachine stateMachine = menuState.getStateMachine();
 
+            //pop self (MenuStateExit).
+            stateMachine.pop();
+            //now MenuStateMenu.
+            //pop MenuState.
+            handler.getStateManager().pop();
+        }
     }
 
     @Override

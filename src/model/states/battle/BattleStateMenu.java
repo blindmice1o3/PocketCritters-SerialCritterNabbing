@@ -69,10 +69,10 @@ public class BattleStateMenu implements IState {
             ////////////////////////////////////////////////////////////
             if (handler.getStateManager().getCurrentState() instanceof BattleState) {
                 BattleState battleState = (BattleState)handler.getStateManager().getCurrentState();
-                StateMachine state = battleState.getStateMachine();
+                StateMachine stateMachine = battleState.getStateMachine();
 
-                state.push(
-                        state.getIState(menuMatrix[yIndex][xIndex]), null
+                stateMachine.push(
+                        stateMachine.getIState(menuMatrix[yIndex][xIndex]), null
                 );
             }
             ////////////////////////////////////////////////////////////

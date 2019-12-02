@@ -4,6 +4,7 @@ import main.Handler;
 import main.gfx.Assets;
 import model.entities.Player;
 import model.states.IState;
+import model.states.StateMachine;
 import model.states.StateManager;
 
 import java.awt.*;
@@ -62,9 +63,6 @@ public class MenuStateMenu implements IState {
             System.out.println("MenuStateMenu.tick()... startButton pressed (VK_ENTER).");
 
             /////////////////////////////////////////////
-            //Object[] args = { player };
-            //pop self (MenuStateMenu) off.
-            handler.getStateManager().pop();
             //pop MenuState off.
             handler.getStateManager().pop();
             /////////////////////////////////////////////
@@ -74,10 +72,14 @@ public class MenuStateMenu implements IState {
             System.out.println("MenuStateMenu.tick()... aButton");
 
             ///////////////////////////////
-            //Object[] args = { player };
-            handler.getStateManager().push(
-                    handler.getStateManager().getIState(menuList[indexMenu]),
-                    null);
+            if (handler.getStateManager().getCurrentState() instanceof MenuState) {
+                MenuState menuState = (MenuState)handler.getStateManager().getCurrentState();
+                StateMachine stateMachine = menuState.getStateMachine();
+
+                stateMachine.push(
+                        stateMachine.getIState(menuList[indexMenu]), null
+                );
+            }
             ///////////////////////////////
         }
         //bButton
@@ -85,9 +87,6 @@ public class MenuStateMenu implements IState {
             System.out.println("MenuStateMenu.tick()... bButton");
 
             ///////////////////////////////
-            //Object[] args = { player };
-            //pop self (MenuStateMenu) off.
-            handler.getStateManager().pop();
             //pop MenuState off.
             handler.getStateManager().pop();
             ///////////////////////////////
