@@ -4,7 +4,7 @@ import main.Handler;
 import main.gfx.Assets;
 import model.entities.Player;
 import model.states.IState;
-import model.states.StateManager;
+import model.states.StateMachine;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -44,20 +44,25 @@ public class BattleStateOutro implements IState {
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_COMMA)) {
             System.out.println("BattleStateOutro.tick()... aButton");
 
-            ///////////////////////////////
-            ((BattleStateMenu) handler.getStateManager().getIState("BattleStateMenu")).resetIndexForBattleStateMenu();
+            ((BattleStateMenu)((BattleState)handler.getStateManager().getIState("BattleState")).getStateMachine().getIState("BattleStateMenu")).resetIndexForBattleStateMenu();
             //returning to GameState.
-            //pop self (BattleStateOutro).
-            handler.getStateManager().pop();
-            //pop BattleStateRun.
-            handler.getStateManager().pop();
-            //pop BattleStateMenu.
-            handler.getStateManager().pop();
-            //pop BattleStateIntro.
-            handler.getStateManager().pop();
-            //pop BattleState.
-            handler.getStateManager().pop();
             ///////////////////////////////
+            if (handler.getStateManager().getCurrentState() instanceof BattleState) {
+                BattleState battleState = (BattleState)handler.getStateManager().getCurrentState();
+                StateMachine state = battleState.getStateMachine();
+
+                //pop self (BattleStateOutro).
+                state.pop();
+                //pop BattleStateRun.
+                state.pop();
+                //pop BattleStateMenu.
+                state.pop();
+                //now at BattleStateIntro for BattleState.state (a state machine using stack structure).
+                //bringing StateManager back to GameState from BattleState.
+                if (handler.getStateManager().getCurrentState() instanceof BattleState) {
+                    handler.getStateManager().pop();
+                }
+            }
         }
         //bButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_PERIOD)) {

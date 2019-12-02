@@ -4,7 +4,7 @@ import main.Handler;
 import main.gfx.Assets;
 import model.entities.Player;
 import model.states.IState;
-import model.states.StateManager;
+import model.states.StateMachine;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -48,8 +48,14 @@ public class BattleStateFight implements IState {
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_PERIOD)) {
             System.out.println("BattleStateFight.tick()... bButton");
 
+
             ///////////////////////////////
-            handler.getStateManager().pop();
+            if (handler.getStateManager().getCurrentState() instanceof BattleState) {
+                BattleState battleState = (BattleState)handler.getStateManager().getCurrentState();
+                StateMachine state = battleState.getStateMachine();
+
+                state.pop();
+            }
             ///////////////////////////////
         }
     }

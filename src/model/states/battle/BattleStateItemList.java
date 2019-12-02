@@ -4,7 +4,7 @@ import main.Handler;
 import main.gfx.Assets;
 import model.entities.Player;
 import model.states.IState;
-import model.states.StateManager;
+import model.states.StateMachine;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -57,14 +57,19 @@ public class BattleStateItemList implements IState {
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_COMMA)) {
             System.out.println("BattleStateItemList.tick()... aButton");
 
-            System.out.println( "Item selected for use: " + player.getInventory().get(index) );
+            //System.out.println( "Item selected for use: " + player.getInventory().get(index) );
         }
         //bButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_PERIOD)) {
             System.out.println("BattleStateItemList.tick()... bButton");
 
             ///////////////////////////////
-            handler.getStateManager().pop();
+            if (handler.getStateManager().getCurrentState() instanceof BattleState) {
+                BattleState battleState = (BattleState)handler.getStateManager().getCurrentState();
+                StateMachine state = battleState.getStateMachine();
+
+                state.pop();
+            }
             ///////////////////////////////
         }
     }

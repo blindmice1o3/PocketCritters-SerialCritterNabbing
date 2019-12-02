@@ -4,7 +4,7 @@ import main.Handler;
 import main.gfx.Assets;
 import model.entities.Player;
 import model.states.IState;
-import model.states.StateManager;
+import model.states.StateMachine;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -67,10 +67,14 @@ public class BattleStateMenu implements IState {
             System.out.println("BattleStateMenu.tick()... aButton");
 
             ////////////////////////////////////////////////////////////
-            //Object[] args = { player };
-            handler.getStateManager().push(
-                    handler.getStateManager().getIState(menuMatrix[yIndex][xIndex]),
-                    null);
+            if (handler.getStateManager().getCurrentState() instanceof BattleState) {
+                BattleState battleState = (BattleState)handler.getStateManager().getCurrentState();
+                StateMachine state = battleState.getStateMachine();
+
+                state.push(
+                        state.getIState(menuMatrix[yIndex][xIndex]), null
+                );
+            }
             ////////////////////////////////////////////////////////////
         }
         //bButton

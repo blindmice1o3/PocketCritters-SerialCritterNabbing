@@ -27,13 +27,7 @@ public class StateManager {
         stateHashMap.put("BattleState", new BattleState(handler, player));
         stateHashMap.put("MenuState", new MenuState(handler, player));
 
-        stateHashMap.put("BattleStateIntro", new BattleStateIntro(handler, player));
-        stateHashMap.put("BattleStateMenu", new BattleStateMenu(handler, player));
-        stateHashMap.put("BattleStateFight", new BattleStateFight(handler, player));
-        stateHashMap.put("BattleStateItemList", new BattleStateItemList(handler, player));
-        stateHashMap.put("BattleStateCritterBeltList", new BattleStateCritterBeltList(handler, player));
-        stateHashMap.put("BattleStateRun", new BattleStateRun(handler, player));
-        stateHashMap.put("BattleStateOutro", new BattleStateOutro(handler, player));
+
 
         stateHashMap.put("MenuStateMenu", new MenuStateMenu(handler, player));
         stateHashMap.put("MenuStateCritterDex", new MenuStateCritterDex(handler, player));

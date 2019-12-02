@@ -5,7 +5,7 @@ import main.gfx.Assets;
 import main.utils.FontGrabber;
 import model.entities.Player;
 import model.states.IState;
-import model.states.StateManager;
+import model.states.StateMachine;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -45,10 +45,14 @@ public class BattleStateIntro implements IState {
             System.out.println("BattleStateIntro.tick()... aButton");
 
             ///////////////////////////////
-            //Object[] args = { player };
-            handler.getStateManager().push(
-                    handler.getStateManager().getIState("BattleStateMenu"),
-                    null);
+            if (handler.getStateManager().getCurrentState() instanceof BattleState) {
+                BattleState battleState = (BattleState)handler.getStateManager().getCurrentState();
+                StateMachine state = battleState.getStateMachine();
+
+                state.push(
+                        state.getIState("BattleStateMenu"), null
+                );
+            }
             ///////////////////////////////
         }
         //bButton

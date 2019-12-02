@@ -4,7 +4,7 @@ import main.Handler;
 import main.gfx.Assets;
 import model.entities.Player;
 import model.states.IState;
-import model.states.StateManager;
+import model.states.StateMachine;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -45,9 +45,14 @@ public class BattleStateRun implements IState {
             System.out.println("BattleStateRun.tick()... aButton");
 
             ///////////////////////////////
-            handler.getStateManager().push(
-                    handler.getStateManager().getIState("BattleStateOutro"),
-                    null);
+            if (handler.getStateManager().getCurrentState() instanceof BattleState) {
+                BattleState battleState = (BattleState)handler.getStateManager().getCurrentState();
+                StateMachine state = battleState.getStateMachine();
+
+                state.push(
+                        state.getIState("BattleStateOutro"), null
+                );
+            }
             ///////////////////////////////
         }
         //bButton
@@ -55,7 +60,12 @@ public class BattleStateRun implements IState {
             System.out.println("BattleStateRun.tick()... bButton");
 
             ///////////////////////////////
-            handler.getStateManager().pop();
+            if (handler.getStateManager().getCurrentState() instanceof BattleState) {
+                BattleState battleState = (BattleState)handler.getStateManager().getCurrentState();
+                StateMachine state = battleState.getStateMachine();
+
+                state.pop();
+            }
             ///////////////////////////////
         }
     }

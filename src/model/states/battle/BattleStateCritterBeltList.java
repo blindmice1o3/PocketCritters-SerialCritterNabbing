@@ -4,7 +4,7 @@ import main.Handler;
 import main.gfx.Assets;
 import model.entities.Player;
 import model.states.IState;
-import model.states.StateManager;
+import model.states.StateMachine;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -66,7 +66,12 @@ public class BattleStateCritterBeltList implements IState {
             System.out.println("BattleStateCritterBeltList.tick()... bButton");
 
             ///////////////////////////////
-            handler.getStateManager().pop();
+            if (handler.getStateManager().getCurrentState() instanceof BattleState) {
+                BattleState battleState = (BattleState)handler.getStateManager().getCurrentState();
+                StateMachine state = battleState.getStateMachine();
+
+                state.pop();
+            }
             ///////////////////////////////
         }
     }
