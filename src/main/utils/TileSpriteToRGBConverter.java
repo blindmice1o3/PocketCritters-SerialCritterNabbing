@@ -55,8 +55,10 @@ public class TileSpriteToRGBConverter {
                 worldMapAsTileSprites.getSubimage(976, 3152, TILE_WIDTH, TILE_HEIGHT) ); //Bush
 
         // building_home, starting at x == 1024, y == 3216, width/number_of_columns == 4, height/number_of_rows == 3.
+        ArrayList<BufferedImage> homeNoDoor = pullMultipleTiles(1024, 3216, 4, 3);
+        homeNoDoor.remove(9);
         nonWalkableTileSpriteTargets.addAll(
-                pullMultipleTiles(1024, 3216, 4, 3)
+            homeNoDoor
         );
 
         // building_home_roofTopOfSecondHome.
@@ -65,8 +67,10 @@ public class TileSpriteToRGBConverter {
         );
 
         //building_store, starting at x == 1120, y == 3296, width/number_of_columns == 6, height/number_of_rows == 4.
+        ArrayList<BufferedImage> buildingStoreNoDoor = pullMultipleTiles(1120, 3296, 6, 4);
+        buildingStoreNoDoor.remove(20);
         nonWalkableTileSpriteTargets.addAll(
-                pullMultipleTiles(1120, 3296, 6, 4)
+                buildingStoreNoDoor
         );
     }
 
