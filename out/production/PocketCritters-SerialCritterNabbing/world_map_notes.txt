@@ -9,6 +9,8 @@ HEIGHT
 //GameCamera (initial position)
 TOP LEFT starting town's blue border tile.
 (960, 3184)
+//GameCamera (initial values)
+(960, 3184, 1279, 3455)
 
 960 / 16 = 60th tile
 3184 / 16 =199th tile

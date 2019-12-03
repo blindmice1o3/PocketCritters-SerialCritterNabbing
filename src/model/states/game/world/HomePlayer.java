@@ -25,9 +25,9 @@ public class HomePlayer implements IWorld {
         //tileSpriteToRGBConverter = new TileSpriteToRGBConverter();
         //worldMapTileCollisionDetection = tileSpriteToRGBConverter.generateWorldMapTileCollisionDetection(Assets.homePlayer);
 
-        worldMapTileCollisionDetection = new Tile[10][10];
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+        worldMapTileCollisionDetection = new Tile[8][8];
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
                 worldMapTileCollisionDetection[i][j] = new NonSolidTile(j, i);
             }
         }

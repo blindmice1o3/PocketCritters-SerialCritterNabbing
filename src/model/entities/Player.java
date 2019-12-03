@@ -263,8 +263,8 @@ public class Player
                             }
                             handler.getGameCamera().setxOffset0(0);
                             handler.getGameCamera().setyOffset0(0);
-                            handler.getGameCamera().setxOffset1(319);
-                            handler.getGameCamera().setyOffset1(271);
+                            handler.getGameCamera().setxOffset1(128);
+                            handler.getGameCamera().setyOffset1(128);
 
 
 

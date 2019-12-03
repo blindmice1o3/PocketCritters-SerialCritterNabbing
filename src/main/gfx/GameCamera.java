@@ -28,6 +28,13 @@ public class GameCamera
         xOffset1 += xDelta;
         yOffset1 += yDelta;
 
+        if (xOffset0 < 0) {
+            xOffset0 = 0;
+        }
+        if (yOffset0 < 0) {
+            yOffset0 = 0;
+        }
+
         xDelta = 0;
         yDelta = 0;
     }
