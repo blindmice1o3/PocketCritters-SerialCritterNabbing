@@ -358,10 +358,10 @@ public class Player
                                         ((Jessie)nabber).setY(3 * Tile.WIDTH);
                                     }
                                 }
-                                handler.getGameCamera().setxOffset0(0);
-                                handler.getGameCamera().setyOffset0(0);
-                                handler.getGameCamera().setxOffset1(320);
-                                handler.getGameCamera().setyOffset1(272);
+                                handler.getGameCamera().setxOffset0(-100);
+                                handler.getGameCamera().setyOffset0(-100);
+                                handler.getGameCamera().setxOffset1(-100+320);
+                                handler.getGameCamera().setyOffset1(-100+272);
 
                                 ////////
                                 worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
