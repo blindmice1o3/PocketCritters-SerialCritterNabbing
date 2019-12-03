@@ -11,6 +11,7 @@ import model.items.Item;
 import model.states.StateManager;
 import model.states.game.GameState;
 import model.states.game.world.WorldManager;
+import model.states.game.world.WorldMap;
 import model.tiles.TallGrassTile;
 import model.tiles.Tile;
 
@@ -141,16 +142,60 @@ public class Player
                     checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+bounds.y+bounds.height) / Tile.HEIGHT)][tx] );
                 }
 
+
                 //CHECKING TransferPoints
                 Rectangle collisionBoundsFuture = new Rectangle(x+bounds.x+xDelta, y+bounds.y, Tile.WIDTH, Tile.HEIGHT);
                 Map<String, Rectangle> transferPoints = ((GameState)handler.getStateManager().getIState("GameState")).getWorldManager().getCurrentWorld().getTransferPoints();
                 for (String identifier : transferPoints.keySet()) {
+                    System.out.println("checking transfer points.");
                     if (transferPoints.get(identifier).intersects(collisionBoundsFuture)) {
+                        System.out.println("CHANGING WORLD!!!!!!!!!");
                         WorldManager worldManager = ((GameState)handler.getStateManager().getIState("GameState")).getWorldManager();
                         if (worldManager.getIWorld(identifier) != null) {
-                            worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
-                            //TODO: set player's position relative to new World's Tile[][].
-                            //TODO: set GameCamera's position/coordinates too.
+
+                            // If we are going to HomePlayer: record player's and game camera's
+                            // last location when currentWorld was WorldMap.
+                            if ( identifier.equals("HomePlayer") ) {
+                                //////////////////////////////////////////////////////////////////////////////////////
+                                ((WorldMap)worldManager.getIWorld("WorldMap")).recordLocationPriorTransfer();
+                                //////////////////////////////////////////////////////////////////////////////////////
+
+                                //setting player and game camera to new location and changing currentWorld to HomePlayer.
+                                x = 3 * Tile.WIDTH;
+                                y = 3 * Tile.HEIGHT;
+                                for (INabber nabber : nabberList) {
+                                    if (nabber instanceof James) {
+                                        ((James)nabber).setX(2 * Tile.WIDTH);
+                                        ((James)nabber).setY(3 * Tile.WIDTH);
+                                    } else if (nabber instanceof Jessie) {
+                                        ((Jessie)nabber).setX(4 * Tile.WIDTH);
+                                        ((Jessie)nabber).setY(3 * Tile.WIDTH);
+                                    }
+                                }
+                                handler.getGameCamera().setxOffset0(0);
+                                handler.getGameCamera().setyOffset0(0);
+                                handler.getGameCamera().setxOffset1(320);
+                                handler.getGameCamera().setyOffset1(272);
+
+                                ////////
+                                worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
+                                return;
+                                ////////
+                            }
+                            // (for now) player going back to WorldMap.
+                            else if (identifier.equals("WorldMap")) {
+                                ////////////////////////////////////////////////////////////////////////////////////
+                                ((WorldMap)worldManager.getIWorld("WorldMap")).loadLocationPriorTransfer();
+                                ////////////////////////////////////////////////////////////////////////////////////
+
+                                ////////
+                                worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
+                                return;
+                                ////////
+                            }
+
+
+
                         }
                     }
                 }
@@ -188,16 +233,60 @@ public class Player
                     checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+bounds.y+bounds.height) / Tile.HEIGHT)][tx] );
                 }
 
+
                 //CHECKING TransferPoints
                 Rectangle collisionBoundsFuture = new Rectangle(x+bounds.x+bounds.width+xDelta, y+bounds.y, Tile.WIDTH, Tile.HEIGHT);
                 Map<String, Rectangle> transferPoints = ((GameState)handler.getStateManager().getIState("GameState")).getWorldManager().getCurrentWorld().getTransferPoints();
                 for (String identifier : transferPoints.keySet()) {
+                    System.out.println("checking transfer points.");
                     if (transferPoints.get(identifier).intersects(collisionBoundsFuture)) {
+                        System.out.println("CHANGING WORLD!!!!!!!!!");
                         WorldManager worldManager = ((GameState)handler.getStateManager().getIState("GameState")).getWorldManager();
                         if (worldManager.getIWorld(identifier) != null) {
-                            worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
-                            //TODO: set player's position relative to new World's Tile[][].
-                            //TODO: set GameCamera's position/coordinates too.
+
+                            // If we are going to HomePlayer: record player's and game camera's
+                            // last location when currentWorld was WorldMap.
+                            if ( identifier.equals("HomePlayer") ) {
+                                //////////////////////////////////////////////////////////////////////////////////////
+                                ((WorldMap)worldManager.getIWorld("WorldMap")).recordLocationPriorTransfer();
+                                //////////////////////////////////////////////////////////////////////////////////////
+
+                                //setting player and game camera to new location and changing currentWorld to HomePlayer.
+                                x = 3 * Tile.WIDTH;
+                                y = 3 * Tile.HEIGHT;
+                                for (INabber nabber : nabberList) {
+                                    if (nabber instanceof James) {
+                                        ((James)nabber).setX(2 * Tile.WIDTH);
+                                        ((James)nabber).setY(3 * Tile.WIDTH);
+                                    } else if (nabber instanceof Jessie) {
+                                        ((Jessie)nabber).setX(4 * Tile.WIDTH);
+                                        ((Jessie)nabber).setY(3 * Tile.WIDTH);
+                                    }
+                                }
+                                handler.getGameCamera().setxOffset0(0);
+                                handler.getGameCamera().setyOffset0(0);
+                                handler.getGameCamera().setxOffset1(320);
+                                handler.getGameCamera().setyOffset1(272);
+
+                                ////////
+                                worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
+                                return;
+                                ////////
+                            }
+                            // (for now) player going back to WorldMap.
+                            else if (identifier.equals("WorldMap")) {
+                                ////////////////////////////////////////////////////////////////////////////////////
+                                ((WorldMap)worldManager.getIWorld("WorldMap")).loadLocationPriorTransfer();
+                                ////////////////////////////////////////////////////////////////////////////////////
+
+                                ////////
+                                worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
+                                return;
+                                ////////
+                            }
+
+
+
                         }
                     }
                 }
@@ -250,30 +339,49 @@ public class Player
                         WorldManager worldManager = ((GameState)handler.getStateManager().getIState("GameState")).getWorldManager();
                         if (worldManager.getIWorld(identifier) != null) {
 
-                            x = 3 * Tile.WIDTH;
-                            y = 3 * Tile.HEIGHT;
-                            for (INabber nabber : nabberList) {
-                                if (nabber instanceof James) {
-                                    ((James)nabber).setX(2 * Tile.WIDTH);
-                                    ((James)nabber).setY(3 * Tile.WIDTH);
-                                } else if (nabber instanceof Jessie) {
-                                    ((Jessie)nabber).setX(4 * Tile.WIDTH);
-                                    ((Jessie)nabber).setY(3 * Tile.WIDTH);
+                            // If we are going to HomePlayer: record player's and game camera's
+                            // last location when currentWorld was WorldMap.
+                            if ( identifier.equals("HomePlayer") ) {
+                                //////////////////////////////////////////////////////////////////////////////////////
+                                ((WorldMap)worldManager.getIWorld("WorldMap")).recordLocationPriorTransfer();
+                                //////////////////////////////////////////////////////////////////////////////////////
+
+                                //setting player and game camera to new location and changing currentWorld to HomePlayer.
+                                x = 3 * Tile.WIDTH;
+                                y = 3 * Tile.HEIGHT;
+                                for (INabber nabber : nabberList) {
+                                    if (nabber instanceof James) {
+                                        ((James)nabber).setX(2 * Tile.WIDTH);
+                                        ((James)nabber).setY(3 * Tile.WIDTH);
+                                    } else if (nabber instanceof Jessie) {
+                                        ((Jessie)nabber).setX(4 * Tile.WIDTH);
+                                        ((Jessie)nabber).setY(3 * Tile.WIDTH);
+                                    }
                                 }
+                                handler.getGameCamera().setxOffset0(0);
+                                handler.getGameCamera().setyOffset0(0);
+                                handler.getGameCamera().setxOffset1(320);
+                                handler.getGameCamera().setyOffset1(272);
+
+                                ////////
+                                worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
+                                return;
+                                ////////
                             }
-                            handler.getGameCamera().setxOffset0(0);
-                            handler.getGameCamera().setyOffset0(0);
-                            handler.getGameCamera().setxOffset1(128);
-                            handler.getGameCamera().setyOffset1(128);
+                            // (for now) player going back to WorldMap.
+                            else if (identifier.equals("WorldMap")) {
+                                ////////////////////////////////////////////////////////////////////////////////////
+                                ((WorldMap)worldManager.getIWorld("WorldMap")).loadLocationPriorTransfer();
+                                ////////////////////////////////////////////////////////////////////////////////////
+
+                                ////////
+                                worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
+                                return;
+                                ////////
+                            }
 
 
 
-                            worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
-
-                            return;
-
-                            //TODO: set player's position relative to new World's Tile[][].
-                            //TODO: set GameCamera's position/coordinates too.
                         }
                     }
                 }
@@ -311,16 +419,60 @@ public class Player
                     checkTallGrassTileCollision( (TallGrassTile)worldMap[ty][((x+bounds.x+bounds.width) / Tile.WIDTH)] );
                 }
 
+
                 //CHECKING TransferPoints
                 Rectangle collisionBoundsFuture = new Rectangle(x+bounds.x, y+bounds.y+bounds.height+yDelta, Tile.WIDTH, Tile.HEIGHT);
                 Map<String, Rectangle> transferPoints = ((GameState)handler.getStateManager().getIState("GameState")).getWorldManager().getCurrentWorld().getTransferPoints();
                 for (String identifier : transferPoints.keySet()) {
+                    System.out.println("checking transfer points.");
                     if (transferPoints.get(identifier).intersects(collisionBoundsFuture)) {
+                        System.out.println("CHANGING WORLD!!!!!!!!!");
                         WorldManager worldManager = ((GameState)handler.getStateManager().getIState("GameState")).getWorldManager();
                         if (worldManager.getIWorld(identifier) != null) {
-                            worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
-                            //TODO: set player's position relative to new World's Tile[][].
-                            //TODO: set GameCamera's position/coordinates too.
+
+                            // If we are going to HomePlayer: record player's and game camera's
+                            // last location when currentWorld was WorldMap.
+                            if ( identifier.equals("HomePlayer") ) {
+                                //////////////////////////////////////////////////////////////////////////////////////
+                                ((WorldMap)worldManager.getIWorld("WorldMap")).recordLocationPriorTransfer();
+                                //////////////////////////////////////////////////////////////////////////////////////
+
+                                //setting player and game camera to new location and changing currentWorld to HomePlayer.
+                                x = 3 * Tile.WIDTH;
+                                y = 3 * Tile.HEIGHT;
+                                for (INabber nabber : nabberList) {
+                                    if (nabber instanceof James) {
+                                        ((James)nabber).setX(2 * Tile.WIDTH);
+                                        ((James)nabber).setY(3 * Tile.WIDTH);
+                                    } else if (nabber instanceof Jessie) {
+                                        ((Jessie)nabber).setX(4 * Tile.WIDTH);
+                                        ((Jessie)nabber).setY(3 * Tile.WIDTH);
+                                    }
+                                }
+                                handler.getGameCamera().setxOffset0(0);
+                                handler.getGameCamera().setyOffset0(0);
+                                handler.getGameCamera().setxOffset1(320);
+                                handler.getGameCamera().setyOffset1(272);
+
+                                ////////
+                                worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
+                                return;
+                                ////////
+                            }
+                            // (for now) player going back to WorldMap.
+                            else if (identifier.equals("WorldMap")) {
+                                ////////////////////////////////////////////////////////////////////////////////////
+                                ((WorldMap)worldManager.getIWorld("WorldMap")).loadLocationPriorTransfer();
+                                ////////////////////////////////////////////////////////////////////////////////////
+
+                                ////////
+                                worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
+                                return;
+                                ////////
+                            }
+
+
+
                         }
                     }
                 }
@@ -370,7 +522,11 @@ public class Player
 
     public int getX() { return x; }
 
+    public void setX(int x) { this.x = x; }
+
     public int getY() { return y; }
+
+    public void setY(int y) { this.y = y; }
 
     public int getXDelta() { return xDelta; }
 

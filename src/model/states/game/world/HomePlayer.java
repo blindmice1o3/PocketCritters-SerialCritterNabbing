@@ -55,11 +55,19 @@ public class HomePlayer implements IWorld {
         g.setColor(Color.GRAY);
         g.fillRect(0, 0, handler.getGame().getWidth(), handler.getGame().getHeight());
 
-        g.drawImage(Assets.homePlayer, 0, 0, handler.getGame().getWidth(), handler.getGame().getHeight(),
+        g.drawImage(Assets.homePlayer,
+                10*Tile.WIDTH, 11*Tile.HEIGHT,
+                10*Tile.WIDTH + handler.getGame().getWidth(), 11*Tile.HEIGHT + handler.getGame().getHeight(),
                 (int)(handler.getGame().getGameCamera().getxOffset0()),
                 (int)(handler.getGame().getGameCamera().getyOffset0()),
                 (int)(handler.getGame().getGameCamera().getxOffset1()),
                 (int)(handler.getGame().getGameCamera().getyOffset1()),
+                /*
+                (14 * Tile.WIDTH),
+                (12 * Tile.HEIGHT),
+                ((14 * Tile.WIDTH) + handler.getGame().getWidth()) ,
+                ((12 * Tile.HEIGHT) + handler.getGame().getHeight()),
+                */
                 null);
     }
 
