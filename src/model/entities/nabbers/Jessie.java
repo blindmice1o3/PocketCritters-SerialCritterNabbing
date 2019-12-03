@@ -183,6 +183,12 @@ public class Jessie extends Player
 
     }
 
+    // GETTERS AND SETTERS
+
+    public void setxScreenPosition(int xScreenPosition) { this.xScreenPosition = xScreenPosition; }
+
+    public void setyScreenPosition(int yScreenPosition) { this.yScreenPosition = yScreenPosition; }
+
     public void setX(int x) {
         this.x = x;
     }

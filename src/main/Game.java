@@ -189,7 +189,7 @@ public class Game implements Runnable {
     // |+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|+|
 
     public static void main(String[] args) {
-        Game game = new Game(640, 540); //640x540
+        Game game = new Game(640, 544); //640x540
         game.start();
     }
 
