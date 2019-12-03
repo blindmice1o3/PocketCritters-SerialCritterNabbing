@@ -162,24 +162,24 @@ public class Player
 
                                 //setting player and game camera to new location and changing currentWorld to HomePlayer.
                                 x = 4 * Tile.WIDTH;
-                                y = 4 * Tile.HEIGHT;
+                                y = 7 * Tile.HEIGHT;
                                 for (INabber nabber : nabberList) {
                                     if (nabber instanceof James) {
                                         ((James)nabber).setX(3 * Tile.WIDTH);
-                                        ((James)nabber).setY(4 * Tile.WIDTH);
+                                        ((James)nabber).setY(7 * Tile.HEIGHT);
                                         ((James)nabber).setxScreenPosition( xScreenPosition - (2 * Tile.WIDTH) );
                                         ((James)nabber).setyScreenPosition( yScreenPosition );
                                     } else if (nabber instanceof Jessie) {
                                         ((Jessie)nabber).setX(4 * Tile.WIDTH);
-                                        ((Jessie)nabber).setY(3 * Tile.WIDTH);
+                                        ((Jessie)nabber).setY(6 * Tile.HEIGHT);
                                         ((Jessie)nabber).setxScreenPosition( xScreenPosition );
                                         ((Jessie)nabber).setyScreenPosition( yScreenPosition - (2 * Tile.HEIGHT) );
                                     }
                                 }
                                 handler.getGameCamera().setxOffset0( (-6 * Tile.WIDTH) );
-                                handler.getGameCamera().setyOffset0( (-5 * Tile.HEIGHT) );
+                                handler.getGameCamera().setyOffset0( (-2 * Tile.HEIGHT) );
                                 handler.getGameCamera().setxOffset1( ((-6 * Tile.WIDTH) + 320) );
-                                handler.getGameCamera().setyOffset1( ((-5 * Tile.HEIGHT) + 272) );
+                                handler.getGameCamera().setyOffset1( ((-2 * Tile.HEIGHT) + 272) );
 
                                 ////////
                                 worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
@@ -257,24 +257,24 @@ public class Player
 
                                 //setting player and game camera to new location and changing currentWorld to HomePlayer.
                                 x = 4 * Tile.WIDTH;
-                                y = 4 * Tile.HEIGHT;
+                                y = 7 * Tile.HEIGHT;
                                 for (INabber nabber : nabberList) {
                                     if (nabber instanceof James) {
                                         ((James)nabber).setX(3 * Tile.WIDTH);
-                                        ((James)nabber).setY(4 * Tile.WIDTH);
+                                        ((James)nabber).setY(7 * Tile.HEIGHT);
                                         ((James)nabber).setxScreenPosition( xScreenPosition - (2 * Tile.WIDTH) );
                                         ((James)nabber).setyScreenPosition( yScreenPosition );
                                     } else if (nabber instanceof Jessie) {
                                         ((Jessie)nabber).setX(4 * Tile.WIDTH);
-                                        ((Jessie)nabber).setY(3 * Tile.WIDTH);
+                                        ((Jessie)nabber).setY(6 * Tile.HEIGHT);
                                         ((Jessie)nabber).setxScreenPosition( xScreenPosition );
                                         ((Jessie)nabber).setyScreenPosition( yScreenPosition - (2 * Tile.HEIGHT) );
                                     }
                                 }
                                 handler.getGameCamera().setxOffset0( (-6 * Tile.WIDTH) );
-                                handler.getGameCamera().setyOffset0( (-5 * Tile.HEIGHT) );
+                                handler.getGameCamera().setyOffset0( (-2 * Tile.HEIGHT) );
                                 handler.getGameCamera().setxOffset1( ((-6 * Tile.WIDTH) + 320) );
-                                handler.getGameCamera().setyOffset1( ((-5 * Tile.HEIGHT) + 272) );
+                                handler.getGameCamera().setyOffset1( ((-2 * Tile.HEIGHT) + 272) );
 
                                 ////////
                                 worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
@@ -356,24 +356,24 @@ public class Player
 
                                 //setting player and game camera to new location and changing currentWorld to HomePlayer.
                                 x = 4 * Tile.WIDTH;
-                                y = 4 * Tile.HEIGHT;
+                                y = 7 * Tile.HEIGHT;
                                 for (INabber nabber : nabberList) {
                                     if (nabber instanceof James) {
                                         ((James)nabber).setX(3 * Tile.WIDTH);
-                                        ((James)nabber).setY(4 * Tile.WIDTH);
+                                        ((James)nabber).setY(7 * Tile.HEIGHT);
                                         ((James)nabber).setxScreenPosition( xScreenPosition - (2 * Tile.WIDTH) );
                                         ((James)nabber).setyScreenPosition( yScreenPosition );
                                     } else if (nabber instanceof Jessie) {
                                         ((Jessie)nabber).setX(4 * Tile.WIDTH);
-                                        ((Jessie)nabber).setY(3 * Tile.WIDTH);
+                                        ((Jessie)nabber).setY(6 * Tile.HEIGHT);
                                         ((Jessie)nabber).setxScreenPosition( xScreenPosition );
                                         ((Jessie)nabber).setyScreenPosition( yScreenPosition - (2 * Tile.HEIGHT) );
                                     }
                                 }
                                 handler.getGameCamera().setxOffset0( (-6 * Tile.WIDTH) );
-                                handler.getGameCamera().setyOffset0( (-5 * Tile.HEIGHT) );
+                                handler.getGameCamera().setyOffset0( (-2 * Tile.HEIGHT) );
                                 handler.getGameCamera().setxOffset1( ((-6 * Tile.WIDTH) + 320) );
-                                handler.getGameCamera().setyOffset1( ((-5 * Tile.HEIGHT) + 272) );
+                                handler.getGameCamera().setyOffset1( ((-2 * Tile.HEIGHT) + 272) );
 
                                 ////////
                                 worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
@@ -451,24 +451,24 @@ public class Player
 
                                 //setting player and game camera to new location and changing currentWorld to HomePlayer.
                                 x = 4 * Tile.WIDTH;
-                                y = 4 * Tile.HEIGHT;
+                                y = 7 * Tile.HEIGHT;
                                 for (INabber nabber : nabberList) {
                                     if (nabber instanceof James) {
                                         ((James)nabber).setX(3 * Tile.WIDTH);
-                                        ((James)nabber).setY(4 * Tile.WIDTH);
+                                        ((James)nabber).setY(7 * Tile.HEIGHT);
                                         ((James)nabber).setxScreenPosition( xScreenPosition - (2 * Tile.WIDTH) );
                                         ((James)nabber).setyScreenPosition( yScreenPosition );
                                     } else if (nabber instanceof Jessie) {
                                         ((Jessie)nabber).setX(4 * Tile.WIDTH);
-                                        ((Jessie)nabber).setY(3 * Tile.WIDTH);
+                                        ((Jessie)nabber).setY(6 * Tile.HEIGHT);
                                         ((Jessie)nabber).setxScreenPosition( xScreenPosition );
                                         ((Jessie)nabber).setyScreenPosition( yScreenPosition - (2 * Tile.HEIGHT) );
                                     }
                                 }
                                 handler.getGameCamera().setxOffset0( (-6 * Tile.WIDTH) );
-                                handler.getGameCamera().setyOffset0( (-5 * Tile.HEIGHT) );
+                                handler.getGameCamera().setyOffset0( (-2 * Tile.HEIGHT) );
                                 handler.getGameCamera().setxOffset1( ((-6 * Tile.WIDTH) + 320) );
-                                handler.getGameCamera().setyOffset1( ((-5 * Tile.HEIGHT) + 272) );
+                                handler.getGameCamera().setyOffset1( ((-2 * Tile.HEIGHT) + 272) );
 
                                 ////////
                                 worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
