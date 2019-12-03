@@ -3,6 +3,7 @@ package model.states.game.world;
 import main.Handler;
 import main.gfx.Assets;
 import main.utils.TileSpriteToRGBConverter;
+import model.tiles.NonSolidTile;
 import model.tiles.Tile;
 
 import java.awt.*;
@@ -24,6 +25,12 @@ public class HomePlayer implements IWorld {
         //tileSpriteToRGBConverter = new TileSpriteToRGBConverter();
         //worldMapTileCollisionDetection = tileSpriteToRGBConverter.generateWorldMapTileCollisionDetection(Assets.homePlayer);
 
+        worldMapTileCollisionDetection = new Tile[10][10];
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                worldMapTileCollisionDetection[i][j] = new NonSolidTile(j, i);
+            }
+        }
         initTransferPoints();
     } // **** end HomePlayer(Handler) constructor ****
 

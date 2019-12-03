@@ -5,6 +5,8 @@ import main.gfx.Animation;
 import main.gfx.Assets;
 import model.entities.critters.Critter;
 import model.entities.nabbers.INabber;
+import model.entities.nabbers.James;
+import model.entities.nabbers.Jessie;
 import model.items.Item;
 import model.states.StateManager;
 import model.states.game.GameState;
@@ -247,7 +249,29 @@ public class Player
                         System.out.println("CHANGING WORLD!!!!!!!!!");
                         WorldManager worldManager = ((GameState)handler.getStateManager().getIState("GameState")).getWorldManager();
                         if (worldManager.getIWorld(identifier) != null) {
+
+                            x = 5 * Tile.WIDTH;
+                            y = 5 * Tile.HEIGHT;
+                            for (INabber nabber : nabberList) {
+                                if (nabber instanceof James) {
+                                    ((James)nabber).setX(4 * Tile.WIDTH);
+                                    ((James)nabber).setY(5 * Tile.WIDTH);
+                                } else if (nabber instanceof Jessie) {
+                                    ((Jessie)nabber).setX(6 * Tile.WIDTH);
+                                    ((Jessie)nabber).setY(5 * Tile.WIDTH);
+                                }
+                            }
+                            handler.getGameCamera().setxOffset0(0);
+                            handler.getGameCamera().setyOffset0(0);
+                            handler.getGameCamera().setxOffset1(319);
+                            handler.getGameCamera().setyOffset1(271);
+
+
+
                             worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
+
+                            return;
+
                             //TODO: set player's position relative to new World's Tile[][].
                             //TODO: set GameCamera's position/coordinates too.
                         }
