@@ -3,6 +3,7 @@ package main;
 import main.gfx.GameCamera;
 import main.input.KeyManager;
 import model.states.StateManager;
+import model.states.game.GameState;
 import model.tiles.Tile;
 
 public class Handler {
@@ -28,7 +29,7 @@ public class Handler {
     public StateManager getStateManager() { return game.getStateManager(); }
 
     public Tile[][] getWorldMapTileCollisionDetection() {
-        return game.getWorldMapTileCollisionDetection();
+        return ((GameState)game.getStateManager().getIState("GameState")).getWorldManager().getCurrentWorld().getWorldMapTileCollisionDetection();
     }
 
 } // **** end main.Handler class ****

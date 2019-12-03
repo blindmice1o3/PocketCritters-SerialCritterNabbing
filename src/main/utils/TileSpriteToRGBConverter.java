@@ -101,7 +101,7 @@ public class TileSpriteToRGBConverter {
      *          where each element of the two-dimensional array is a reference to a third array of int
      *          values (i.e. int[3]), an array of the RGB values of each individual pixels from
      *          BufferedImage image. The values inside the array of int[] representing RGB will be
-     *          parsed and translated to their corresponding Tile type using World class's
+     *          parsed and translated to their corresponding Tile type using IWorld class's
      *          translateTileFromRGB(int[][][] rgbArrayRelativeToMap) method.
      */
     public static int[][][] transcribeRGBFromImage(BufferedImage image) {

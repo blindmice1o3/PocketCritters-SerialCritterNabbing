@@ -6,9 +6,8 @@ import model.entities.nabbers.James;
 import model.entities.nabbers.Jessie;
 import model.entities.Player;
 import model.states.IState;
-import model.states.StateManager;
-import model.tiles.SolidTile;
-import model.tiles.Tile;
+import model.states.game.world.IWorld;
+import model.states.game.world.WorldManager;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -16,10 +15,14 @@ import java.awt.event.KeyEvent;
 public class GameState implements IState {
 
     private Handler handler;
+
+    private WorldManager worldManager;
     private Player player, james, jessie;
 
     public GameState(Handler handler) {
         this.handler = handler;
+
+        worldManager = new WorldManager(handler);
     } // **** end GameState(Handler) constructor ****
 
     @Override
@@ -53,16 +56,22 @@ public class GameState implements IState {
         }
 
         //update()
+        worldManager.tick(timeElapsed);
+        //TODO: move player.tick() (an Entity) into WorldManager's or WorldMap.
         player.tick();
     }
 
     @Override
     public void render(Graphics g) {
-        //render()
-        renderBackground(g);
+        // render background
+        worldManager.render(g);
+
+        //renderBackground(g);
+        // render entities
         renderEntities(g);
     }
 
+    /*
     private void renderBackground(Graphics g) {
         g.drawImage(Assets.world, 0, 0, handler.getGame().getWidth(), handler.getGame().getHeight(),
                 (int)(handler.getGame().getGameCamera().getxOffset0()),
@@ -70,9 +79,8 @@ public class GameState implements IState {
                 (int)(handler.getGame().getGameCamera().getxOffset1()),
                 (int)(handler.getGame().getGameCamera().getyOffset1()),
                 null);
-        //g.setColor(Color.YELLOW);
-        //g.drawString("Pocket Critters - Serial Critter Nabbing!!!", 10, 10);
     }
+    */
 
     private void renderEntities(Graphics g) {
         player.render(g);
@@ -96,6 +104,12 @@ public class GameState implements IState {
     @Override
     public void exit() {
 
+    }
+
+    // GETTERS AND SETTERS
+
+    public WorldManager getWorldManager() {
+        return worldManager;
     }
 
 } // **** end GameState class ****

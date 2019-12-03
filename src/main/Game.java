@@ -30,8 +30,8 @@ public class Game implements Runnable {
     private Displayer displayer;
 
     private int width, height;
-    private TileSpriteToRGBConverter tileSpriteToRGBConverter;
-    private Tile[][] worldMapTileCollisionDetection;
+    //private TileSpriteToRGBConverter tileSpriteToRGBConverter;
+    //private Tile[][] worldMapTileCollisionDetection;
     private Player player;
     private James james;
     private Jessie jessie;
@@ -76,8 +76,8 @@ public class Game implements Runnable {
         gameCamera = new GameCamera(960, 3184, 1279, 3455);
 
         //@@@@@ Initializing Tile[][] worldMapTileCollisionDetection @@@@@
-        tileSpriteToRGBConverter = new TileSpriteToRGBConverter();
-        worldMapTileCollisionDetection = tileSpriteToRGBConverter.generateWorldMapTileCollisionDetection(Assets.world);
+        //tileSpriteToRGBConverter = new TileSpriteToRGBConverter();
+        //worldMapTileCollisionDetection = tileSpriteToRGBConverter.generateWorldMapTileCollisionDetection(Assets.world);
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
         handler = new Handler(this);
@@ -118,9 +118,11 @@ public class Game implements Runnable {
         }
     }
 
+    /*
     public Tile[][] getWorldMapTileCollisionDetection() {
         return worldMapTileCollisionDetection;
     }
+    */
 
     public void gameLoop() {
 
