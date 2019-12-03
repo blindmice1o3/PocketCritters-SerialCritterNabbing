@@ -38,6 +38,10 @@ public class WorldManager {
         return currentWorld;
     }
 
+    public void setCurrentWorld(IWorld currentWorld) {
+        this.currentWorld = currentWorld;
+    }
+
     public IWorld getIWorld(String identifier) {
         if (worldCollection.containsKey(identifier)) {
             return worldCollection.get(identifier);

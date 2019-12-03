@@ -7,6 +7,8 @@ import model.entities.critters.Critter;
 import model.entities.nabbers.INabber;
 import model.items.Item;
 import model.states.StateManager;
+import model.states.game.GameState;
+import model.states.game.world.WorldManager;
 import model.tiles.TallGrassTile;
 import model.tiles.Tile;
 
@@ -128,12 +130,27 @@ public class Player
                 }
                 ////////////////////////////////////////////
 
+                //CHECKING TallGrassTile
                 if ( worldMap[((y+bounds.y) / Tile.HEIGHT)][tx] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's top-LEFT.");
                     checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+bounds.y) / Tile.HEIGHT)][tx] );
                 } else if ( worldMap[((y+bounds.y+bounds.height) / Tile.HEIGHT)][tx] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's bottom-LEFT.");
                     checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+bounds.y+bounds.height) / Tile.HEIGHT)][tx] );
+                }
+
+                //CHECKING TransferPoints
+                Rectangle collisionBoundsFuture = new Rectangle(x+bounds.x+xDelta, y+bounds.y, Tile.WIDTH, Tile.HEIGHT);
+                Map<String, Rectangle> transferPoints = ((GameState)handler.getStateManager().getIState("GameState")).getWorldManager().getCurrentWorld().getTransferPoints();
+                for (String identifier : transferPoints.keySet()) {
+                    if (transferPoints.get(identifier).intersects(collisionBoundsFuture)) {
+                        WorldManager worldManager = ((GameState)handler.getStateManager().getIState("GameState")).getWorldManager();
+                        if (worldManager.getIWorld(identifier) != null) {
+                            worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
+                            //TODO: set player's position relative to new World's Tile[][].
+                            //TODO: set GameCamera's position/coordinates too.
+                        }
+                    }
                 }
 
                 /////////////////////////////////////////
@@ -160,12 +177,27 @@ public class Player
                 }
                 ////////////////////////////////////////////
 
+                //CHECKING TallGrassTile
                 if ( worldMap[((y+bounds.y) / Tile.HEIGHT)][tx] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's top-RIGHT.");
                     checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+bounds.y) / Tile.HEIGHT)][tx] );
                 } else if ( worldMap[((y+bounds.y+bounds.height) / Tile.HEIGHT)][tx] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's bottom-RIGHT.");
                     checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+bounds.y+bounds.height) / Tile.HEIGHT)][tx] );
+                }
+
+                //CHECKING TransferPoints
+                Rectangle collisionBoundsFuture = new Rectangle(x+bounds.x+bounds.width+xDelta, y+bounds.y, Tile.WIDTH, Tile.HEIGHT);
+                Map<String, Rectangle> transferPoints = ((GameState)handler.getStateManager().getIState("GameState")).getWorldManager().getCurrentWorld().getTransferPoints();
+                for (String identifier : transferPoints.keySet()) {
+                    if (transferPoints.get(identifier).intersects(collisionBoundsFuture)) {
+                        WorldManager worldManager = ((GameState)handler.getStateManager().getIState("GameState")).getWorldManager();
+                        if (worldManager.getIWorld(identifier) != null) {
+                            worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
+                            //TODO: set player's position relative to new World's Tile[][].
+                            //TODO: set GameCamera's position/coordinates too.
+                        }
+                    }
                 }
 
                 ///////////////////////////////////////////
@@ -197,12 +229,29 @@ public class Player
                 }
                 /////////////////////////////////////////////
 
+                //CHECKING TallGrassTile
                 if ( worldMap[ty][((x+bounds.x) / Tile.WIDTH)] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's TOP-left.");
                     checkTallGrassTileCollision( (TallGrassTile)worldMap[ty][((x+bounds.x) / Tile.WIDTH)] );
                 } else if ( worldMap[ty][((x+bounds.x+bounds.width) / Tile.WIDTH)] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's TOP-right.");
                     checkTallGrassTileCollision( (TallGrassTile)worldMap[ty][((x+bounds.x+bounds.width) / Tile.WIDTH)] );
+                }
+
+                //CHECKING TransferPoints
+                Rectangle collisionBoundsFuture = new Rectangle(x+bounds.x, y+bounds.y+yDelta, Tile.WIDTH, Tile.HEIGHT);
+                Map<String, Rectangle> transferPoints = ((GameState)handler.getStateManager().getIState("GameState")).getWorldManager().getCurrentWorld().getTransferPoints();
+                for (String identifier : transferPoints.keySet()) {
+                    System.out.println("checking transfer points.");
+                    if (transferPoints.get(identifier).intersects(collisionBoundsFuture)) {
+                        System.out.println("CHANGING WORLD!!!!!!!!!");
+                        WorldManager worldManager = ((GameState)handler.getStateManager().getIState("GameState")).getWorldManager();
+                        if (worldManager.getIWorld(identifier) != null) {
+                            worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
+                            //TODO: set player's position relative to new World's Tile[][].
+                            //TODO: set GameCamera's position/coordinates too.
+                        }
+                    }
                 }
 
                 //////////////////////////////////////
@@ -229,12 +278,27 @@ public class Player
                 }
                 //////////////////////////////////////////////
 
+                //CHECKING TallGrassTile
                 if ( worldMap[ty][((x+bounds.x) / Tile.WIDTH)] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's BOTTOM-left.");
                     checkTallGrassTileCollision( (TallGrassTile)worldMap[ty][((x+bounds.x) / Tile.WIDTH)] );
                 } else if ( worldMap[ty][((x+bounds.x+bounds.width) / Tile.WIDTH)] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's BOTTOM-right.");
                     checkTallGrassTileCollision( (TallGrassTile)worldMap[ty][((x+bounds.x+bounds.width) / Tile.WIDTH)] );
+                }
+
+                //CHECKING TransferPoints
+                Rectangle collisionBoundsFuture = new Rectangle(x+bounds.x, y+bounds.y+bounds.height+yDelta, Tile.WIDTH, Tile.HEIGHT);
+                Map<String, Rectangle> transferPoints = ((GameState)handler.getStateManager().getIState("GameState")).getWorldManager().getCurrentWorld().getTransferPoints();
+                for (String identifier : transferPoints.keySet()) {
+                    if (transferPoints.get(identifier).intersects(collisionBoundsFuture)) {
+                        WorldManager worldManager = ((GameState)handler.getStateManager().getIState("GameState")).getWorldManager();
+                        if (worldManager.getIWorld(identifier) != null) {
+                            worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
+                            //TODO: set player's position relative to new World's Tile[][].
+                            //TODO: set GameCamera's position/coordinates too.
+                        }
+                    }
                 }
 
                 ////////////////////////////////////////
