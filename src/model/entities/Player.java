@@ -250,15 +250,15 @@ public class Player
                         WorldManager worldManager = ((GameState)handler.getStateManager().getIState("GameState")).getWorldManager();
                         if (worldManager.getIWorld(identifier) != null) {
 
-                            x = 5 * Tile.WIDTH;
-                            y = 5 * Tile.HEIGHT;
+                            x = 3 * Tile.WIDTH;
+                            y = 3 * Tile.HEIGHT;
                             for (INabber nabber : nabberList) {
                                 if (nabber instanceof James) {
-                                    ((James)nabber).setX(4 * Tile.WIDTH);
-                                    ((James)nabber).setY(5 * Tile.WIDTH);
+                                    ((James)nabber).setX(2 * Tile.WIDTH);
+                                    ((James)nabber).setY(3 * Tile.WIDTH);
                                 } else if (nabber instanceof Jessie) {
-                                    ((Jessie)nabber).setX(6 * Tile.WIDTH);
-                                    ((Jessie)nabber).setY(5 * Tile.WIDTH);
+                                    ((Jessie)nabber).setX(4 * Tile.WIDTH);
+                                    ((Jessie)nabber).setY(3 * Tile.WIDTH);
                                 }
                             }
                             handler.getGameCamera().setxOffset0(0);

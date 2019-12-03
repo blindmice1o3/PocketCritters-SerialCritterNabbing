@@ -4,6 +4,7 @@ import main.Handler;
 import main.gfx.Assets;
 import main.utils.TileSpriteToRGBConverter;
 import model.tiles.NonSolidTile;
+import model.tiles.SolidTile;
 import model.tiles.Tile;
 
 import java.awt.*;
@@ -28,7 +29,11 @@ public class HomePlayer implements IWorld {
         worldMapTileCollisionDetection = new Tile[8][8];
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                worldMapTileCollisionDetection[i][j] = new NonSolidTile(j, i);
+                if ((i == 0) || (i == 7) || (j == 0) || (j == 7)) {
+                    worldMapTileCollisionDetection[i][j] = new SolidTile(j, i);
+                } else {
+                    worldMapTileCollisionDetection[i][j] = new NonSolidTile(j, i);
+                }
             }
         }
         initTransferPoints();
@@ -47,6 +52,9 @@ public class HomePlayer implements IWorld {
 
     @Override
     public void render(Graphics g) {
+        g.setColor(Color.GRAY);
+        g.fillRect(0, 0, handler.getGame().getWidth(), handler.getGame().getHeight());
+
         g.drawImage(Assets.homePlayer, 0, 0, handler.getGame().getWidth(), handler.getGame().getHeight(),
                 (int)(handler.getGame().getGameCamera().getxOffset0()),
                 (int)(handler.getGame().getGameCamera().getyOffset0()),
