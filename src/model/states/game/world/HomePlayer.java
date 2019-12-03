@@ -26,10 +26,10 @@ public class HomePlayer implements IWorld {
         //tileSpriteToRGBConverter = new TileSpriteToRGBConverter();
         //worldMapTileCollisionDetection = tileSpriteToRGBConverter.generateWorldMapTileCollisionDetection(Assets.homePlayer);
 
-        worldMapTileCollisionDetection = new Tile[8][8];
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                if ((i == 0) || (i == 7) || (j == 0) || (j == 7)) {
+        worldMapTileCollisionDetection = new Tile[10][10];
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if ((i == 0) || (i == 9) || (j == 0) || (j == 9)) {
                     worldMapTileCollisionDetection[i][j] = new SolidTile(j, i);
                 } else {
                     worldMapTileCollisionDetection[i][j] = new NonSolidTile(j, i);
@@ -42,7 +42,7 @@ public class HomePlayer implements IWorld {
     private void initTransferPoints() {
         transferPoints = new HashMap<String, Rectangle>();
 
-        transferPoints.put( "WorldMap", new Rectangle(32, 112, (2 * Tile.WIDTH), Tile.HEIGHT) );
+        transferPoints.put( "WorldMap", new Rectangle((4 * Tile.WIDTH), (9 * Tile.HEIGHT), (Tile.WIDTH), (Tile.HEIGHT / 2)) );
     }
 
     @Override
@@ -56,18 +56,12 @@ public class HomePlayer implements IWorld {
         g.fillRect(0, 0, handler.getGame().getWidth(), handler.getGame().getHeight());
 
         g.drawImage(Assets.homePlayer,
-                10*Tile.WIDTH, 11*Tile.HEIGHT,
-                10*Tile.WIDTH + handler.getGame().getWidth(), 11*Tile.HEIGHT + handler.getGame().getHeight(),
+                14*Tile.WIDTH, 12*Tile.HEIGHT,
+                14*Tile.WIDTH + handler.getGame().getWidth(), 12*Tile.HEIGHT + handler.getGame().getHeight(),
                 (int)(handler.getGame().getGameCamera().getxOffset0()),
                 (int)(handler.getGame().getGameCamera().getyOffset0()),
                 (int)(handler.getGame().getGameCamera().getxOffset1()),
                 (int)(handler.getGame().getGameCamera().getyOffset1()),
-                /*
-                (14 * Tile.WIDTH),
-                (12 * Tile.HEIGHT),
-                ((14 * Tile.WIDTH) + handler.getGame().getWidth()) ,
-                ((12 * Tile.HEIGHT) + handler.getGame().getHeight()),
-                */
                 null);
     }
 
