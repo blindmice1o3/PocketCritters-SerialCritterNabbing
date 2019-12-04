@@ -22,60 +22,7 @@ public class TileSpriteToRGBConverter {
 
     } // **** end TileSpriteToRGBConverter() constructor ****
 
-    private void initWalkableTileSpriteTargets() {
-        walkableTileSpriteTargets = new ArrayList<BufferedImage>();
-
-        //NON-SOLID TILES
-        //Tall-Grass -> possible PocketMonster Encounter!
-        walkableTileSpriteTargets.add(
-                worldMapAsTileSprites.getSubimage(1088, 3184, TILE_WIDTH, TILE_HEIGHT) ); //tall-grass
-
-    }
-
-    private void initNonWalkableTileSpriteTargets() {
-        nonWalkableTileSpriteTargets = new ArrayList<BufferedImage>();
-
-        //SOLID TILES
-        nonWalkableTileSpriteTargets.add(
-                worldMapAsTileSprites.getSubimage(960, 3376, TILE_WIDTH, TILE_HEIGHT) ); //fence-blue
-        nonWalkableTileSpriteTargets.add(
-                worldMapAsTileSprites.getSubimage(1024, 3312, TILE_WIDTH, TILE_HEIGHT) ); //fence-brown
-        nonWalkableTileSpriteTargets.add(
-                worldMapAsTileSprites.getSubimage(1072, 3312, TILE_WIDTH, TILE_HEIGHT) ); //sign-post
-        nonWalkableTileSpriteTargets.add(
-                worldMapAsTileSprites.getSubimage(1024, 3392, TILE_WIDTH, TILE_HEIGHT) ); //NW-shore
-        nonWalkableTileSpriteTargets.add(
-                worldMapAsTileSprites.getSubimage(1040, 3392, TILE_WIDTH, TILE_HEIGHT) ); //N-shore
-        nonWalkableTileSpriteTargets.add(
-                worldMapAsTileSprites.getSubimage(1072, 3392, TILE_WIDTH, TILE_HEIGHT) ); //NE-shore
-        nonWalkableTileSpriteTargets.add(
-                worldMapAsTileSprites.getSubimage(1024, 3408, TILE_WIDTH, TILE_HEIGHT) ); //W-shore
-        nonWalkableTileSpriteTargets.add(
-                worldMapAsTileSprites.getSubimage(1072, 3408, TILE_WIDTH, TILE_HEIGHT) ); //E-shore
-        nonWalkableTileSpriteTargets.add(
-                worldMapAsTileSprites.getSubimage(976, 3152, TILE_WIDTH, TILE_HEIGHT) ); //Bush
-
-        // building_home, starting at x == 1024, y == 3216, width/number_of_columns == 4, height/number_of_rows == 3.
-        ArrayList<BufferedImage> homeNoDoor = pullMultipleTiles(1024, 3216, 4, 3);
-        homeNoDoor.remove(9);
-        nonWalkableTileSpriteTargets.addAll(
-                homeNoDoor
-        );
-
-        // building_home_roofTopOfSecondHome.
-        nonWalkableTileSpriteTargets.addAll(
-                pullMultipleTiles(1152, 3216, 4, 1)
-        );
-
-        //building_store, starting at x == 1120, y == 3296, width/number_of_columns == 6, height/number_of_rows == 4.
-        ArrayList<BufferedImage> buildingStoreNoDoor = pullMultipleTiles(1120, 3296, 6, 4);
-        buildingStoreNoDoor.remove(20);
-        nonWalkableTileSpriteTargets.addAll(
-                buildingStoreNoDoor
-        );
-    }
-
-    private ArrayList<BufferedImage> pullMultipleTiles(int xInit, int yInit, int numOfCols, int numOfRows) {
+    public ArrayList<BufferedImage> pullMultipleTiles(BufferedImage spriteSheet, int xInit, int yInit, int numOfCols, int numOfRows) {
         ArrayList<BufferedImage> returner = new ArrayList<BufferedImage>();
 
         for (int yy = 0; yy < numOfRows; yy++) {
@@ -83,7 +30,7 @@ public class TileSpriteToRGBConverter {
             for (int xx = 0; xx < numOfCols; xx++) {
                 int xOffset = xx * TILE_WIDTH;
                 returner.add(
-                        worldMapAsTileSprites.getSubimage((xInit + xOffset), (yInit + yOffset), TILE_WIDTH, TILE_HEIGHT)
+                        spriteSheet.getSubimage((xInit + xOffset), (yInit + yOffset), TILE_WIDTH, TILE_HEIGHT)
                 );
             }
         }
@@ -91,18 +38,24 @@ public class TileSpriteToRGBConverter {
         return returner;
     }
 
-    public Tile[][] generateWorldMapTileCollisionDetection(BufferedImage worldMapAsTileSprites) {
+    public Tile[][] generateWorldMapTileCollisionDetection(BufferedImage worldMapAsTileSprites,
+                                                           ArrayList<BufferedImage> nonWalkableTileSpriteTargets,
+                                                           ArrayList<BufferedImage> walkableTileSpriteTargets) {
         //////////////////////////////////////////////////////////////////////////
         this.worldMapAsTileSprites = worldMapAsTileSprites;
+        //Used in translateTileSpriteToRGBImage() for its final for-loop.
+        this.nonWalkableTileSpriteTargets = nonWalkableTileSpriteTargets;
+        //Used in translateTileSpriteToRGBImage() for its final for-loop.
+        this.walkableTileSpriteTargets = walkableTileSpriteTargets;
         int[][][] rgbImage = translateTileSpriteToRGBImage();
         //////////////////////////////////////////////////////////////////////////
-        int widthWorld = rgbImage[0].length;
-        int heightWorld = rgbImage.length;
+        int widthNumberOfTile = rgbImage[0].length;
+        int heightNumberOfTile = rgbImage.length;
 
-        System.out.println("TileSpriteToRGBConverter.generateWorldMapTileCollisionDetection(BufferedImage)'s widthWorld: " + widthWorld);
-        System.out.println("TileSpriteToRGBConverter.generateWorldMapTileCollisionDetection(BufferedImage)'s heightWorld: " + heightWorld);
+        System.out.println("TileSpriteToRGBConverter.generateWorldMapTileCollisionDetection(BufferedImage)'s widthWorld: " + widthNumberOfTile);
+        System.out.println("TileSpriteToRGBConverter.generateWorldMapTileCollisionDetection(BufferedImage)'s heightWorld: " + heightNumberOfTile);
 
-        Tile[][] returner = new Tile[heightWorld][widthWorld];
+        Tile[][] returner = new Tile[heightNumberOfTile][widthNumberOfTile];
 
         for (int y = 0; y < rgbImage.length; y++) {
             for (int x = 0; x <rgbImage[y].length; x++) {
@@ -122,11 +75,6 @@ public class TileSpriteToRGBConverter {
     }
 
     public int[][][] translateTileSpriteToRGBImage() {
-        ////////////////////////////////////////////////////////
-        initNonWalkableTileSpriteTargets(); //Used in final for-loop.
-        initWalkableTileSpriteTargets();
-        ////////////////////////////////////////////////////////
-
         int widthNumberOfTile = (worldMapAsTileSprites.getWidth() / TILE_WIDTH);
         int heightNumberOfTile = (worldMapAsTileSprites.getHeight() / TILE_HEIGHT);
 
@@ -219,7 +167,7 @@ public class TileSpriteToRGBConverter {
         }
 
         return returner;
-    } // **** end BufferedImage translateTileSpriteToRGBImage(BufferedImage) method ****
+    } // **** end BufferedImage translateTileSpriteToRGBImage() method ****
 
     private boolean compareTile(BufferedImage tileSpriteImage, BufferedImage tileSpriteTarget) {
         boolean sameImage = true;

@@ -6,6 +6,8 @@ import main.utils.TileSpriteToRGBConverter;
 import model.tiles.Tile;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,10 +24,71 @@ public class WorldMap implements IWorld {
         this.handler = handler;
 
         tileSpriteToRGBConverter = new TileSpriteToRGBConverter();
-        worldMapTileCollisionDetection = tileSpriteToRGBConverter.generateWorldMapTileCollisionDetection(Assets.world);
+        ArrayList<BufferedImage> nonWalkableTileSpriteTargets = initNonWalkableTileSpriteTargets();
+        ArrayList<BufferedImage> walkableTileSpriteTargets = initWalkableTileSpriteTargets();
+        worldMapTileCollisionDetection = tileSpriteToRGBConverter.generateWorldMapTileCollisionDetection(Assets.world,
+                nonWalkableTileSpriteTargets, walkableTileSpriteTargets);
 
         initTransferPoints();
     } // **** end WorldMap(Handler) constructor ****
+
+    private ArrayList<BufferedImage> initWalkableTileSpriteTargets() {
+        ArrayList<BufferedImage> walkableTileSpriteTargets = new ArrayList<BufferedImage>();
+
+        //NON-SOLID TILES
+        //Tall-Grass -> possible PocketMonster Encounter!
+        walkableTileSpriteTargets.add(
+                Assets.world.getSubimage(1088, 3184, Tile.WIDTH, Tile.HEIGHT) ); //tall-grass
+
+        return walkableTileSpriteTargets;
+    }
+
+    private ArrayList<BufferedImage> initNonWalkableTileSpriteTargets() {
+        ArrayList<BufferedImage> nonWalkableTileSpriteTargets = new ArrayList<BufferedImage>();
+
+        //SOLID TILES
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(960, 3376, Tile.WIDTH, Tile.HEIGHT) ); //fence-blue
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(1024, 3312, Tile.WIDTH, Tile.HEIGHT) ); //fence-brown
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(1072, 3312, Tile.WIDTH, Tile.HEIGHT) ); //sign-post
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(1024, 3392, Tile.WIDTH, Tile.HEIGHT) ); //NW-shore
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(1040, 3392, Tile.WIDTH, Tile.HEIGHT) ); //N-shore
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(1072, 3392, Tile.WIDTH, Tile.HEIGHT) ); //NE-shore
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(1024, 3408, Tile.WIDTH, Tile.HEIGHT) ); //W-shore
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(1072, 3408, Tile.WIDTH, Tile.HEIGHT) ); //E-shore
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(976, 3152, Tile.WIDTH, Tile.HEIGHT) ); //Bush
+
+        // building_home, starting at x == 1024, y == 3216, width/number_of_columns == 4, height/number_of_rows == 3.
+        ArrayList<BufferedImage> homeNoDoor = tileSpriteToRGBConverter.pullMultipleTiles(Assets.world,1024, 3216, 4, 3);
+        homeNoDoor.remove(9);
+        nonWalkableTileSpriteTargets.addAll(
+                homeNoDoor
+        );
+
+        // building_home_roofTopOfSecondHome.
+        nonWalkableTileSpriteTargets.addAll(
+                tileSpriteToRGBConverter.pullMultipleTiles(Assets.world,1152, 3216, 4, 1)
+        );
+
+        //building_store, starting at x == 1120, y == 3296, width/number_of_columns == 6, height/number_of_rows == 4.
+        ArrayList<BufferedImage> buildingStoreNoDoor = tileSpriteToRGBConverter.pullMultipleTiles(Assets.world,1120, 3296, 6, 4);
+        buildingStoreNoDoor.remove(20);
+        nonWalkableTileSpriteTargets.addAll(
+                buildingStoreNoDoor
+        );
+
+        return nonWalkableTileSpriteTargets;
+    }
+
+
 
     private void initTransferPoints() {
         transferPoints = new HashMap<String, Rectangle>();
