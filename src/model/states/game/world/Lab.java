@@ -37,7 +37,7 @@ public class Lab implements IWorld {
     private void initTransferPoints() {
         transferPoints = new HashMap<String, Rectangle>();
 
-        transferPoints.put( "WorldMap", new Rectangle((5 * Tile.WIDTH), (13 * Tile.HEIGHT), Tile.WIDTH, (Tile.HEIGHT / 2)) );
+        transferPoints.put( "WorldMap", new Rectangle((6 * Tile.WIDTH), (13 * Tile.HEIGHT), Tile.WIDTH, (Tile.HEIGHT / 2)) );
     }
 
     @Override

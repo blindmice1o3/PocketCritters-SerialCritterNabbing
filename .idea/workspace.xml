@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fb96119b-76aa-4531-8c73-0e06b445031b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/states/game/world/Lab.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PocketCritters-SerialCritterNabbing/model/states/game/world/HomePlayer.class" afterPath="$PROJECT_DIR$/out/production/PocketCritters-SerialCritterNabbing/model/states/game/world/HomePlayer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PocketCritters-SerialCritterNabbing/model/states/game/world/WorldMap.class" afterPath="$PROJECT_DIR$/out/production/PocketCritters-SerialCritterNabbing/model/states/game/world/WorldMap.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/entities/Player.java" afterPath="$PROJECT_DIR$/src/model/entities/Player.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/states/game/world/HomePlayer.java" afterPath="$PROJECT_DIR$/src/model/states/game/world/HomePlayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/states/game/world/HomeRival.java" afterPath="$PROJECT_DIR$/src/model/states/game/world/HomeRival.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/states/game/world/RoomPlayer.java" afterPath="$PROJECT_DIR$/src/model/states/game/world/RoomPlayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/states/game/world/WorldManager.java" afterPath="$PROJECT_DIR$/src/model/states/game/world/WorldManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/states/game/world/WorldMap.java" afterPath="$PROJECT_DIR$/src/model/states/game/world/WorldMap.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/states/game/world/Lab.java" afterPath="$PROJECT_DIR$/src/model/states/game/world/Lab.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,11 +15,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Player.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/model/entities/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="257" column="25" lean-forward="false" selection-start-line="257" selection-start-column="25" selection-end-line="257" selection-end-column="25" />
+            <state relative-caret-position="425">
+              <caret line="261" column="63" lean-forward="false" selection-start-line="261" selection-start-column="63" selection-end-line="261" selection-end-column="63" />
               <folding />
             </state>
           </provider>
@@ -84,11 +76,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Lab.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Lab.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/states/game/world/Lab.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="28" column="82" lean-forward="true" selection-start-line="28" selection-start-column="82" selection-end-line="28" selection-end-column="82" />
+            <state relative-caret-position="476">
+              <caret line="39" column="56" lean-forward="false" selection-start-line="39" selection-start-column="56" selection-end-line="39" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2075#2076#0" expanded="true" />
@@ -892,8 +884,8 @@
         <state relative-caret-position="323">
           <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
           <folding>
-            <element signature="e#961#962#0" expanded="true" />
-            <element signature="e#1018#1019#0" expanded="true" />
+            <element signature="e#961#962#0" expanded="false" />
+            <element signature="e#1018#1019#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -934,9 +926,9 @@
         <state relative-caret-position="17">
           <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1629#1644#0" expanded="true" />
-            <element signature="e#2030#2045#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1629#1644#0" expanded="false" />
+            <element signature="e#2030#2045#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -946,9 +938,9 @@
         <state relative-caret-position="143">
           <caret line="32" column="79" lean-forward="false" selection-start-line="32" selection-start-column="79" selection-end-line="32" selection-end-column="79" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1625#1640#0" expanded="true" />
-            <element signature="e#2001#2016#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1625#1640#0" expanded="false" />
+            <element signature="e#2001#2016#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -965,18 +957,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/entities/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="257" column="25" lean-forward="false" selection-start-line="257" selection-start-column="25" selection-end-line="257" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/states/game/world/Lab.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="28" column="82" lean-forward="true" selection-start-line="28" selection-start-column="82" selection-end-line="28" selection-end-column="82" />
+        <state relative-caret-position="476">
+          <caret line="39" column="56" lean-forward="false" selection-start-line="39" selection-start-column="56" selection-end-line="39" selection-end-column="56" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2075#2076#0" expanded="true" />
@@ -984,6 +968,14 @@
             <element signature="e#2199#2200#0" expanded="true" />
             <element signature="e#2236#2237#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/entities/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="261" column="63" lean-forward="false" selection-start-line="261" selection-start-column="63" selection-end-line="261" selection-end-column="63" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -241,8 +241,8 @@ public class Player
                         //////////////////////////////////////////////////////////////////////////////////////
 
                         //setting player and game camera to new location and changing currentWorld to HomeRival.
-                        x = 4 * Tile.WIDTH;
-                        y = 7 * Tile.HEIGHT;
+                        x = 5 * Tile.WIDTH;
+                        y = 11 * Tile.HEIGHT;
                         for (INabber nabber : nabberList) {
                             if (nabber instanceof James) {
                                 ((James)nabber).setX(3 * Tile.WIDTH);
@@ -256,10 +256,10 @@ public class Player
                                 ((Jessie)nabber).setyScreenPosition( yScreenPosition - (2 * Tile.HEIGHT) );
                             }
                         }
-                        handler.getGameCamera().setxOffset0( (-6 * Tile.WIDTH) );
-                        handler.getGameCamera().setyOffset0( (-2 * Tile.HEIGHT) );
-                        handler.getGameCamera().setxOffset1( ((-6 * Tile.WIDTH) + 320) );
-                        handler.getGameCamera().setyOffset1( ((-2 * Tile.HEIGHT) + 272) );
+                        handler.getGameCamera().setxOffset0( (-5 * Tile.WIDTH) );
+                        handler.getGameCamera().setyOffset0( (2 * Tile.HEIGHT) );
+                        handler.getGameCamera().setxOffset1( ((-5 * Tile.WIDTH) + 320) );
+                        handler.getGameCamera().setyOffset1( ((2 * Tile.HEIGHT) + 272) );
 
                         ////////
                         worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
