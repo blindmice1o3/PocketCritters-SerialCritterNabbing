@@ -44,9 +44,10 @@ public class HomeRival implements IWorld {
         ArrayList<BufferedImage> walkableTileSpriteTargets = new ArrayList<BufferedImage>();
 
         //NON-SOLID TILES
+        /*
         walkableTileSpriteTargets.add(
                 Assets.homeRival.getSubimage(32, 48, Tile.WIDTH, Tile.HEIGHT) ); //chair
-
+        */
 
         return walkableTileSpriteTargets;
     }
