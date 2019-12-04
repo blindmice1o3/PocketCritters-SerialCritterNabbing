@@ -95,10 +95,6 @@ public class Player
         }
         handler.getGameCamera().move();
 
-        /////////////////////////////
-        transferPointCollisionEscape:
-        /////////////////////////////
-
         xDelta = 0;
         yDelta = 0;
     }
@@ -179,6 +175,39 @@ public class Player
                     }
                     else if (identifier.equals("RoomPlayer")) {
                         //setting player and game camera to new location and changing currentWorld to RoomPlayer.
+                        x = 4 * Tile.WIDTH;
+                        y = 7 * Tile.HEIGHT;
+                        for (INabber nabber : nabberList) {
+                            if (nabber instanceof James) {
+                                ((James)nabber).setX(3 * Tile.WIDTH);
+                                ((James)nabber).setY(7 * Tile.HEIGHT);
+                                ((James)nabber).setxScreenPosition( xScreenPosition - (2 * Tile.WIDTH) );
+                                ((James)nabber).setyScreenPosition( yScreenPosition );
+                            } else if (nabber instanceof Jessie) {
+                                ((Jessie)nabber).setX(4 * Tile.WIDTH);
+                                ((Jessie)nabber).setY(6 * Tile.HEIGHT);
+                                ((Jessie)nabber).setxScreenPosition( xScreenPosition );
+                                ((Jessie)nabber).setyScreenPosition( yScreenPosition - (2 * Tile.HEIGHT) );
+                            }
+                        }
+                        handler.getGameCamera().setxOffset0( (-6 * Tile.WIDTH) );
+                        handler.getGameCamera().setyOffset0( (-2 * Tile.HEIGHT) );
+                        handler.getGameCamera().setxOffset1( ((-6 * Tile.WIDTH) + 320) );
+                        handler.getGameCamera().setyOffset1( ((-2 * Tile.HEIGHT) + 272) );
+
+                        ////////
+                        worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
+                        return true;
+                        ////////
+                    }
+                    else if ( identifier.equals("HomeRival") ) {
+                        //////////////////////////////////////////////////////////////////////////////////////
+                        if (worldManager.getCurrentWorld() instanceof WorldMap) {
+                            ((WorldMap) worldManager.getIWorld("WorldMap")).recordLocationPriorTransfer();
+                        }
+                        //////////////////////////////////////////////////////////////////////////////////////
+
+                        //setting player and game camera to new location and changing currentWorld to HomeRival.
                         x = 4 * Tile.WIDTH;
                         y = 7 * Tile.HEIGHT;
                         for (INabber nabber : nabberList) {

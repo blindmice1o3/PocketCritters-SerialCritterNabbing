@@ -37,9 +37,9 @@ public class TileSpriteToRGBConverter {
         return returner;
     }
 
-    public Tile[][] generateWorldMapTileCollisionDetection(BufferedImage worldBackground,
-                                                           ArrayList<BufferedImage> nonWalkableTileSpriteTargets,
-                                                           ArrayList<BufferedImage> walkableTileSpriteTargets) {
+    public Tile[][] generateTileMapForCollisionDetection(BufferedImage worldBackground,
+                                                         ArrayList<BufferedImage> nonWalkableTileSpriteTargets,
+                                                         ArrayList<BufferedImage> walkableTileSpriteTargets) {
         //////////////////////////////////////////////////////////////////////////
         this.worldBackground = worldBackground;
         //Used in translateTileSpriteToRGBImage() for its final for-loop.
@@ -51,8 +51,8 @@ public class TileSpriteToRGBConverter {
         int widthNumberOfTile = rgbImage[0].length;
         int heightNumberOfTile = rgbImage.length;
 
-        System.out.println("TileSpriteToRGBConverter.generateWorldMapTileCollisionDetection(BufferedImage)'s widthWorld: " + widthNumberOfTile);
-        System.out.println("TileSpriteToRGBConverter.generateWorldMapTileCollisionDetection(BufferedImage)'s heightWorld: " + heightNumberOfTile);
+        System.out.println("TileSpriteToRGBConverter.generateTileMapForCollisionDetection(BufferedImage)'s widthWorld: " + widthNumberOfTile);
+        System.out.println("TileSpriteToRGBConverter.generateTileMapForCollisionDetection(BufferedImage)'s heightWorld: " + heightNumberOfTile);
 
         Tile[][] returner = new Tile[heightNumberOfTile][widthNumberOfTile];
 
@@ -69,6 +69,9 @@ public class TileSpriteToRGBConverter {
                         returner[y][x] = new StaircaseTile(x, y);
                     } else if (this.worldBackground == Assets.roomPlayer) {
                         returner[y][x] = new StaircaseTile(x, y);
+                    } else if (this.worldBackground == Assets.homeRival) {
+                        //filler-space
+                        returner[y][x] = new NonSolidTile(x, y);
                     }
                 } else if (rgbImage[y][x][0] == 9) {
                     returner[y][x] = new NullTile(x, y);
@@ -151,20 +154,24 @@ public class TileSpriteToRGBConverter {
 
                 //if non-blank (equals 0)...
                 if (returner[y][x][0] == 0) {
-                    for (BufferedImage tileSpriteTarget : nonWalkableTileSpriteTargets) {
+                    if (nonWalkableTileSpriteTargets.size() > 0) {
+                        for (BufferedImage tileSpriteTarget : nonWalkableTileSpriteTargets) {
 
-                        //it is the same as one of the target.
-                        if ( compareTile(worldBackground.getSubimage(xOffset, yOffset, TILE_WIDTH, TILE_HEIGHT),
-                                tileSpriteTarget) ) {
-                            returner[y][x][0] = 1;
-                            break;
+                            //it is the same as one of the target.
+                            if (compareTile(worldBackground.getSubimage(xOffset, yOffset, TILE_WIDTH, TILE_HEIGHT),
+                                    tileSpriteTarget)) {
+                                returner[y][x][0] = 1;
+                                break;
+                            }
                         }
                     }
-                    for (BufferedImage tileSpriteTarget : walkableTileSpriteTargets) {
-                        if ( compareTile(worldBackground.getSubimage(xOffset, yOffset, TILE_WIDTH, TILE_HEIGHT),
-                                tileSpriteTarget) ) {
-                            returner[y][x][0] = 2;
-                            break;
+                    if (walkableTileSpriteTargets.size() > 0) {
+                        for (BufferedImage tileSpriteTarget : walkableTileSpriteTargets) {
+                            if (compareTile(worldBackground.getSubimage(xOffset, yOffset, TILE_WIDTH, TILE_HEIGHT),
+                                    tileSpriteTarget)) {
+                                returner[y][x][0] = 2;
+                                break;
+                            }
                         }
                     }
                 }

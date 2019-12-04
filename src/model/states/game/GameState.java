@@ -1,12 +1,10 @@
 package model.states.game;
 
 import main.Handler;
-import main.gfx.Assets;
 import model.entities.nabbers.James;
 import model.entities.nabbers.Jessie;
 import model.entities.Player;
 import model.states.IState;
-import model.states.game.world.IWorld;
 import model.states.game.world.WorldManager;
 
 import java.awt.*;
@@ -21,7 +19,6 @@ public class GameState implements IState {
 
     public GameState(Handler handler) {
         this.handler = handler;
-
         worldManager = new WorldManager(handler);
     } // **** end GameState(Handler) constructor ****
 

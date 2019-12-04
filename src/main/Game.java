@@ -8,11 +8,7 @@ import model.entities.nabbers.INabber;
 import model.entities.nabbers.James;
 import model.entities.nabbers.Jessie;
 import model.entities.Player;
-import model.states.battle.BattleState;
-import model.states.game.GameState;
 import model.states.StateManager;
-import model.states.menu.MenuState;
-import model.tiles.Tile;
 import main.utils.TileSpriteToRGBConverter;
 import view.Displayer;
 
@@ -25,13 +21,13 @@ public class Game implements Runnable {
     private Thread thread;
     private boolean running = false;
 
+    private TileSpriteToRGBConverter tileSpriteToRGBConverter;
     private StateManager stateManager;
     private GameCamera gameCamera;
     private Displayer displayer;
 
     private int width, height;
-    //private TileSpriteToRGBConverter tileSpriteToRGBConverter;
-    //private Tile[][] worldMapTileCollisionDetection;
+
     private Player player;
     private James james;
     private Jessie jessie;
@@ -75,11 +71,6 @@ public class Game implements Runnable {
         keyManager = new KeyManager();
         gameCamera = new GameCamera(960, 3184, 1279, 3455);
 
-        //@@@@@ Initializing Tile[][] worldMapTileCollisionDetection @@@@@
-        //tileSpriteToRGBConverter = new TileSpriteToRGBConverter();
-        //worldMapTileCollisionDetection = tileSpriteToRGBConverter.generateWorldMapTileCollisionDetection(Assets.world);
-        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
         handler = new Handler(this);
 
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -89,6 +80,8 @@ public class Game implements Runnable {
         player.addINabber((INabber)james);
         player.addINabber((INabber)jessie);
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+        tileSpriteToRGBConverter = new TileSpriteToRGBConverter();
 
         stateManager = new StateManager(handler, player);
 
@@ -175,6 +168,7 @@ public class Game implements Runnable {
 
     public KeyManager getKeyManager() { return keyManager; }
     public GameCamera getGameCamera() { return gameCamera; }
+    public TileSpriteToRGBConverter getTileSpriteToRGBConverter() { return tileSpriteToRGBConverter; }
     public StateManager getStateManager() { return stateManager; }
     public void setGameCamera(GameCamera gameCamera) { this.gameCamera = gameCamera; }
     public int getWidth() { return width; }

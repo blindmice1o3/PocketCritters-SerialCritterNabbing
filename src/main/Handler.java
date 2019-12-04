@@ -2,6 +2,7 @@ package main;
 
 import main.gfx.GameCamera;
 import main.input.KeyManager;
+import main.utils.TileSpriteToRGBConverter;
 import model.states.StateManager;
 import model.states.game.GameState;
 import model.tiles.Tile;
@@ -30,6 +31,10 @@ public class Handler {
 
     public Tile[][] getWorldMapTileCollisionDetection() {
         return ((GameState)game.getStateManager().getIState("GameState")).getWorldManager().getCurrentWorld().getWorldMapTileCollisionDetection();
+    }
+
+    public TileSpriteToRGBConverter getTileSpriteToRGBConverter() {
+        return game.getTileSpriteToRGBConverter();
     }
 
 } // **** end main.Handler class ****

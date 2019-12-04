@@ -2,7 +2,6 @@ package model.states.game.world;
 
 import main.Handler;
 import main.gfx.Assets;
-import main.utils.TileSpriteToRGBConverter;
 import model.tiles.SolidTile;
 import model.tiles.Tile;
 
@@ -16,19 +15,16 @@ public class HomePlayer implements IWorld {
 
     private Handler handler;
 
-    private TileSpriteToRGBConverter tileSpriteToRGBConverter;
     private Tile[][] worldMapTileCollisionDetection;
-
     private Map<String, Rectangle> transferPoints;
 
     public HomePlayer(Handler handler) {
         this.handler = handler;
 
-        tileSpriteToRGBConverter = new TileSpriteToRGBConverter();
         ArrayList<BufferedImage> nonWalkableTileSpriteTargets = initNonWalkableTileSpriteTargets();
         ArrayList<BufferedImage> walkableTileSpriteTargets = initWalkableTileSpriteTargets();
-        Tile[][] unborderedTileCollisionDetection = tileSpriteToRGBConverter.generateWorldMapTileCollisionDetection(Assets.homePlayer,
-                nonWalkableTileSpriteTargets, walkableTileSpriteTargets);
+        Tile[][] unborderedTileCollisionDetection = handler.getTileSpriteToRGBConverter().generateTileMapForCollisionDetection(
+                Assets.homePlayer, nonWalkableTileSpriteTargets, walkableTileSpriteTargets);
 
         worldMapTileCollisionDetection = new Tile[10][10];
         for (int i = 0; i < 10; i++) {
@@ -67,14 +63,15 @@ public class HomePlayer implements IWorld {
         }
 
         nonWalkableTileSpriteTargets.add(
-                Assets.homePlayer.getSubimage(0, 16, Tile.WIDTH, Tile.HEIGHT) ); //bookShelfBL
+                Assets.homePlayer.getSubimage(0, 16, Tile.WIDTH, Tile.HEIGHT) ); //bookShelf1Bottom
         nonWalkableTileSpriteTargets.add(
-                Assets.homePlayer.getSubimage(16, 16, Tile.WIDTH, Tile.HEIGHT) ); //bookShelfBR
+                Assets.homePlayer.getSubimage(16, 16, Tile.WIDTH, Tile.HEIGHT) ); //bookShelf2Bottom
         nonWalkableTileSpriteTargets.add(
                 Assets.homePlayer.getSubimage(48, 16, Tile.WIDTH, Tile.HEIGHT) ); //tv
 
         // table, starting at x == 48, y == 64, width/number_of_columns == 2, height/number_of_rows == 2.
-        ArrayList<BufferedImage> table = tileSpriteToRGBConverter.pullMultipleTiles(Assets.homePlayer,48, 64, 2, 2);
+        ArrayList<BufferedImage> table = handler.getTileSpriteToRGBConverter().pullMultipleTiles(
+                Assets.homePlayer,48, 64, 2, 2);
         nonWalkableTileSpriteTargets.addAll(
                 table
         );

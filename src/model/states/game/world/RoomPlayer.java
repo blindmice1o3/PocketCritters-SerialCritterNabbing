@@ -2,7 +2,6 @@ package model.states.game.world;
 
 import main.Handler;
 import main.gfx.Assets;
-import main.utils.TileSpriteToRGBConverter;
 import model.tiles.SolidTile;
 import model.tiles.Tile;
 
@@ -16,19 +15,16 @@ public class RoomPlayer implements IWorld {
 
     private Handler handler;
 
-    private TileSpriteToRGBConverter tileSpriteToRGBConverter;
     private Tile[][] worldMapTileCollisionDetection;
-
     private Map<String, Rectangle> transferPoints;
 
     public RoomPlayer(Handler handler) {
         this.handler = handler;
 
-        tileSpriteToRGBConverter = new TileSpriteToRGBConverter();
         ArrayList<BufferedImage> nonWalkableTileSpriteTargets = initNonWalkableTileSpriteTargets();
         ArrayList<BufferedImage> walkableTileSpriteTargets = initWalkableTileSpriteTargets();
-        Tile[][] unborderedTileCollisionDetection = tileSpriteToRGBConverter.generateWorldMapTileCollisionDetection(Assets.roomPlayer,
-                nonWalkableTileSpriteTargets, walkableTileSpriteTargets);
+        Tile[][] unborderedTileCollisionDetection = handler.getTileSpriteToRGBConverter().generateTileMapForCollisionDetection(
+                Assets.roomPlayer, nonWalkableTileSpriteTargets, walkableTileSpriteTargets);
 
         worldMapTileCollisionDetection = new Tile[10][10];
         for (int i = 0; i < 10; i++) {

@@ -2,7 +2,6 @@ package model.states.game.world;
 
 import main.Handler;
 import main.gfx.Assets;
-import main.utils.TileSpriteToRGBConverter;
 import model.tiles.Tile;
 
 import java.awt.*;
@@ -15,19 +14,16 @@ public class WorldMap implements IWorld {
 
     private Handler handler;
 
-    private TileSpriteToRGBConverter tileSpriteToRGBConverter;
     private Tile[][] worldMapTileCollisionDetection;
-
     private Map<String, Rectangle> transferPoints;
 
     public WorldMap(Handler handler) {
         this.handler = handler;
 
-        tileSpriteToRGBConverter = new TileSpriteToRGBConverter();
         ArrayList<BufferedImage> nonWalkableTileSpriteTargets = initNonWalkableTileSpriteTargets();
         ArrayList<BufferedImage> walkableTileSpriteTargets = initWalkableTileSpriteTargets();
-        worldMapTileCollisionDetection = tileSpriteToRGBConverter.generateWorldMapTileCollisionDetection(Assets.world,
-                nonWalkableTileSpriteTargets, walkableTileSpriteTargets);
+        worldMapTileCollisionDetection = handler.getTileSpriteToRGBConverter().generateTileMapForCollisionDetection(
+                Assets.world, nonWalkableTileSpriteTargets, walkableTileSpriteTargets);
 
         initTransferPoints();
     } // **** end WorldMap(Handler) constructor ****
@@ -67,7 +63,8 @@ public class WorldMap implements IWorld {
                 Assets.world.getSubimage(976, 3152, Tile.WIDTH, Tile.HEIGHT) ); //Bush
 
         // building_home, starting at x == 1024, y == 3216, width/number_of_columns == 4, height/number_of_rows == 3.
-        ArrayList<BufferedImage> homeNoDoor = tileSpriteToRGBConverter.pullMultipleTiles(Assets.world,1024, 3216, 4, 3);
+        ArrayList<BufferedImage> homeNoDoor = handler.getTileSpriteToRGBConverter().pullMultipleTiles(
+                Assets.world,1024, 3216, 4, 3);
         homeNoDoor.remove(9);
         nonWalkableTileSpriteTargets.addAll(
                 homeNoDoor
@@ -75,11 +72,13 @@ public class WorldMap implements IWorld {
 
         // building_home_roofTopOfSecondHome.
         nonWalkableTileSpriteTargets.addAll(
-                tileSpriteToRGBConverter.pullMultipleTiles(Assets.world,1152, 3216, 4, 1)
+                handler.getTileSpriteToRGBConverter().pullMultipleTiles(
+                        Assets.world,1152, 3216, 4, 1)
         );
 
         //building_store, starting at x == 1120, y == 3296, width/number_of_columns == 6, height/number_of_rows == 4.
-        ArrayList<BufferedImage> buildingStoreNoDoor = tileSpriteToRGBConverter.pullMultipleTiles(Assets.world,1120, 3296, 6, 4);
+        ArrayList<BufferedImage> buildingStoreNoDoor = handler.getTileSpriteToRGBConverter().pullMultipleTiles(
+                Assets.world,1120, 3296, 6, 4);
         buildingStoreNoDoor.remove(20);
         nonWalkableTileSpriteTargets.addAll(
                 buildingStoreNoDoor

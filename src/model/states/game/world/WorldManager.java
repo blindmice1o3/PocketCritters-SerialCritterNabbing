@@ -24,6 +24,7 @@ public class WorldManager {
         worldCollection.put("WorldMap", new WorldMap(handler));
         worldCollection.put("HomePlayer", new HomePlayer(handler));
         worldCollection.put("RoomPlayer", new RoomPlayer(handler));
+        worldCollection.put("HomeRival", new HomeRival(handler));
 
         currentWorld = worldCollection.get("WorldMap");
     }
