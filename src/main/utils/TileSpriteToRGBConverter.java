@@ -1,5 +1,6 @@
 package main.utils;
 
+import main.gfx.Assets;
 import model.tiles.*;
 
 import java.awt.image.BufferedImage;
@@ -58,7 +59,7 @@ public class TileSpriteToRGBConverter {
         ArrayList<BufferedImage> homeNoDoor = pullMultipleTiles(1024, 3216, 4, 3);
         homeNoDoor.remove(9);
         nonWalkableTileSpriteTargets.addAll(
-            homeNoDoor
+                homeNoDoor
         );
 
         // building_home_roofTopOfSecondHome.
@@ -89,6 +90,165 @@ public class TileSpriteToRGBConverter {
 
         return returner;
     }
+
+    public Tile[][] generateWorldMapTileCollisionDetection(BufferedImage worldMapAsTileSprites) {
+        //////////////////////////////////////////////////////////////////////////
+        this.worldMapAsTileSprites = worldMapAsTileSprites;
+        int[][][] rgbImage = translateTileSpriteToRGBImage();
+        //////////////////////////////////////////////////////////////////////////
+        int widthWorld = rgbImage[0].length;
+        int heightWorld = rgbImage.length;
+
+        System.out.println("TileSpriteToRGBConverter.generateWorldMapTileCollisionDetection(BufferedImage)'s widthWorld: " + widthWorld);
+        System.out.println("TileSpriteToRGBConverter.generateWorldMapTileCollisionDetection(BufferedImage)'s heightWorld: " + heightWorld);
+
+        Tile[][] returner = new Tile[heightWorld][widthWorld];
+
+        for (int y = 0; y < rgbImage.length; y++) {
+            for (int x = 0; x <rgbImage[y].length; x++) {
+                if (rgbImage[y][x][0] == 1) {
+                    returner[y][x] = new SolidTile(x, y);
+                } else if (rgbImage[y][x][0] == 0) {
+                    returner[y][x] = new NonSolidTile(x, y);
+                } else if (rgbImage[y][x][0] == 2) {
+                    returner[y][x] = new TallGrassTile(x, y);
+                } else if (rgbImage[y][x][0] == 9) {
+                    returner[y][x] = new NullTile(x, y);
+                }
+            }
+        }
+
+        return returner;
+    }
+
+    public int[][][] translateTileSpriteToRGBImage() {
+        ////////////////////////////////////////////////////////
+        initNonWalkableTileSpriteTargets(); //Used in final for-loop.
+        initWalkableTileSpriteTargets();
+        ////////////////////////////////////////////////////////
+
+        int widthNumberOfTile = (worldMapAsTileSprites.getWidth() / TILE_WIDTH);
+        int heightNumberOfTile = (worldMapAsTileSprites.getHeight() / TILE_HEIGHT);
+
+        System.out.println("TileSpriteToRGBConverter.translateTileSpriteToRGBImage()'s widthNumberOfTile: " + widthNumberOfTile);
+        System.out.println("TileSpriteToRGBConverter.translateTileSpriteToRGBImage()'s heightNumberOfTile: " + heightNumberOfTile);
+
+        int[][][] returner = new int[heightNumberOfTile][widthNumberOfTile][1];
+
+        //checking each tile sprite image (16x16) within the entire world map (widthNumberOfTile by heightNumberOfTile).
+        for (int y = 0; y < heightNumberOfTile; y++) {
+            for (int x = 0; x < widthNumberOfTile; x++) {
+
+                int xOffset = (x * TILE_WIDTH);
+                int yOffset = (y * TILE_HEIGHT);
+
+                boolean blankTile = false;
+
+                //ONLY FOR WORLDMAP (pokemon-gsc-kanto.png)
+                if (worldMapAsTileSprites == Assets.world) {
+
+                    blankTile = true;
+                    //!!!CHECK TILE - BLANK VERSUS FILLED!!!
+                    //check each individual pixel within each of the 64x64-pixeled tile.
+                    //@@@@@
+                    //label for outer-loop in case I can break out early.
+                    //@@@@@
+                    outerloop:
+                    for (int yy = 0; yy < TILE_HEIGHT; yy++) {
+                        for (int xx = 0; xx < TILE_WIDTH; xx++) {
+
+                            int pixel = worldMapAsTileSprites.getRGB((xOffset + xx), (yOffset + yy));
+                            int red = (pixel >> 16) & 0xff;
+                            int green = (pixel >> 8) & 0xff;
+                            int blue = (pixel) & 0xff;
+
+                            //if non-blank tile
+                            if (!((red == 255) && (green == 255) && (blue == 255)) &&
+                                    //!!!THERE WERE OTHER RGB values FOR BLANK!!!
+                                    !((red == 254) && (green == 254) && (blue == 254))) {
+                                blankTile = false;
+                                //@@@@@@@@@@@@@@
+                                break outerloop;
+                                //@@@@@@@@@@@@@@
+                            }
+                        }
+                    }
+
+                }
+
+                // non-blank tile will be set to have a value of 0.
+                if (!blankTile) {
+                    returner[y][x][0] = 0;
+                }
+                // blank tile will be set to have a value of 9.
+                else {
+                    returner[y][x][0] = 9;
+                }
+
+            }
+        }
+
+
+        //CHECK TARGET TILE IMAGE TO DETERMINE IWALKABLE.
+        for (int y = 0; y < heightNumberOfTile; y++) {
+            for (int x = 0; x < widthNumberOfTile; x++) {
+
+                int xOffset = (x * TILE_WIDTH);
+                int yOffset = (y * TILE_HEIGHT);
+
+                //if non-blank (equals 0)...
+                if (returner[y][x][0] == 0) {
+                    for (BufferedImage tileSpriteTarget : nonWalkableTileSpriteTargets) {
+
+                        //it is the same as one of the target.
+                        if ( compareTile(worldMapAsTileSprites.getSubimage(xOffset, yOffset, TILE_WIDTH, TILE_HEIGHT),
+                                tileSpriteTarget) ) {
+                            returner[y][x][0] = 1;
+                            break;
+                        }
+                    }
+                    for (BufferedImage tileSpriteTarget : walkableTileSpriteTargets) {
+                        if ( compareTile(worldMapAsTileSprites.getSubimage(xOffset, yOffset, TILE_WIDTH, TILE_HEIGHT),
+                                tileSpriteTarget) ) {
+                            returner[y][x][0] = 2;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        return returner;
+    } // **** end BufferedImage translateTileSpriteToRGBImage(BufferedImage) method ****
+
+    private boolean compareTile(BufferedImage tileSpriteImage, BufferedImage tileSpriteTarget) {
+        boolean sameImage = true;
+
+        outerloop:
+        for (int yy = 0; yy < TILE_HEIGHT; yy++) {
+            for (int xx = 0; xx < TILE_WIDTH; xx++) {
+                int pixelImage = tileSpriteImage.getRGB(xx, yy);
+                int redImage = (pixelImage >> 16) & 0xff;
+                int greenImage = (pixelImage >> 8) & 0xff;
+                int blueImage = (pixelImage) & 0xff;
+
+                int pixelTarget = tileSpriteTarget.getRGB(xx, yy);
+                int redTarget = (pixelTarget >> 16) & 0xff;
+                int greenTarget = (pixelTarget >> 8) & 0xff;
+                int blueTarget = (pixelTarget) & 0xff;
+
+                //if one pixel is not the same... sameImage set to false.
+                if ( !((redImage == redTarget) && (greenImage == greenTarget) && (blueImage == blueTarget)) ) {
+                    sameImage = false;
+                    break outerloop;
+                }
+            }
+        }
+
+        return sameImage;
+    }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
      *  Load world by reading RGB values from BufferedImage object and writing to int[][][].
@@ -130,159 +290,6 @@ public class TileSpriteToRGBConverter {
 
         return rgbArrayRelativeToMap;
     } // **** end int[][][] transcribeRGBFromImage(BufferedImage) method ****
-
-    public int[][][] translateTileSpriteToRGBImage() {
-        ////////////////////////////////////////////////////////
-        initNonWalkableTileSpriteTargets(); //Used in final for-loop.
-        initWalkableTileSpriteTargets();
-        ////////////////////////////////////////////////////////
-
-
-        int widthNumberOfTile = (worldMapAsTileSprites.getWidth() / TILE_WIDTH);
-        int heightNumberOfTile = (worldMapAsTileSprites.getHeight() / TILE_HEIGHT);
-
-        int[][][] returner = new int[heightNumberOfTile][widthNumberOfTile][1];
-
-        //checking each tile sprite image (64x64) within the entire world map (widthNumberOfTile by heightNumberOfTile).
-        for (int y = 0; y < heightNumberOfTile; y++) {
-            for (int x = 0; x < widthNumberOfTile; x++) {
-
-                int xOffset = (x * TILE_WIDTH);
-                int yOffset = (y * TILE_HEIGHT);
-                boolean blankTile = true;
-
-                //!!!CHECK TILE - BLANK VERSUS FILLED!!!
-                //check each individual pixel within each of the 64x64-pixeled tile.
-                //@@@@@
-                //label for outer-loop in case I can break out early.
-                //@@@@@
-                outerloop:
-                for (int yy = 0; yy < TILE_HEIGHT; yy++) {
-                    for (int xx = 0; xx < TILE_WIDTH; xx++) {
-
-                        int pixel = worldMapAsTileSprites.getRGB((xOffset + xx), (yOffset + yy));
-                        int red = (pixel >> 16) & 0xff;
-                        int green = (pixel >> 8) & 0xff;
-                        int blue = (pixel) & 0xff;
-
-                        //if non-blank tile
-                        if ( !((red == 255) && (green == 255) && (blue == 255)) &&
-                                //!!!THERE WERE OTHER RGB values FOR BLANK!!!
-                                !((red == 254) && (green == 254) && (blue == 254)) ) {
-                            blankTile = false;
-                            //@@@@@@@@@@@@@@
-                            break outerloop;
-                            //@@@@@@@@@@@@@@
-                        }
-                    }
-                }
-
-                // blank tile will be set to have a value of 9.
-                if (blankTile) {
-                    returner[y][x][0] = 9;
-                }
-                // non-blank tile will be set to have a value of 0.
-                else {
-                    returner[y][x][0] = 0;
-
-
-                    //CHECK NON-BLANK TILE using collection of target (16x16pixels) model.tiles.
-                    //target model.tiles - a collection of IWalkable tile sprite (16x16pixels).
-                        //returner[y][x][0] = 0;
-
-
-                }
-            }
-        }
-
-
-        //CHECK TARGET TILE IMAGE TO DETERMINE IWALKABLE.
-        for (int y = 0; y < heightNumberOfTile; y++) {
-            for (int x = 0; x < widthNumberOfTile; x++) {
-
-                int xOffset = (x * TILE_WIDTH);
-                int yOffset = (y * TILE_HEIGHT);
-
-                //if non-blank (equals 0)...
-                if (returner[y][x][0] == 0) {
-                    for (BufferedImage tileSpriteTarget : nonWalkableTileSpriteTargets) {
-
-                        //it is the same as one of the target.
-                        if ( compareTile(worldMapAsTileSprites.getSubimage(xOffset, yOffset, TILE_WIDTH, TILE_HEIGHT),
-                                tileSpriteTarget) ) {
-                            returner[y][x][0] = 1;
-                            break;
-                        }
-                    }
-                    for (BufferedImage tileSpriteTarget : walkableTileSpriteTargets) {
-                        if ( compareTile(worldMapAsTileSprites.getSubimage(xOffset, yOffset, TILE_WIDTH, TILE_HEIGHT),
-                                tileSpriteTarget) ) {
-                            returner[y][x][0] = 2;
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-
-        return returner;
-    } // **** end BufferedImage translateTileSpriteToRGBImage(BufferedImage) method ****
-
-
-
-    private boolean compareTile(BufferedImage tileSpriteImage, BufferedImage tileSpriteTarget) {
-        boolean sameImage = true;
-
-        outerloop:
-        for (int yy = 0; yy < TILE_HEIGHT; yy++) {
-            for (int xx = 0; xx < TILE_WIDTH; xx++) {
-                int pixelImage = tileSpriteImage.getRGB(xx, yy);
-                int redImage = (pixelImage >> 16) & 0xff;
-                int greenImage = (pixelImage >> 8) & 0xff;
-                int blueImage = (pixelImage) & 0xff;
-
-                int pixelTarget = tileSpriteTarget.getRGB(xx, yy);
-                int redTarget = (pixelTarget >> 16) & 0xff;
-                int greenTarget = (pixelTarget >> 8) & 0xff;
-                int blueTarget = (pixelTarget) & 0xff;
-
-                //if one pixel is not the same... sameImage set to false.
-                if ( !((redImage == redTarget) && (greenImage == greenTarget) && (blueImage == blueTarget)) ) {
-                    sameImage = false;
-                    break outerloop;
-                }
-            }
-        }
-
-        return sameImage;
-    }
-
-    public Tile[][] generateWorldMapTileCollisionDetection(BufferedImage worldMapAsTileSprites) {
-        //////////////////////////////////////////////////////////////////////////
-        this.worldMapAsTileSprites = worldMapAsTileSprites;
-        int[][][] rgbImage = translateTileSpriteToRGBImage();
-        //////////////////////////////////////////////////////////////////////////
-        int widthWorld = rgbImage[0].length;
-        int heightWorld = rgbImage.length;
-
-        Tile[][] returner = new Tile[heightWorld][widthWorld];
-
-        for (int y = 0; y < rgbImage.length; y++) {
-            for (int x = 0; x <rgbImage[y].length; x++) {
-                if (rgbImage[y][x][0] == 1) {
-                    returner[y][x] = new SolidTile(x, y);
-                } else if (rgbImage[y][x][0] == 0) {
-                    returner[y][x] = new NonSolidTile(x, y);
-                } else if (rgbImage[y][x][0] == 2) {
-                    returner[y][x] = new TallGrassTile(x, y);
-                } else if (rgbImage[y][x][0] == 9) {
-                    returner[y][x] = new NullTile(x, y);
-                }
-            }
-        }
-
-        return returner;
-    }
 
     public void testConsoleOutput(int[][][] rgbImage) {
         for (int y = 0; y < rgbImage.length; y++) {
