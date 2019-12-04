@@ -95,6 +95,10 @@ public class Player
         }
         handler.getGameCamera().move();
 
+        /////////////////////////////
+        transferPointCollisionEscape:
+        /////////////////////////////
+
         xDelta = 0;
         yDelta = 0;
     }
@@ -117,6 +121,97 @@ public class Player
             //}
         }
     }
+
+    private boolean checkTransferPointsCollision(Rectangle collisionBoundsFuture) {
+        Map<String, Rectangle> transferPoints = ((GameState)handler.getStateManager().getIState("GameState")).getWorldManager().getCurrentWorld().getTransferPoints();
+        for (String identifier : transferPoints.keySet()) {
+            System.out.println("checking transfer points.");
+            if (transferPoints.get(identifier).intersects(collisionBoundsFuture)) {
+                System.out.println("CHANGING WORLD!!!!!!!!! (to @@@ " + identifier + " @@@)");
+                WorldManager worldManager = ((GameState)handler.getStateManager().getIState("GameState")).getWorldManager();
+                if (worldManager.getIWorld(identifier) != null) {
+
+                    // If we are going to HomePlayer: record player's and game camera's
+                    // last location when currentWorld was WorldMap.
+                    if ( identifier.equals("HomePlayer") ) {
+                        //////////////////////////////////////////////////////////////////////////////////////
+                        if (worldManager.getCurrentWorld() instanceof WorldMap) {
+                            ((WorldMap) worldManager.getIWorld("WorldMap")).recordLocationPriorTransfer();
+                        }
+                        //////////////////////////////////////////////////////////////////////////////////////
+
+                        //setting player and game camera to new location and changing currentWorld to HomePlayer.
+                        x = 4 * Tile.WIDTH;
+                        y = 7 * Tile.HEIGHT;
+                        for (INabber nabber : nabberList) {
+                            if (nabber instanceof James) {
+                                ((James)nabber).setX(3 * Tile.WIDTH);
+                                ((James)nabber).setY(7 * Tile.HEIGHT);
+                                ((James)nabber).setxScreenPosition( xScreenPosition - (2 * Tile.WIDTH) );
+                                ((James)nabber).setyScreenPosition( yScreenPosition );
+                            } else if (nabber instanceof Jessie) {
+                                ((Jessie)nabber).setX(4 * Tile.WIDTH);
+                                ((Jessie)nabber).setY(6 * Tile.HEIGHT);
+                                ((Jessie)nabber).setxScreenPosition( xScreenPosition );
+                                ((Jessie)nabber).setyScreenPosition( yScreenPosition - (2 * Tile.HEIGHT) );
+                            }
+                        }
+                        handler.getGameCamera().setxOffset0( (-6 * Tile.WIDTH) );
+                        handler.getGameCamera().setyOffset0( (-2 * Tile.HEIGHT) );
+                        handler.getGameCamera().setxOffset1( ((-6 * Tile.WIDTH) + 320) );
+                        handler.getGameCamera().setyOffset1( ((-2 * Tile.HEIGHT) + 272) );
+
+                        ////////
+                        worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
+                        return true;
+                        ////////
+                    }
+                    // (for now) player going back to WorldMap.
+                    else if (identifier.equals("WorldMap")) {
+                        ////////////////////////////////////////////////////////////////////////////////////
+                        ((WorldMap)worldManager.getIWorld("WorldMap")).loadLocationPriorTransfer();
+                        ////////////////////////////////////////////////////////////////////////////////////
+
+                        ////////
+                        worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
+                        return true;
+                        ////////
+                    }
+                    else if (identifier.equals("RoomPlayer")) {
+                        //setting player and game camera to new location and changing currentWorld to RoomPlayer.
+                        x = 4 * Tile.WIDTH;
+                        y = 7 * Tile.HEIGHT;
+                        for (INabber nabber : nabberList) {
+                            if (nabber instanceof James) {
+                                ((James)nabber).setX(3 * Tile.WIDTH);
+                                ((James)nabber).setY(7 * Tile.HEIGHT);
+                                ((James)nabber).setxScreenPosition( xScreenPosition - (2 * Tile.WIDTH) );
+                                ((James)nabber).setyScreenPosition( yScreenPosition );
+                            } else if (nabber instanceof Jessie) {
+                                ((Jessie)nabber).setX(4 * Tile.WIDTH);
+                                ((Jessie)nabber).setY(6 * Tile.HEIGHT);
+                                ((Jessie)nabber).setxScreenPosition( xScreenPosition );
+                                ((Jessie)nabber).setyScreenPosition( yScreenPosition - (2 * Tile.HEIGHT) );
+                            }
+                        }
+                        handler.getGameCamera().setxOffset0( (-6 * Tile.WIDTH) );
+                        handler.getGameCamera().setyOffset0( (-2 * Tile.HEIGHT) );
+                        handler.getGameCamera().setxOffset1( ((-6 * Tile.WIDTH) + 320) );
+                        handler.getGameCamera().setyOffset1( ((-2 * Tile.HEIGHT) + 272) );
+
+                        ////////
+                        worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
+                        return true;
+                        ////////
+                    }
+
+                }
+            }
+        }
+
+        return false;
+    }
+
     protected void moveX() {
         Tile[][] worldMap = handler.getWorldMapTileCollisionDetection();
 
@@ -127,13 +222,6 @@ public class Player
             //if top-LEFT AND bottom-LEFT corners of player-sprite moving into NOT solid tile, do stuff.
             if ( !(worldMap[((y+bounds.y) / Tile.HEIGHT)][tx].isSolid()) &&                   //TOP-LEFT
                     !(worldMap[((y+bounds.y+bounds.height) / Tile.HEIGHT)][tx].isSolid()) ) {   //BOTTOM-LEFT
-
-                /////////////////////////////////////////////
-                for (INabber nabber : nabberList) {
-                    nabber.setXDelta(xDelta);
-                }
-                ////////////////////////////////////////////
-
                 //CHECKING TallGrassTile
                 if ( worldMap[((y+bounds.y) / Tile.HEIGHT)][tx] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's top-LEFT.");
@@ -143,104 +231,22 @@ public class Player
                     checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+bounds.y+bounds.height) / Tile.HEIGHT)][tx] );
                 }
 
-
                 //CHECKING TransferPoints
                 Rectangle collisionBoundsFuture = new Rectangle(x+bounds.x+xDelta, y+bounds.y, Tile.WIDTH, Tile.HEIGHT);
-                Map<String, Rectangle> transferPoints = ((GameState)handler.getStateManager().getIState("GameState")).getWorldManager().getCurrentWorld().getTransferPoints();
-                for (String identifier : transferPoints.keySet()) {
-                    System.out.println("checking transfer points.");
-                    if (transferPoints.get(identifier).intersects(collisionBoundsFuture)) {
-                        System.out.println("CHANGING WORLD!!!!!!!!!");
-                        WorldManager worldManager = ((GameState)handler.getStateManager().getIState("GameState")).getWorldManager();
-                        if (worldManager.getIWorld(identifier) != null) {
+                boolean transferPointCollision = checkTransferPointsCollision(collisionBoundsFuture);
 
-                            // If we are going to HomePlayer: record player's and game camera's
-                            // last location when currentWorld was WorldMap.
-                            if ( identifier.equals("HomePlayer") ) {
-                                //////////////////////////////////////////////////////////////////////////////////////
-                                if (worldManager.getCurrentWorld() instanceof WorldMap) {
-                                    ((WorldMap) worldManager.getIWorld("WorldMap")).recordLocationPriorTransfer();
-                                }
-                                //////////////////////////////////////////////////////////////////////////////////////
-
-                                //setting player and game camera to new location and changing currentWorld to HomePlayer.
-                                x = 4 * Tile.WIDTH;
-                                y = 7 * Tile.HEIGHT;
-                                for (INabber nabber : nabberList) {
-                                    if (nabber instanceof James) {
-                                        ((James)nabber).setX(3 * Tile.WIDTH);
-                                        ((James)nabber).setY(7 * Tile.HEIGHT);
-                                        ((James)nabber).setxScreenPosition( xScreenPosition - (2 * Tile.WIDTH) );
-                                        ((James)nabber).setyScreenPosition( yScreenPosition );
-                                    } else if (nabber instanceof Jessie) {
-                                        ((Jessie)nabber).setX(4 * Tile.WIDTH);
-                                        ((Jessie)nabber).setY(6 * Tile.HEIGHT);
-                                        ((Jessie)nabber).setxScreenPosition( xScreenPosition );
-                                        ((Jessie)nabber).setyScreenPosition( yScreenPosition - (2 * Tile.HEIGHT) );
-                                    }
-                                }
-                                handler.getGameCamera().setxOffset0( (-6 * Tile.WIDTH) );
-                                handler.getGameCamera().setyOffset0( (-2 * Tile.HEIGHT) );
-                                handler.getGameCamera().setxOffset1( ((-6 * Tile.WIDTH) + 320) );
-                                handler.getGameCamera().setyOffset1( ((-2 * Tile.HEIGHT) + 272) );
-
-                                ////////
-                                worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
-                                return;
-                                ////////
-                            }
-                            // (for now) player going back to WorldMap.
-                            else if (identifier.equals("WorldMap")) {
-                                ////////////////////////////////////////////////////////////////////////////////////
-                                ((WorldMap)worldManager.getIWorld("WorldMap")).loadLocationPriorTransfer();
-                                ////////////////////////////////////////////////////////////////////////////////////
-
-                                ////////
-                                worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
-                                return;
-                                ////////
-                            }
-                            else if (identifier.equals("RoomPlayer")) {
-                                //setting player and game camera to new location and changing currentWorld to HomePlayer.
-                                x = 4 * Tile.WIDTH;
-                                y = 7 * Tile.HEIGHT;
-                                for (INabber nabber : nabberList) {
-                                    if (nabber instanceof James) {
-                                        ((James)nabber).setX(3 * Tile.WIDTH);
-                                        ((James)nabber).setY(7 * Tile.HEIGHT);
-                                        ((James)nabber).setxScreenPosition( xScreenPosition - (2 * Tile.WIDTH) );
-                                        ((James)nabber).setyScreenPosition( yScreenPosition );
-                                    } else if (nabber instanceof Jessie) {
-                                        ((Jessie)nabber).setX(4 * Tile.WIDTH);
-                                        ((Jessie)nabber).setY(6 * Tile.HEIGHT);
-                                        ((Jessie)nabber).setxScreenPosition( xScreenPosition );
-                                        ((Jessie)nabber).setyScreenPosition( yScreenPosition - (2 * Tile.HEIGHT) );
-                                    }
-                                }
-                                handler.getGameCamera().setxOffset0( (-6 * Tile.WIDTH) );
-                                handler.getGameCamera().setyOffset0( (-2 * Tile.HEIGHT) );
-                                handler.getGameCamera().setxOffset1( ((-6 * Tile.WIDTH) + 320) );
-                                handler.getGameCamera().setyOffset1( ((-2 * Tile.HEIGHT) + 272) );
-
-                                ////////
-                                worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
-                                return;
-                                ////////
-                            }
-
-
-                        }
+                /////////////////////////////////////////
+                //no collision with transferPoints
+                if (!transferPointCollision) {
+                    //moves Player's x-position.
+                    x += xDelta;
+                    directionFacing = DirectionFacing.LEFT;
+                    handler.getGameCamera().setXDelta(xDelta);
+                    for (INabber nabber : nabberList) {
+                        nabber.setXDelta(xDelta);
                     }
                 }
-
                 /////////////////////////////////////////
-                //moves Player's x-position.
-                x += xDelta;
-                handler.getGameCamera().setXDelta(xDelta);
-                directionFacing = DirectionFacing.LEFT;
-                /////////////////////////////////////////
-                //moves GameCamera's x-position.
-                //handler.getGameCamera().move(xDelta, 0);
             }
         }
         //MOVING RIGHT
@@ -250,13 +256,6 @@ public class Player
             //if top-RIGHT AND bottom-RIGHT corners of player-sprite moving into NOT solid tile, do stuff.
             if ( !(worldMap[((y+bounds.y) / Tile.HEIGHT)][tx].isSolid()) &&                   //TOP-RIGHT
                     !(worldMap[((y+bounds.y+bounds.height) / Tile.HEIGHT)][tx].isSolid()) ) {   //BOTTOM-RIGHT
-
-                ////////////////////////////////////////////
-                for (INabber nabber : nabberList) {
-                    nabber.setXDelta(xDelta);
-                }
-                ////////////////////////////////////////////
-
                 //CHECKING TallGrassTile
                 if ( worldMap[((y+bounds.y) / Tile.HEIGHT)][tx] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's top-RIGHT.");
@@ -266,104 +265,22 @@ public class Player
                     checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+bounds.y+bounds.height) / Tile.HEIGHT)][tx] );
                 }
 
-
                 //CHECKING TransferPoints
                 Rectangle collisionBoundsFuture = new Rectangle(x+bounds.x+bounds.width+xDelta, y+bounds.y, Tile.WIDTH, Tile.HEIGHT);
-                Map<String, Rectangle> transferPoints = ((GameState)handler.getStateManager().getIState("GameState")).getWorldManager().getCurrentWorld().getTransferPoints();
-                for (String identifier : transferPoints.keySet()) {
-                    System.out.println("checking transfer points.");
-                    if (transferPoints.get(identifier).intersects(collisionBoundsFuture)) {
-                        System.out.println("CHANGING WORLD!!!!!!!!!");
-                        WorldManager worldManager = ((GameState)handler.getStateManager().getIState("GameState")).getWorldManager();
-                        if (worldManager.getIWorld(identifier) != null) {
+                boolean transferPointCollision = checkTransferPointsCollision(collisionBoundsFuture);
 
-                            // If we are going to HomePlayer: record player's and game camera's
-                            // last location when currentWorld was WorldMap.
-                            if ( identifier.equals("HomePlayer") ) {
-                                //////////////////////////////////////////////////////////////////////////////////////
-                                if (worldManager.getCurrentWorld() instanceof WorldMap) {
-                                    ((WorldMap) worldManager.getIWorld("WorldMap")).recordLocationPriorTransfer();
-                                }
-                                //////////////////////////////////////////////////////////////////////////////////////
-
-                                //setting player and game camera to new location and changing currentWorld to HomePlayer.
-                                x = 4 * Tile.WIDTH;
-                                y = 7 * Tile.HEIGHT;
-                                for (INabber nabber : nabberList) {
-                                    if (nabber instanceof James) {
-                                        ((James)nabber).setX(3 * Tile.WIDTH);
-                                        ((James)nabber).setY(7 * Tile.HEIGHT);
-                                        ((James)nabber).setxScreenPosition( xScreenPosition - (2 * Tile.WIDTH) );
-                                        ((James)nabber).setyScreenPosition( yScreenPosition );
-                                    } else if (nabber instanceof Jessie) {
-                                        ((Jessie)nabber).setX(4 * Tile.WIDTH);
-                                        ((Jessie)nabber).setY(6 * Tile.HEIGHT);
-                                        ((Jessie)nabber).setxScreenPosition( xScreenPosition );
-                                        ((Jessie)nabber).setyScreenPosition( yScreenPosition - (2 * Tile.HEIGHT) );
-                                    }
-                                }
-                                handler.getGameCamera().setxOffset0( (-6 * Tile.WIDTH) );
-                                handler.getGameCamera().setyOffset0( (-2 * Tile.HEIGHT) );
-                                handler.getGameCamera().setxOffset1( ((-6 * Tile.WIDTH) + 320) );
-                                handler.getGameCamera().setyOffset1( ((-2 * Tile.HEIGHT) + 272) );
-
-                                ////////
-                                worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
-                                return;
-                                ////////
-                            }
-                            // (for now) player going back to WorldMap.
-                            else if (identifier.equals("WorldMap")) {
-                                ////////////////////////////////////////////////////////////////////////////////////
-                                ((WorldMap)worldManager.getIWorld("WorldMap")).loadLocationPriorTransfer();
-                                ////////////////////////////////////////////////////////////////////////////////////
-
-                                ////////
-                                worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
-                                return;
-                                ////////
-                            }
-                            else if (identifier.equals("RoomPlayer")) {
-                                //setting player and game camera to new location and changing currentWorld to HomePlayer.
-                                x = 4 * Tile.WIDTH;
-                                y = 7 * Tile.HEIGHT;
-                                for (INabber nabber : nabberList) {
-                                    if (nabber instanceof James) {
-                                        ((James)nabber).setX(3 * Tile.WIDTH);
-                                        ((James)nabber).setY(7 * Tile.HEIGHT);
-                                        ((James)nabber).setxScreenPosition( xScreenPosition - (2 * Tile.WIDTH) );
-                                        ((James)nabber).setyScreenPosition( yScreenPosition );
-                                    } else if (nabber instanceof Jessie) {
-                                        ((Jessie)nabber).setX(4 * Tile.WIDTH);
-                                        ((Jessie)nabber).setY(6 * Tile.HEIGHT);
-                                        ((Jessie)nabber).setxScreenPosition( xScreenPosition );
-                                        ((Jessie)nabber).setyScreenPosition( yScreenPosition - (2 * Tile.HEIGHT) );
-                                    }
-                                }
-                                handler.getGameCamera().setxOffset0( (-6 * Tile.WIDTH) );
-                                handler.getGameCamera().setyOffset0( (-2 * Tile.HEIGHT) );
-                                handler.getGameCamera().setxOffset1( ((-6 * Tile.WIDTH) + 320) );
-                                handler.getGameCamera().setyOffset1( ((-2 * Tile.HEIGHT) + 272) );
-
-                                ////////
-                                worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
-                                return;
-                                ////////
-                            }
-
-
-                        }
+                ///////////////////////////////////////////
+                //no collision with transferPoints
+                if (!transferPointCollision) {
+                    //moves Player's x-position.
+                    x += xDelta;
+                    directionFacing = DirectionFacing.RIGHT;
+                    handler.getGameCamera().setXDelta(xDelta);
+                    for (INabber nabber : nabberList) {
+                        nabber.setXDelta(xDelta);
                     }
                 }
-
                 ///////////////////////////////////////////
-                //moves Player's x-position.
-                x += xDelta;
-                handler.getGameCamera().setXDelta(xDelta);
-                directionFacing = DirectionFacing.RIGHT;
-                ///////////////////////////////////////////
-                //moves GameCamera's x-position.
-                //handler.getGameCamera().move(xDelta, 0);
             }
         }
     }
@@ -378,13 +295,6 @@ public class Player
             //if TOP-left AND TOP-right corners of player-sprite moving into NOT solid tile, do stuff.
             if ( !(worldMap[ty][((x+bounds.x) / Tile.WIDTH)].isSolid()) &&                    //TOP-LEFT
                     !(worldMap[ty][((x+bounds.x+bounds.width) / Tile.WIDTH)].isSolid()) ) {     //TOP-RIGHT
-
-                /////////////////////////////////////////////
-                for (INabber nabber : nabberList) {
-                    nabber.setYDelta(yDelta);
-                }
-                /////////////////////////////////////////////
-
                 //CHECKING TallGrassTile
                 if ( worldMap[ty][((x+bounds.x) / Tile.WIDTH)] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's TOP-left.");
@@ -396,101 +306,20 @@ public class Player
 
                 //CHECKING TransferPoints
                 Rectangle collisionBoundsFuture = new Rectangle(x+bounds.x, y+bounds.y+yDelta, Tile.WIDTH, Tile.HEIGHT);
-                Map<String, Rectangle> transferPoints = ((GameState)handler.getStateManager().getIState("GameState")).getWorldManager().getCurrentWorld().getTransferPoints();
-                for (String identifier : transferPoints.keySet()) {
-                    System.out.println("checking transfer points.");
-                    if (transferPoints.get(identifier).intersects(collisionBoundsFuture)) {
-                        System.out.println("CHANGING WORLD!!!!!!!!!");
-                        WorldManager worldManager = ((GameState)handler.getStateManager().getIState("GameState")).getWorldManager();
-                        if (worldManager.getIWorld(identifier) != null) {
+                boolean transferPointCollision = checkTransferPointsCollision(collisionBoundsFuture);
 
-                            // If we are going to HomePlayer: record player's and game camera's
-                            // last location when currentWorld was WorldMap.
-                            if ( identifier.equals("HomePlayer") ) {
-                                //////////////////////////////////////////////////////////////////////////////////////
-                                if (worldManager.getCurrentWorld() instanceof WorldMap) {
-                                    ((WorldMap) worldManager.getIWorld("WorldMap")).recordLocationPriorTransfer();
-                                }
-                                //////////////////////////////////////////////////////////////////////////////////////
-
-                                //setting player and game camera to new location and changing currentWorld to HomePlayer.
-                                x = 4 * Tile.WIDTH;
-                                y = 7 * Tile.HEIGHT;
-                                for (INabber nabber : nabberList) {
-                                    if (nabber instanceof James) {
-                                        ((James)nabber).setX(3 * Tile.WIDTH);
-                                        ((James)nabber).setY(7 * Tile.HEIGHT);
-                                        ((James)nabber).setxScreenPosition( xScreenPosition - (2 * Tile.WIDTH) );
-                                        ((James)nabber).setyScreenPosition( yScreenPosition );
-                                    } else if (nabber instanceof Jessie) {
-                                        ((Jessie)nabber).setX(4 * Tile.WIDTH);
-                                        ((Jessie)nabber).setY(6 * Tile.HEIGHT);
-                                        ((Jessie)nabber).setxScreenPosition( xScreenPosition );
-                                        ((Jessie)nabber).setyScreenPosition( yScreenPosition - (2 * Tile.HEIGHT) );
-                                    }
-                                }
-                                handler.getGameCamera().setxOffset0( (-6 * Tile.WIDTH) );
-                                handler.getGameCamera().setyOffset0( (-2 * Tile.HEIGHT) );
-                                handler.getGameCamera().setxOffset1( ((-6 * Tile.WIDTH) + 320) );
-                                handler.getGameCamera().setyOffset1( ((-2 * Tile.HEIGHT) + 272) );
-
-                                ////////
-                                worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
-                                return;
-                                ////////
-                            }
-                            // (for now) player going back to WorldMap.
-                            else if (identifier.equals("WorldMap")) {
-                                ////////////////////////////////////////////////////////////////////////////////////
-                                ((WorldMap)worldManager.getIWorld("WorldMap")).loadLocationPriorTransfer();
-                                ////////////////////////////////////////////////////////////////////////////////////
-
-                                ////////
-                                worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
-                                return;
-                                ////////
-                            }
-                            else if (identifier.equals("RoomPlayer")) {
-                                //setting player and game camera to new location and changing currentWorld to HomePlayer.
-                                x = 4 * Tile.WIDTH;
-                                y = 7 * Tile.HEIGHT;
-                                for (INabber nabber : nabberList) {
-                                    if (nabber instanceof James) {
-                                        ((James)nabber).setX(3 * Tile.WIDTH);
-                                        ((James)nabber).setY(7 * Tile.HEIGHT);
-                                        ((James)nabber).setxScreenPosition( xScreenPosition - (2 * Tile.WIDTH) );
-                                        ((James)nabber).setyScreenPosition( yScreenPosition );
-                                    } else if (nabber instanceof Jessie) {
-                                        ((Jessie)nabber).setX(4 * Tile.WIDTH);
-                                        ((Jessie)nabber).setY(6 * Tile.HEIGHT);
-                                        ((Jessie)nabber).setxScreenPosition( xScreenPosition );
-                                        ((Jessie)nabber).setyScreenPosition( yScreenPosition - (2 * Tile.HEIGHT) );
-                                    }
-                                }
-                                handler.getGameCamera().setxOffset0( (-6 * Tile.WIDTH) );
-                                handler.getGameCamera().setyOffset0( (-2 * Tile.HEIGHT) );
-                                handler.getGameCamera().setxOffset1( ((-6 * Tile.WIDTH) + 320) );
-                                handler.getGameCamera().setyOffset1( ((-2 * Tile.HEIGHT) + 272) );
-
-                                ////////
-                                worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
-                                return;
-                                ////////
-                            }
-
-
-                        }
+                //////////////////////////////////////
+                //no collision with transferPoints
+                if (!transferPointCollision) {
+                    //moves Player's y-position.
+                    y += yDelta;
+                    directionFacing = DirectionFacing.UP;
+                    handler.getGameCamera().setYDelta(yDelta);
+                    for (INabber nabber : nabberList) {
+                        nabber.setYDelta(yDelta);
                     }
                 }
-
                 //////////////////////////////////////
-                //moves Player's y-position.
-                y += yDelta;
-                handler.getGameCamera().setYDelta(yDelta);
-                directionFacing = DirectionFacing.UP;
-                //////////////////////////////////////
-                //moves GameCamera's y-position.
-                //handler.getGameCamera().move(0, yDelta);
             }
         }
         //MOVING DOWN
@@ -500,13 +329,6 @@ public class Player
             //if BOTTOM-left AND BOTTOM-right corners of player-sprite moving into NOT solid tile, do stuff.
             if ( !(worldMap[ty][((x+bounds.x) / Tile.WIDTH)].isSolid()) &&                    //BOTTOM-LEFT
                     !(worldMap[ty][((x+bounds.x+bounds.width) / Tile.WIDTH)].isSolid()) ) {     //BOTTOM-RIGHT
-
-                //////////////////////////////////////////////
-                for (INabber nabber : nabberList) {
-                    nabber.setYDelta(yDelta);
-                }
-                //////////////////////////////////////////////
-
                 //CHECKING TallGrassTile
                 if ( worldMap[ty][((x+bounds.x) / Tile.WIDTH)] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's BOTTOM-left.");
@@ -516,104 +338,22 @@ public class Player
                     checkTallGrassTileCollision( (TallGrassTile)worldMap[ty][((x+bounds.x+bounds.width) / Tile.WIDTH)] );
                 }
 
-
                 //CHECKING TransferPoints
                 Rectangle collisionBoundsFuture = new Rectangle(x+bounds.x, y+bounds.y+bounds.height+yDelta, Tile.WIDTH, Tile.HEIGHT);
-                Map<String, Rectangle> transferPoints = ((GameState)handler.getStateManager().getIState("GameState")).getWorldManager().getCurrentWorld().getTransferPoints();
-                for (String identifier : transferPoints.keySet()) {
-                    System.out.println("checking transfer points.");
-                    if (transferPoints.get(identifier).intersects(collisionBoundsFuture)) {
-                        System.out.println("CHANGING WORLD!!!!!!!!!");
-                        WorldManager worldManager = ((GameState)handler.getStateManager().getIState("GameState")).getWorldManager();
-                        if (worldManager.getIWorld(identifier) != null) {
+                boolean transferPointCollision = checkTransferPointsCollision(collisionBoundsFuture);
 
-                            // If we are going to HomePlayer: record player's and game camera's
-                            // last location when currentWorld was WorldMap.
-                            if ( identifier.equals("HomePlayer") ) {
-                                //////////////////////////////////////////////////////////////////////////////////////
-                                if (worldManager.getCurrentWorld() instanceof WorldMap) {
-                                    ((WorldMap) worldManager.getIWorld("WorldMap")).recordLocationPriorTransfer();
-                                }
-                                //////////////////////////////////////////////////////////////////////////////////////
-
-                                //setting player and game camera to new location and changing currentWorld to HomePlayer.
-                                x = 4 * Tile.WIDTH;
-                                y = 7 * Tile.HEIGHT;
-                                for (INabber nabber : nabberList) {
-                                    if (nabber instanceof James) {
-                                        ((James)nabber).setX(3 * Tile.WIDTH);
-                                        ((James)nabber).setY(7 * Tile.HEIGHT);
-                                        ((James)nabber).setxScreenPosition( xScreenPosition - (2 * Tile.WIDTH) );
-                                        ((James)nabber).setyScreenPosition( yScreenPosition );
-                                    } else if (nabber instanceof Jessie) {
-                                        ((Jessie)nabber).setX(4 * Tile.WIDTH);
-                                        ((Jessie)nabber).setY(6 * Tile.HEIGHT);
-                                        ((Jessie)nabber).setxScreenPosition( xScreenPosition );
-                                        ((Jessie)nabber).setyScreenPosition( yScreenPosition - (2 * Tile.HEIGHT) );
-                                    }
-                                }
-                                handler.getGameCamera().setxOffset0( (-6 * Tile.WIDTH) );
-                                handler.getGameCamera().setyOffset0( (-2 * Tile.HEIGHT) );
-                                handler.getGameCamera().setxOffset1( ((-6 * Tile.WIDTH) + 320) );
-                                handler.getGameCamera().setyOffset1( ((-2 * Tile.HEIGHT) + 272) );
-
-                                ////////
-                                worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
-                                return;
-                                ////////
-                            }
-                            // (for now) player going back to WorldMap.
-                            else if (identifier.equals("WorldMap")) {
-                                ////////////////////////////////////////////////////////////////////////////////////
-                                ((WorldMap)worldManager.getIWorld("WorldMap")).loadLocationPriorTransfer();
-                                ////////////////////////////////////////////////////////////////////////////////////
-
-                                ////////
-                                worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
-                                return;
-                                ////////
-                            }
-                            else if (identifier.equals("RoomPlayer")) {
-                                //setting player and game camera to new location and changing currentWorld to HomePlayer.
-                                x = 4 * Tile.WIDTH;
-                                y = 7 * Tile.HEIGHT;
-                                for (INabber nabber : nabberList) {
-                                    if (nabber instanceof James) {
-                                        ((James)nabber).setX(3 * Tile.WIDTH);
-                                        ((James)nabber).setY(7 * Tile.HEIGHT);
-                                        ((James)nabber).setxScreenPosition( xScreenPosition - (2 * Tile.WIDTH) );
-                                        ((James)nabber).setyScreenPosition( yScreenPosition );
-                                    } else if (nabber instanceof Jessie) {
-                                        ((Jessie)nabber).setX(4 * Tile.WIDTH);
-                                        ((Jessie)nabber).setY(6 * Tile.HEIGHT);
-                                        ((Jessie)nabber).setxScreenPosition( xScreenPosition );
-                                        ((Jessie)nabber).setyScreenPosition( yScreenPosition - (2 * Tile.HEIGHT) );
-                                    }
-                                }
-                                handler.getGameCamera().setxOffset0( (-6 * Tile.WIDTH) );
-                                handler.getGameCamera().setyOffset0( (-2 * Tile.HEIGHT) );
-                                handler.getGameCamera().setxOffset1( ((-6 * Tile.WIDTH) + 320) );
-                                handler.getGameCamera().setyOffset1( ((-2 * Tile.HEIGHT) + 272) );
-
-                                ////////
-                                worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
-                                return;
-                                ////////
-                            }
-
-
-                        }
+                ////////////////////////////////////////
+                //no collision with transferPoints
+                if (!transferPointCollision) {
+                    //moves Player's y-position.
+                    y += yDelta;
+                    directionFacing = DirectionFacing.DOWN;
+                    handler.getGameCamera().setYDelta(yDelta);
+                    for (INabber nabber : nabberList) {
+                        nabber.setYDelta(yDelta);
                     }
                 }
-
                 ////////////////////////////////////////
-                //moves Player's y-position.
-                y += yDelta;
-                handler.getGameCamera().setYDelta(yDelta);
-                directionFacing = DirectionFacing.DOWN;
-                ////////////////////////////////////////
-                //moves GameCamera's y-position.
-                //handler.getGameCamera().move(0, yDelta);
             }
         }
     }
