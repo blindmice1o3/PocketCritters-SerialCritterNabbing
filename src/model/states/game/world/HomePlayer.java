@@ -8,6 +8,8 @@ import model.tiles.SolidTile;
 import model.tiles.Tile;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,8 +25,11 @@ public class HomePlayer implements IWorld {
     public HomePlayer(Handler handler) {
         this.handler = handler;
 
-        //tileSpriteToRGBConverter = new TileSpriteToRGBConverter();
-        //worldMapTileCollisionDetection = tileSpriteToRGBConverter.generateWorldMapTileCollisionDetection(Assets.homePlayer);
+        tileSpriteToRGBConverter = new TileSpriteToRGBConverter();
+        ArrayList<BufferedImage> nonWalkableTileSpriteTargets = initNonWalkableTileSpriteTargets();
+        ArrayList<BufferedImage> walkableTileSpriteTargets = initWalkableTileSpriteTargets();
+        Tile[][] unborderedTileCollisionDetection = tileSpriteToRGBConverter.generateWorldMapTileCollisionDetection(Assets.homePlayer,
+                nonWalkableTileSpriteTargets, walkableTileSpriteTargets);
 
         worldMapTileCollisionDetection = new Tile[10][10];
         for (int i = 0; i < 10; i++) {
@@ -32,12 +37,53 @@ public class HomePlayer implements IWorld {
                 if ((i == 0) || (i == 9) || (j == 0) || (j == 9)) {
                     worldMapTileCollisionDetection[i][j] = new SolidTile(j, i);
                 } else {
-                    worldMapTileCollisionDetection[i][j] = new NonSolidTile(j, i);
+                    worldMapTileCollisionDetection[i][j] = unborderedTileCollisionDetection[i-1][j-1];
                 }
             }
         }
+
         initTransferPoints();
     } // **** end HomePlayer(Handler) constructor ****
+
+    private ArrayList<BufferedImage> initWalkableTileSpriteTargets() {
+        ArrayList<BufferedImage> walkableTileSpriteTargets = new ArrayList<BufferedImage>();
+
+        //NON-SOLID TILES
+        //staircase
+        walkableTileSpriteTargets.add(
+                Assets.homePlayer.getSubimage(112, 16, Tile.WIDTH, Tile.HEIGHT) ); //staircase
+
+        return walkableTileSpriteTargets;
+    }
+
+    private ArrayList<BufferedImage> initNonWalkableTileSpriteTargets() {
+        ArrayList<BufferedImage> nonWalkableTileSpriteTargets = new ArrayList<BufferedImage>();
+
+        //SOLID TILES
+        for (int i = 0; i < 8; i++) {
+            int xOffset = i * Tile.WIDTH;
+
+            nonWalkableTileSpriteTargets.add(
+                    Assets.homePlayer.getSubimage(xOffset, 0, Tile.WIDTH, Tile.HEIGHT) ); //first ROW.
+        }
+
+        nonWalkableTileSpriteTargets.add(
+                Assets.homePlayer.getSubimage(0, 16, Tile.WIDTH, Tile.HEIGHT) ); //bookShelfBL
+        nonWalkableTileSpriteTargets.add(
+                Assets.homePlayer.getSubimage(16, 16, Tile.WIDTH, Tile.HEIGHT) ); //bookShelfBR
+        nonWalkableTileSpriteTargets.add(
+                Assets.homePlayer.getSubimage(48, 16, Tile.WIDTH, Tile.HEIGHT) ); //tv
+
+        // table, starting at x == 48, y == 64, width/number_of_columns == 2, height/number_of_rows == 2.
+        ArrayList<BufferedImage> table = tileSpriteToRGBConverter.pullMultipleTiles(Assets.homePlayer,48, 64, 2, 2);
+        nonWalkableTileSpriteTargets.addAll(
+                table
+        );
+
+        return nonWalkableTileSpriteTargets;
+    }
+
+
 
     private void initTransferPoints() {
         transferPoints = new HashMap<String, Rectangle>();
