@@ -21,3 +21,23 @@ lab (23, 544, 160, 192) 10x12
 
 32 / 16 = 2 tile in
 112 / 16 = 7 tile down
+
+
+
+
+game screen
+(640, 544)
+40x34
+home background
+14 * Tile.WIDTH = 14 * 16 = 224
+
+player screen position
+288, 256
+288 / 16 = 18
+256 / 16 = 16
+player position
+3 * Tile.WIDTH = 3 * 16 = 48
+
+
+
+

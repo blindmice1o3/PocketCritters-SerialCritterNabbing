@@ -67,6 +67,8 @@ public class TileSpriteToRGBConverter {
                         returner[y][x] = new TallGrassTile(x, y);
                     } else if (this.worldBackground == Assets.homePlayer) {
                         returner[y][x] = new StaircaseTile(x, y);
+                    } else if (this.worldBackground == Assets.roomPlayer) {
+                        returner[y][x] = new StaircaseTile(x, y);
                     }
                 } else if (rgbImage[y][x][0] == 9) {
                     returner[y][x] = new NullTile(x, y);

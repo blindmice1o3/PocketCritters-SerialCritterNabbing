@@ -103,10 +103,6 @@ public class HomePlayer implements IWorld {
 
         g.drawImage(Assets.homePlayer,
                 0, 0, handler.getGame().getWidth(), handler.getGame().getHeight(),
-                /*
-                14*Tile.WIDTH, 12*Tile.HEIGHT,
-                14*Tile.WIDTH + handler.getGame().getWidth(), 12*Tile.HEIGHT + handler.getGame().getHeight(),
-                */
                 (int)(handler.getGame().getGameCamera().getxOffset0()),
                 (int)(handler.getGame().getGameCamera().getyOffset0()),
                 (int)(handler.getGame().getGameCamera().getxOffset1()),

@@ -3,11 +3,12 @@ package model.states.game.world;
 import main.Handler;
 import main.gfx.Assets;
 import main.utils.TileSpriteToRGBConverter;
-import model.tiles.NonSolidTile;
 import model.tiles.SolidTile;
 import model.tiles.Tile;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +25,10 @@ public class RoomPlayer implements IWorld {
         this.handler = handler;
 
         tileSpriteToRGBConverter = new TileSpriteToRGBConverter();
+        ArrayList<BufferedImage> nonWalkableTileSpriteTargets = initNonWalkableTileSpriteTargets();
+        ArrayList<BufferedImage> walkableTileSpriteTargets = initWalkableTileSpriteTargets();
+        Tile[][] unborderedTileCollisionDetection = tileSpriteToRGBConverter.generateWorldMapTileCollisionDetection(Assets.roomPlayer,
+                nonWalkableTileSpriteTargets, walkableTileSpriteTargets);
 
         worldMapTileCollisionDetection = new Tile[10][10];
         for (int i = 0; i < 10; i++) {
@@ -31,13 +36,59 @@ public class RoomPlayer implements IWorld {
                 if ((i == 0) || (i == 9) || (j == 0) || (j == 9)) {
                     worldMapTileCollisionDetection[i][j] = new SolidTile(j, i);
                 } else {
-                    worldMapTileCollisionDetection[i][j] = new NonSolidTile(j, i);
+                    worldMapTileCollisionDetection[i][j] = unborderedTileCollisionDetection[i-1][j-1];
                 }
             }
         }
 
         initTransferPoints();
     } // **** end RoomPlayer(Handler) constructor ****
+
+    private ArrayList<BufferedImage> initWalkableTileSpriteTargets() {
+        ArrayList<BufferedImage> walkableTileSpriteTargets = new ArrayList<BufferedImage>();
+
+        //NON-SOLID TILES
+        //staircase
+        walkableTileSpriteTargets.add(
+                Assets.roomPlayer.getSubimage(112, 16, Tile.WIDTH, Tile.HEIGHT) ); //staircase
+
+        return walkableTileSpriteTargets;
+    }
+
+    private ArrayList<BufferedImage> initNonWalkableTileSpriteTargets() {
+        ArrayList<BufferedImage> nonWalkableTileSpriteTargets = new ArrayList<BufferedImage>();
+
+        //SOLID TILES
+        for (int i = 0; i < 8; i++) {
+            int xOffset = i * Tile.WIDTH;
+
+            nonWalkableTileSpriteTargets.add(
+                    Assets.roomPlayer.getSubimage(xOffset, 0, Tile.WIDTH, Tile.HEIGHT) ); //first ROW.
+        }
+
+        nonWalkableTileSpriteTargets.add(
+                Assets.roomPlayer.getSubimage(0, 16, Tile.WIDTH, Tile.HEIGHT) ); //computerKeyboard
+        nonWalkableTileSpriteTargets.add(
+                Assets.roomPlayer.getSubimage(16, 16, Tile.WIDTH, Tile.HEIGHT) ); //tableBL
+        nonWalkableTileSpriteTargets.add(
+                Assets.roomPlayer.getSubimage(32, 16, Tile.WIDTH, Tile.HEIGHT) ); //tableBR
+        nonWalkableTileSpriteTargets.add(
+                Assets.roomPlayer.getSubimage(48, 64, Tile.WIDTH, Tile.HEIGHT) ); //tv
+        nonWalkableTileSpriteTargets.add(
+                Assets.roomPlayer.getSubimage(48, 80, Tile.WIDTH, Tile.HEIGHT) ); //gameConsole
+        nonWalkableTileSpriteTargets.add(
+                Assets.roomPlayer.getSubimage(0, 96, Tile.WIDTH, Tile.HEIGHT) ); //bedTop
+        nonWalkableTileSpriteTargets.add(
+                Assets.roomPlayer.getSubimage(0, 112, Tile.WIDTH, Tile.HEIGHT) ); //bedBottom
+        nonWalkableTileSpriteTargets.add(
+                Assets.roomPlayer.getSubimage(96, 96, Tile.WIDTH, Tile.HEIGHT) ); //pottedTreeTop
+        nonWalkableTileSpriteTargets.add(
+                Assets.roomPlayer.getSubimage(96, 112, Tile.WIDTH, Tile.HEIGHT) ); //pottedTreeBottom
+
+        return nonWalkableTileSpriteTargets;
+    }
+
+
 
     private void initTransferPoints() {
         transferPoints = new HashMap<String, Rectangle>();
