@@ -4,7 +4,6 @@ import main.gfx.Assets;
 import model.tiles.*;
 
 import java.awt.image.BufferedImage;
-import java.nio.Buffer;
 import java.util.ArrayList;
 
 public class TileSpriteToRGBConverter {
@@ -16,7 +15,7 @@ public class TileSpriteToRGBConverter {
     // MEMBER VARIABLES
     private static ArrayList<BufferedImage> nonWalkableTileSpriteTargets;
     private static ArrayList<BufferedImage> walkableTileSpriteTargets;
-    private static BufferedImage worldMapAsTileSprites;
+    private static BufferedImage worldBackground;
 
     public TileSpriteToRGBConverter() {
 
@@ -38,11 +37,11 @@ public class TileSpriteToRGBConverter {
         return returner;
     }
 
-    public Tile[][] generateWorldMapTileCollisionDetection(BufferedImage worldMapAsTileSprites,
+    public Tile[][] generateWorldMapTileCollisionDetection(BufferedImage worldBackground,
                                                            ArrayList<BufferedImage> nonWalkableTileSpriteTargets,
                                                            ArrayList<BufferedImage> walkableTileSpriteTargets) {
         //////////////////////////////////////////////////////////////////////////
-        this.worldMapAsTileSprites = worldMapAsTileSprites;
+        this.worldBackground = worldBackground;
         //Used in translateTileSpriteToRGBImage() for its final for-loop.
         this.nonWalkableTileSpriteTargets = nonWalkableTileSpriteTargets;
         //Used in translateTileSpriteToRGBImage() for its final for-loop.
@@ -64,7 +63,11 @@ public class TileSpriteToRGBConverter {
                 } else if (rgbImage[y][x][0] == 0) {
                     returner[y][x] = new NonSolidTile(x, y);
                 } else if (rgbImage[y][x][0] == 2) {
-                    returner[y][x] = new TallGrassTile(x, y);
+                    if (this.worldBackground == Assets.world) {
+                        returner[y][x] = new TallGrassTile(x, y);
+                    } else if (this.worldBackground == Assets.homePlayer) {
+                        returner[y][x] = new StaircaseTile(x, y);
+                    }
                 } else if (rgbImage[y][x][0] == 9) {
                     returner[y][x] = new NullTile(x, y);
                 }
@@ -75,8 +78,8 @@ public class TileSpriteToRGBConverter {
     }
 
     public int[][][] translateTileSpriteToRGBImage() {
-        int widthNumberOfTile = (worldMapAsTileSprites.getWidth() / TILE_WIDTH);
-        int heightNumberOfTile = (worldMapAsTileSprites.getHeight() / TILE_HEIGHT);
+        int widthNumberOfTile = (worldBackground.getWidth() / TILE_WIDTH);
+        int heightNumberOfTile = (worldBackground.getHeight() / TILE_HEIGHT);
 
         System.out.println("TileSpriteToRGBConverter.translateTileSpriteToRGBImage()'s widthNumberOfTile: " + widthNumberOfTile);
         System.out.println("TileSpriteToRGBConverter.translateTileSpriteToRGBImage()'s heightNumberOfTile: " + heightNumberOfTile);
@@ -93,7 +96,7 @@ public class TileSpriteToRGBConverter {
                 boolean blankTile = false;
 
                 //ONLY FOR WORLDMAP (pokemon-gsc-kanto.png)
-                if (worldMapAsTileSprites == Assets.world) {
+                if (worldBackground == Assets.world) {
 
                     blankTile = true;
                     //!!!CHECK TILE - BLANK VERSUS FILLED!!!
@@ -105,7 +108,7 @@ public class TileSpriteToRGBConverter {
                     for (int yy = 0; yy < TILE_HEIGHT; yy++) {
                         for (int xx = 0; xx < TILE_WIDTH; xx++) {
 
-                            int pixel = worldMapAsTileSprites.getRGB((xOffset + xx), (yOffset + yy));
+                            int pixel = worldBackground.getRGB((xOffset + xx), (yOffset + yy));
                             int red = (pixel >> 16) & 0xff;
                             int green = (pixel >> 8) & 0xff;
                             int blue = (pixel) & 0xff;
@@ -149,14 +152,14 @@ public class TileSpriteToRGBConverter {
                     for (BufferedImage tileSpriteTarget : nonWalkableTileSpriteTargets) {
 
                         //it is the same as one of the target.
-                        if ( compareTile(worldMapAsTileSprites.getSubimage(xOffset, yOffset, TILE_WIDTH, TILE_HEIGHT),
+                        if ( compareTile(worldBackground.getSubimage(xOffset, yOffset, TILE_WIDTH, TILE_HEIGHT),
                                 tileSpriteTarget) ) {
                             returner[y][x][0] = 1;
                             break;
                         }
                     }
                     for (BufferedImage tileSpriteTarget : walkableTileSpriteTargets) {
-                        if ( compareTile(worldMapAsTileSprites.getSubimage(xOffset, yOffset, TILE_WIDTH, TILE_HEIGHT),
+                        if ( compareTile(worldBackground.getSubimage(xOffset, yOffset, TILE_WIDTH, TILE_HEIGHT),
                                 tileSpriteTarget) ) {
                             returner[y][x][0] = 2;
                             break;

@@ -3,7 +3,6 @@ package model.states.game.world;
 import main.Handler;
 import main.gfx.Assets;
 import main.utils.TileSpriteToRGBConverter;
-import model.tiles.NonSolidTile;
 import model.tiles.SolidTile;
 import model.tiles.Tile;
 
@@ -89,6 +88,7 @@ public class HomePlayer implements IWorld {
         transferPoints = new HashMap<String, Rectangle>();
 
         transferPoints.put( "WorldMap", new Rectangle((4 * Tile.WIDTH), (9 * Tile.HEIGHT), (Tile.WIDTH), (Tile.HEIGHT / 2)) );
+        transferPoints.put( "RoomPlayer", new Rectangle((9 * Tile.WIDTH), (2 * Tile.HEIGHT), (Tile.WIDTH / 2), (Tile.HEIGHT / 2)) );
     }
 
     @Override

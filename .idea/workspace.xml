@@ -2,9 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fb96119b-76aa-4531-8c73-0e06b445031b" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/states/game/world/RoomPlayer.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/model/tiles/StaircaseTile.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PocketCritters-SerialCritterNabbing/main/utils/TileSpriteToRGBConverter.class" afterPath="$PROJECT_DIR$/out/production/PocketCritters-SerialCritterNabbing/main/utils/TileSpriteToRGBConverter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PocketCritters-SerialCritterNabbing/model/entities/Player.class" afterPath="$PROJECT_DIR$/out/production/PocketCritters-SerialCritterNabbing/model/entities/Player.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PocketCritters-SerialCritterNabbing/model/states/game/world/HomePlayer.class" afterPath="$PROJECT_DIR$/out/production/PocketCritters-SerialCritterNabbing/model/states/game/world/HomePlayer.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PocketCritters-SerialCritterNabbing/model/states/game/world/WorldManager.class" afterPath="$PROJECT_DIR$/out/production/PocketCritters-SerialCritterNabbing/model/states/game/world/WorldManager.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/utils/TileSpriteToRGBConverter.java" afterPath="$PROJECT_DIR$/src/main/utils/TileSpriteToRGBConverter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/entities/Player.java" afterPath="$PROJECT_DIR$/src/model/entities/Player.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/states/game/world/HomePlayer.java" afterPath="$PROJECT_DIR$/src/model/states/game/world/HomePlayer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/states/game/world/WorldManager.java" afterPath="$PROJECT_DIR$/src/model/states/game/world/WorldManager.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,8 +37,8 @@
       <file leaf-file-name="WorldManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/states/game/world/WorldManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="408">
+              <caret line="25" column="67" lean-forward="false" selection-start-line="25" selection-start-column="67" selection-end-line="25" selection-end-column="67" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -41,9 +49,25 @@
       <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/entities/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="92" column="0" lean-forward="false" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
+            <state relative-caret-position="85">
+              <caret line="162" column="33" lean-forward="false" selection-start-line="162" selection-start-column="33" selection-end-line="162" selection-end-column="33" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RoomPlayer.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/model/states/game/world/RoomPlayer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="30" column="28" lean-forward="false" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="28" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2284#2285#0" expanded="true" />
+                <element signature="e#2337#2338#0" expanded="true" />
+                <element signature="e#2408#2409#0" expanded="true" />
+                <element signature="e#2445#2446#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -52,7 +76,7 @@
         <entry file="file://$PROJECT_DIR$/src/model/states/game/world/WorldMap.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="51">
-              <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+              <caret line="94" column="0" lean-forward="true" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
               <folding>
                 <element signature="e#1280#1295#0" expanded="true" />
                 <element signature="e#1718#1733#0" expanded="true" />
@@ -64,22 +88,22 @@
       <file leaf-file-name="TileSpriteToRGBConverter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/utils/TileSpriteToRGBConverter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="32" column="36" lean-forward="false" selection-start-line="32" selection-start-column="36" selection-end-line="32" selection-end-column="36" />
+            <state relative-caret-position="510">
+              <caret line="68" column="65" lean-forward="false" selection-start-line="68" selection-start-column="65" selection-end-line="68" selection-end-column="65" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HomePlayer.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="HomePlayer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/states/game/world/HomePlayer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="43" column="8" lean-forward="true" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="8" />
+            <state relative-caret-position="255">
+              <caret line="90" column="58" lean-forward="false" selection-start-line="90" selection-start-column="58" selection-end-line="90" selection-end-column="58" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1833#1848#0" expanded="true" />
-                <element signature="e#2234#2249#0" expanded="true" />
+                <element signature="e#1792#1807#0" expanded="true" />
+                <element signature="e#2193#2208#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -100,16 +124,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="391">
               <caret line="191" column="37" lean-forward="false" selection-start-line="191" selection-start-column="37" selection-end-line="191" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Handler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/Handler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="30" column="20" lean-forward="false" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -141,8 +155,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/model/items/Item.java" />
-        <option value="$PROJECT_DIR$/src/model/states/GameState.java" />
         <option value="$PROJECT_DIR$/src/model/entities/critters/Critter.java" />
         <option value="$PROJECT_DIR$/src/main/utils/FontGrabber.java" />
         <option value="$PROJECT_DIR$/src/model/states/BattleState.java" />
@@ -183,15 +195,17 @@
         <option value="$PROJECT_DIR$/src/model/states/game/GameState.java" />
         <option value="$PROJECT_DIR$/src/main/Handler.java" />
         <option value="$PROJECT_DIR$/src/model/states/game/world/IWorld.java" />
-        <option value="$PROJECT_DIR$/src/model/states/game/world/WorldManager.java" />
         <option value="$PROJECT_DIR$/src/main/gfx/GameCamera.java" />
         <option value="$PROJECT_DIR$/src/main/Game.java" />
         <option value="$PROJECT_DIR$/src/model/entities/nabbers/James.java" />
         <option value="$PROJECT_DIR$/src/model/entities/nabbers/Jessie.java" />
-        <option value="$PROJECT_DIR$/src/model/entities/Player.java" />
-        <option value="$PROJECT_DIR$/src/main/utils/TileSpriteToRGBConverter.java" />
         <option value="$PROJECT_DIR$/src/model/states/game/world/WorldMap.java" />
+        <option value="$PROJECT_DIR$/src/model/states/game/world/WorldManager.java" />
+        <option value="$PROJECT_DIR$/src/model/tiles/StaircaseTile.java" />
+        <option value="$PROJECT_DIR$/src/main/utils/TileSpriteToRGBConverter.java" />
+        <option value="$PROJECT_DIR$/src/model/entities/Player.java" />
         <option value="$PROJECT_DIR$/src/model/states/game/world/HomePlayer.java" />
+        <option value="$PROJECT_DIR$/src/model/states/game/world/RoomPlayer.java" />
       </list>
     </option>
   </component>
@@ -531,7 +545,7 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6650327" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6650327" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5114379" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -581,20 +595,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/input/KeyManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="11" column="32" lean-forward="false" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_92/src.zip!/java/awt/image/BufferedImage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="1199" column="25" lean-forward="false" selection-start-line="1199" selection-start-column="25" selection-end-line="1199" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/Sandbox.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="163">
@@ -825,6 +825,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="13" column="47" lean-forward="false" selection-start-line="13" selection-start-column="47" selection-end-line="13" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -832,14 +835,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/tiles/TallGrassTile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="20" lean-forward="false" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
           <folding />
         </state>
       </provider>
@@ -887,14 +882,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="191" column="37" lean-forward="false" selection-start-line="191" selection-start-column="37" selection-end-line="191" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/entities/nabbers/James.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="445">
@@ -911,13 +898,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/states/game/world/WorldManager.java">
+    <entry file="file://$PROJECT_DIR$/src/main/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="391">
+          <caret line="191" column="37" lean-forward="false" selection-start-line="191" selection-start-column="37" selection-end-line="191" selection-end-column="37" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -925,14 +910,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/utils/TileSpriteToRGBConverter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="32" column="36" lean-forward="false" selection-start-line="32" selection-start-column="36" selection-end-line="32" selection-end-column="36" />
           <folding />
         </state>
       </provider>
@@ -945,10 +922,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/tiles/StaircaseTile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="1" lean-forward="false" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+          <folding>
+            <element signature="e#112#113#0" expanded="true" />
+            <element signature="e#139#140#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/tiles/TallGrassTile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/utils/TileSpriteToRGBConverter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="68" column="65" lean-forward="false" selection-start-line="68" selection-start-column="65" selection-end-line="68" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/states/game/world/WorldMap.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
-          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <caret line="94" column="0" lean-forward="true" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
           <folding>
             <element signature="e#1280#1295#0" expanded="true" />
             <element signature="e#1718#1733#0" expanded="true" />
@@ -956,22 +960,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/states/game/world/WorldManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="25" column="67" lean-forward="false" selection-start-line="25" selection-start-column="67" selection-end-line="25" selection-end-column="67" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/entities/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="92" column="0" lean-forward="false" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
+        <state relative-caret-position="85">
+          <caret line="162" column="33" lean-forward="false" selection-start-line="162" selection-start-column="33" selection-end-line="162" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/states/game/world/HomePlayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="43" column="8" lean-forward="true" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="8" />
+        <state relative-caret-position="255">
+          <caret line="90" column="58" lean-forward="false" selection-start-line="90" selection-start-column="58" selection-end-line="90" selection-end-column="58" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1833#1848#0" expanded="true" />
-            <element signature="e#2234#2249#0" expanded="true" />
+            <element signature="e#1792#1807#0" expanded="true" />
+            <element signature="e#2193#2208#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/states/game/world/RoomPlayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="30" column="28" lean-forward="false" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2284#2285#0" expanded="true" />
+            <element signature="e#2337#2338#0" expanded="true" />
+            <element signature="e#2408#2409#0" expanded="true" />
+            <element signature="e#2445#2446#0" expanded="true" />
           </folding>
         </state>
       </provider>

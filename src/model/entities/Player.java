@@ -10,6 +10,7 @@ import model.entities.nabbers.Jessie;
 import model.items.Item;
 import model.states.StateManager;
 import model.states.game.GameState;
+import model.states.game.world.RoomPlayer;
 import model.states.game.world.WorldManager;
 import model.states.game.world.WorldMap;
 import model.tiles.TallGrassTile;
@@ -157,7 +158,9 @@ public class Player
                             // last location when currentWorld was WorldMap.
                             if ( identifier.equals("HomePlayer") ) {
                                 //////////////////////////////////////////////////////////////////////////////////////
-                                ((WorldMap)worldManager.getIWorld("WorldMap")).recordLocationPriorTransfer();
+                                if (worldManager.getCurrentWorld() instanceof WorldMap) {
+                                    ((WorldMap) worldManager.getIWorld("WorldMap")).recordLocationPriorTransfer();
+                                }
                                 //////////////////////////////////////////////////////////////////////////////////////
 
                                 //setting player and game camera to new location and changing currentWorld to HomePlayer.
@@ -197,7 +200,33 @@ public class Player
                                 return;
                                 ////////
                             }
+                            else if (identifier.equals("RoomPlayer")) {
+                                //setting player and game camera to new location and changing currentWorld to HomePlayer.
+                                x = 4 * Tile.WIDTH;
+                                y = 7 * Tile.HEIGHT;
+                                for (INabber nabber : nabberList) {
+                                    if (nabber instanceof James) {
+                                        ((James)nabber).setX(3 * Tile.WIDTH);
+                                        ((James)nabber).setY(7 * Tile.HEIGHT);
+                                        ((James)nabber).setxScreenPosition( xScreenPosition - (2 * Tile.WIDTH) );
+                                        ((James)nabber).setyScreenPosition( yScreenPosition );
+                                    } else if (nabber instanceof Jessie) {
+                                        ((Jessie)nabber).setX(4 * Tile.WIDTH);
+                                        ((Jessie)nabber).setY(6 * Tile.HEIGHT);
+                                        ((Jessie)nabber).setxScreenPosition( xScreenPosition );
+                                        ((Jessie)nabber).setyScreenPosition( yScreenPosition - (2 * Tile.HEIGHT) );
+                                    }
+                                }
+                                handler.getGameCamera().setxOffset0( (-6 * Tile.WIDTH) );
+                                handler.getGameCamera().setyOffset0( (-2 * Tile.HEIGHT) );
+                                handler.getGameCamera().setxOffset1( ((-6 * Tile.WIDTH) + 320) );
+                                handler.getGameCamera().setyOffset1( ((-2 * Tile.HEIGHT) + 272) );
 
+                                ////////
+                                worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
+                                return;
+                                ////////
+                            }
 
 
                         }
@@ -252,7 +281,9 @@ public class Player
                             // last location when currentWorld was WorldMap.
                             if ( identifier.equals("HomePlayer") ) {
                                 //////////////////////////////////////////////////////////////////////////////////////
-                                ((WorldMap)worldManager.getIWorld("WorldMap")).recordLocationPriorTransfer();
+                                if (worldManager.getCurrentWorld() instanceof WorldMap) {
+                                    ((WorldMap) worldManager.getIWorld("WorldMap")).recordLocationPriorTransfer();
+                                }
                                 //////////////////////////////////////////////////////////////////////////////////////
 
                                 //setting player and game camera to new location and changing currentWorld to HomePlayer.
@@ -292,7 +323,33 @@ public class Player
                                 return;
                                 ////////
                             }
+                            else if (identifier.equals("RoomPlayer")) {
+                                //setting player and game camera to new location and changing currentWorld to HomePlayer.
+                                x = 4 * Tile.WIDTH;
+                                y = 7 * Tile.HEIGHT;
+                                for (INabber nabber : nabberList) {
+                                    if (nabber instanceof James) {
+                                        ((James)nabber).setX(3 * Tile.WIDTH);
+                                        ((James)nabber).setY(7 * Tile.HEIGHT);
+                                        ((James)nabber).setxScreenPosition( xScreenPosition - (2 * Tile.WIDTH) );
+                                        ((James)nabber).setyScreenPosition( yScreenPosition );
+                                    } else if (nabber instanceof Jessie) {
+                                        ((Jessie)nabber).setX(4 * Tile.WIDTH);
+                                        ((Jessie)nabber).setY(6 * Tile.HEIGHT);
+                                        ((Jessie)nabber).setxScreenPosition( xScreenPosition );
+                                        ((Jessie)nabber).setyScreenPosition( yScreenPosition - (2 * Tile.HEIGHT) );
+                                    }
+                                }
+                                handler.getGameCamera().setxOffset0( (-6 * Tile.WIDTH) );
+                                handler.getGameCamera().setyOffset0( (-2 * Tile.HEIGHT) );
+                                handler.getGameCamera().setxOffset1( ((-6 * Tile.WIDTH) + 320) );
+                                handler.getGameCamera().setyOffset1( ((-2 * Tile.HEIGHT) + 272) );
 
+                                ////////
+                                worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
+                                return;
+                                ////////
+                            }
 
 
                         }
@@ -351,7 +408,9 @@ public class Player
                             // last location when currentWorld was WorldMap.
                             if ( identifier.equals("HomePlayer") ) {
                                 //////////////////////////////////////////////////////////////////////////////////////
-                                ((WorldMap)worldManager.getIWorld("WorldMap")).recordLocationPriorTransfer();
+                                if (worldManager.getCurrentWorld() instanceof WorldMap) {
+                                    ((WorldMap) worldManager.getIWorld("WorldMap")).recordLocationPriorTransfer();
+                                }
                                 //////////////////////////////////////////////////////////////////////////////////////
 
                                 //setting player and game camera to new location and changing currentWorld to HomePlayer.
@@ -391,7 +450,33 @@ public class Player
                                 return;
                                 ////////
                             }
+                            else if (identifier.equals("RoomPlayer")) {
+                                //setting player and game camera to new location and changing currentWorld to HomePlayer.
+                                x = 4 * Tile.WIDTH;
+                                y = 7 * Tile.HEIGHT;
+                                for (INabber nabber : nabberList) {
+                                    if (nabber instanceof James) {
+                                        ((James)nabber).setX(3 * Tile.WIDTH);
+                                        ((James)nabber).setY(7 * Tile.HEIGHT);
+                                        ((James)nabber).setxScreenPosition( xScreenPosition - (2 * Tile.WIDTH) );
+                                        ((James)nabber).setyScreenPosition( yScreenPosition );
+                                    } else if (nabber instanceof Jessie) {
+                                        ((Jessie)nabber).setX(4 * Tile.WIDTH);
+                                        ((Jessie)nabber).setY(6 * Tile.HEIGHT);
+                                        ((Jessie)nabber).setxScreenPosition( xScreenPosition );
+                                        ((Jessie)nabber).setyScreenPosition( yScreenPosition - (2 * Tile.HEIGHT) );
+                                    }
+                                }
+                                handler.getGameCamera().setxOffset0( (-6 * Tile.WIDTH) );
+                                handler.getGameCamera().setyOffset0( (-2 * Tile.HEIGHT) );
+                                handler.getGameCamera().setxOffset1( ((-6 * Tile.WIDTH) + 320) );
+                                handler.getGameCamera().setyOffset1( ((-2 * Tile.HEIGHT) + 272) );
 
+                                ////////
+                                worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
+                                return;
+                                ////////
+                            }
 
 
                         }
@@ -446,7 +531,9 @@ public class Player
                             // last location when currentWorld was WorldMap.
                             if ( identifier.equals("HomePlayer") ) {
                                 //////////////////////////////////////////////////////////////////////////////////////
-                                ((WorldMap)worldManager.getIWorld("WorldMap")).recordLocationPriorTransfer();
+                                if (worldManager.getCurrentWorld() instanceof WorldMap) {
+                                    ((WorldMap) worldManager.getIWorld("WorldMap")).recordLocationPriorTransfer();
+                                }
                                 //////////////////////////////////////////////////////////////////////////////////////
 
                                 //setting player and game camera to new location and changing currentWorld to HomePlayer.
@@ -486,7 +573,33 @@ public class Player
                                 return;
                                 ////////
                             }
+                            else if (identifier.equals("RoomPlayer")) {
+                                //setting player and game camera to new location and changing currentWorld to HomePlayer.
+                                x = 4 * Tile.WIDTH;
+                                y = 7 * Tile.HEIGHT;
+                                for (INabber nabber : nabberList) {
+                                    if (nabber instanceof James) {
+                                        ((James)nabber).setX(3 * Tile.WIDTH);
+                                        ((James)nabber).setY(7 * Tile.HEIGHT);
+                                        ((James)nabber).setxScreenPosition( xScreenPosition - (2 * Tile.WIDTH) );
+                                        ((James)nabber).setyScreenPosition( yScreenPosition );
+                                    } else if (nabber instanceof Jessie) {
+                                        ((Jessie)nabber).setX(4 * Tile.WIDTH);
+                                        ((Jessie)nabber).setY(6 * Tile.HEIGHT);
+                                        ((Jessie)nabber).setxScreenPosition( xScreenPosition );
+                                        ((Jessie)nabber).setyScreenPosition( yScreenPosition - (2 * Tile.HEIGHT) );
+                                    }
+                                }
+                                handler.getGameCamera().setxOffset0( (-6 * Tile.WIDTH) );
+                                handler.getGameCamera().setyOffset0( (-2 * Tile.HEIGHT) );
+                                handler.getGameCamera().setxOffset1( ((-6 * Tile.WIDTH) + 320) );
+                                handler.getGameCamera().setyOffset1( ((-2 * Tile.HEIGHT) + 272) );
 
+                                ////////
+                                worldManager.setCurrentWorld(worldManager.getIWorld(identifier));
+                                return;
+                                ////////
+                            }
 
 
                         }

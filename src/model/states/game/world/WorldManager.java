@@ -23,6 +23,7 @@ public class WorldManager {
         worldCollection = new HashMap<String, IWorld>();
         worldCollection.put("WorldMap", new WorldMap(handler));
         worldCollection.put("HomePlayer", new HomePlayer(handler));
+        worldCollection.put("RoomPlayer", new RoomPlayer(handler));
 
         currentWorld = worldCollection.get("WorldMap");
     }
