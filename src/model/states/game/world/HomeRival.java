@@ -30,7 +30,7 @@ public class HomeRival implements IWorld {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 if ((i == 0) || (i == 9) || (j == 0) || (j == 9)) {
-                    worldMapTileCollisionDetection[i][j] = new SolidTile(j, i);
+                    worldMapTileCollisionDetection[i][j] = new SolidTile(i, j);
                 } else {
                     worldMapTileCollisionDetection[i][j] = unborderedTileCollisionDetection[i-1][j-1];
                 }
