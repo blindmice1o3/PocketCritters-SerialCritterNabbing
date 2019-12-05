@@ -2,6 +2,7 @@ package main.gfx;
 
 import main.utils.FontGrabber;
 import main.utils.ImageLoader;
+import model.tiles.Tile;
 
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
@@ -21,6 +22,7 @@ public class Assets {
             critterBallSprite, cursorSprite;
 
     public static BufferedImage world, roomPlayer, homePlayer, homeRival, lab;
+    public static BufferedImage computerKeyboard, gameConsole, television;
 
     public static BufferedImage[] jamesDown, jamesUp, jamesLeft, jamesRight,
             jessieDown, jessieUp, jessieLeft, jessieRight,
@@ -43,6 +45,10 @@ public class Assets {
         homePlayer = indoorsHomeAndRoomSpriteSheet.getSubimage(168, 8, 128, 128);
         homeRival = indoorsHomeAndRoomSpriteSheet.getSubimage(304, 9, 128, 128);
         lab = indoorsHomeAndRoomSpriteSheet.getSubimage(23, 544, 160, 192);
+
+        computerKeyboard = roomPlayer.getSubimage( (0 * Tile.WIDTH), (1 * Tile.HEIGHT), Tile.WIDTH, (Tile.HEIGHT / 2) );
+        gameConsole = roomPlayer.getSubimage( (3 * Tile.WIDTH), (5 * Tile.HEIGHT), Tile.WIDTH, Tile.HEIGHT );
+        television = homePlayer.getSubimage( (3 * Tile.WIDTH), (1 * Tile.HEIGHT), Tile.WIDTH, Tile.HEIGHT );
 
         crittersBufferedImageNestedArray = ImageLoader.cropSpriteFromSpriteSheet(12, 13,
                 56, 56, 1, 1, critterSpriteSheet);

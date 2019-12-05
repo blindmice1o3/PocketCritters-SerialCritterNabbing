@@ -49,13 +49,16 @@ public class GameState implements IState {
             /////////////////////////////////////////////
             handler.getStateManager().push(
                     handler.getStateManager().getIState("MenuState"),
-                    null);
+                    null );
             /////////////////////////////////////////////
         }
         //aButton
         if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_COMMA)) {
             System.out.println("GameState.tick()... aButton pressed (VK_COMMA).");
+
+            /////////////////////////
             player.checkTileFacing();
+            /////////////////////////
         }
 
         //update()

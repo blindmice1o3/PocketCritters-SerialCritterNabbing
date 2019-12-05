@@ -3,6 +3,7 @@ package model.states;
 import main.Handler;
 import model.entities.Player;
 import model.states.battle.*;
+import model.states.computer.ComputerState;
 import model.states.game.GameState;
 import model.states.menu.*;
 
@@ -26,6 +27,7 @@ public class StateManager {
         stateHashMap.put("GameState", new GameState(handler));
         stateHashMap.put("BattleState", new BattleState(handler, player));
         stateHashMap.put("MenuState", new MenuState(handler, player));
+        stateHashMap.put("ComputerState", new ComputerState(handler, player));
 
         stateStack = new ArrayList<IState>();
         stateStack.add(stateHashMap.get("GameState"));

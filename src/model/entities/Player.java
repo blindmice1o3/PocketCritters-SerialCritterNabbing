@@ -146,10 +146,18 @@ public class Player
 
         if (tileFacing instanceof ComputerKeyboardTile) {
             System.out.println("ACTIVATED: ComputerKeyboardTile...");
+
+            /////////////////////////////////////////////
+            handler.getStateManager().push(
+                    handler.getStateManager().getIState("ComputerState"),
+                    null );
+            /////////////////////////////////////////////
         } else if (tileFacing instanceof GameConsoleTile) {
             System.out.println("ACTIVATED: GameConsoleTile...");
+
         } else  if (tileFacing instanceof TelevisionTile) {
             System.out.println("ACTIVATED: TelevisionTile...");
+
         } else {
             System.out.println("NOTHING ACTIVATED when aButton was pressed.");
         }
