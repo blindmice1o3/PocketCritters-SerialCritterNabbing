@@ -41,8 +41,9 @@ public class GameState implements IState {
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_D)) {
             player.setXDelta( player.getMoveSpeed() );
         }
+
         //startButton
-        else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
+        if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
             System.out.println("GameState.tick()... startButton pressed (VK_ENTER).");
 
             /////////////////////////////////////////////
@@ -50,6 +51,11 @@ public class GameState implements IState {
                     handler.getStateManager().getIState("MenuState"),
                     null);
             /////////////////////////////////////////////
+        }
+        //aButton
+        if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_COMMA)) {
+            System.out.println("GameState.tick()... aButton pressed (VK_COMMA).");
+            player.checkTileFacing();
         }
 
         //update()

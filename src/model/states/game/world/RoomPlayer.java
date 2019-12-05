@@ -43,10 +43,11 @@ public class RoomPlayer implements IWorld {
     private ArrayList<BufferedImage> initWalkableTileSpriteTargets() {
         ArrayList<BufferedImage> walkableTileSpriteTargets = new ArrayList<BufferedImage>();
 
-        //NON-SOLID TILES
-        //staircase
+        //NON-SOLID TILES (!!!nevermind the non-solid part!!! just SPECIAL TILES)
         walkableTileSpriteTargets.add(
-                Assets.roomPlayer.getSubimage(112, 16, Tile.WIDTH, Tile.HEIGHT) ); //staircase
+                Assets.roomPlayer.getSubimage(0, 16, Tile.WIDTH, Tile.HEIGHT) ); //computerKeyboard
+        walkableTileSpriteTargets.add(
+                Assets.roomPlayer.getSubimage(48, 80, Tile.WIDTH, Tile.HEIGHT) ); //gameConsole
 
         return walkableTileSpriteTargets;
     }
@@ -63,15 +64,11 @@ public class RoomPlayer implements IWorld {
         }
 
         nonWalkableTileSpriteTargets.add(
-                Assets.roomPlayer.getSubimage(0, 16, Tile.WIDTH, Tile.HEIGHT) ); //computerKeyboard
-        nonWalkableTileSpriteTargets.add(
                 Assets.roomPlayer.getSubimage(16, 16, Tile.WIDTH, Tile.HEIGHT) ); //tableBL
         nonWalkableTileSpriteTargets.add(
                 Assets.roomPlayer.getSubimage(32, 16, Tile.WIDTH, Tile.HEIGHT) ); //tableBR
         nonWalkableTileSpriteTargets.add(
                 Assets.roomPlayer.getSubimage(48, 64, Tile.WIDTH, Tile.HEIGHT) ); //tv
-        nonWalkableTileSpriteTargets.add(
-                Assets.roomPlayer.getSubimage(48, 80, Tile.WIDTH, Tile.HEIGHT) ); //gameConsole
         nonWalkableTileSpriteTargets.add(
                 Assets.roomPlayer.getSubimage(0, 96, Tile.WIDTH, Tile.HEIGHT) ); //bedTop
         nonWalkableTileSpriteTargets.add(

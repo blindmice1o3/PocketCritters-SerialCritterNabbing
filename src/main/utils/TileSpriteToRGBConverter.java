@@ -66,9 +66,13 @@ public class TileSpriteToRGBConverter {
                     if (this.worldBackground == Assets.world) {
                         returner[y][x] = new TallGrassTile(x, y);
                     } else if (this.worldBackground == Assets.homePlayer) {
-                        returner[y][x] = new StaircaseTile(x, y);
+                        returner[y][x] = new TelevisionTile(x, y);
                     } else if (this.worldBackground == Assets.roomPlayer) {
-                        returner[y][x] = new StaircaseTile(x, y);
+                        if (x == 0) {
+                            returner[y][x] = new ComputerKeyboardTile(x, y);
+                        } else {
+                            returner[y][x] = new GameConsoleTile(x, y);
+                        }
                     } else if (this.worldBackground == Assets.homeRival) {
                         //filler-space
                         returner[y][x] = new NonSolidTile(x, y);

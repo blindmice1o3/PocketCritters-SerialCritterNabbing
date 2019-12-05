@@ -43,10 +43,9 @@ public class HomePlayer implements IWorld {
     private ArrayList<BufferedImage> initWalkableTileSpriteTargets() {
         ArrayList<BufferedImage> walkableTileSpriteTargets = new ArrayList<BufferedImage>();
 
-        //NON-SOLID TILES
-        //staircase
+        //NON-SOLID TILES (!!!nevermind the non-solid part!!! just SPECIAL TILES)
         walkableTileSpriteTargets.add(
-                Assets.homePlayer.getSubimage(112, 16, Tile.WIDTH, Tile.HEIGHT) ); //staircase
+                Assets.homePlayer.getSubimage(48, 16, Tile.WIDTH, Tile.HEIGHT) ); //tv
 
         return walkableTileSpriteTargets;
     }
@@ -66,8 +65,6 @@ public class HomePlayer implements IWorld {
                 Assets.homePlayer.getSubimage(0, 16, Tile.WIDTH, Tile.HEIGHT) ); //bookShelf1Bottom
         nonWalkableTileSpriteTargets.add(
                 Assets.homePlayer.getSubimage(16, 16, Tile.WIDTH, Tile.HEIGHT) ); //bookShelf2Bottom
-        nonWalkableTileSpriteTargets.add(
-                Assets.homePlayer.getSubimage(48, 16, Tile.WIDTH, Tile.HEIGHT) ); //tv
 
         // table, starting at x == 48, y == 64, width/number_of_columns == 2, height/number_of_rows == 2.
         ArrayList<BufferedImage> table = handler.getTileSpriteToRGBConverter().pullMultipleTiles(

@@ -13,8 +13,7 @@ import model.states.game.GameState;
 import model.states.game.world.RoomPlayer;
 import model.states.game.world.WorldManager;
 import model.states.game.world.WorldMap;
-import model.tiles.TallGrassTile;
-import model.tiles.Tile;
+import model.tiles.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -97,6 +96,46 @@ public class Player
 
         xDelta = 0;
         yDelta = 0;
+    }
+
+    public void checkTileFacing() {
+        Tile[][] tileCollisionDetection = handler.getWorldMapTileCollisionDetection();
+
+        int xPlayer = (x / Tile.WIDTH);
+        int yPlayer = (y / Tile.HEIGHT);
+        Tile tileFacing = null;
+        //ADJUST FOR THE BORDER IN SOME IWORLD!!!!
+        switch (directionFacing) {
+            case UP:
+                System.out.println("index of tile facing: (" + (xPlayer-1) + ", " + (yPlayer-1-1) + ").");
+                tileFacing = tileCollisionDetection[(xPlayer)][(yPlayer-1)];
+                break;
+            case DOWN:
+                System.out.println("index of tile facing: (" + (xPlayer-1) + ", " + (yPlayer+1-1) + ").");
+                tileFacing = tileCollisionDetection[(xPlayer)][(yPlayer+1)];
+                break;
+            case LEFT:
+                System.out.println("index of tile facing: (" + ((xPlayer-1-1)) + ", " + (yPlayer-1) + ").");
+                tileFacing = tileCollisionDetection[(xPlayer-1)][(yPlayer)];
+                break;
+            case RIGHT:
+                System.out.println("index of tile facing: (" + (xPlayer+1-1) + ", " + (yPlayer-1) + ").");
+                tileFacing = tileCollisionDetection[(xPlayer+1)][(yPlayer)];
+                break;
+            default:
+                System.out.println("Player.checkTileFacing() switch(directionFacing) construct's default block.");
+                break;
+        }
+
+        if (tileFacing instanceof ComputerKeyboardTile) {
+            System.out.println("ACTIVATED: ComputerKeyboardTile...");
+        } else if (tileFacing instanceof GameConsoleTile) {
+            System.out.println("ACTIVATED: GameConsoleTile...");
+        } else  if (tileFacing instanceof TelevisionTile) {
+            System.out.println("ACTIVATED: TelevisionTile...");
+        } else {
+            System.out.println("NOTHING ACTIVATED when aButton was pressed.");
+        }
     }
 
     private void checkTallGrassTileCollision(TallGrassTile tile) {
@@ -279,6 +318,7 @@ public class Player
 
         //MOVING LEFT
         if (xDelta < 0) {
+            directionFacing = DirectionFacing.LEFT;
             int tx = (int)((x+bounds.x+xDelta) / Tile.WIDTH);                                        //LEFT
 
             //if top-LEFT AND bottom-LEFT corners of player-sprite moving into NOT solid tile, do stuff.
@@ -302,7 +342,6 @@ public class Player
                 if (!transferPointCollision) {
                     //moves Player's x-position.
                     x += xDelta;
-                    directionFacing = DirectionFacing.LEFT;
                     handler.getGameCamera().setXDelta(xDelta);
                     for (INabber nabber : nabberList) {
                         nabber.setXDelta(xDelta);
@@ -313,6 +352,7 @@ public class Player
         }
         //MOVING RIGHT
         else if (xDelta > 0) {
+            directionFacing = DirectionFacing.RIGHT;
             int tx = (int)((x+bounds.x+bounds.width+xDelta) / Tile.WIDTH);                             //RIGHT
 
             //if top-RIGHT AND bottom-RIGHT corners of player-sprite moving into NOT solid tile, do stuff.
@@ -336,7 +376,6 @@ public class Player
                 if (!transferPointCollision) {
                     //moves Player's x-position.
                     x += xDelta;
-                    directionFacing = DirectionFacing.RIGHT;
                     handler.getGameCamera().setXDelta(xDelta);
                     for (INabber nabber : nabberList) {
                         nabber.setXDelta(xDelta);
@@ -352,6 +391,7 @@ public class Player
 
         //MOVING UP
         if (yDelta < 0) {
+            directionFacing = DirectionFacing.UP;
             int ty = (int)((y+bounds.y+yDelta) / Tile.HEIGHT);                                       //TOP
 
             //if TOP-left AND TOP-right corners of player-sprite moving into NOT solid tile, do stuff.
@@ -375,7 +415,6 @@ public class Player
                 if (!transferPointCollision) {
                     //moves Player's y-position.
                     y += yDelta;
-                    directionFacing = DirectionFacing.UP;
                     handler.getGameCamera().setYDelta(yDelta);
                     for (INabber nabber : nabberList) {
                         nabber.setYDelta(yDelta);
@@ -386,6 +425,7 @@ public class Player
         }
         //MOVING DOWN
         else if (yDelta > 0) {
+            directionFacing = DirectionFacing.DOWN;
             int ty = (int)((y+bounds.y+bounds.height+yDelta) / Tile.HEIGHT);                           //BOTTOM
 
             //if BOTTOM-left AND BOTTOM-right corners of player-sprite moving into NOT solid tile, do stuff.
@@ -409,7 +449,6 @@ public class Player
                 if (!transferPointCollision) {
                     //moves Player's y-position.
                     y += yDelta;
-                    directionFacing = DirectionFacing.DOWN;
                     handler.getGameCamera().setYDelta(yDelta);
                     for (INabber nabber : nabberList) {
                         nabber.setYDelta(yDelta);
