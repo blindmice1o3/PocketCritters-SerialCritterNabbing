@@ -27,12 +27,12 @@ public class HomePlayer implements IWorld {
                 Assets.homePlayer, nonWalkableTileSpriteTargets, walkableTileSpriteTargets);
 
         worldMapTileCollisionDetection = new Tile[10][10];
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                if ((i == 0) || (i == 9) || (j == 0) || (j == 9)) {
-                    worldMapTileCollisionDetection[i][j] = new SolidTile(i, j);
+        for (int y = 0; y < 10; y++) {
+            for (int x = 0; x < 10; x++) {
+                if ((x == 0) || (x == 9) || (y == 0) || (y == 9)) {
+                    worldMapTileCollisionDetection[x][y] = new SolidTile(x, y);
                 } else {
-                    worldMapTileCollisionDetection[i][j] = unborderedTileCollisionDetection[i-1][j-1];
+                    worldMapTileCollisionDetection[x][y] = unborderedTileCollisionDetection[x-1][y-1];
                 }
             }
         }

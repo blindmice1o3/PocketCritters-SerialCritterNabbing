@@ -104,23 +104,40 @@ public class Player
         int xPlayer = (x / Tile.WIDTH);
         int yPlayer = (y / Tile.HEIGHT);
         Tile tileFacing = null;
-        //ADJUST FOR THE BORDER IN SOME IWORLD!!!!
+
+        //INVISIBLE row AND column FOR THE BORDER IN SOME IWORLD!!!!
         switch (directionFacing) {
             case UP:
-                System.out.println("index of tile facing: (" + (xPlayer-1) + ", " + (yPlayer-1-1) + ").");
-                tileFacing = tileCollisionDetection[(xPlayer)][(yPlayer-1)];
+                if (((GameState)handler.getStateManager().getIState("GameState")).getWorldManager().getCurrentWorld() instanceof WorldMap) {
+                    System.out.println("index of tile facing: (" + (xPlayer) + ", " + (yPlayer-1) + ").");
+                } else {
+                    System.out.println("index of tile facing: (" + (xPlayer-1) + ", " + (yPlayer-1-1) + ").");
+                }
+                tileFacing = tileCollisionDetection[(yPlayer-1)][(xPlayer)];
                 break;
             case DOWN:
-                System.out.println("index of tile facing: (" + (xPlayer-1) + ", " + (yPlayer+1-1) + ").");
-                tileFacing = tileCollisionDetection[(xPlayer)][(yPlayer+1)];
+                if (((GameState)handler.getStateManager().getIState("GameState")).getWorldManager().getCurrentWorld() instanceof WorldMap) {
+                    System.out.println("index of tile facing: (" + (xPlayer) + ", " + (yPlayer+1) + ").");
+                } else {
+                    System.out.println("index of tile facing: (" + (xPlayer-1) + ", " + (yPlayer+1-1) + ").");
+                }
+                tileFacing = tileCollisionDetection[(yPlayer+1)][(xPlayer)];
                 break;
             case LEFT:
-                System.out.println("index of tile facing: (" + ((xPlayer-1-1)) + ", " + (yPlayer-1) + ").");
-                tileFacing = tileCollisionDetection[(xPlayer-1)][(yPlayer)];
+                if (((GameState)handler.getStateManager().getIState("GameState")).getWorldManager().getCurrentWorld() instanceof WorldMap) {
+                    System.out.println("index of tile facing: (" + (xPlayer-1) + ", " + (yPlayer) + ").");
+                } else {
+                    System.out.println("index of tile facing: (" + (xPlayer-1-1) + ", " + (yPlayer-1) + ").");
+                }
+                tileFacing = tileCollisionDetection[(yPlayer)][(xPlayer-1)];
                 break;
             case RIGHT:
-                System.out.println("index of tile facing: (" + (xPlayer+1-1) + ", " + (yPlayer-1) + ").");
-                tileFacing = tileCollisionDetection[(xPlayer+1)][(yPlayer)];
+                if (((GameState)handler.getStateManager().getIState("GameState")).getWorldManager().getCurrentWorld() instanceof WorldMap) {
+                    System.out.println("index of tile facing: (" + (xPlayer+1) + ", " + (yPlayer) + ").");
+                } else {
+                    System.out.println("index of tile facing: (" + (xPlayer+1-1) + ", " + (yPlayer-1) + ").");
+                }
+                tileFacing = tileCollisionDetection[(yPlayer)][(xPlayer+1)];
                 break;
             default:
                 System.out.println("Player.checkTileFacing() switch(directionFacing) construct's default block.");

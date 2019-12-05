@@ -56,8 +56,8 @@ public class TileSpriteToRGBConverter {
 
         Tile[][] returner = new Tile[heightNumberOfTile][widthNumberOfTile];
 
-        for (int y = 0; y < rgbImage.length; y++) {
-            for (int x = 0; x <rgbImage[y].length; x++) {
+        for (int y = 0; y < heightNumberOfTile; y++) {
+            for (int x = 0; x < widthNumberOfTile; x++) {
                 if (rgbImage[y][x][0] == 1) {
                     returner[y][x] = new SolidTile(x, y);
                 } else if (rgbImage[y][x][0] == 0) {
