@@ -12,6 +12,67 @@ import java.util.Map;
 
 public class WorldMap implements IWorld {
 
+    public enum City {
+        PALLET_TOWN(960, 3184, 1279, 3455),
+        VIRIDIAN_CITY(640, 2016, 1279, 2591),
+        PEWTER_CITY(640, 576, 1279, 1151);
+
+        private final int x0, y0, x1, y1;
+
+        City(int x0, int y0, int x1, int y1) {
+            this.x0 = x0;
+            this.y0 = y0;
+            this.x1 = x1;
+            this.y1 = y1;
+        }
+
+        public int getX0() { return x0; }
+        public int getY0() { return y0; }
+        public int getX1() { return x1; }
+        public int getY1() { return y1; }
+    }
+
+    public enum Route {
+        ROUTE01(960, 2592, 1279, 3183),
+        ROUTE02(800, 1664, 1119, 2015),
+        ROUTE22(288, 2144, 639, 2431),
+        ROUTE23(0, 2144, 287, 2431),
+        ROUTE03(1280, 736, 2191, 1023);
+
+        private final int x0, y0, x1, y1;
+
+        Route(int x0, int y0, int x1, int y1) {
+            this.x0 = x0;
+            this.y0 = y0;
+            this.x1 = x1;
+            this.y1 = y1;
+        }
+
+        public int getX0() { return x0; }
+        public int getY0() { return y0; }
+        public int getX1() { return x1; }
+        public int getY1() { return y1; }
+    }
+
+    public enum Place {
+        VIRIDIAN_FOREST(800, 1152, 1119, 1663) /*,
+        MT_MOON */;
+
+        private final int x0, y0, x1, y1;
+
+        Place(int x0, int y0, int x1, int y1) {
+            this.x0 = x0;
+            this.y0 = y0;
+            this.x1 = x1;
+            this.y1 = y1;
+        }
+
+        public int getX0() { return x0; }
+        public int getY0() { return y0; }
+        public int getX1() { return x1; }
+        public int getY1() { return y1; }
+    }
+
     private Handler handler;
 
     private Tile[][] worldMapTileCollisionDetection;
