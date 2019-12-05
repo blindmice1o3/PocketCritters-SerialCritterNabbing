@@ -155,8 +155,20 @@ public class Player
         } else if (tileFacing instanceof GameConsoleTile) {
             System.out.println("ACTIVATED: GameConsoleTile...");
 
+            /////////////////////////////////////////////
+            handler.getStateManager().push(
+                    handler.getStateManager().getIState("GameConsoleState"),
+                    null );
+            /////////////////////////////////////////////
+
         } else  if (tileFacing instanceof TelevisionTile) {
             System.out.println("ACTIVATED: TelevisionTile...");
+
+            /////////////////////////////////////////////
+            handler.getStateManager().push(
+                    handler.getStateManager().getIState("TelevisionState"),
+                    null );
+            /////////////////////////////////////////////
 
         } else {
             System.out.println("NOTHING ACTIVATED when aButton was pressed.");

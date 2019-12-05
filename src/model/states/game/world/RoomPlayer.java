@@ -45,7 +45,7 @@ public class RoomPlayer implements IWorld {
 
         //NON-SOLID TILES (!!!nevermind the non-solid part!!! just SPECIAL TILES)
         walkableTileSpriteTargets.add(
-                Assets.roomPlayer.getSubimage(0, 16, Tile.WIDTH, Tile.HEIGHT) ); //computerKeyboard
+                Assets.roomPlayer.getSubimage(0, 16, Tile.WIDTH, Tile.HEIGHT) ); //keyboardFromComputer
         walkableTileSpriteTargets.add(
                 Assets.roomPlayer.getSubimage(48, 80, Tile.WIDTH, Tile.HEIGHT) ); //gameConsole
 

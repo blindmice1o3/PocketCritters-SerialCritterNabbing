@@ -5,7 +5,9 @@ import model.entities.Player;
 import model.states.battle.*;
 import model.states.computer.ComputerState;
 import model.states.game.GameState;
+import model.states.game_console.GameConsoleState;
 import model.states.menu.*;
+import model.states.television.TelevisionState;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,6 +30,8 @@ public class StateManager {
         stateHashMap.put("BattleState", new BattleState(handler, player));
         stateHashMap.put("MenuState", new MenuState(handler, player));
         stateHashMap.put("ComputerState", new ComputerState(handler, player));
+        stateHashMap.put("GameConsoleState", new GameConsoleState(handler, player));
+        stateHashMap.put("TelevisionState", new TelevisionState(handler, player));
 
         stateStack = new ArrayList<IState>();
         stateStack.add(stateHashMap.get("GameState"));

@@ -22,7 +22,7 @@ public class Assets {
             critterBallSprite, cursorSprite;
 
     public static BufferedImage world, roomPlayer, homePlayer, homeRival, lab;
-    public static BufferedImage computerKeyboard, gameConsole, television;
+    public static BufferedImage computerWithKeyboard, keyboardFromComputer, gameConsole, television;
 
     public static BufferedImage[] jamesDown, jamesUp, jamesLeft, jamesRight,
             jessieDown, jessieUp, jessieLeft, jessieRight,
@@ -46,7 +46,8 @@ public class Assets {
         homeRival = indoorsHomeAndRoomSpriteSheet.getSubimage(304, 9, 128, 128);
         lab = indoorsHomeAndRoomSpriteSheet.getSubimage(23, 544, 160, 192);
 
-        computerKeyboard = roomPlayer.getSubimage( (0 * Tile.WIDTH), (1 * Tile.HEIGHT), Tile.WIDTH, (Tile.HEIGHT / 2) );
+        computerWithKeyboard = roomPlayer.getSubimage( 0, 0, Tile.WIDTH, (Tile.HEIGHT + (Tile.HEIGHT / 2)) );
+        keyboardFromComputer = roomPlayer.getSubimage( (0 * Tile.WIDTH), (1 * Tile.HEIGHT), Tile.WIDTH, (Tile.HEIGHT / 2) );
         gameConsole = roomPlayer.getSubimage( (3 * Tile.WIDTH), (5 * Tile.HEIGHT), Tile.WIDTH, Tile.HEIGHT );
         television = homePlayer.getSubimage( (3 * Tile.WIDTH), (1 * Tile.HEIGHT), Tile.WIDTH, Tile.HEIGHT );
 
