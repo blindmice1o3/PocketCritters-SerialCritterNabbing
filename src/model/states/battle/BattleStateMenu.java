@@ -90,8 +90,9 @@ public class BattleStateMenu implements IState {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.battleStateSpriteSheet, 0, 0, handler.getGame().getWidth(),
-                handler.getGame().getHeight(), 161, 2, 161+159, 2+145, null);
+        g.drawImage(Assets.battleStateSpriteSheet,
+                0, 0, handler.getGame().getWidth(), handler.getGame().getHeight(),
+                161, 2, 161+159, 2+145, null);
 
         if (menuMatrix[yIndex][xIndex].equals("BattleStateFight")) {
             g.drawImage(Assets.cursorSprite, 291, 423, 7 * 4, 7 * 4, null);

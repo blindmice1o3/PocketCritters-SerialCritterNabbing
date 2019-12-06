@@ -38,8 +38,8 @@ public class Player
     private DirectionFacing directionFacing;
     protected transient Rectangle bounds;
 
-    private transient ArrayList<Item> inventory;
-    private transient ArrayList<Critter> critterBeltList;
+    private ArrayList<Item> inventory;
+    private ArrayList<Critter> critterBeltList;
     //////////////////////////////////////
     private transient ArrayList<INabber> nabberList;
     //////////////////////////////////////

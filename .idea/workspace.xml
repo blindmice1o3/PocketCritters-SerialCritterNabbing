@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="fb96119b-76aa-4531-8c73-0e06b445031b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/entities/Player.java" afterPath="$PROJECT_DIR$/src/model/entities/Player.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/entities/critters/Critter.java" afterPath="$PROJECT_DIR$/src/model/entities/critters/Critter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/items/Item.java" afterPath="$PROJECT_DIR$/src/model/items/Item.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/states/battle/BattleStateCritterBeltList.java" afterPath="$PROJECT_DIR$/src/model/states/battle/BattleStateCritterBeltList.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/states/battle/BattleStateMenu.java" afterPath="$PROJECT_DIR$/src/model/states/battle/BattleStateMenu.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,107 +18,74 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GameState.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/states/game/GameState.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="51" column="27" lean-forward="false" selection-start-line="51" selection-start-column="27" selection-end-line="51" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/entities/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="41" column="45" lean-forward="false" selection-start-line="41" selection-start-column="45" selection-end-line="41" selection-end-column="45" />
+            <state relative-caret-position="283">
+              <caret line="40" column="35" lean-forward="true" selection-start-line="40" selection-start-column="35" selection-end-line="40" selection-end-column="35" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BattleStateCritterBeltList.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/model/states/battle/BattleStateCritterBeltList.java">
+      <file leaf-file-name="BattleStateItemList.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/states/battle/BattleStateItemList.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
-              <caret line="61" column="93" lean-forward="false" selection-start-line="61" selection-start-column="93" selection-end-line="61" selection-end-column="93" />
+              <caret line="34" column="32" lean-forward="false" selection-start-line="34" selection-start-column="32" selection-end-line="34" selection-end-column="32" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Critter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/entities/critters/Critter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TelevisionState.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/states/television/TelevisionState.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="44" column="41" lean-forward="false" selection-start-line="44" selection-start-column="41" selection-end-line="44" selection-end-column="41" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StateManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/states/StateManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="33" column="82" lean-forward="false" selection-start-line="33" selection-start-column="82" selection-end-line="33" selection-end-column="82" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ComputerState.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/states/computer/ComputerState.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="44" column="47" lean-forward="false" selection-start-line="44" selection-start-column="47" selection-end-line="44" selection-end-column="47" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameConsoleState.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/states/game_console/GameConsoleState.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="44" column="42" lean-forward="true" selection-start-line="44" selection-start-column="42" selection-end-line="44" selection-end-column="42" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Assets.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/gfx/Assets.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="49" column="55" lean-forward="false" selection-start-line="49" selection-start-column="55" selection-end-line="49" selection-end-column="55" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RoomPlayer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/states/game/world/RoomPlayer.java">
+      <file leaf-file-name="BattleStateMenu.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/states/battle/BattleStateMenu.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="306">
-              <caret line="47" column="77" lean-forward="false" selection-start-line="47" selection-start-column="77" selection-end-line="47" selection-end-column="77" />
+              <caret line="94" column="16" lean-forward="false" selection-start-line="94" selection-start-column="16" selection-end-line="94" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BattleStateCritterBeltList.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/states/battle/BattleStateCritterBeltList.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="82" column="16" lean-forward="false" selection-start-line="82" selection-start-column="16" selection-end-line="82" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Critter.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/model/entities/critters/Critter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="850">
+              <caret line="57" column="47" lean-forward="false" selection-start-line="57" selection-start-column="47" selection-end-line="57" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WorldMap.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/states/game/world/WorldMap.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="19" column="15" lean-forward="false" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
+              <folding>
+                <element signature="e#2733#2748#0" expanded="true" />
+                <element signature="e#3171#3186#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Item.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/items/Item.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="26" lean-forward="false" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -147,8 +117,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/Sandbox.java" />
-        <option value="$PROJECT_DIR$/src/main/gfx/Animation.java" />
         <option value="$PROJECT_DIR$/src/main/utils/SerializationDoer.java" />
         <option value="$PROJECT_DIR$/src/model/tiles/Tile.java" />
         <option value="$PROJECT_DIR$/src/model/states/IState.java" />
@@ -158,7 +126,6 @@
         <option value="$PROJECT_DIR$/src/model/states/battle/BattleState.java" />
         <option value="$PROJECT_DIR$/src/model/states/menu/MenuState.java" />
         <option value="$PROJECT_DIR$/src/model/states/menu/MenuStateMenu.java" />
-        <option value="$PROJECT_DIR$/src/model/states/battle/BattleStateMenu.java" />
         <option value="$PROJECT_DIR$/src/model/states/battle/BattleStateIntro.java" />
         <option value="$PROJECT_DIR$/src/model/states/battle/BattleStateFight.java" />
         <option value="$PROJECT_DIR$/src/model/states/battle/BattleStateItemList.java" />
@@ -196,8 +163,11 @@
         <option value="$PROJECT_DIR$/src/model/states/game_console/GameConsoleState.java" />
         <option value="$PROJECT_DIR$/src/model/states/computer/ComputerState.java" />
         <option value="$PROJECT_DIR$/src/model/states/television/TelevisionState.java" />
-        <option value="$PROJECT_DIR$/src/model/entities/Player.java" />
         <option value="$PROJECT_DIR$/src/model/states/battle/BattleStateCritterBeltList.java" />
+        <option value="$PROJECT_DIR$/src/model/states/battle/BattleStateMenu.java" />
+        <option value="$PROJECT_DIR$/src/model/entities/Player.java" />
+        <option value="$PROJECT_DIR$/src/model/entities/critters/Critter.java" />
+        <option value="$PROJECT_DIR$/src/model/items/Item.java" />
       </list>
     </option>
   </component>
@@ -611,48 +581,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/model/states/battle/BattleStateFight.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="57" column="13" lean-forward="false" selection-start-line="57" selection-start-column="13" selection-end-line="57" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/states/menu/MenuStateCritterDex.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="23" column="8" lean-forward="false" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/states/menu/MenuStateCritterBeltList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="32" column="35" lean-forward="true" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/states/menu/MenuStateItemList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="31" column="45" lean-forward="false" selection-start-line="31" selection-start-column="45" selection-end-line="31" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/states/menu/MenuStateOption.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="31" column="43" lean-forward="false" selection-start-line="31" selection-start-column="43" selection-end-line="31" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/states/menu/MenuStatePlayerStats.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="31" column="48" lean-forward="false" selection-start-line="31" selection-start-column="48" selection-end-line="31" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/states/menu/MenuStateLoad.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
@@ -672,14 +600,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="31" column="28" lean-forward="true" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/states/battle/BattleStateMenu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="74" column="36" lean-forward="false" selection-start-line="74" selection-start-column="36" selection-end-line="74" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -883,17 +803,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/states/game/world/WorldMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding>
-            <element signature="e#2733#2748#0" expanded="true" />
-            <element signature="e#3171#3186#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/states/game/world/HomeRival.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -908,8 +817,8 @@
           <caret line="45" column="80" lean-forward="true" selection-start-line="45" selection-start-column="80" selection-end-line="45" selection-end-column="80" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1629#1644#0" expanded="true" />
-            <element signature="e#2058#2073#0" expanded="true" />
+            <element signature="e#1629#1644#0" expanded="false" />
+            <element signature="e#2058#2073#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1002,26 +911,93 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/entities/critters/Critter.java">
+    <entry file="file://$PROJECT_DIR$/src/model/states/menu/MenuStateItemList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        <state relative-caret-position="425">
+          <caret line="31" column="45" lean-forward="false" selection-start-line="31" selection-start-column="45" selection-end-line="31" selection-end-column="45" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/entities/Player.java">
+    <entry file="file://$PROJECT_DIR$/src/model/states/menu/MenuStateCritterBeltList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="41" column="45" lean-forward="false" selection-start-line="41" selection-start-column="45" selection-end-line="41" selection-end-column="45" />
+        <state relative-caret-position="68">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/states/menu/MenuStateCritterDex.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/states/battle/BattleStateFight.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/states/battle/BattleStateCritterBeltList.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="82" column="16" lean-forward="false" selection-start-line="82" selection-start-column="16" selection-end-line="82" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/states/battle/BattleStateMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="94" column="16" lean-forward="false" selection-start-line="94" selection-start-column="16" selection-end-line="94" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/states/battle/BattleStateItemList.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
-          <caret line="61" column="93" lean-forward="false" selection-start-line="61" selection-start-column="93" selection-end-line="61" selection-end-column="93" />
+          <caret line="34" column="32" lean-forward="false" selection-start-line="34" selection-start-column="32" selection-end-line="34" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/entities/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="40" column="35" lean-forward="true" selection-start-line="40" selection-start-column="35" selection-end-line="40" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/states/game/world/WorldMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="19" column="15" lean-forward="false" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
+          <folding>
+            <element signature="e#2733#2748#0" expanded="true" />
+            <element signature="e#3171#3186#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/items/Item.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="26" lean-forward="false" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/entities/critters/Critter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="850">
+          <caret line="57" column="47" lean-forward="false" selection-start-line="57" selection-start-column="47" selection-end-line="57" selection-end-column="47" />
           <folding />
         </state>
       </provider>
