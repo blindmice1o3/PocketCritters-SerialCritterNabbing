@@ -34,7 +34,7 @@ public class BattleStateCritterBeltList implements IState {
             index--;
 
             if (index < 0) {
-                index = (player.getCritterBeltList().length-1);
+                index = (player.getCritterBeltList().size()-1);
             }
         }
         //DOWN
@@ -43,7 +43,7 @@ public class BattleStateCritterBeltList implements IState {
 
             index++;
 
-            if (index >= player.getCritterBeltList().length) {
+            if (index >= player.getCritterBeltList().size()) {
                 index = 0;
             }
         }
@@ -59,7 +59,7 @@ public class BattleStateCritterBeltList implements IState {
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_COMMA)) {
             System.out.println("BattleStateCritterBeltList.tick()... aButton");
 
-            System.out.println( "Critter selected: " + player.getCritterBeltList()[index] );
+            System.out.println( "Critter selected: " + player.getCritterBeltList().get(index) );
         }
         //bButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_PERIOD)) {

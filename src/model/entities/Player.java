@@ -39,7 +39,7 @@ public class Player
     protected transient Rectangle bounds;
 
     private transient ArrayList<Item> inventory;
-    private transient Critter[] critterBeltList;
+    private transient ArrayList<Critter> critterBeltList;
     //////////////////////////////////////
     private transient ArrayList<INabber> nabberList;
     //////////////////////////////////////
@@ -68,7 +68,7 @@ public class Player
         moveSpeed = Tile.WIDTH;
 
         inventory = new ArrayList<Item>();
-        critterBeltList = new Critter[6];
+        critterBeltList = new ArrayList<Critter>(6);
         nabberList = new ArrayList<INabber>();
     } // **** end model.entities.Player() constructor ****
 
@@ -555,6 +555,6 @@ public class Player
 
     public ArrayList<Item> getInventory() { return inventory; }
 
-    public Critter[] getCritterBeltList() { return critterBeltList; }
+    public ArrayList<Critter> getCritterBeltList() { return critterBeltList; }
 
 } // **** end model.entities.Player class ****
