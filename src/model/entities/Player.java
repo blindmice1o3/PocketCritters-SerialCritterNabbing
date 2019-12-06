@@ -44,6 +44,10 @@ public class Player
     private transient ArrayList<INabber> nabberList;
     //////////////////////////////////////
 
+    private String name;
+    private int money;
+    private int timePlayed;
+
     public void addINabber(INabber nabber) {
         nabberList.add(nabber);
     }
