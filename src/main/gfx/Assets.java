@@ -21,6 +21,8 @@ public class Assets {
             battleStateSpriteSheet, menuStateSpriteSheet, menuStateInfoSpriteSheet,
             critterBallSprite, cursorSprite;
 
+    public static BufferedImage backgroundCritterBeltList;
+
     public static BufferedImage world, roomPlayer, homePlayer, homeRival, lab;
     public static BufferedImage computerWithKeyboard, keyboardFromComputer, gameConsole, television;
 
@@ -39,6 +41,8 @@ public class Assets {
         menuStateInfoSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Yellow - Trainer Card.png");
         critterBallSprite = battleStateSpriteSheet.getSubimage(324, 269, 7, 7);
         cursorSprite = battleStateSpriteSheet.getSubimage(331, 270, 7, 7);
+
+        backgroundCritterBeltList = battleStateSpriteSheet.getSubimage(320, 2, 159, 145);
 
         world = ImageLoader.loadImage("/pokemon-gsc-kanto.png");
         roomPlayer = indoorsHomeAndRoomSpriteSheet.getSubimage(32, 8, 128, 128);

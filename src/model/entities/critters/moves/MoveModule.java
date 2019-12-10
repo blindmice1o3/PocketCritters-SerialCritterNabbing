@@ -106,11 +106,14 @@ public class MoveModule {
 
     private Handler handler;
 
+    //stores the specific Move-value in position 1-4.
     private int idMove1, idMove2, idMove3, idMove4;
+    //TODO: track pp for each of the 4 moves.
 
     public MoveModule(Handler handler) {
         this.handler = handler;
 
+        //for now, everyone starts with TACKLE and QUICK_ATTACK (and positions 3 and 4 are suppose to be "null"/unassigned).
         idMove1 = 33;
         idMove2 = 98;
         idMove3 = 0;

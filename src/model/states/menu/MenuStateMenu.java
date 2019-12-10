@@ -16,6 +16,8 @@ public class MenuStateMenu implements IState {
     private Player player;
 
     private int indexMenu;
+
+
     private String[] menuList = { "MenuStateCritterDex", "MenuStateCritterBeltList",
             "MenuStateItemList", "MenuStatePlayerStats",
             "MenuStateSave", "MenuStateLoad", "MenuStateExit" };

@@ -19,11 +19,12 @@ public class MenuState implements IState {
         this.handler = handler;
         this.player = player;
 
-        stateMachine = new StateMachine(handler);
         initStateMachine();
     } // **** end MenuState(Handler, Player) constructor
 
     private void initStateMachine() {
+        stateMachine = new StateMachine(handler);
+
         stateMachine.addIStateToCollection("MenuStateMenu", new MenuStateMenu(handler, player));
         stateMachine.addIStateToCollection("MenuStateCritterDex", new MenuStateCritterDex(handler, player));
         stateMachine.addIStateToCollection("MenuStateCritterBeltList", new MenuStateCritterBeltList(handler, player));

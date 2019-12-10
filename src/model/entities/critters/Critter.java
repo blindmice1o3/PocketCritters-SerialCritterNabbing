@@ -11,11 +11,8 @@ public class Critter {
     private Handler handler;
 
     private Species species;
-    private Type type1, type2;
-    private transient BufferedImage speciesIcon;
 
     private MoveModule moveModule;
-    //track pp for each of the 4 moves.
 
     private int hpCurrent;
 
@@ -28,10 +25,6 @@ public class Critter {
     //(EV == effort value [stat experience]... EP == effort points)
     private int attackIV, defenseIV, speedIV, specialIV;
     private int attackEP, defenseEP, speedEP, specialEP;
-    //private int individualValue, effortValue;
-    //(int individualValue, int effortValue)
-    //this.individualValue = individualValue;
-    //this.effortValue = effortValue;
 
     /* !!!as long as it's not in Species (okay if in Critter)!!!
     "In all core series games since Generation III, vitamins that affect stats increase a Pokémon's
@@ -47,8 +40,6 @@ public class Critter {
     public Critter(Handler handler, Species species, int level) {
         this.handler = handler;
         this.species = species;
-        parseSpeciesToInitType1AndType2();
-        parseSpeciesToInitSpeciesIcon();
 
         moveModule = new MoveModule(handler);
 
@@ -59,69 +50,42 @@ public class Critter {
         status = StatusConditionNonVolatile.OK;
     } // **** end Critter(Handler, Species, int) constructor ****
 
-    public void parseSpeciesToInitSpeciesIcon() {
-        switch(species) {
-            case THUNDER_MOUSE:
-                speciesIcon = Assets.crittersBufferedImageNestedArray[2][0];
-                break;
-            case DINO_SPROUTLING:
-                speciesIcon = Assets.crittersBufferedImageNestedArray[0][0];
-                break;
-            /* ... */
-            default:
-                System.out.println("Critter.parseSpeciesToInitSpeciesIcon() switch(species) construct's default block.");
-                speciesIcon = Assets.critterBallSprite;
-                break;
-        }
-    }
 
-    private void parseSpeciesToInitType1AndType2() {
-        switch(species) {
-            case THUNDER_MOUSE:
-                type1 = Type.ELECTRIC;
-                type2 = Type.GROUND;
-                break;
-            case DINO_SPROUTLING:
-                type1 = Type.GRASS;
-                type1 = Type.GROUND;
-                break;
-            /* ... */
-            default:
-                System.out.println("Critter.parseSpeciesToInitType1AndType2() switch(species) construct's default block.");
-                type1 = Type.NORMAL;
-                type2 = Type.NORMAL;
-                break;
-        }
-    }
+
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public enum Species {
-        THUNDER_MOUSE(25, 190, ExpGroup.MEDIUM_FAST, 35, 55, 30, 90, 50),
-        TOTIPOTENT_PUPPY(133, 45, ExpGroup.MEDIUM_FAST, 55, 55, 50, 55, 65),
-        COLONIAL_MOUSE(19, 255, ExpGroup.MEDIUM_FAST, 30, 56, 35, 72, 25),
-        MOTLEY_PIGEON(16, 255, ExpGroup.MEDIUM_SLOW, 40, 45, 40, 56, 35),
-        COASTAL_GULL(21, 255, ExpGroup.MEDIUM_FAST, 40, 60, 30, 70, 31),
-        STONE_MONKEY(56, 190, ExpGroup.MEDIUM_FAST, 40, 80, 35, 70, 35),
-        FEMALE_LAPINE(29, 235, ExpGroup.MEDIUM_SLOW, 55, 47, 52, 41, 40),
-        MALE_LAPINE(32, 235, ExpGroup.MEDIUM_SLOW, 46, 57, 40, 50, 40),
-        HOOKAH_CATERPILLAR(10, 255, ExpGroup.MEDIUM_FAST, 45, 30, 35, 45, 20),
-        GRUB_LARVAE(13, 255, ExpGroup.MEDIUM_FAST, 40, 35, 30, 50, 20),
-        GROUND_HOG(50, 255, ExpGroup.MEDIUM_FAST, 10, 55, 25, 95, 45),
-        SAND_MOUSE(27, 255, ExpGroup.MEDIUM_FAST, 50, 75, 85, 40, 30),
-        ROCK_GOLEM(74, 255, ExpGroup.MEDIUM_SLOW, 40, 80, 100, 20, 30),
-        LEGLESS_ROCK_LIZARD(95, 45, ExpGroup.MEDIUM_FAST, 35, 45, 160, 70, 30),
-        BEARHUG_PYTHON(23, 255, ExpGroup.MEDIUM_FAST, 35, 60, 44, 55, 40),
-        SMOKEY_KITTY(52, 255, ExpGroup.MEDIUM_FAST, 40, 45, 35, 90, 40),
-        GASEOUS_GOLEM(109, 190, ExpGroup.MEDIUM_FAST, 40, 65, 95, 35, 60),
-        KARAOKE_CREAMPUFF(39, 170, ExpGroup.FAST, 115, 45, 20, 20, 25),
-        SPLASHILIC_TILAPIA(129, 255, ExpGroup.SLOW, 20, 10, 55, 80, 20), //from AQUAPONIC SALESMAN in hospital near Place.MT_MOON.
-        DINO_SPROUTLING(1, 45, ExpGroup.MEDIUM_SLOW, 45, 49, 49, 45, 65);
+        THUNDER_MOUSE(25, 190, Type.ELECTRIC, Type.ELECTRIC, ExpGroup.MEDIUM_FAST, 35, 55, 30, 90, 50),
+        TOTIPOTENT_PUPPY(133, 45, Type.NORMAL, Type.NORMAL, ExpGroup.MEDIUM_FAST, 55, 55, 50, 55, 65),
+        COLONIAL_MOUSE(19, 255, Type.NORMAL, Type.NORMAL, ExpGroup.MEDIUM_FAST, 30, 56, 35, 72, 25),
+        MOTLEY_PIGEON(16, 255, Type.NORMAL, Type.FLYING, ExpGroup.MEDIUM_SLOW, 40, 45, 40, 56, 35),
+        COASTAL_GULL(21, 255, Type.NORMAL, Type.FLYING, ExpGroup.MEDIUM_FAST, 40, 60, 30, 70, 31),
+        STONE_MONKEY(56, 190, Type.FIGHTING, Type.FIGHTING, ExpGroup.MEDIUM_FAST, 40, 80, 35, 70, 35),
+        FEMALE_LAPINE(29, 235, Type.POISON, Type.POISON, ExpGroup.MEDIUM_SLOW, 55, 47, 52, 41, 40),
+        MALE_LAPINE(32, 235, Type.POISON, Type.POISON, ExpGroup.MEDIUM_SLOW, 46, 57, 40, 50, 40),
+        HOOKAH_CATERPILLAR(10, 255, Type.BUG, Type.BUG, ExpGroup.MEDIUM_FAST, 45, 30, 35, 45, 20),
+        GRUB_LARVAE(13, 255, Type.BUG, Type.POISON, ExpGroup.MEDIUM_FAST, 40, 35, 30, 50, 20),
+        GROUND_HOG(50, 255, Type.GROUND, Type.GROUND, ExpGroup.MEDIUM_FAST, 10, 55, 25, 95, 45),
+        SAND_MOUSE(27, 255, Type.GROUND, Type.GROUND, ExpGroup.MEDIUM_FAST, 50, 75, 85, 40, 30),
+        ROCK_GOLEM(74, 255, Type.ROCK, Type.GROUND, ExpGroup.MEDIUM_SLOW, 40, 80, 100, 20, 30),
+        LEGLESS_ROCK_LIZARD(95, 45, Type.ROCK, Type.GROUND, ExpGroup.MEDIUM_FAST, 35, 45, 160, 70, 30),
+        BEARHUG_PYTHON(23, 255, Type.POISON, Type.POISON, ExpGroup.MEDIUM_FAST, 35, 60, 44, 55, 40),
+        SMOKEY_KITTY(52, 255, Type.NORMAL, Type.NORMAL, ExpGroup.MEDIUM_FAST, 40, 45, 35, 90, 40),
+        GASEOUS_GOLEM(109, 190, Type.POISON, Type.POISON, ExpGroup.MEDIUM_FAST, 40, 65, 95, 35, 60),
+        KARAOKE_CREAMPUFF(39, 170, Type.NORMAL, Type.NORMAL, ExpGroup.FAST, 115, 45, 20, 20, 25),
+        SPLASHILIC_TILAPIA(129, 255, Type.WATER, Type.WATER, ExpGroup.SLOW, 20, 10, 55, 80, 20), //from AQUAPONIC SALESMAN in hospital near Place.MT_MOON.
+        DINO_SPROUTLING(1, 45, Type.GRASS, Type.POISON, ExpGroup.MEDIUM_SLOW, 45, 49, 49, 45, 65);
 
         private final int id, catchRate;
+        private Type type1, type2;
         private ExpGroup expGroup;
         //stats
         private final float hpBase, attackBase, defenseBase, speedBase, specialBase;
+        //icon (method initializes speciesIcon with switch construct based on int id)
+        private BufferedImage speciesIcon;
+
         /*
         The box trick is
         a method in the core series Pokémon games
@@ -190,10 +154,12 @@ public class Critter {
             3.3	Stage multipliers
          */
 
-        Species(int id, int catchRate, ExpGroup expGroup,
+        Species(int id, int catchRate, Type type1, Type type2, ExpGroup expGroup,
                 float hpBase, float attackBase, float defenseBase, float speedBase, float specialBase) {
             this.id = id;
             this.catchRate = catchRate;
+            this.type1 = type1;
+            this.type2 = type2;
             this.expGroup = expGroup;
 
             //stats
@@ -202,7 +168,28 @@ public class Critter {
             this.defenseBase = defenseBase;
             this.speedBase = speedBase;
             this.specialBase = specialBase;
+
+            initSpeciesIcon();
         }
+
+        //intentionally public in case BufferedImage has to be re-initialized after loading.
+        public void initSpeciesIcon() {
+            switch(id) {
+                case 25: //THUNDER_MOUSE
+                    speciesIcon = Assets.crittersBufferedImageNestedArray[2][0];
+                    break;
+                case 1: //DINO_SPROUTLING
+                    speciesIcon = Assets.crittersBufferedImageNestedArray[0][0];
+                    break;
+            /* ... */
+                default:
+                    System.out.println("Critter.initSpeciesIcon() switch(id) construct's default block.");
+                    System.out.println("THIS Critter is NOT a THUNDER_MOUSE or DINO_SPROUTLING species, WHICH IS WHY THIS default BLOCK IS RUNNING!!!");
+                    speciesIcon = Assets.critterBallSprite;
+                    break;
+            }
+        }
+
     }
 
     public enum ExpGroup {

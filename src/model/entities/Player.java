@@ -73,6 +73,9 @@ public class Player
 
         inventory = new ArrayList<Item>();
         critterBeltList = new ArrayList<Critter>(6);
+        //////////////////////////////////////
+        critterBeltList.add( new Critter(handler, Critter.Species.DINO_SPROUTLING, 3) );
+        //////////////////////////////////////
         nabberList = new ArrayList<INabber>();
     } // **** end model.entities.Player() constructor ****
 
