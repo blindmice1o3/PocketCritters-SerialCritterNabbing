@@ -3,6 +3,10 @@ package model.items;
 public class Item {
 
     public enum Identifier {
+        /*
+        HM == Hidden Machine
+        TM == Technical Machine
+        */
         //TM_XX, HM_XX,
         CRITTER_NET,
         PARCEL_TO_BE_DELIVERED,

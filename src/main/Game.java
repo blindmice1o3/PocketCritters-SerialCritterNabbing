@@ -90,8 +90,7 @@ public class Game implements Runnable {
                 stateManager.getIState("GameState"),
                 args);
 
-        displayer = new Displayer(handler, keyManager,
-                "Pocket Critters - Serial Critter Nabbing", width, height);
+        displayer = new Displayer(handler,"Pocket Critters - Serial Critter Nabbing", width, height);
     }
 
     public synchronized void stop() {

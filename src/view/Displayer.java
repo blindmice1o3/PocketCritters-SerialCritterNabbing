@@ -10,16 +10,14 @@ import java.awt.*;
 public class Displayer {
 
     private Handler handler;
-    private KeyManager keyManager;
     private String title;
     private int width, height;
 
     private JFrame frame;
     private JPanel panel;
 
-    public Displayer(Handler handler, KeyManager keyManager, String title, int width, int height) {
+    public Displayer(Handler handler, String title, int width, int height) {
         this.handler = handler;
-        this.keyManager = keyManager;
         this.title = title;
         this.width = width;
         this.height = height;
@@ -35,7 +33,7 @@ public class Displayer {
         frame.setLocationRelativeTo(null);
 
         /////////////////////////////////
-        frame.addKeyListener(keyManager);
+        frame.addKeyListener( handler.getKeyManager() );
         /////////////////////////////////
 
         panel = new BasePanel();
