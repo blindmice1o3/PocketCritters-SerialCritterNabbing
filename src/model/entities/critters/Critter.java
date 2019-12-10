@@ -9,16 +9,40 @@ import java.awt.image.BufferedImage;
 public class Critter {
 
     private Handler handler;
+
     private Species species;
     private Type type1, type2;
     private transient BufferedImage speciesIcon;
 
     private MoveModule moveModule;
+    //track pp for each of the 4 moves.
 
     private int hpCurrent;
-    private int expCurrent, expRewardedIfDefeated;
-    private int level;
+
     private StatusConditionNonVolatile status;
+
+    private int level;
+    private int expCurrent, expRewardedIfDefeated;
+    // STATS
+    //(IV == individual value [genes]... range from 0-15)
+    //(EV == effort value [stat experience]... EP == effort points)
+    private int attackIV, defenseIV, speedIV, specialIV;
+    private int attackEP, defenseEP, speedEP, specialEP;
+    //private int individualValue, effortValue;
+    //(int individualValue, int effortValue)
+    //this.individualValue = individualValue;
+    //this.effortValue = effortValue;
+
+    /* !!!as long as it's not in Species (okay if in Critter)!!!
+    "In all core series games since Generation III, vitamins that affect stats increase a Pokémon's
+    EVs for a given stat by 10 EV points,
+    but can't increase the total EVs beyond a maximum of 510.
+    Between Generations III and VII, vitamins will also have no effect on an individual stat that
+    already has 100 or more EVs.
+    Prior to Generation III, effort values were based on a system of
+    stat experience and vitamins increased a stat by 2560 EV points,
+    but could only be used until the stat had 25600 EVs."
+    */
 
     public Critter(Handler handler, Species species, int level) {
         this.handler = handler;
@@ -180,23 +204,6 @@ public class Critter {
             this.specialBase = specialBase;
         }
     }
-
-    /* !!!as long as it's not in Species (okay if in Critter)!!!
-    public enum Statistic {
-        ATTACK(),
-        DEFENSE(),
-        SPEED(),
-        SPECIAL();
-
-        private int base, individualValue, effortValue;
-
-        Statistic(int base, int individualValue, int effortValue) {
-            this.base = base;
-            this.individualValue = individualValue;
-            this.effortValue = effortValue;
-        }
-    }
-    */
 
     public enum ExpGroup {
         FAST, MEDIUM_FAST, MEDIUM_SLOW, SLOW;
