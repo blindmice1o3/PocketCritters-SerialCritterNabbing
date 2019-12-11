@@ -19,10 +19,6 @@ public class MenuStateCritterBeltList implements IState {
         SELECT_ACTION,
     }
 
-    private enum Action {
-        STAT, SWAP, CANCEL;
-    }
-
     private Handler handler;
     private Player player;
 
@@ -31,8 +27,6 @@ public class MenuStateCritterBeltList implements IState {
     private int indexCritterBeltList;
     private final int xOffsetCursor, yOffsetCursor;
     private int xCursor, yCursor;
-
-    private Action indexAction;
 
     public MenuStateCritterBeltList(Handler handler, Player player) {
         this.handler = handler;
@@ -44,15 +38,13 @@ public class MenuStateCritterBeltList implements IState {
         xOffsetCursor = 3;
         yOffsetCursor = 27;
         updateCursorPosition();
-
-        indexAction = Action.STAT;
     } // **** end MenuStateCritterBeltList(Handler, Player) constructor ****
 
     private void initStateMachine() {
         stateMachine = new StateMachine(handler);
 
         //TODO: implement IState subclasses of MenuStateCritterBeltList (e.g. BeltListCritterStats, BeltListCritterSwap, BeltListCritterCancel).
-        stateMachine.addIStateToCollection("CritterBeltListEntryMenuOption", new CritterBeltListEntryMenuOption(handler));
+        stateMachine.addIStateToCollection("MenuStateCritterBeltListAction", new MenuStateCritterBeltListAction(handler, player));
 
     }
 
@@ -101,7 +93,7 @@ public class MenuStateCritterBeltList implements IState {
             updateCursorPosition();
         }
         //aButton
-        //TODO: pushes CritterBeltListEntryMenuOption onto top of stack. Should pass in the selected Critter instance or the index of critterBeltList.
+        //TODO: pushes MenuStateCritterBeltListAction onto top of stack. Should pass in the selected Critter instance or the index of critterBeltList.
         if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_COMMA)) {
             ///////////////////////////////
             player.getCritterBeltList().get(indexCritterBeltList).consoleOutIVsAndEVs();

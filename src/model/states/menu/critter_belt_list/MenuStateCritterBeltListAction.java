@@ -1,17 +1,28 @@
 package model.states.menu.critter_belt_list;
 
 import main.Handler;
+import model.entities.Player;
 import model.states.IState;
 
 import java.awt.*;
 
-public class CritterBeltListEntryMenuOption implements IState {
+public class MenuStateCritterBeltListAction implements IState {
+
+    private enum Action {
+        STAT, SWAP, CANCEL;
+    }
 
     private Handler handler;
+    private Player player;
 
-    public CritterBeltListEntryMenuOption(Handler handler) {
+    private Action indexAction;
+
+    public MenuStateCritterBeltListAction(Handler handler, Player player) {
         this.handler = handler;
-    } // **** end CritterBeltListEntryMenuOption(Handler) constructor ****
+        this.player = player;
+
+        indexAction = Action.STAT;
+    } // **** end MenuStateCritterBeltListAction(Handler, Player) constructor ****
 
     @Override
     public void tick(long timeElapsed) {
