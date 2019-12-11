@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
+import java.util.Random;
 
 public class Sandbox {
     // Team Rocket w Jessie and James.
@@ -18,6 +19,11 @@ public class Sandbox {
     public static void main(String[] args) {
         //TileSpriteToRGBConverter tester = new TileSpriteToRGBConverter();
         //tester.testConsoleOutput( tester.translateTileSpriteToRGBImage() );
+
+        Random random = new Random();
+        for (int i = 0; i < 100; i++) {
+            System.out.println("random number between 0-15: " + random.nextInt(16) + ".");
+        }
 
         int counter = 1;
         String formattedString = String.format("%05d", counter);

@@ -14,19 +14,38 @@ import java.awt.image.BufferedImage;
 
 public class MenuStateCritterBeltList implements IState {
 
+    private enum Phase {
+        SELECT_CRITTER,
+        SELECT_ACTION,
+    }
+
+    private enum Action {
+        STAT, SWAP, CANCEL;
+    }
+
     private Handler handler;
     private Player player;
 
     private StateMachine stateMachine;
-    private int index;
+
+    private int indexCritterBeltList;
+    private final int xOffsetCursor, yOffsetCursor;
     private int xCursor, yCursor;
+
+    private Action indexAction;
 
     public MenuStateCritterBeltList(Handler handler, Player player) {
         this.handler = handler;
         this.player = player;
 
         initStateMachine();
-        index = 0;
+
+        indexCritterBeltList = 0;
+        xOffsetCursor = 3;
+        yOffsetCursor = 27;
+        updateCursorPosition();
+
+        indexAction = Action.STAT;
     } // **** end MenuStateCritterBeltList(Handler, Player) constructor ****
 
     private void initStateMachine() {
@@ -35,6 +54,11 @@ public class MenuStateCritterBeltList implements IState {
         //TODO: implement IState subclasses of MenuStateCritterBeltList (e.g. BeltListCritterStats, BeltListCritterSwap, BeltListCritterCancel).
         stateMachine.addIStateToCollection("CritterBeltListEntryMenuOption", new CritterBeltListEntryMenuOption(handler));
 
+    }
+
+    private void updateCursorPosition() {
+        xCursor = xOffsetCursor;
+        yCursor = yOffsetCursor + (indexCritterBeltList * 60);
     }
 
     @Override
@@ -55,11 +79,34 @@ public class MenuStateCritterBeltList implements IState {
             ///////////////////////////////
         }
         //upButton
-        //TODO: decrement the index, check if less than 0 (if so, set to player.critterBeltList.size()-1 and update cursor's position).
+        if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {
+            System.out.println("MenuStateCritterBeltList.tick()... upButton");
+
+            indexCritterBeltList--;
+            if (indexCritterBeltList < 0) {
+                indexCritterBeltList = (player.getCritterBeltList().size() - 1);
+            }
+
+            updateCursorPosition();
+        }
         //downButton
-        //TODO: increment the index, check if greater than player.critterBeltList.size()-1 (if so, set to 0 and update cursor's position).
+        if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) {
+            System.out.println("MenuStateCritterBeltList.tick()... downButton");
+
+            indexCritterBeltList++;
+            if (indexCritterBeltList > (player.getCritterBeltList().size() - 1)) {
+                indexCritterBeltList = 0;
+            }
+
+            updateCursorPosition();
+        }
         //aButton
         //TODO: pushes CritterBeltListEntryMenuOption onto top of stack. Should pass in the selected Critter instance or the index of critterBeltList.
+        if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_COMMA)) {
+            ///////////////////////////////
+            player.getCritterBeltList().get(indexCritterBeltList).consoleOutIVsAndEVs();
+            ///////////////////////////////
+        }
     }
 
     @Override
@@ -89,6 +136,9 @@ public class MenuStateCritterBeltList implements IState {
             ///////////////////////////////
             yOffset += 60;
         }
+
+        //CURSOR
+        g.drawImage(Assets.critterBallSprite, xCursor, yCursor, 20, 20, null);
     }
 
     @Override
