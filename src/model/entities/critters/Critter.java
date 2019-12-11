@@ -50,7 +50,9 @@ public class Critter {
         status = StatusConditionNonVolatile.OK;
     } // **** end Critter(Handler, Species, int) constructor ****
 
-
+    public BufferedImage getSpeciesIcon() {
+        return species.speciesIcon;
+    }
 
 
 
@@ -169,6 +171,7 @@ public class Critter {
             this.speedBase = speedBase;
             this.specialBase = specialBase;
 
+            //BufferedImage speciesIcon
             initSpeciesIcon();
         }
 
@@ -181,10 +184,24 @@ public class Critter {
                 case 1: //DINO_SPROUTLING
                     speciesIcon = Assets.crittersBufferedImageNestedArray[0][0];
                     break;
-            /* ... */
+                case 133: //TOTIPOTENT_PUPPY
+                    speciesIcon = Assets.crittersBufferedImageNestedArray[11][0];
+                    break;
+                case 56: //STONE_MONKEY
+                    speciesIcon = Assets.crittersBufferedImageNestedArray[4][7];
+                    break;
+                case 129: //SPLASHILIC_TILAPIA
+                    speciesIcon = Assets.crittersBufferedImageNestedArray[10][8];
+                    break;
+                case 74: //ROCK_GOLEM
+                    speciesIcon = Assets.crittersBufferedImageNestedArray[6][1];
+                    break;
+                case 21: //COASTAL_GULL
+                    speciesIcon = Assets.crittersBufferedImageNestedArray[1][8];
+                    break;
                 default:
                     System.out.println("Critter.initSpeciesIcon() switch(id) construct's default block.");
-                    System.out.println("THIS Critter is NOT a THUNDER_MOUSE or DINO_SPROUTLING species, WHICH IS WHY THIS default BLOCK IS RUNNING!!!");
+                    System.out.println("THIS Critter is NOT listed in Critter.initSpeciesIcon()!!!");
                     speciesIcon = Assets.critterBallSprite;
                     break;
             }

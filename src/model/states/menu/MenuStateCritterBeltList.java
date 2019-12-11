@@ -8,16 +8,27 @@ import model.states.StateMachine;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 
 public class MenuStateCritterBeltList implements IState {
 
     private Handler handler;
     private Player player;
 
+    private StateMachine stateMachine;
+
     public MenuStateCritterBeltList(Handler handler, Player player) {
         this.handler = handler;
         this.player = player;
+
+        initStateMachine();
     } // **** end MenuStateCritterBeltList(Handler, Player) constructor ****
+
+    private void initStateMachine() {
+        stateMachine = new StateMachine(handler);
+
+        //TODO: implement IState subclasses of MenuStateCritterBeltList (e.g. BeltListCritterStats, BeltListCritterSwap, BeltListCritterCancel).
+    }
 
     @Override
     public void tick(long timeElapsed) {
@@ -40,9 +51,23 @@ public class MenuStateCritterBeltList implements IState {
 
     @Override
     public void render(Graphics g) {
+        //BACKGROUND
         g.drawImage(Assets.backgroundCritterBeltList,
                 0, 0, handler.getGame().getWidth(), handler.getGame().getHeight(),
                 0, 0, Assets.backgroundCritterBeltList.getWidth(), Assets.backgroundCritterBeltList.getHeight(), null);
+
+        //speciesIcon COLUMN
+        BufferedImage speciesIcon = null;
+        int numberOfCritters = player.getCritterBeltList().size();
+        int xOffset = 25;
+        int yOffset = 5;
+        for (int i = 0; i < numberOfCritters; i++) {
+            speciesIcon = player.getCritterBeltList().get(i).getSpeciesIcon();
+            ///////////////////////////////
+            g.drawImage(speciesIcon, xOffset, yOffset, null);
+            ///////////////////////////////
+            yOffset += 60;
+        }
     }
 
     @Override

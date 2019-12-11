@@ -74,7 +74,12 @@ public class Player
         inventory = new ArrayList<Item>();
         critterBeltList = new ArrayList<Critter>(6);
         //////////////////////////////////////
-        critterBeltList.add( new Critter(handler, Critter.Species.DINO_SPROUTLING, 3) );
+        critterBeltList.add( new Critter(handler, Critter.Species.DINO_SPROUTLING, 5) );
+        critterBeltList.add( new Critter(handler, Critter.Species.TOTIPOTENT_PUPPY, 6) );
+        critterBeltList.add( new Critter(handler, Critter.Species.STONE_MONKEY, 7) );
+        critterBeltList.add( new Critter(handler, Critter.Species.SPLASHILIC_TILAPIA, 8) );
+        critterBeltList.add( new Critter(handler, Critter.Species.ROCK_GOLEM, 10) );
+        critterBeltList.add( new Critter(handler, Critter.Species.COASTAL_GULL, 11) );
         //////////////////////////////////////
         nabberList = new ArrayList<INabber>();
     } // **** end model.entities.Player() constructor ****
