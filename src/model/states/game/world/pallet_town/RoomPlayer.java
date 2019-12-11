@@ -1,4 +1,4 @@
-package model.states.game.world;
+package model.states.game.world.pallet_town;
 
 import main.Handler;
 import main.gfx.Assets;

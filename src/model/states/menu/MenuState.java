@@ -4,7 +4,7 @@ import main.Handler;
 import model.entities.Player;
 import model.states.IState;
 import model.states.StateMachine;
-import model.states.StateManager;
+import model.states.menu.critter_belt_list.MenuStateCritterBeltList;
 
 import java.awt.*;
 

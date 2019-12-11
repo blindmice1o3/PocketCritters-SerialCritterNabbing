@@ -1,4 +1,4 @@
-package model.states.menu;
+package model.states.menu.critter_belt_list;
 
 import main.Handler;
 import main.gfx.Assets;
@@ -6,6 +6,7 @@ import main.utils.FontGrabber;
 import model.entities.Player;
 import model.states.IState;
 import model.states.StateMachine;
+import model.states.menu.MenuState;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -17,18 +18,23 @@ public class MenuStateCritterBeltList implements IState {
     private Player player;
 
     private StateMachine stateMachine;
+    private int index;
+    private int xCursor, yCursor;
 
     public MenuStateCritterBeltList(Handler handler, Player player) {
         this.handler = handler;
         this.player = player;
 
         initStateMachine();
+        index = 0;
     } // **** end MenuStateCritterBeltList(Handler, Player) constructor ****
 
     private void initStateMachine() {
         stateMachine = new StateMachine(handler);
 
         //TODO: implement IState subclasses of MenuStateCritterBeltList (e.g. BeltListCritterStats, BeltListCritterSwap, BeltListCritterCancel).
+        stateMachine.addIStateToCollection("CritterBeltListEntryMenuOption", new CritterBeltListEntryMenuOption(handler));
+
     }
 
     @Override
@@ -48,6 +54,12 @@ public class MenuStateCritterBeltList implements IState {
             }
             ///////////////////////////////
         }
+        //upButton
+        //TODO: decrement the index, check if less than 0 (if so, set to player.critterBeltList.size()-1 and update cursor's position).
+        //downButton
+        //TODO: increment the index, check if greater than player.critterBeltList.size()-1 (if so, set to 0 and update cursor's position).
+        //aButton
+        //TODO: pushes CritterBeltListEntryMenuOption onto top of stack. Should pass in the selected Critter instance or the index of critterBeltList.
     }
 
     @Override

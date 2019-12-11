@@ -1,7 +1,8 @@
-package model.states.game.world;
+package model.states.game.world.pallet_town;
 
 import main.Handler;
 import main.gfx.Assets;
+import model.states.game.world.IWorld;
 import model.tiles.NonSolidTile;
 import model.tiles.SolidTile;
 import model.tiles.Tile;

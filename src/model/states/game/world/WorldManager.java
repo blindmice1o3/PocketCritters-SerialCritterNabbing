@@ -1,6 +1,10 @@
 package model.states.game.world;
 
 import main.Handler;
+import model.states.game.world.pallet_town.HomePlayer;
+import model.states.game.world.pallet_town.HomeRival;
+import model.states.game.world.pallet_town.Lab;
+import model.states.game.world.pallet_town.RoomPlayer;
 
 import java.awt.*;
 import java.util.HashMap;

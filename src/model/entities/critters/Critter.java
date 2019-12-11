@@ -11,45 +11,34 @@ public class Critter {
     private Handler handler;
 
     private Species species;
+    private int level;
+
+    private String nameColloquial;
+    private int hpCurrent;
+    private StatusConditionNonVolatile status;
+    private int expCurrent, expRewardedIfDefeated;
 
     private MoveModule moveModule;
 
-    private int hpCurrent;
-
-    private StatusConditionNonVolatile status;
-
-    private int level;
-    private int expCurrent, expRewardedIfDefeated;
-    private String nameColloquial;
-    // STATS
+    // STATS (attackBase, defenseBase, speedBase, and specialBase can be found in Species)
     //(IV == individual value [genes]... range from 0-15)
     //(EV == effort value [stat experience]... EP == effort points)
     private int attackIV, defenseIV, speedIV, specialIV;
     private int attackEP, defenseEP, speedEP, specialEP;
 
-    /* !!!as long as it's not in Species (okay if in Critter)!!!
-    "In all core series games since Generation III, vitamins that affect stats increase a Pokémon's
-    EVs for a given stat by 10 EV points,
-    but can't increase the total EVs beyond a maximum of 510.
-    Between Generations III and VII, vitamins will also have no effect on an individual stat that
-    already has 100 or more EVs.
-    Prior to Generation III, effort values were based on a system of
-    stat experience and vitamins increased a stat by 2560 EV points,
-    but could only be used until the stat had 25600 EVs."
-    */
-
     public Critter(Handler handler, Species species, int level) {
         this.handler = handler;
+
         this.species = species;
+        this.level = level;
 
-        moveModule = new MoveModule(handler);
-
+        nameColloquial = this.species.toString().replace('_', ' ');
         hpCurrent = (int)species.hpBase;
+        status = StatusConditionNonVolatile.OK;
         expCurrent = 0;
         expRewardedIfDefeated = 10;
-        this.level = level;
-        status = StatusConditionNonVolatile.OK;
-        nameColloquial = this.species.toString().replace('_', ' ');
+
+        moveModule = new MoveModule(handler);
     } // **** end Critter(Handler, Species, int) constructor ****
 
     public BufferedImage getSpeciesIcon() {
