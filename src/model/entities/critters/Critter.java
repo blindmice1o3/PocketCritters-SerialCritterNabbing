@@ -20,6 +20,7 @@ public class Critter {
 
     private int level;
     private int expCurrent, expRewardedIfDefeated;
+    private String nameColloquial;
     // STATS
     //(IV == individual value [genes]... range from 0-15)
     //(EV == effort value [stat experience]... EP == effort points)
@@ -48,13 +49,28 @@ public class Critter {
         expRewardedIfDefeated = 10;
         this.level = level;
         status = StatusConditionNonVolatile.OK;
+        nameColloquial = this.species.toString().replace('_', ' ');
     } // **** end Critter(Handler, Species, int) constructor ****
 
     public BufferedImage getSpeciesIcon() {
         return species.speciesIcon;
     }
 
+    public String getNameColloquial() {
+        return nameColloquial;
+    }
 
+    public int getLevel() {
+        return level;
+    }
+
+    public int getHpCurrent() {
+        return hpCurrent;
+    }
+
+    public Species getSpecies() {
+        return species;
+    }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -206,6 +222,8 @@ public class Critter {
                     break;
             }
         }
+
+        public int getHpBase() { return (int)hpBase; }
 
     }
 
