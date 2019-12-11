@@ -48,6 +48,12 @@ public class Critter {
     //(EV == effort value [STATs EXPERIENCE]... EP == effort points)
     private int attackEP, defenseEP, speedEP, specialEP, hpEP;
 
+    /*
+    DETERMINATION OF STATS:
+    hp =        ( ((((base + iv) * 2) + (sqrt(ev) / 4)) * level) / 100 ) + level + 10
+    otherStat = ( ((((base + iv) * 2) + (sqrt(ev) / 4)) * level) / 100 ) + 5
+    */
+
     public Critter(Handler handler, Species species, int level) {
         this.handler = handler;
 
