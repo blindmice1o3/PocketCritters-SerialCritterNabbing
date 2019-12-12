@@ -18,6 +18,7 @@ public class MenuStateCritterBeltList implements IState {
     private Player player;
 
     private int indexCritterBeltList;
+
     private final int xOffsetCursor, yOffsetCursor;
     private int xCursor, yCursor;
 
@@ -85,10 +86,17 @@ public class MenuStateCritterBeltList implements IState {
             if (handler.getStateManager().getCurrentState() instanceof MenuState) {
                 MenuState menuState = (MenuState)handler.getStateManager().getCurrentState();
                 StateMachine stateMachine = menuState.getStateMachine();
-                int widthCursorIcon = 20;
                 int widthSpeciesIcon = player.getCritterBeltList().get(indexCritterBeltList).getSpeciesIcon().getWidth();
 
-                int[] cursorPosition = { (xCursor + widthCursorIcon + widthSpeciesIcon), yCursor };
+                int xNewPanel = (25 + widthSpeciesIcon + xOffsetCursor);
+                ///////////////////////////////////////////////////////////////////////////////
+                //if in top part of the screen, set the new IState's yStart BELOW nameColloquial
+                //if in bottom part of screen, set the new IState's yStart ABOVE nameColloquial.
+                int yNewPanel = (yCursor < (handler.getGame().getWidth() / 3)) ?
+                        (yCursor+5) : (yCursor+5-MenuStateCritterBeltListAction.HEIGHT-20-3);
+                ///////////////////////////////////////////////////////////////////////////////
+
+                int[] cursorPosition = { xNewPanel, yNewPanel };
                 Object[] args = { cursorPosition };
 
                 stateMachine.push(

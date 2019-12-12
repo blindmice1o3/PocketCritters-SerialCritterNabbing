@@ -13,6 +13,8 @@ import java.awt.event.KeyEvent;
 
 public class MenuStateCritterBeltListAction implements IState {
 
+    public static final int WIDTH = 160, HEIGHT = 120;
+
     private enum Action {
         STAT, SWAP, CANCEL;
     }
@@ -21,6 +23,7 @@ public class MenuStateCritterBeltListAction implements IState {
     private Player player;
 
     private Action currentAction;
+
     //initialized when enter(Object]) is called (tracks its background panel position).
     private int xOffsetStart, yOffsetStart;
     private final int xOffsetCursor, yOffsetCursor;
@@ -31,15 +34,15 @@ public class MenuStateCritterBeltListAction implements IState {
         this.handler = handler;
         this.player = player;
 
-        xOffsetCursor = 3;
-        yOffsetCursor = 27;
+        xOffsetCursor = 5;
+        yOffsetCursor = 10;
 
         currentAction = Action.STAT;
     } // **** end MenuStateCritterBeltListAction(Handler, Player) constructor ****
 
     private void updateCursorPosition() {
         xCursor = xOffsetStart + xOffsetCursor;
-        yCursor = yOffsetStart + yOffsetCursor + (currentAction.ordinal() * 60);
+        yCursor = yOffsetStart + yOffsetCursor + (currentAction.ordinal() * 40);
     }
 
     @Override
@@ -95,12 +98,12 @@ public class MenuStateCritterBeltListAction implements IState {
     public void render(Graphics g) {
         //BACKGROUND
         g.setColor(Color.YELLOW);
-        g.fillRect(xOffsetStart, yOffsetStart, 180, 180);
+        g.fillRect(xOffsetStart, yOffsetStart, WIDTH, HEIGHT);
 
         g.setColor(Color.BLUE);
         int xString = xOffsetStart + xOffsetCursor + 20 + xOffsetCursor;
         for (int i = 0; i < Action.values().length; i++) {
-            int yString = yOffsetStart + yOffsetCursor + (i * 60);
+            int yString = yOffsetStart + yOffsetCursor + (i * 40);
 
             String nameMenuElement = Action.values()[i].toString();
             FontGrabber.renderString(g, nameMenuElement, xString, yString, 20, 20);

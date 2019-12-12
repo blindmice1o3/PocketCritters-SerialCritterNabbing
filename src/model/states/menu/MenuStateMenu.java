@@ -12,15 +12,15 @@ import java.awt.event.KeyEvent;
 
 public class MenuStateMenu implements IState {
 
-    private Handler handler;
-    private Player player;
-
-    private int indexMenu;
-
     private String[] menuList = { "MenuStateCritterDex", "MenuStateCritterBeltList",
             "MenuStateItemList", "MenuStatePlayerStats",
             "MenuStateSave", "MenuStateLoad", "MenuStateExit" };
     //SWITCHING MenuStateOption for MenuStateLoad for now.
+
+    private Handler handler;
+    private Player player;
+
+    private int indexMenu;
 
     public MenuStateMenu(Handler handler, Player player) {
         this.handler = handler;
