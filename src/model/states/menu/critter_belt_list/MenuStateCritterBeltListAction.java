@@ -96,10 +96,15 @@ public class MenuStateCritterBeltListAction implements IState {
 
     @Override
     public void render(Graphics g) {
-        //BACKGROUND
+        MenuState menuState = (MenuState)handler.getStateManager().getIState("MenuState");
+        //re-draw the IState below this one as background.
+        menuState.getStateMachine().getIState("MenuStateCritterBeltList").render(g);
+
+        //PANEL
         g.setColor(Color.YELLOW);
         g.fillRect(xOffsetStart, yOffsetStart, WIDTH, HEIGHT);
 
+        //LIST OF ACTIONS
         g.setColor(Color.BLUE);
         int xString = xOffsetStart + xOffsetCursor + 20 + xOffsetCursor;
         for (int i = 0; i < Action.values().length; i++) {

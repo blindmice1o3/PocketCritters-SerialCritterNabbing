@@ -95,6 +95,10 @@ public class MenuStateMenu implements IState {
 
     @Override
     public void render(Graphics g) {
+        //re-draw the IState below this one as background.
+        handler.getStateManager().getIState("GameState").render(g);
+
+        //PANEL
         g.drawImage(Assets.menuStateSpriteSheet.getSubimage(239, 3, 75, 124),
                 325, 10,
                 (handler.getGame().getWidth()-10), (handler.getGame().getHeight()-10),
@@ -102,6 +106,7 @@ public class MenuStateMenu implements IState {
                 Assets.menuStateSpriteSheet.getSubimage(239, 3, 75, 124).getWidth(),
                 Assets.menuStateSpriteSheet.getSubimage(239, 3, 75, 124).getHeight(), null);
 
+        //CURSOR
         if (menuList[indexMenu].equals("MenuStateCritterDex")) {
             g.drawImage(Assets.cursorSprite, 345, 70, 7 * 4, 7 * 4, null);
         } else if (menuList[indexMenu].equals("MenuStateCritterBeltList")) {
