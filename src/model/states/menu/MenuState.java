@@ -5,6 +5,7 @@ import model.entities.Player;
 import model.states.IState;
 import model.states.StateMachine;
 import model.states.menu.critter_belt_list.MenuStateCritterBeltList;
+import model.states.menu.critter_belt_list.MenuStateCritterBeltListAction;
 
 import java.awt.*;
 
@@ -28,6 +29,7 @@ public class MenuState implements IState {
         stateMachine.addIStateToCollection("MenuStateMenu", new MenuStateMenu(handler, player));
         stateMachine.addIStateToCollection("MenuStateCritterDex", new MenuStateCritterDex(handler, player));
         stateMachine.addIStateToCollection("MenuStateCritterBeltList", new MenuStateCritterBeltList(handler, player));
+        stateMachine.addIStateToCollection("MenuStateCritterBeltListAction", new MenuStateCritterBeltListAction(handler, player));
         stateMachine.addIStateToCollection("MenuStateItemList", new MenuStateItemList(handler, player));
         stateMachine.addIStateToCollection("MenuStatePlayerStats", new MenuStatePlayerStats(handler, player));
         stateMachine.addIStateToCollection("MenuStateSave", new MenuStateSave(handler, player));

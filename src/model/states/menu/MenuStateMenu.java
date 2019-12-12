@@ -17,7 +17,6 @@ public class MenuStateMenu implements IState {
 
     private int indexMenu;
 
-
     private String[] menuList = { "MenuStateCritterDex", "MenuStateCritterBeltList",
             "MenuStateItemList", "MenuStatePlayerStats",
             "MenuStateSave", "MenuStateLoad", "MenuStateExit" };
@@ -32,8 +31,6 @@ public class MenuStateMenu implements IState {
 
     @Override
     public void tick(long timeElapsed) {
-        //System.out.println("MenuStateMenu.tick()");
-
         //UP
         if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {
             System.out.println("MenuStateMenu.tick()... up");
