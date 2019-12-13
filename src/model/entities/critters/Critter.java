@@ -119,6 +119,10 @@ public class Critter {
         return hpCurrent;
     }
 
+    public int getExpCurrent() { return expCurrent; }
+
+    public MoveModule getMoveModule() { return moveModule; }
+
     public Species getSpecies() {
         return species;
     }
@@ -276,6 +280,10 @@ public class Critter {
         }
 
         public int getId() { return id; }
+
+        public Type getType1() { return type1; }
+
+        public Type getType2() { return type2; }
 
         public int getHpBase() { return (int)hpBase; }
 

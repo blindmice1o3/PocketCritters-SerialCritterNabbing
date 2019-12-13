@@ -102,6 +102,8 @@ public class MoveModule {
             this.accuracy = accuracy;
             this.priority = priority;
         }
+
+        public int getPpBase() { return ppBase; }
     }
 
     private Handler handler;
@@ -109,6 +111,7 @@ public class MoveModule {
     //stores the specific Move-value in position 1-4.
     private int idMove1, idMove2, idMove3, idMove4;
     //TODO: track pp for each of the 4 moves.
+    private int ppMove1, ppMove2, ppMove3, ppMove4;
 
     public MoveModule(Handler handler) {
         this.handler = handler;
@@ -118,6 +121,45 @@ public class MoveModule {
         idMove2 = 98;
         idMove3 = 0;
         idMove4 = 0;
+
+        if (idMove1 != 0) {
+            ppMove1 = lookUpMove(idMove1).getPpBase();
+        }
+        if (idMove2 != 0) {
+            ppMove2 = lookUpMove(idMove2).getPpBase();
+        }
+        if (idMove3 != 0) {
+            ppMove3 = lookUpMove(idMove3).getPpBase();
+        }
+        if (idMove4 != 0) {
+            ppMove4 = lookUpMove(idMove4).getPpBase();
+        }
     } // *** end MoveModule(Handler) constructor
+
+    public int getIdMove1() { return idMove1; }
+
+    public int getIdMove2() { return idMove2; }
+
+    public int getIdMove3() { return idMove3; }
+
+    public int getIdMove4() { return idMove4; }
+
+    public int getPpMove1() { return ppMove1; }
+
+    public int getPpMove2() { return ppMove2; }
+
+    public int getPpMove3() { return ppMove3; }
+
+    public int getPpMove4() { return ppMove4; }
+
+    public Move lookUpMove(int idMove) {
+        for (Move move : Move.values()) {
+            if (idMove == move.id) {
+                return move;
+            }
+        }
+        //BY DEFAULT (if not one of the enum Move's value, return null.
+        return null;
+    }
 
 } // **** end MoveModule class ****
