@@ -72,12 +72,13 @@ public class MenuBeltListActionSwap implements IState {
 
                 //pop self (MenuBeltListActionSwap).
                 stateMachine.pop();
-                //pop self (MenuBeltListAction).
+                //pop (MenuBeltListAction).
                 stateMachine.pop();
                 //now MenuBeltList.
             }
             ///////////////////////////////
         }
+        //aButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_COMMA)) {
             System.out.println("MenuBeltListActionSwap.tick(long)... aButton");
             StateMachine stateMachine = ((MenuState)handler.getStateManager().getIState("MenuState")).getStateMachine();

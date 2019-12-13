@@ -6,7 +6,7 @@ import model.states.IState;
 import model.states.StateMachine;
 import model.states.menu.critter_belt_list.MenuBeltList;
 import model.states.menu.critter_belt_list.MenuBeltListAction;
-import model.states.menu.critter_belt_list.MenuBeltListActionStat;
+import model.states.menu.critter_belt_list.MenuBeltListActionSummary;
 import model.states.menu.critter_belt_list.MenuBeltListActionSwap;
 
 import java.awt.*;
@@ -32,7 +32,7 @@ public class MenuState implements IState {
         stateMachine.addIStateToCollection("MenuStateCritterDex", new MenuStateCritterDex(handler, player));
         stateMachine.addIStateToCollection("MenuBeltList", new MenuBeltList(handler, player));
         stateMachine.addIStateToCollection("MenuBeltListAction", new MenuBeltListAction(handler, player));
-        stateMachine.addIStateToCollection("MenuBeltListActionStat", new MenuBeltListActionStat(handler, player));
+        stateMachine.addIStateToCollection("MenuBeltListActionSummary", new MenuBeltListActionSummary(handler, player));
         stateMachine.addIStateToCollection("MenuBeltListActionSwap", new MenuBeltListActionSwap(handler, player));
         stateMachine.addIStateToCollection("MenuStateItemList", new MenuStateItemList(handler, player));
         stateMachine.addIStateToCollection("MenuStatePlayerStats", new MenuStatePlayerStats(handler, player));

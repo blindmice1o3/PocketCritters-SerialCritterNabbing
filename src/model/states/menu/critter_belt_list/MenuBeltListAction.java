@@ -15,7 +15,7 @@ public class MenuBeltListAction implements IState {
     public static final int WIDTH = 160, HEIGHT = 120;
 
     private enum Action {
-        STAT, SWAP, CANCEL;
+        SUMMARY, SWAP, CANCEL;
     }
 
     private Handler handler;
@@ -37,7 +37,7 @@ public class MenuBeltListAction implements IState {
         xOffsetCursor = 5;
         yOffsetCursor = 10;
 
-        currentAction = Action.STAT;
+        currentAction = Action.SUMMARY;
     } // **** end MenuBeltListAction(Handler, Player) constructor ****
 
     private void updateCursorPosition() {
@@ -92,10 +92,10 @@ public class MenuBeltListAction implements IState {
             MenuState menuState = (MenuState)handler.getStateManager().getIState("MenuState");
             Object[] args = { indexCritterBeltList };
             switch (currentAction) {
-                case STAT:
-                    MenuBeltListActionStat menuBeltListActionStat = (MenuBeltListActionStat)menuState.getStateMachine().getIState("MenuBeltListActionStat");
+                case SUMMARY:
+                    MenuBeltListActionSummary menuBeltListActionSummary = (MenuBeltListActionSummary)menuState.getStateMachine().getIState("MenuBeltListActionSummary");
                     ///////////////////////////////
-                    menuState.getStateMachine().push( menuBeltListActionStat, args );
+                    menuState.getStateMachine().push(menuBeltListActionSummary, args );
                     ///////////////////////////////
                     break;
                 case SWAP:

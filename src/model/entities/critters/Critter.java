@@ -123,6 +123,8 @@ public class Critter {
         return species;
     }
 
+    public StatusConditionNonVolatile getStatus() { return status; }
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public enum Species {
@@ -154,7 +156,6 @@ public class Critter {
         private final float hpBase, attackBase, defenseBase, speedBase, specialBase;
         //icon (method initializes speciesIcon with switch construct based on int id)
         private BufferedImage speciesIcon;
-
         /*
         The box trick is
         a method in the core series Pokémon games
@@ -274,7 +275,17 @@ public class Critter {
             }
         }
 
+        public int getId() { return id; }
+
         public int getHpBase() { return (int)hpBase; }
+
+        public int getAttackBase() { return (int)attackBase; }
+
+        public int getDefenseBase() { return (int)defenseBase; }
+
+        public int getSpeedBase() { return (int)speedBase; }
+
+        public int getSpecialBase() { return (int)specialBase; }
 
     }
 
