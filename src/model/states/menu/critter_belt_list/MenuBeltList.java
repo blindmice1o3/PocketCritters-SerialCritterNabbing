@@ -12,36 +12,35 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
-public class MenuStateCritterBeltList implements IState {
+public class MenuBeltList implements IState {
+
+    public static final int X_OFFSET_CURSOR = 3, Y_OFFSET_CURSOR = 27;
 
     private Handler handler;
     private Player player;
 
     private int indexCritterBeltList;
 
-    private final int xOffsetCursor, yOffsetCursor;
     private int xCursor, yCursor;
 
-    public MenuStateCritterBeltList(Handler handler, Player player) {
+    public MenuBeltList(Handler handler, Player player) {
         this.handler = handler;
         this.player = player;
 
         indexCritterBeltList = 0;
-        xOffsetCursor = 3;
-        yOffsetCursor = 27;
         updateCursorPosition();
-    } // **** end MenuStateCritterBeltList(Handler, Player) constructor ****
+    } // **** end MenuBeltList(Handler, Player) constructor ****
 
     private void updateCursorPosition() {
-        xCursor = xOffsetCursor;
-        yCursor = yOffsetCursor + (indexCritterBeltList * 60);
+        xCursor = X_OFFSET_CURSOR;
+        yCursor = Y_OFFSET_CURSOR + (indexCritterBeltList * 60);
     }
 
     @Override
     public void tick(long timeElapsed) {
         //upButton
         if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {
-            System.out.println("MenuStateCritterBeltList.tick(long)... upButton");
+            System.out.println("MenuBeltList.tick(long)... upButton");
 
             indexCritterBeltList--;
             if (indexCritterBeltList < 0) {
@@ -52,7 +51,7 @@ public class MenuStateCritterBeltList implements IState {
         }
         //downButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) {
-            System.out.println("MenuStateCritterBeltList.tick(long)... downButton");
+            System.out.println("MenuBeltList.tick(long)... downButton");
 
             indexCritterBeltList++;
             if (indexCritterBeltList > (player.getCritterBeltList().size() - 1)) {
@@ -63,50 +62,49 @@ public class MenuStateCritterBeltList implements IState {
         }
         //bButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_PERIOD)) {
-            System.out.println("MenuStateCritterBeltList.tick(long)... bButton");
+            System.out.println("MenuBeltList.tick(long)... bButton");
 
             ///////////////////////////////
             if (handler.getStateManager().getCurrentState() instanceof MenuState) {
                 MenuState menuState = (MenuState)handler.getStateManager().getCurrentState();
                 StateMachine stateMachine = menuState.getStateMachine();
 
-                //pop self (MenuStateCritterBeltList).
+                //pop self (MenuBeltList).
                 stateMachine.pop();
                 //now MenuStateMenu.
             }
             ///////////////////////////////
         }
         //aButton
-        //TODO: pushes MenuStateCritterBeltListAction onto top of MenuState's stateManager.
+        //TODO: pushes MenuBeltListAction onto top of MenuState's stateManager.
         //TODO: !!! pass in xCursor and yCursor (and indexCritterBeltList) as an int[] for Object[] args during enter(Object[]). !!!
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_COMMA)) {
-            System.out.println("MenuStateCritterBeltList.tick(long)... aButton");
+            System.out.println("MenuBeltList.tick(long)... aButton");
+            //for developer (to be removed later).
+            player.getCritterBeltList().get(indexCritterBeltList).consoleOutIVsAndEVs();
 
-            ///////////////////////////////
             if (handler.getStateManager().getCurrentState() instanceof MenuState) {
                 MenuState menuState = (MenuState)handler.getStateManager().getCurrentState();
                 StateMachine stateMachine = menuState.getStateMachine();
                 int widthSpeciesIcon = player.getCritterBeltList().get(indexCritterBeltList).getSpeciesIcon().getWidth();
 
-                int xNewPanel = (25 + widthSpeciesIcon + xOffsetCursor);
+                int xNewPanel = (25 + widthSpeciesIcon + X_OFFSET_CURSOR);
                 ///////////////////////////////////////////////////////////////////////////////
                 //if in top part of the screen, set the new IState's yStart BELOW nameColloquial
                 //if in bottom part of screen, set the new IState's yStart ABOVE nameColloquial.
                 int yNewPanel = (yCursor < (handler.getGame().getWidth() / 3)) ?
-                        (yCursor+5) : (yCursor+5-MenuStateCritterBeltListAction.HEIGHT-20-3);
+                        (yCursor+5) : (yCursor+5- MenuBeltListAction.HEIGHT-20-3);
                 ///////////////////////////////////////////////////////////////////////////////
 
-                int[] cursorPosition = { xNewPanel, yNewPanel };
-                Object[] args = { cursorPosition };
+                int[] cursorPositionAndIndexCritterBeltList = { xNewPanel, yNewPanel, indexCritterBeltList };
+                Object[] args = { cursorPositionAndIndexCritterBeltList };
 
+                ///////////////////////////////////////////////////////////////////////////////
                 stateMachine.push(
-                    stateMachine.getIState("MenuStateCritterBeltListAction"), args
+                    stateMachine.getIState("MenuBeltListAction"), args
                 );
+                ///////////////////////////////////////////////////////////////////////////////
             }
-            ///////////////////////////////
-
-            //for developer (to be removed later).
-            player.getCritterBeltList().get(indexCritterBeltList).consoleOutIVsAndEVs();
         }
     }
 
@@ -152,4 +150,4 @@ public class MenuStateCritterBeltList implements IState {
 
     }
 
-} // **** end MenuStateCritterBeltList class ****
+} // **** end MenuBeltList class ****

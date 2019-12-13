@@ -5,13 +5,12 @@ import main.gfx.Assets;
 import main.utils.FontGrabber;
 import model.entities.Player;
 import model.states.IState;
-import model.states.StateMachine;
 import model.states.menu.MenuState;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-public class MenuStateCritterBeltListAction implements IState {
+public class MenuBeltListAction implements IState {
 
     public static final int WIDTH = 160, HEIGHT = 120;
 
@@ -21,6 +20,7 @@ public class MenuStateCritterBeltListAction implements IState {
 
     private Handler handler;
     private Player player;
+    private int indexCritterBeltList;
 
     private Action currentAction;
 
@@ -30,7 +30,7 @@ public class MenuStateCritterBeltListAction implements IState {
     //is relative to the current Action (the currentAction).
     private int xCursor, yCursor;
 
-    public MenuStateCritterBeltListAction(Handler handler, Player player) {
+    public MenuBeltListAction(Handler handler, Player player) {
         this.handler = handler;
         this.player = player;
 
@@ -38,7 +38,7 @@ public class MenuStateCritterBeltListAction implements IState {
         yOffsetCursor = 10;
 
         currentAction = Action.STAT;
-    } // **** end MenuStateCritterBeltListAction(Handler, Player) constructor ****
+    } // **** end MenuBeltListAction(Handler, Player) constructor ****
 
     private void updateCursorPosition() {
         xCursor = xOffsetStart + xOffsetCursor;
@@ -49,7 +49,7 @@ public class MenuStateCritterBeltListAction implements IState {
     public void tick(long timeElapsed) {
         //upButton
         if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {
-            System.out.println("MenuStateCritterBeltListAction.tick(long)... upButton");
+            System.out.println("MenuBeltListAction.tick(long)... upButton");
 
             if ((currentAction.ordinal() - 1) >= 0) {
                 currentAction = Action.values()[(currentAction.ordinal() - 1)];
@@ -61,7 +61,7 @@ public class MenuStateCritterBeltListAction implements IState {
         }
         //downButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) {
-            System.out.println("MenuStateCritterBeltListAction.tick(long)... downButton");
+            System.out.println("MenuBeltListAction.tick(long)... downButton");
 
             if ((currentAction.ordinal() + 1) <= (Action.values().length - 1)) {
                 currentAction = Action.values()[(currentAction.ordinal() + 1)];
@@ -73,24 +73,48 @@ public class MenuStateCritterBeltListAction implements IState {
         }
         //bButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_PERIOD)) {
-            System.out.println("MenuStateCritterBeltListAction.tick(long)... bButton");
+            System.out.println("MenuBeltListAction.tick(long)... bButton");
 
             ///////////////////////////////
             if (handler.getStateManager().getCurrentState() instanceof MenuState) {
                 MenuState menuState = (MenuState) handler.getStateManager().getCurrentState();
-                StateMachine stateMachine = menuState.getStateMachine();
-
-                //pop self (MenuStateCritterBeltListAction).
-                stateMachine.pop();
-                //now MenuStateCritterBeltList.
+                //pop self (MenuBeltListAction).
+                menuState.getStateMachine().pop();
+                //now MenuBeltList.
             }
             ///////////////////////////////
         }
         //aButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_COMMA)) {
-            System.out.println("MenuStateCritterBeltListAction.tick(long)... aButton");
-
+            System.out.println("MenuBeltListAction.tick(long)... aButton");
             System.out.println("currentAction: " + currentAction.toString() + ".");
+
+            MenuState menuState = (MenuState)handler.getStateManager().getIState("MenuState");
+            Object[] args = { indexCritterBeltList };
+            switch (currentAction) {
+                case STAT:
+                    MenuBeltListActionStat menuBeltListActionStat = (MenuBeltListActionStat)menuState.getStateMachine().getIState("MenuBeltListActionStat");
+                    ///////////////////////////////
+                    menuState.getStateMachine().push( menuBeltListActionStat, args );
+                    ///////////////////////////////
+                    break;
+                case SWAP:
+                    MenuBeltListActionSwap menuBeltListActionSwap = (MenuBeltListActionSwap)menuState.getStateMachine().getIState("MenuBeltListActionSwap");
+                    ///////////////////////////////
+                    menuState.getStateMachine().push( menuBeltListActionSwap, args );
+                    ///////////////////////////////
+                    break;
+                case CANCEL:
+                    ///////////////////////////////
+                    //pop self (MenuBeltListAction).
+                    menuState.getStateMachine().pop();
+                    //now MenuBeltList.
+                    ///////////////////////////////
+                    break;
+                default:
+                    System.out.println("MenuBeltListAction.tick(long)... aButton's switch(currentAction) construct's default block.");
+                    break;
+            }
         }
     }
 
@@ -98,7 +122,7 @@ public class MenuStateCritterBeltListAction implements IState {
     public void render(Graphics g) {
         MenuState menuState = (MenuState)handler.getStateManager().getIState("MenuState");
         //re-draw the IState below this one as background.
-        menuState.getStateMachine().getIState("MenuStateCritterBeltList").render(g);
+        menuState.getStateMachine().getIState("MenuBeltList").render(g);
 
         //PANEL
         g.setColor(Color.YELLOW);
@@ -123,10 +147,11 @@ public class MenuStateCritterBeltListAction implements IState {
     public void enter(Object[] args) {
         if (args != null) {
             if (args[0] instanceof int[]) {
-                int[] offsetPosition = (int[])args[0];
+                int[] cursorPositionAndIndexCritterBeltList = (int[])args[0];
 
-                xOffsetStart = offsetPosition[0];
-                yOffsetStart = offsetPosition[1];
+                xOffsetStart = cursorPositionAndIndexCritterBeltList[0];
+                yOffsetStart = cursorPositionAndIndexCritterBeltList[1];
+                indexCritterBeltList = cursorPositionAndIndexCritterBeltList[2];
 
                 updateCursorPosition();
             }
@@ -138,4 +163,4 @@ public class MenuStateCritterBeltListAction implements IState {
 
     }
 
-} // **** end MenuStateCritterBeltListAction class ****
+} // **** end MenuBeltListAction class ****

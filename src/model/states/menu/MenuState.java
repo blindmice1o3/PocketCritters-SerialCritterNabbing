@@ -4,8 +4,10 @@ import main.Handler;
 import model.entities.Player;
 import model.states.IState;
 import model.states.StateMachine;
-import model.states.menu.critter_belt_list.MenuStateCritterBeltList;
-import model.states.menu.critter_belt_list.MenuStateCritterBeltListAction;
+import model.states.menu.critter_belt_list.MenuBeltList;
+import model.states.menu.critter_belt_list.MenuBeltListAction;
+import model.states.menu.critter_belt_list.MenuBeltListActionStat;
+import model.states.menu.critter_belt_list.MenuBeltListActionSwap;
 
 import java.awt.*;
 
@@ -28,8 +30,10 @@ public class MenuState implements IState {
 
         stateMachine.addIStateToCollection("MenuStateMenu", new MenuStateMenu(handler, player));
         stateMachine.addIStateToCollection("MenuStateCritterDex", new MenuStateCritterDex(handler, player));
-        stateMachine.addIStateToCollection("MenuStateCritterBeltList", new MenuStateCritterBeltList(handler, player));
-        stateMachine.addIStateToCollection("MenuStateCritterBeltListAction", new MenuStateCritterBeltListAction(handler, player));
+        stateMachine.addIStateToCollection("MenuBeltList", new MenuBeltList(handler, player));
+        stateMachine.addIStateToCollection("MenuBeltListAction", new MenuBeltListAction(handler, player));
+        stateMachine.addIStateToCollection("MenuBeltListActionStat", new MenuBeltListActionStat(handler, player));
+        stateMachine.addIStateToCollection("MenuBeltListActionSwap", new MenuBeltListActionSwap(handler, player));
         stateMachine.addIStateToCollection("MenuStateItemList", new MenuStateItemList(handler, player));
         stateMachine.addIStateToCollection("MenuStatePlayerStats", new MenuStatePlayerStats(handler, player));
         stateMachine.addIStateToCollection("MenuStateSave", new MenuStateSave(handler, player));

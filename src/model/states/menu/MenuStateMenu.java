@@ -12,7 +12,7 @@ import java.awt.event.KeyEvent;
 
 public class MenuStateMenu implements IState {
 
-    private String[] menuList = { "MenuStateCritterDex", "MenuStateCritterBeltList",
+    private String[] menuList = { "MenuStateCritterDex", "MenuBeltList",
             "MenuStateItemList", "MenuStatePlayerStats",
             "MenuStateSave", "MenuStateLoad", "MenuStateExit" };
     //SWITCHING MenuStateOption for MenuStateLoad for now.
@@ -109,7 +109,7 @@ public class MenuStateMenu implements IState {
         //CURSOR
         if (menuList[indexMenu].equals("MenuStateCritterDex")) {
             g.drawImage(Assets.cursorSprite, 345, 70, 7 * 4, 7 * 4, null);
-        } else if (menuList[indexMenu].equals("MenuStateCritterBeltList")) {
+        } else if (menuList[indexMenu].equals("MenuBeltList")) {
             g.drawImage(Assets.cursorSprite, 345, 137, 7 * 4, 7 * 4, null);
         } else if (menuList[indexMenu].equals("MenuStateItemList")) {
             g.drawImage(Assets.cursorSprite, 345, 204, 7 * 4, 7 * 4, null);

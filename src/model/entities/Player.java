@@ -567,4 +567,6 @@ public class Player
 
     public ArrayList<Critter> getCritterBeltList() { return critterBeltList; }
 
+    public void setCritterBeltList(ArrayList<Critter> critterBeltList) { this.critterBeltList = critterBeltList; }
+
 } // **** end model.entities.Player class ****
