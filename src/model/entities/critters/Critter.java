@@ -52,6 +52,8 @@ public class Critter {
     DETERMINATION OF STATS:
     hp =        ( ((((base + iv) * 2) + (sqrt(ev) / 4)) * level) / 100 ) + level + 10
     otherStat = ( ((((base + iv) * 2) + (sqrt(ev) / 4)) * level) / 100 ) + 5
+    damage = ((((((2 * Level) / 5) + 2) * Power  * (A/D)) / 50) + 2) * Modifier
+        Modifier == Targets * Weather * Badge * Critical * random * STAB * Type * Burn * other.
     */
 
     public Critter(Handler handler, Species species, int level) {
@@ -88,6 +90,14 @@ public class Critter {
         //TODO: should NOT be solo based on hpBase (should use equation that factors in hpIV).
         hpCurrent = (int)species.hpBase;
     } // **** end Critter(Handler, Species, int) constructor ****
+
+    public int calculateDamage(int power, int opponentDefense) {
+        //TODO: currently using attackBase and the opponentDefense is defenseBase... should be attackDerived and defenseDerived (also no Modifier being multipled)!!!
+        int damage = ((((((2 * level) / 5) + 2) * power  * (species.getAttackBase()/opponentDefense)) / 50) + 2);
+        //TODO: everything before + (* Modifier)
+        //Modifier == Targets * Weather * Badge * Critical * random * STAB * Type * Burn * other.
+        return damage;
+    }
 
     public void consoleOutIVsAndEVs() {
         System.out.println(nameColloquial + "'s attackIV: " + attackIV + ".");

@@ -2,17 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fb96119b-76aa-4531-8c73-0e06b445031b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/entities/critters/Critter.java" afterPath="$PROJECT_DIR$/src/model/entities/critters/Critter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/entities/critters/moves/MoveModule.java" afterPath="$PROJECT_DIR$/src/model/entities/critters/moves/MoveModule.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/states/battle/BattleState.java" afterPath="$PROJECT_DIR$/src/model/states/battle/BattleState.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/states/battle/BattleStateCritterBeltList.java" afterPath="$PROJECT_DIR$/src/model/states/battle/BattleStateCritterBeltList.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/states/battle/BattleStateFight.java" afterPath="$PROJECT_DIR$/src/model/states/battle/BattleStateFight.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/states/battle/BattleStateIntro.java" afterPath="$PROJECT_DIR$/src/model/states/battle/BattleStateIntro.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/states/battle/BattleStateItemList.java" afterPath="$PROJECT_DIR$/src/model/states/battle/BattleStateItemList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/states/battle/BattleStateMenu.java" afterPath="$PROJECT_DIR$/src/model/states/battle/BattleStateMenu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/states/battle/BattleStateOutro.java" afterPath="$PROJECT_DIR$/src/model/states/battle/BattleStateOutro.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/states/battle/BattleStateRun.java" afterPath="$PROJECT_DIR$/src/model/states/battle/BattleStateRun.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/states/menu/critter_belt_list/MenuBeltListActionSummary.java" afterPath="$PROJECT_DIR$/src/model/states/menu/critter_belt_list/MenuBeltListActionSummary.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,6 +26,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="Critter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/entities/critters/Critter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="BattleStateIntro.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/states/battle/BattleStateIntro.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -47,8 +49,8 @@
       <file leaf-file-name="BattleStateMenu.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/states/battle/BattleStateMenu.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="42" column="8" lean-forward="false" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
+            <state relative-caret-position="306">
+              <caret line="97" column="38" lean-forward="false" selection-start-line="97" selection-start-column="38" selection-end-line="97" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -57,8 +59,8 @@
       <file leaf-file-name="BattleStateFight.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/model/states/battle/BattleStateFight.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="128" column="70" lean-forward="false" selection-start-line="128" selection-start-column="70" selection-end-line="128" selection-end-column="70" />
+            <state relative-caret-position="119">
+              <caret line="126" column="0" lean-forward="true" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -77,12 +79,9 @@
       <file leaf-file-name="MoveModule.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/entities/critters/moves/MoveModule.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="108" column="12" lean-forward="false" selection-start-line="108" selection-start-column="12" selection-end-line="108" selection-end-column="24" />
-              <folding>
-                <element signature="e#5540#5541#0" expanded="true" />
-                <element signature="e#5575#5576#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="119">
+              <caret line="120" column="27" lean-forward="false" selection-start-line="120" selection-start-column="27" selection-end-line="120" selection-end-column="27" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -153,7 +152,6 @@
         <option value="$PROJECT_DIR$/src/model/states/menu/critter_belt_list/MenuBeltListAction.java" />
         <option value="$PROJECT_DIR$/src/model/states/menu/critter_belt_list/MenuBeltListActionSwap.java" />
         <option value="$PROJECT_DIR$/src/model/entities/Player.java" />
-        <option value="$PROJECT_DIR$/src/model/entities/critters/Critter.java" />
         <option value="$PROJECT_DIR$/src/model/states/battle/BattleState.java" />
         <option value="$PROJECT_DIR$/src/model/states/battle/BattleStateIntro.java" />
         <option value="$PROJECT_DIR$/src/model/states/battle/BattleStateMenu.java" />
@@ -163,6 +161,7 @@
         <option value="$PROJECT_DIR$/src/model/states/battle/BattleStateOutro.java" />
         <option value="$PROJECT_DIR$/src/model/states/menu/critter_belt_list/MenuBeltListActionSummary.java" />
         <option value="$PROJECT_DIR$/src/model/entities/critters/moves/MoveModule.java" />
+        <option value="$PROJECT_DIR$/src/model/entities/critters/Critter.java" />
         <option value="$PROJECT_DIR$/src/model/states/battle/BattleStateFight.java" />
       </list>
     </option>
@@ -554,7 +553,7 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4379085" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.78594774" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5114379" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -880,6 +879,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="113" column="43" lean-forward="false" selection-start-line="113" selection-start-column="43" selection-end-line="113" selection-end-column="43" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -896,16 +896,6 @@
         <state relative-caret-position="986">
           <caret line="80" column="47" lean-forward="false" selection-start-line="80" selection-start-column="47" selection-end-line="80" selection-end-column="47" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/entities/critters/Critter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5372">
-          <caret line="331" column="8" lean-forward="false" selection-start-line="331" selection-start-column="8" selection-end-line="331" selection-end-column="8" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -957,14 +947,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/states/battle/BattleStateMenu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="42" column="8" lean-forward="false" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/states/menu/critter_belt_list/MenuBeltListActionSummary.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -975,19 +957,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/entities/critters/moves/MoveModule.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="108" column="12" lean-forward="false" selection-start-line="108" selection-start-column="12" selection-end-line="108" selection-end-column="24" />
-          <folding>
-            <element signature="e#5540#5541#0" expanded="true" />
-            <element signature="e#5575#5576#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="119">
+          <caret line="120" column="27" lean-forward="false" selection-start-line="120" selection-start-column="27" selection-end-line="120" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/entities/critters/Critter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/states/battle/BattleStateMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="97" column="38" lean-forward="false" selection-start-line="97" selection-start-column="38" selection-end-line="97" selection-end-column="38" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/states/battle/BattleStateFight.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="128" column="70" lean-forward="false" selection-start-line="128" selection-start-column="70" selection-end-line="128" selection-end-column="70" />
+        <state relative-caret-position="119">
+          <caret line="126" column="0" lean-forward="true" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
           <folding />
         </state>
       </provider>

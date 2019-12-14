@@ -53,8 +53,9 @@ public class BattleStateFight implements IState {
 
     @Override
     public void tick(long timeElapsed) {
-        System.out.println("BattleStateFight.tick()");
+        //System.out.println("BattleStateFight.tick()");
 
+        Critter critterOfOpponent = ((BattleState)handler.getStateManager().getIState("BattleState")).getCritterOfOpponent();
         Critter critterOfPlayer = ((BattleState)handler.getStateManager().getIState("BattleState")).getCritterOfPlayer();
         //UP
         if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {
@@ -95,6 +96,13 @@ public class BattleStateFight implements IState {
             MoveModule moveModule = critterOfPlayer.getMoveModule();
             int idMove = moveModule.getMoves()[index];
             System.out.println("execute move: " + moveModule.lookUpMove(idMove));
+
+            int power = moveModule.lookUpMove(idMove).getPower();
+            int opponentDefense = critterOfOpponent.getSpecies().getDefenseBase();
+            int damageDerived = critterOfPlayer.calculateDamage(power, opponentDefense);
+            System.out.println(critterOfPlayer.getNameColloquial() + "'s " +
+                    moveModule.lookUpMove(idMove).toString() + " will do: " + damageDerived +
+                    " damage to " + critterOfOpponent.getNameColloquial() + ".");
         }
         //bButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_PERIOD)) {

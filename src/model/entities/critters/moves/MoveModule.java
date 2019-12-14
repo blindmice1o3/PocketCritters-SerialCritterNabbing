@@ -85,8 +85,10 @@ public class MoveModule {
         TRI_ATTACK(161, Critter.Type.NORMAL, Category.SPECIAL, 10, 80, 100, 0),
         WATER_GUN(55, Critter.Type.WATER, Category.SPECIAL, 25, 40, 100, 0),
         WHIRLWIND(18, Critter.Type.NORMAL, Category.STATUS, 20, 0, 85, 0),
+        //////////////////////////////////////////////////////////////////////////
         QUICK_ATTACK(98, Critter.Type.NORMAL, Category.PHYSICAL, 30, 40, 100, +1),
         TACKLE(33, Critter.Type.NORMAL, Category.PHYSICAL, 35, 35, 95, 0);
+        //////////////////////////////////////////////////////////////////////////
 
         private final int id, priority;
         private final Critter.Type type;
@@ -108,25 +110,21 @@ public class MoveModule {
         public Critter.Type getType() {
             return type;
         }
+
+        public int getPower() { return power; }
     }
 
     private Handler handler;
 
-    //stores the specific Move-value in position 1-4.
+    //stores the idMove in index 0-3.
     private int[] moves;
-    //private int idMove1, idMove2, idMove3, idMove4;
-    //TODO: track pp for each of the 4 moves.
+    //stores the ppCurrent in index 0-3.
     private int[] ppMoves;
-    //private int ppMove1, ppMove2, ppMove3, ppMove4;
 
     public MoveModule(Handler handler) {
         this.handler = handler;
 
-        //for now, everyone starts with TACKLE and QUICK_ATTACK (and positions 3 and 4 are suppose to be "null"/unassigned).
-        //idMove1 = 33;
-        //idMove2 = 98;
-        //idMove3 = 0;
-        //idMove4 = 0;
+        //for now, everyone starts with TACKLE and QUICK_ATTACK (and positions 3 and 4 are suppose to be "null"/unassigned/default is 0).
         moves = new int[4];
         moves[0] = 33;
         moves[1] = 98;
