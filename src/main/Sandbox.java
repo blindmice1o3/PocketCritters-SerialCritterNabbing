@@ -29,6 +29,9 @@ public class Sandbox {
         String formattedString = String.format("%05d", counter);
         System.out.println(formattedString);
 
+        int sqrtOf9 = (int)Math.sqrt(9);
+        System.out.println("square root of 9: " + sqrtOf9);
+
         /*
         //Hopefully creating a NON-null File object that will be overwritten from Team Rocket to hard-coded RGB world map.
         File file = new File("/res/throwAwayImage.png");

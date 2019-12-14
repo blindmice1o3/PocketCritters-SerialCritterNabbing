@@ -4,7 +4,7 @@ import main.Handler;
 import main.utils.FontGrabber;
 import model.entities.Player;
 import model.entities.critters.Critter;
-import model.entities.critters.moves.MoveModule;
+import model.entities.critters.moves.MovesModule;
 import model.states.IState;
 import model.states.StateMachine;
 import model.states.menu.MenuState;
@@ -112,7 +112,7 @@ public class MenuBeltListActionSummary implements IState {
                 String level = ":L" + critter.getLevel();
                 FontGrabber.renderString(g, level, xOffset+(xHalfScreen/2), yOffset+20, 20, 20);
                 //INSERT hp bar image
-                String hpCurrentAndMax = critter.getHpCurrent() + "/" + critter.getSpecies().getHpBase();
+                String hpCurrentAndMax = critter.getHpEffectiveCurrent() + "/" + critter.getSpecies().getHpBase();
                 int x = handler.getGame().getWidth()-(hpCurrentAndMax.length() * 20)-5;
                 FontGrabber.renderString(g, hpCurrentAndMax, x, yOffset+50, 20, 20);
                 String status = "STATUS/" + critter.getStatus().toString();
@@ -207,16 +207,16 @@ public class MenuBeltListActionSummary implements IState {
                 xOffset += 20;
                 x = handler.getGame().getWidth()-5-5-(8 * 20);
 
-                MoveModule moveModule = critter.getMoveModule();
+                MovesModule movesModule = critter.getMovesModule();
                 String nameMove = "-dash";
                 String ppInfoMove = "_underline_underline";
-                int[] moves = moveModule.getMoves();
-                int[] ppMoves = moveModule.getPpMoves();
+                int[] moves = movesModule.getMoves();
+                int[] ppMoves = movesModule.getPpMoves();
                 for (int i = 0; i < moves.length; i++) {
                     if (moves[i] != 0) {
-                        nameMove = moveModule.lookUpMove(moves[i]).toString();
+                        nameMove = movesModule.lookUpMove(moves[i]).toString();
                         ppInfoMove = "pp " + ppMoves[i] + "/" +
-                                moveModule.lookUpMove(moves[i]).getPpBase();
+                                movesModule.lookUpMove(moves[i]).getPpBase();
 
                         FontGrabber.renderString(g, nameMove, xOffset, yOffset, 20, 20);
                         yOffset += 20;
@@ -225,10 +225,10 @@ public class MenuBeltListActionSummary implements IState {
                     }
                 }
                 /*
-                if (moveModule.getIdMove1() != 0) {
-                    nameMove1 = moveModule.lookUpMove(moveModule.getIdMove1()).toString();
-                    ppInfoMove1 = "pp " + moveModule.getPpMove1() + "/" +
-                            moveModule.lookUpMove(moveModule.getIdMove1()).getPpBase();
+                if (movesModule.getIdMove1() != 0) {
+                    nameMove1 = movesModule.lookUpMove(movesModule.getIdMove1()).toString();
+                    ppInfoMove1 = "pp " + movesModule.getPpMove1() + "/" +
+                            movesModule.lookUpMove(movesModule.getIdMove1()).getPpBase();
 
                 }
                 FontGrabber.renderString(g, nameMove1, xOffset, yOffset, 20, 20);
@@ -238,10 +238,10 @@ public class MenuBeltListActionSummary implements IState {
 
                 String nameMove2 = "-";
                 String ppInfoMove2 = "__";
-                if (moveModule.getIdMove2() != 0) {
-                    nameMove2 = moveModule.lookUpMove(moveModule.getIdMove2()).toString();
-                    ppInfoMove2 = "pp " + moveModule.getPpMove2() + "/" +
-                            moveModule.lookUpMove(moveModule.getIdMove2()).getPpBase();
+                if (movesModule.getIdMove2() != 0) {
+                    nameMove2 = movesModule.lookUpMove(movesModule.getIdMove2()).toString();
+                    ppInfoMove2 = "pp " + movesModule.getPpMove2() + "/" +
+                            movesModule.lookUpMove(movesModule.getIdMove2()).getPpBase();
                 }
                 FontGrabber.renderString(g, nameMove2, xOffset, yOffset, 20, 20);
                 yOffset += 20;
@@ -250,10 +250,10 @@ public class MenuBeltListActionSummary implements IState {
 
                 String nameMove3 = "-";
                 String ppInfoMove3 = "__";
-                if (moveModule.getIdMove3() != 0) {
-                    nameMove3 = moveModule.lookUpMove(moveModule.getIdMove3()).toString();
-                    ppInfoMove3 = "pp " + moveModule.getPpMove3() + "/" +
-                            moveModule.lookUpMove(moveModule.getIdMove3()).getPpBase();
+                if (movesModule.getIdMove3() != 0) {
+                    nameMove3 = movesModule.lookUpMove(movesModule.getIdMove3()).toString();
+                    ppInfoMove3 = "pp " + movesModule.getPpMove3() + "/" +
+                            movesModule.lookUpMove(movesModule.getIdMove3()).getPpBase();
                 }
                 FontGrabber.renderString(g, nameMove3, xOffset, yOffset, 20, 20);
                 yOffset += 20;
@@ -262,10 +262,10 @@ public class MenuBeltListActionSummary implements IState {
 
                 String nameMove4 = "-";
                 String ppInfoMove4 = "__";
-                if (moveModule.getIdMove4() != 0) {
-                    nameMove4 = moveModule.lookUpMove(moveModule.getIdMove4()).toString();
-                    ppInfoMove4 = "pp " + moveModule.getPpMove4() + "/" +
-                            moveModule.lookUpMove(moveModule.getIdMove4()).getPpBase();
+                if (movesModule.getIdMove4() != 0) {
+                    nameMove4 = movesModule.lookUpMove(movesModule.getIdMove4()).toString();
+                    ppInfoMove4 = "pp " + movesModule.getPpMove4() + "/" +
+                            movesModule.lookUpMove(movesModule.getIdMove4()).getPpBase();
                 }
                 FontGrabber.renderString(g, nameMove4, xOffset, yOffset, 20, 20);
                 yOffset += 20;

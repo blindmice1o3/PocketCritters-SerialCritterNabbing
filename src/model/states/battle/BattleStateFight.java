@@ -5,7 +5,7 @@ import main.gfx.Assets;
 import main.utils.FontGrabber;
 import model.entities.Player;
 import model.entities.critters.Critter;
-import model.entities.critters.moves.MoveModule;
+import model.entities.critters.moves.MovesModule;
 import model.states.IState;
 import model.states.StateMachine;
 
@@ -64,7 +64,7 @@ public class BattleStateFight implements IState {
             index--;
 
             if (index < 0) {
-                index = (critterOfPlayer.getMoveModule().getNumberMovesKnown() - 1);
+                index = (critterOfPlayer.getMovesModule().getNumberMovesKnown() - 1);
             }
 
             updateCursorPosition();
@@ -75,7 +75,7 @@ public class BattleStateFight implements IState {
 
             index++;
 
-            if (index > (critterOfPlayer.getMoveModule().getNumberMovesKnown() - 1)) {
+            if (index > (critterOfPlayer.getMovesModule().getNumberMovesKnown() - 1)) {
                 index = 0;
             }
 
@@ -93,15 +93,15 @@ public class BattleStateFight implements IState {
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_COMMA)) {
             System.out.println("BattleStateFight.tick()... aButton");
 
-            MoveModule moveModule = critterOfPlayer.getMoveModule();
-            int idMove = moveModule.getMoves()[index];
-            System.out.println("execute move: " + moveModule.lookUpMove(idMove));
+            MovesModule movesModule = critterOfPlayer.getMovesModule();
+            int idMove = movesModule.getMoves()[index];
+            System.out.println("execute move: " + movesModule.lookUpMove(idMove));
 
-            int power = moveModule.lookUpMove(idMove).getPower();
+            int power = movesModule.lookUpMove(idMove).getPower();
             int opponentDefense = critterOfOpponent.getSpecies().getDefenseBase();
             int damageDerived = critterOfPlayer.calculateDamage(power, opponentDefense);
             System.out.println(critterOfPlayer.getNameColloquial() + "'s " +
-                    moveModule.lookUpMove(idMove).toString() + " will do: " + damageDerived +
+                    movesModule.lookUpMove(idMove).toString() + " will do: " + damageDerived +
                     " damage to " + critterOfOpponent.getNameColloquial() + ".");
         }
         //bButton
@@ -126,22 +126,22 @@ public class BattleStateFight implements IState {
                 handler.getGame().getHeight(), 161, 146, 161+159, 146+145, null);
 
         Critter critterOfPlayer = ((BattleState)handler.getStateManager().getIState("BattleState")).getCritterOfPlayer();
-        MoveModule moveModule = critterOfPlayer.getMoveModule();
+        MovesModule movesModule = critterOfPlayer.getMovesModule();
 
         String nameMove = null;
         //CURRENTLY SELECTED MOVE (and its pp)
-        if (moveModule.getMoves()[index] != 0) {
-            nameMove = moveModule.lookUpMove(moveModule.getMoves()[index]).getType().toString();
+        if (movesModule.getMoves()[index] != 0) {
+            nameMove = movesModule.lookUpMove(movesModule.getMoves()[index]).getType().toString();
             FontGrabber.renderString(g, nameMove, 60, 240, 30, 30);
-            String ppCurrentAndBase = moveModule.getPpMoves()[index] + "/" + moveModule.lookUpMove(moveModule.getMoves()[index]).getPpBase();
+            String ppCurrentAndBase = movesModule.getPpMoves()[index] + "/" + movesModule.lookUpMove(movesModule.getMoves()[index]).getPpBase();
             FontGrabber.renderString(g, ppCurrentAndBase, 168, 270, 30, 30);
         }
 
         //LIST OF MOVES
         int xOffset = xCursor + 35;
         int yOffset = 330;
-        for (int i = 0; i < moveModule.getNumberMovesKnown(); i++) {
-            nameMove = moveModule.lookUpMove( moveModule.getMoves()[i] ).toString();
+        for (int i = 0; i < movesModule.getNumberMovesKnown(); i++) {
+            nameMove = movesModule.lookUpMove( movesModule.getMoves()[i] ).toString();
             FontGrabber.renderString(g, nameMove, xOffset, yOffset, 30, 30);
             yOffset += 30;
         }

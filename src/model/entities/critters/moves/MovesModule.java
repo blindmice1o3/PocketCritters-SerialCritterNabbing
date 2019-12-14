@@ -3,7 +3,7 @@ package model.entities.critters.moves;
 import main.Handler;
 import model.entities.critters.Critter;
 
-public class MoveModule {
+public class MovesModule {
 
     public enum Category {
         PHYSICAL, SPECIAL, STATUS;
@@ -121,7 +121,7 @@ public class MoveModule {
     //stores the ppCurrent in index 0-3.
     private int[] ppMoves;
 
-    public MoveModule(Handler handler) {
+    public MovesModule(Handler handler) {
         this.handler = handler;
 
         //for now, everyone starts with TACKLE and QUICK_ATTACK (and positions 3 and 4 are suppose to be "null"/unassigned/default is 0).
@@ -135,7 +135,7 @@ public class MoveModule {
                 ppMoves[i] = lookUpMove(moves[i]).getPpBase();
             }
         }
-    } // *** end MoveModule(Handler) constructor
+    } // *** end MovesModule(Handler) constructor
 
     public int getNumberMovesKnown() {
         int numberMovesKnown = 0;
@@ -181,4 +181,4 @@ public class MoveModule {
         return null;
     }
 
-} // **** end MoveModule class ****
+} // **** end MovesModule class ****

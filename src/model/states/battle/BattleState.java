@@ -17,6 +17,7 @@ public class BattleState implements IState {
 
     private Critter critterOfOpponent;
     private Critter critterOfPlayer;
+    //TODO: each Critter have In-battle stats: (1) evasion, (2) accuracy.
 
     public BattleState(Handler handler, Player player) {
         this.handler = handler;

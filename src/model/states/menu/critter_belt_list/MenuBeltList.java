@@ -4,6 +4,7 @@ import main.Handler;
 import main.gfx.Assets;
 import main.utils.FontGrabber;
 import model.entities.Player;
+import model.entities.critters.Critter;
 import model.states.IState;
 import model.states.StateMachine;
 import model.states.menu.MenuState;
@@ -81,7 +82,8 @@ public class MenuBeltList implements IState {
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_COMMA)) {
             System.out.println("MenuBeltList.tick(long)... aButton");
             //for developer (to be removed later).
-            player.getCritterBeltList().get(indexCritterBeltList).consoleOutIVsAndEVs();
+            Critter critter = player.getCritterBeltList().get(indexCritterBeltList);
+            critter.getStatsModule().consoleOutIVsAndEVs( critter.getNameColloquial() );
 
             if (handler.getStateManager().getCurrentState() instanceof MenuState) {
                 MenuState menuState = (MenuState)handler.getStateManager().getCurrentState();
@@ -124,7 +126,7 @@ public class MenuBeltList implements IState {
             speciesIcon = player.getCritterBeltList().get(i).getSpeciesIcon();
             String name = player.getCritterBeltList().get(i).getNameColloquial();
             String level = String.format("%02d", player.getCritterBeltList().get(i).getLevel());
-            String hpCurrent = String.format("%3d", player.getCritterBeltList().get(i).getHpCurrent());
+            String hpCurrent = String.format("%3d", player.getCritterBeltList().get(i).getHpEffectiveCurrent());
             String hpBase = String.format("%3d", player.getCritterBeltList().get(i).getSpecies().getHpBase());
             ///////////////////////////////
             g.drawImage(speciesIcon, xOffset, yOffset, null);
