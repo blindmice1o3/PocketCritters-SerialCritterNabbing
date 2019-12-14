@@ -2,6 +2,7 @@ package model.states.battle;
 
 import main.Handler;
 import model.entities.Player;
+import model.entities.critters.Critter;
 import model.states.IState;
 import model.states.StateMachine;
 
@@ -14,15 +15,18 @@ public class BattleState implements IState {
 
     private StateMachine stateMachine;
 
+    private Critter opponentCritter;
+
     public BattleState(Handler handler, Player player) {
         this.handler = handler;
         this.player = player;
 
-        stateMachine = new StateMachine(handler);
         initStateMachine();
     } // **** end BattleState(Handler, Player) constructor ****
 
     private void initStateMachine() {
+        stateMachine = new StateMachine(handler);
+
         stateMachine.addIStateToCollection("BattleStateIntro", new BattleStateIntro(handler, player));
         stateMachine.addIStateToCollection("BattleStateMenu", new BattleStateMenu(handler, player));
         stateMachine.addIStateToCollection("BattleStateFight", new BattleStateFight(handler, player));
@@ -46,7 +50,12 @@ public class BattleState implements IState {
 
     @Override
     public void enter(Object[] args) {
-
+        if (args != null) {
+            if (args[0] instanceof Critter) {
+                opponentCritter = (Critter)args[0];
+                ((BattleStateIntro)stateMachine.getIState("BattleStateIntro")).setOpponentCritter(opponentCritter);
+            }
+        }
     }
 
     @Override

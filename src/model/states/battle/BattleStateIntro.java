@@ -4,6 +4,7 @@ import main.Handler;
 import main.gfx.Assets;
 import main.utils.FontGrabber;
 import model.entities.Player;
+import model.entities.critters.Critter;
 import model.states.IState;
 import model.states.StateMachine;
 
@@ -14,6 +15,8 @@ public class BattleStateIntro implements IState {
 
     private Handler handler;
     private Player player;
+
+    private Critter opponentCritter;
 
     public BattleStateIntro(Handler handler, Player player) {
         this.handler = handler;
@@ -49,8 +52,9 @@ public class BattleStateIntro implements IState {
                 BattleState battleState = (BattleState)handler.getStateManager().getCurrentState();
                 StateMachine stateMachine = battleState.getStateMachine();
 
+                Object[] args = { opponentCritter };
                 stateMachine.push(
-                        stateMachine.getIState("BattleStateMenu"), null
+                        stateMachine.getIState("BattleStateMenu"), args
                 );
             }
             ///////////////////////////////
@@ -66,29 +70,33 @@ public class BattleStateIntro implements IState {
         g.drawImage(Assets.battleStateSpriteSheet, 0, 0, handler.getGame().getWidth(),
                 handler.getGame().getHeight(), 2, 2, 2+159, 2+145, null);
 
-        FontGrabber.renderString(g, "Cannabis", 190, 411, 40, 40);
+        int xOffset = 10;
+        int yOffset = 5;
+        FontGrabber.renderString(g, opponentCritter.getNameColloquial(), xOffset, yOffset, 28, 28);
+        yOffset += 32;
+        xOffset += 110;
+        FontGrabber.renderString(g, ":L" + opponentCritter.getLevel(), xOffset, yOffset, 28, 28);
+        xOffset = (handler.getGame().getWidth() / 2) + 50;
+        yOffset = 5;
+        g.drawImage(opponentCritter.getSpeciesIcon(), xOffset, yOffset,
+                (handler.getGame().getWidth() - xOffset - 5), ((handler.getGame().getHeight() / 3) + 20), null);
 
-        g.drawImage(Assets.fontHashMap.get("6"), 10, 200, 10*4, 10*4, null);
-        g.drawImage(Assets.fontHashMap.get("7"), 50, 200, 10*4, 10*4, null);
-        g.drawImage(Assets.fontHashMap.get("8"), 90, 200, 10*4, 10*4, null);
-        g.drawImage(Assets.fontHashMap.get("M"), 130, 200, 10*4, 10*4, null);
-        g.drawImage(Assets.fontHashMap.get("m"), 170, 200, 10*4, 10*4, null);
-        g.drawImage(Assets.fontHashMap.get("z"), 210, 200, 10*4, 10*4, null);
-        g.drawImage(Assets.fontHashMap.get("C"), 250, 200, 10*4, 10*4, null);
-        g.drawImage(Assets.fontHashMap.get("r"), 290, 200, 10*4, 10*4, null);
-        g.drawImage(Assets.fontHashMap.get("i"), 330, 200, 10*4, 10*4, null);
-        g.drawImage(Assets.fontHashMap.get("t"), 370, 200, 10*4, 10*4, null);
-        g.drawImage(Assets.fontHashMap.get("t"), 410, 200, 10*4, 10*4, null);
-        g.drawImage(Assets.fontHashMap.get("e"), 450, 200, 10*4, 10*4, null);
-        g.drawImage(Assets.fontHashMap.get("r"), 490, 200, 10*4, 10*4, null);
-        g.drawImage(Assets.fontHashMap.get("N"), 530, 200, 10*4, 10*4, null);
-        g.drawImage(Assets.fontHashMap.get("a"), 570, 200, 10*4, 10*4, null);
-        g.drawImage(Assets.fontHashMap.get("b"), 610, 200, 10*4, 10*4, null);
-        g.drawImage(Assets.fontHashMap.get("b"), 650, 200, 10*4, 10*4, null);
-        g.drawImage(Assets.fontHashMap.get("i"), 690, 200, 10*4, 10*4, null);
-        g.drawImage(Assets.fontHashMap.get("i"), 730, 200, 10*4, 10*4, null);
-        g.drawImage(Assets.fontHashMap.get("g"), 770, 200, 10*4, 10*4, null);
+        FontGrabber.renderString(g, opponentCritter.getNameColloquial(), 175, 418, 37, 37);
 
+        int xFirstCritterBall = 360;
+        int yFirstCritterBall = 304;
+        for (int i = 0; i < player.getCritterBeltList().size(); i++) {
+            if (player.getCritterBeltList().get(i).getStatus() == Critter.StatusConditionNonVolatile.OK) {
+                g.drawImage(Assets.critterBallSprite, xFirstCritterBall, yFirstCritterBall, 28, 28, null);
+                xFirstCritterBall += 32;
+            } else {
+                //TODO: get different critter-ball sprite for non-OK Critter instances.
+                g.drawImage(Assets.cursorSprite, xFirstCritterBall, yFirstCritterBall, 28, 28, null);
+                xFirstCritterBall += 32;
+            }
+        }
+
+        /*
         //First critterBallSprite (index == 0).
         g.drawImage(Assets.critterBallSprite, 90*4, 76*4, 7*4, 7*4, null);
         //Second critterBallSprite (index == 1).
@@ -101,6 +109,7 @@ public class BattleStateIntro implements IState {
         //g.drawImage(Assets.critterBallSprite, 122*4, 76*4, 7*4, 7*4, null);
         //Sixth critterBallSprite (index == 5).
         //g.drawImage(Assets.critterBallSprite, 130*4, 76*4, 7*4, 7*4, null);
+        */
     }
 
     @Override
@@ -111,6 +120,12 @@ public class BattleStateIntro implements IState {
     @Override
     public void exit() {
 
+    }
+
+    // GETTERS AND SETTERS
+
+    public void setOpponentCritter(Critter opponentCritter) {
+        this.opponentCritter = opponentCritter;
     }
 
 } // **** end BattleStateIntro ****

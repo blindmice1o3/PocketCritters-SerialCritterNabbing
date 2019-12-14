@@ -3,6 +3,7 @@ package model.states.battle;
 import main.Handler;
 import main.gfx.Assets;
 import model.entities.Player;
+import model.entities.critters.Critter;
 import model.states.IState;
 import model.states.StateMachine;
 
@@ -14,6 +15,8 @@ public class BattleStateRun implements IState {
 
     private Handler handler;
     private Player player;
+
+    private Critter opponentCritter;
 
     public BattleStateRun(Handler handler, Player player) {
         this.handler = handler;
@@ -49,8 +52,9 @@ public class BattleStateRun implements IState {
                 BattleState battleState = (BattleState)handler.getStateManager().getCurrentState();
                 StateMachine stateMachine = battleState.getStateMachine();
 
+                Object[] args = { opponentCritter };
                 stateMachine.push(
-                        stateMachine.getIState("BattleStateOutro"), null
+                        stateMachine.getIState("BattleStateOutro"), args
                 );
             }
             ///////////////////////////////
@@ -115,7 +119,11 @@ public class BattleStateRun implements IState {
 
     @Override
     public void enter(Object[] args) {
-
+        if (args != null) {
+            if (args[0] instanceof Critter) {
+                opponentCritter = (Critter)args[0];
+            }
+        }
     }
 
     @Override

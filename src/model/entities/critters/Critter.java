@@ -127,6 +127,8 @@ public class Critter {
         return species;
     }
 
+    public void setStatus(StatusConditionNonVolatile status) { this.status = status; }
+
     public StatusConditionNonVolatile getStatus() { return status; }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -326,7 +328,8 @@ public class Critter {
         PARALYSIS,
         POISON,
         BADLY_POISONED,
-        SLEEP;
+        SLEEP,
+        FAINTED;
     }
 
     public enum StatusConditionVolatile {

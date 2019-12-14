@@ -78,6 +78,7 @@ public class Player
         critterBeltList.add( new Critter(handler, Critter.Species.SPLASHILIC_TILAPIA, 8) );
         critterBeltList.add( new Critter(handler, Critter.Species.ROCK_GOLEM, 10) );
         critterBeltList.add( new Critter(handler, Critter.Species.COASTAL_GULL, 11) );
+        critterBeltList.get(2).setStatus(Critter.StatusConditionNonVolatile.SLEEP);
         //////////////////////////////////////
         nabberList = new ArrayList<INabber>();
     } // **** end model.entities.Player() constructor ****
@@ -195,10 +196,10 @@ public class Player
 
             //if (r.nextInt(4) < 1) {
             //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-            //Object[] args = { this };
+            Object[] args = { new Critter(handler, Critter.Species.COASTAL_GULL, 6) };
             handler.getStateManager().push(
                     handler.getStateManager().getIState("BattleState"),
-                    null);
+                    args);
             //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
             //}
         }

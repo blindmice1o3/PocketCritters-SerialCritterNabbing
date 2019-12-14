@@ -2,7 +2,9 @@ package model.states.battle;
 
 import main.Handler;
 import main.gfx.Assets;
+import main.utils.FontGrabber;
 import model.entities.Player;
+import model.entities.critters.Critter;
 import model.states.IState;
 import model.states.StateMachine;
 
@@ -13,6 +15,9 @@ public class BattleStateMenu implements IState {
 
     private Handler handler;
     private Player player;
+
+    private Critter opponentCritter;
+    private Critter playerCritterFirst;
 
     private int xIndex, yIndex;
     private String[][] menuMatrix;
@@ -71,8 +76,9 @@ public class BattleStateMenu implements IState {
                 BattleState battleState = (BattleState)handler.getStateManager().getCurrentState();
                 StateMachine stateMachine = battleState.getStateMachine();
 
+                Object[] args = { opponentCritter };
                 stateMachine.push(
-                        stateMachine.getIState(menuMatrix[yIndex][xIndex]), null
+                        stateMachine.getIState(menuMatrix[yIndex][xIndex]), args
                 );
             }
             ////////////////////////////////////////////////////////////
@@ -94,6 +100,31 @@ public class BattleStateMenu implements IState {
                 0, 0, handler.getGame().getWidth(), handler.getGame().getHeight(),
                 161, 2, 161+159, 2+145, null);
 
+        //opponent's critter
+        int xOffset = 10;
+        int yOffset = 5;
+        FontGrabber.renderString(g, opponentCritter.getNameColloquial(), xOffset, yOffset, 28, 28);
+        yOffset += 32;
+        xOffset += 80;
+        FontGrabber.renderString(g, ":L" + opponentCritter.getLevel(), xOffset, yOffset, 24, 24);
+        xOffset = (handler.getGame().getWidth() / 2) + 50;
+        yOffset = 5;
+        g.drawImage(opponentCritter.getSpeciesIcon(), xOffset, yOffset,
+                (handler.getGame().getWidth() - xOffset - 5), ((handler.getGame().getHeight() / 3) + 20), null);
+
+        //player's critter
+        xOffset = ((handler.getGame().getWidth() / 2) - 35);
+        yOffset = 5 + ((handler.getGame().getHeight() / 3) + 20) + 5;
+        FontGrabber.renderString(g, playerCritterFirst.getNameColloquial(), xOffset, yOffset, 28, 28);
+        yOffset += 32;
+        xOffset += 110;
+        FontGrabber.renderString(g, ":L" + playerCritterFirst.getLevel(), xOffset, yOffset, 28, 28);
+        //player's critter's image
+        yOffset = ((handler.getGame().getHeight() / 3) - 30);
+        xOffset = 5;
+        g.drawImage(playerCritterFirst.getSpeciesIcon(), xOffset, yOffset,
+                ((handler.getGame().getWidth() / 2) - 55), ((handler.getGame().getHeight() / 3) + 20), null);
+
         if (menuMatrix[yIndex][xIndex].equals("BattleStateFight")) {
             g.drawImage(Assets.cursorSprite, 291, 423, 7 * 4, 7 * 4, null);
         } else if (menuMatrix[yIndex][xIndex].equals("BattleStateCritterBeltList")) {
@@ -107,7 +138,18 @@ public class BattleStateMenu implements IState {
 
     @Override
     public void enter(Object[] args) {
+        if (args != null) {
+            if (args[0] instanceof Critter) {
+                opponentCritter = (Critter)args[0];
+            }
+        }
 
+        for (int i = 0; i < player.getCritterBeltList().size(); i++) {
+            if (player.getCritterBeltList().get(i).getStatus() != Critter.StatusConditionNonVolatile.FAINTED) {
+                playerCritterFirst = player.getCritterBeltList().get(i);
+                break;
+            }
+        }
     }
 
     @Override
