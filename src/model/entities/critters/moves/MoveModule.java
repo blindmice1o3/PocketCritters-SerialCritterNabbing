@@ -104,38 +104,58 @@ public class MoveModule {
         }
 
         public int getPpBase() { return ppBase; }
+
+        public Critter.Type getType() {
+            return type;
+        }
     }
 
     private Handler handler;
 
     //stores the specific Move-value in position 1-4.
-    private int idMove1, idMove2, idMove3, idMove4;
+    private int[] moves;
+    //private int idMove1, idMove2, idMove3, idMove4;
     //TODO: track pp for each of the 4 moves.
-    private int ppMove1, ppMove2, ppMove3, ppMove4;
+    private int[] ppMoves;
+    //private int ppMove1, ppMove2, ppMove3, ppMove4;
 
     public MoveModule(Handler handler) {
         this.handler = handler;
 
         //for now, everyone starts with TACKLE and QUICK_ATTACK (and positions 3 and 4 are suppose to be "null"/unassigned).
-        idMove1 = 33;
-        idMove2 = 98;
-        idMove3 = 0;
-        idMove4 = 0;
+        //idMove1 = 33;
+        //idMove2 = 98;
+        //idMove3 = 0;
+        //idMove4 = 0;
+        moves = new int[4];
+        moves[0] = 33;
+        moves[1] = 98;
 
-        if (idMove1 != 0) {
-            ppMove1 = lookUpMove(idMove1).getPpBase();
-        }
-        if (idMove2 != 0) {
-            ppMove2 = lookUpMove(idMove2).getPpBase();
-        }
-        if (idMove3 != 0) {
-            ppMove3 = lookUpMove(idMove3).getPpBase();
-        }
-        if (idMove4 != 0) {
-            ppMove4 = lookUpMove(idMove4).getPpBase();
+        ppMoves = new int[4];
+        for (int i = 0; i < moves.length; i++) {
+            if (moves[i] != 0) {
+                ppMoves[i] = lookUpMove(moves[i]).getPpBase();
+            }
         }
     } // *** end MoveModule(Handler) constructor
 
+    public int getNumberMovesKnown() {
+        int numberMovesKnown = 0;
+
+        for (int idMove : moves) {
+            if (idMove != 0) {
+                numberMovesKnown++;
+            }
+        }
+
+        return numberMovesKnown;
+    }
+
+    public int[] getMoves() { return moves; }
+
+    public int[] getPpMoves() { return ppMoves; }
+
+    /*
     public int getIdMove1() { return idMove1; }
 
     public int getIdMove2() { return idMove2; }
@@ -151,6 +171,7 @@ public class MoveModule {
     public int getPpMove3() { return ppMove3; }
 
     public int getPpMove4() { return ppMove4; }
+    */
 
     public Move lookUpMove(int idMove) {
         for (Move move : Move.values()) {

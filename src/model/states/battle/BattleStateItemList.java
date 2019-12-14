@@ -15,8 +15,6 @@ public class BattleStateItemList implements IState {
     private Handler handler;
     private Player player;
 
-    private Critter opponentCritter;
-
     private int index = 0;
 
     public BattleStateItemList(Handler handler, Player player) {
@@ -85,11 +83,7 @@ public class BattleStateItemList implements IState {
 
     @Override
     public void enter(Object[] args) {
-        if (args != null) {
-            if (args[0] instanceof Critter) {
-                opponentCritter = (Critter)args[0];
-            }
-        }
+
     }
 
     @Override

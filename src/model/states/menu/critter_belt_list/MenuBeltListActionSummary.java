@@ -208,9 +208,23 @@ public class MenuBeltListActionSummary implements IState {
                 x = handler.getGame().getWidth()-5-5-(8 * 20);
 
                 MoveModule moveModule = critter.getMoveModule();
+                String nameMove = "-dash";
+                String ppInfoMove = "_underline_underline";
+                int[] moves = moveModule.getMoves();
+                int[] ppMoves = moveModule.getPpMoves();
+                for (int i = 0; i < moves.length; i++) {
+                    if (moves[i] != 0) {
+                        nameMove = moveModule.lookUpMove(moves[i]).toString();
+                        ppInfoMove = "pp " + ppMoves[i] + "/" +
+                                moveModule.lookUpMove(moves[i]).getPpBase();
 
-                String nameMove1 = "-";
-                String ppInfoMove1 = "__";
+                        FontGrabber.renderString(g, nameMove, xOffset, yOffset, 20, 20);
+                        yOffset += 20;
+                        FontGrabber.renderString(g, ppInfoMove, x, yOffset, 20, 20);
+                        yOffset += 20;
+                    }
+                }
+                /*
                 if (moveModule.getIdMove1() != 0) {
                     nameMove1 = moveModule.lookUpMove(moveModule.getIdMove1()).toString();
                     ppInfoMove1 = "pp " + moveModule.getPpMove1() + "/" +
@@ -256,6 +270,7 @@ public class MenuBeltListActionSummary implements IState {
                 FontGrabber.renderString(g, nameMove4, xOffset, yOffset, 20, 20);
                 yOffset += 20;
                 FontGrabber.renderString(g, ppInfoMove4, x, yOffset, 20, 20);
+                */
 
                 break;
             default:

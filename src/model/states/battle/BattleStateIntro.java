@@ -16,8 +16,6 @@ public class BattleStateIntro implements IState {
     private Handler handler;
     private Player player;
 
-    private Critter opponentCritter;
-
     public BattleStateIntro(Handler handler, Player player) {
         this.handler = handler;
         this.player = player;
@@ -52,9 +50,9 @@ public class BattleStateIntro implements IState {
                 BattleState battleState = (BattleState)handler.getStateManager().getCurrentState();
                 StateMachine stateMachine = battleState.getStateMachine();
 
-                Object[] args = { opponentCritter };
+                //Object[] args = {critterOfOpponent};
                 stateMachine.push(
-                        stateMachine.getIState("BattleStateMenu"), args
+                        stateMachine.getIState("BattleStateMenu"), null
                 );
             }
             ///////////////////////////////
@@ -70,18 +68,19 @@ public class BattleStateIntro implements IState {
         g.drawImage(Assets.battleStateSpriteSheet, 0, 0, handler.getGame().getWidth(),
                 handler.getGame().getHeight(), 2, 2, 2+159, 2+145, null);
 
+        Critter critterOfOpponent = ((BattleState)handler.getStateManager().getIState("BattleState")).getCritterOfOpponent();
         int xOffset = 10;
         int yOffset = 5;
-        FontGrabber.renderString(g, opponentCritter.getNameColloquial(), xOffset, yOffset, 28, 28);
+        FontGrabber.renderString(g, critterOfOpponent.getNameColloquial(), xOffset, yOffset, 28, 28);
         yOffset += 32;
         xOffset += 110;
-        FontGrabber.renderString(g, ":L" + opponentCritter.getLevel(), xOffset, yOffset, 28, 28);
+        FontGrabber.renderString(g, ":L" + critterOfOpponent.getLevel(), xOffset, yOffset, 28, 28);
         xOffset = (handler.getGame().getWidth() / 2) + 50;
         yOffset = 5;
-        g.drawImage(opponentCritter.getSpeciesIcon(), xOffset, yOffset,
+        g.drawImage(critterOfOpponent.getSpeciesIcon(), xOffset, yOffset,
                 (handler.getGame().getWidth() - xOffset - 5), ((handler.getGame().getHeight() / 3) + 20), null);
 
-        FontGrabber.renderString(g, opponentCritter.getNameColloquial(), 175, 418, 37, 37);
+        FontGrabber.renderString(g, critterOfOpponent.getNameColloquial(), 175, 418, 37, 37);
 
         int xFirstCritterBall = 360;
         int yFirstCritterBall = 304;
@@ -120,12 +119,6 @@ public class BattleStateIntro implements IState {
     @Override
     public void exit() {
 
-    }
-
-    // GETTERS AND SETTERS
-
-    public void setOpponentCritter(Critter opponentCritter) {
-        this.opponentCritter = opponentCritter;
     }
 
 } // **** end BattleStateIntro ****

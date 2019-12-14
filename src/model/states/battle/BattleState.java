@@ -15,11 +15,14 @@ public class BattleState implements IState {
 
     private StateMachine stateMachine;
 
-    private Critter opponentCritter;
+    private Critter critterOfOpponent;
+    private Critter critterOfPlayer;
 
     public BattleState(Handler handler, Player player) {
         this.handler = handler;
         this.player = player;
+
+        critterOfOpponent = new Critter(handler, Critter.Species.COASTAL_GULL, 6);
 
         initStateMachine();
     } // **** end BattleState(Handler, Player) constructor ****
@@ -50,10 +53,18 @@ public class BattleState implements IState {
 
     @Override
     public void enter(Object[] args) {
+        //initialize critterOfOpponent (the ACTUAL one [not a dummy/filler]).
         if (args != null) {
             if (args[0] instanceof Critter) {
-                opponentCritter = (Critter)args[0];
-                ((BattleStateIntro)stateMachine.getIState("BattleStateIntro")).setOpponentCritter(opponentCritter);
+                critterOfOpponent = (Critter)args[0];
+            }
+        }
+
+        //initialize critterOfPlayer (find FIRST Critter that is NOT FAINTED and SET it to be critterOfPlayer).
+        for (int i = 0; i < player.getCritterBeltList().size(); i++) {
+            if (player.getCritterBeltList().get(i).getStatus() != Critter.StatusConditionNonVolatile.FAINTED) {
+                critterOfPlayer = player.getCritterBeltList().get(i);
+                break;
             }
         }
     }
@@ -64,6 +75,12 @@ public class BattleState implements IState {
     }
 
     // GETTERS AND SETTERS
+
+    public Critter getCritterOfOpponent() { return critterOfOpponent; }
+
+    public Critter getCritterOfPlayer() { return critterOfPlayer; }
+
+    public void setCritterOfPlayer(Critter critterOfPlayer) { this.critterOfPlayer = critterOfPlayer; }
 
     public StateMachine getStateMachine() { return stateMachine; }
 

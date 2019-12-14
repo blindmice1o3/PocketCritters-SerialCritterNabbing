@@ -16,8 +16,6 @@ public class BattleStateRun implements IState {
     private Handler handler;
     private Player player;
 
-    private Critter opponentCritter;
-
     public BattleStateRun(Handler handler, Player player) {
         this.handler = handler;
         this.player = player;
@@ -52,9 +50,9 @@ public class BattleStateRun implements IState {
                 BattleState battleState = (BattleState)handler.getStateManager().getCurrentState();
                 StateMachine stateMachine = battleState.getStateMachine();
 
-                Object[] args = { opponentCritter };
+                //Object[] args = { opponentCritter };
                 stateMachine.push(
-                        stateMachine.getIState("BattleStateOutro"), args
+                        stateMachine.getIState("BattleStateOutro"), null
                 );
             }
             ///////////////////////////////
@@ -119,11 +117,7 @@ public class BattleStateRun implements IState {
 
     @Override
     public void enter(Object[] args) {
-        if (args != null) {
-            if (args[0] instanceof Critter) {
-                opponentCritter = (Critter)args[0];
-            }
-        }
+
     }
 
     @Override

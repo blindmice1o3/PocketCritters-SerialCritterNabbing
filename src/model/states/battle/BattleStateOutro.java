@@ -16,8 +16,6 @@ public class BattleStateOutro implements IState {
     private Handler handler;
     private Player player;
 
-    private Critter opponentCritter;
-
     public BattleStateOutro(Handler handler, Player player) {
         this.handler = handler;
         this.player = player;
@@ -128,11 +126,7 @@ public class BattleStateOutro implements IState {
 
     @Override
     public void enter(Object[] args) {
-        if (args != null) {
-            if (args[0] instanceof Critter) {
-                opponentCritter = (Critter)args[0];
-            }
-        }
+
     }
 
     @Override
