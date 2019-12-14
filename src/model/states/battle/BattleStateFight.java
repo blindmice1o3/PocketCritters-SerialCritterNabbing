@@ -6,6 +6,7 @@ import main.utils.FontGrabber;
 import model.entities.Player;
 import model.entities.critters.Critter;
 import model.entities.critters.moves.MovesModule;
+import model.entities.critters.stats.StatsModule;
 import model.states.IState;
 import model.states.StateMachine;
 
@@ -98,10 +99,10 @@ public class BattleStateFight implements IState {
             System.out.println("execute move: " + movesModule.lookUpMove(idMove));
 
             int power = movesModule.lookUpMove(idMove).getPower();
-            int opponentDefense = critterOfOpponent.getSpecies().getDefenseBase();
-            int damageDerived = critterOfPlayer.calculateDamage(power, opponentDefense);
+            int opponentDefenseEffective = critterOfOpponent.getStatsModule().getStatsEffectiveMap().get(StatsModule.Type.DEFENSE);
+            int damageEffective = critterOfPlayer.calculateDamage(power, opponentDefenseEffective);
             System.out.println(critterOfPlayer.getNameColloquial() + "'s " +
-                    movesModule.lookUpMove(idMove).toString() + " will do: " + damageDerived +
+                    movesModule.lookUpMove(idMove).toString() + " will do: " + damageEffective +
                     " damage to " + critterOfOpponent.getNameColloquial() + ".");
         }
         //bButton

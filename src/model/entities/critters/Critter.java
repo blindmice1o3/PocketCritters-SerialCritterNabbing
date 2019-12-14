@@ -36,17 +36,16 @@ public class Critter {
         expRewardedIfDefeated = 10;
 
         movesModule = new MovesModule(handler);
-        statsModule = new StatsModule(handler, species, level);
+        statsModule = new StatsModule(handler, this.species, this.level);
 
-        hpEffectiveCurrent = statsModule.getHpEffective();
+        hpEffectiveCurrent = statsModule.getStatsEffectiveMap().get(StatsModule.Type.HP);
     } // **** end Critter(Handler, Species, int) constructor ****
 
-    public int calculateDamage(int power, int opponentDefense) {
-        //TODO: currently using attackBase and the opponentDefense is defenseBase... should be attackDerived and defenseDerived (also no Modifier being multipled)!!!
-        //TODO: attackBase is used if the move's Type is PHYSICAL (btw should be attackEffective NOT attackBase)...
-        // if it's SPECIAL, use specialBase (btw should be specialEffective NOT specialBase).
-        // ALL OF THE ABOVE APPLIES TO defenseBase TOO!!!
-        int damage = ((((((2 * level) / 5) + 2) * power  * (species.getAttackBase()/opponentDefense)) / 50) + 2);
+    public int calculateDamage(int power, int opponentDefenseEffective) {
+        //TODO: attackEffective is used if the move's Type is PHYSICAL
+        // if it's SPECIAL, use specialEffective.
+        int playerAttackEffective = statsModule.getStatsEffectiveMap().get(StatsModule.Type.ATTACK);
+        int damage = ((((((2 * level) / 5) + 2) * power  * (playerAttackEffective/opponentDefenseEffective)) / 50) + 2);
         //TODO: everything before + (* Modifier)
         //Modifier == Targets * Weather * Badge * Critical * random * STAB * Type * Burn * other.
         return damage;

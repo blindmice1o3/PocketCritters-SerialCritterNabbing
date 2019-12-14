@@ -3,9 +3,13 @@ package model.entities.critters.stats;
 import main.Handler;
 import model.entities.critters.Critter;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class StatsModule {
+
+    public enum Type { ATTACK, DEFENSE, SPEED, SPECIAL, HP; }
 
     private Handler handler;
     private Critter.Species species;
@@ -30,10 +34,12 @@ public class StatsModule {
     and CANNOT be changed. */
 
     //(IV == individual value [GENES]... IVs range from 0-15)
-    private final int attackIV, defenseIV, speedIV, specialIV, hpIV;
+    private final Map<Type, Integer> ivMap;
+    /* private final int attackIV, defenseIV, speedIV, specialIV, hpIV; */
 
     //(EV == effort value [STATs EXPERIENCE]... EP == effort points)
-    private int attackEP, defenseEP, speedEP, specialEP, hpEP;
+    private Map<Type, Integer> evMap;
+    /* private int attackEP, defenseEP, speedEP, specialEP, hpEP; */
 
     /* DETERMINATION OF STATS:
         hp =        ( ((((base + iv) * 2) + (sqrt(ev) / 4)) * level) / 100 ) + level + 10
@@ -42,7 +48,9 @@ public class StatsModule {
             Modifier == Targets * Weather * Badge * Critical * random * STAB * Type * Burn * other. */
     // STATS (attackBase, defenseBase, speedBase, and specialBase can be found in Critter.Species)
 
-    private int attackEffective, defenseEffective, speedEffective, specialEffective, hpEffective;
+    //(statsEffective == calculated stats, determined stats, NOT base stats)
+    private Map<Type, Integer> statsEffectiveMap;
+    /* private int attackEffective, defenseEffective, speedEffective, specialEffective, hpEffective; */
 
     public StatsModule(Handler handler, Critter.Species species, int level) {
         this.handler = handler;
@@ -51,6 +59,17 @@ public class StatsModule {
 
         Random random = new Random();
         //IVs
+        ivMap = new HashMap<Type, Integer>();
+        ivMap.put(Type.ATTACK, random.nextInt(16));
+        ivMap.put(Type.DEFENSE, random.nextInt(16));
+        ivMap.put(Type.SPEED, random.nextInt(16));
+        ivMap.put(Type.SPECIAL, random.nextInt(16));
+        ivMap.put(Type.HP,  ((ivMap.get(Type.ATTACK) % 2 == 1)    ? 8 : 0) +
+                            ((ivMap.get(Type.DEFENSE) % 2 == 1)   ? 4 : 0) +
+                            ((ivMap.get(Type.SPEED) % 2 == 1)     ? 2 : 0) +
+                            ((ivMap.get(Type.SPECIAL) % 2 == 1)   ? 1 : 0) );
+
+        /*
         attackIV = random.nextInt(16);
         defenseIV = random.nextInt(16);
         speedIV = random.nextInt(16);
@@ -59,45 +78,79 @@ public class StatsModule {
                 ((defenseIV % 2 == 1)   ? 4 : 0) +
                 ((speedIV % 2 == 1)     ? 2 : 0) +
                 ((specialIV % 2 == 1)   ? 1 : 0);
+        */
 
         //EVs (EP == effort points)
+        evMap = new HashMap<Type, Integer>();
+        evMap.put(Type.ATTACK, 0);
+        evMap.put(Type.DEFENSE, 0);
+        evMap.put(Type.SPEED, 0);
+        evMap.put(Type.SPECIAL, 0);
+        evMap.put(Type.HP, 0);
+
+        /*
         attackEP = 0;
         defenseEP = 0;
         speedEP = 0;
         specialEP = 0;
         hpEP = 0;
+        */
 
-        attackEffective = updateAttackEffective(this.level);
+        //statsEffective (calculated stats, determined stats, NOT base stats)
+        //NOTE: Type.HP uses a different formula than the other stats types.
+        statsEffectiveMap = new HashMap<Type, Integer>();
+        statsEffectiveMap.put(Type.ATTACK, updateStatsEffective(Type.ATTACK, this.level));
+        statsEffectiveMap.put(Type.DEFENSE, updateStatsEffective(Type.DEFENSE, this.level));
+        statsEffectiveMap.put(Type.SPEED, updateStatsEffective(Type.SPEED, this.level));
+        statsEffectiveMap.put(Type.SPECIAL, updateStatsEffective(Type.SPECIAL, this.level));
+        statsEffectiveMap.put(Type.HP, updateHpEffective(this.level));
+
+        /*
+        attackEffective = updateStatsEffective(this.level);
 
         hpEffective = updateHpEffective(this.level);
+        */
     } // **** end StatsModule(Handler) constructor ****
 
-    private int updateAttackEffective(int level) {
-        int attackEffective = (int)((((((species.getAttackBase() + attackIV) * 2) + (Math.sqrt(attackEP) / 4)) * level) / 100) + 5);
-        return attackEffective;
+    private int updateStatsEffective(Type statsType, int level) {
+        int statsTypeEffective = (int)((((((species.getAttackBase() + ivMap.get(statsType)) * 2) + (Math.sqrt( evMap.get(statsType) ) / 4)) * level) / 100) + 5);
+        return statsTypeEffective;
     }
 
     private int updateHpEffective(int level) {
-        int hpEffective = (int)((((((species.getHpBase() + hpIV) * 2) + (Math.sqrt(hpEP) / 4)) * level) / 100) + level + 10);
+        int hpEffective = (int)((((((species.getHpBase() + ivMap.get(Type.HP)) * 2) + (Math.sqrt( evMap.get(Type.HP) ) / 4)) * level) / 100) + level + 10);
         return hpEffective;
     }
 
     public void consoleOutIVsAndEVs(String nameColloquial) {
-        System.out.println(nameColloquial + "'s attackIV: " + attackIV + ".");
-        System.out.println(nameColloquial + "'s defenseIV: " + defenseIV + ".");
-        System.out.println(nameColloquial + "'s speedIV: " + speedIV + ".");
-        System.out.println(nameColloquial + "'s specialIV: " + specialIV + ".");
-        System.out.println(nameColloquial + "'s hpIV: " + hpIV + ".");
+        System.out.println(nameColloquial + "'s attackIV: " + ivMap.get(Type.ATTACK) + ".");
+        System.out.println(nameColloquial + "'s defenseIV: " + ivMap.get(Type.DEFENSE) + ".");
+        System.out.println(nameColloquial + "'s speedIV: " + ivMap.get(Type.SPEED) + ".");
+        System.out.println(nameColloquial + "'s specialIV: " + ivMap.get(Type.SPECIAL) + ".");
+        System.out.println(nameColloquial + "'s hpIV: " + ivMap.get(Type.HP) + ".");
         System.out.println("////////////////////////////////");
-        System.out.println(nameColloquial + "'s attackEP: " + attackEP + ".");
-        System.out.println(nameColloquial + "'s defenseEP: " + defenseEP + ".");
-        System.out.println(nameColloquial + "'s speedEP: " + speedEP + ".");
-        System.out.println(nameColloquial + "'s specialEP: " + specialEP + ".");
-        System.out.println(nameColloquial + "'s hpEP: " + hpEP + ".");
+        System.out.println(nameColloquial + "'s attackEP: " + evMap.get(Type.ATTACK) + ".");
+        System.out.println(nameColloquial + "'s defenseEP: " + evMap.get(Type.DEFENSE) + ".");
+        System.out.println(nameColloquial + "'s speedEP: " + evMap.get(Type.SPEED) + ".");
+        System.out.println(nameColloquial + "'s specialEP: " + evMap.get(Type.SPECIAL) + ".");
+        System.out.println(nameColloquial + "'s hpEP: " + evMap.get(Type.HP) + ".");
     }
 
     // GETTERS AND SETTERS
 
-    public int getHpEffective() { return hpEffective; }
+
+    public Map<Type, Integer> getIvMap() {
+        return ivMap;
+    }
+
+    public Map<Type, Integer> getEvMap() {
+        return evMap;
+    }
+
+    public Map<Type, Integer> getStatsEffectiveMap() {
+        return statsEffectiveMap;
+    }
+
+    /* public int getHpEffective() { return hpEffective; } */
 
 } // *** end StatsModule class ****
