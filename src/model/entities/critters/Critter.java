@@ -51,7 +51,7 @@ public class Critter {
         hpEffectiveCurrent -= damage;
         System.out.println("Remaining hpEffectiveCurrent after takeDamage(int): " + hpEffectiveCurrent);
 
-        if (hpEffectiveCurrent < 0) {
+        if (hpEffectiveCurrent <= 0) {
             System.out.println("SQUAWK!!!");
             hpEffectiveCurrent = 0;
         }
