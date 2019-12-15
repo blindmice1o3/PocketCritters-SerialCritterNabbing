@@ -79,9 +79,8 @@ public class BattleStateCritterBeltList implements IState {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.backgroundCritterBeltList,
-                0, 0, handler.getGame().getWidth(), handler.getGame().getHeight(),
-                0, 0, Assets.backgroundCritterBeltList.getWidth(), Assets.backgroundCritterBeltList.getHeight(), null);
+        g.drawImage(Assets.backgroundCritterBeltList, 0, 0,
+                handler.getGame().getWidth(), handler.getGame().getHeight(), null);
     }
 
     @Override

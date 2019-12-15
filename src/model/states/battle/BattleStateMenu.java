@@ -93,26 +93,25 @@ public class BattleStateMenu implements IState {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.battleStateSpriteSheet,
-                0, 0, handler.getGame().getWidth(), handler.getGame().getHeight(),
-                161, 2, 161+159, 2+145, null);
+        g.drawImage(Assets.backgroundBattleStateMenu,0, 0,
+                handler.getGame().getWidth(), handler.getGame().getHeight(), null);
 
         Critter critterOfOpponent = ((BattleState)handler.getStateManager().getIState("BattleState")).getCritterOfOpponent();
         //opponent's critter
-        int xOffset = 10;
+        int xOffset = 9;
         int yOffset = 5;
         FontGrabber.renderString(g, critterOfOpponent.getNameColloquial(), xOffset, yOffset, 28, 28);
         yOffset += 32;
         xOffset += 80;
         FontGrabber.renderString(g, ":L" + critterOfOpponent.getLevel(), xOffset, yOffset, 24, 24);
-        xOffset = (handler.getGame().getWidth() / 2) + 50;
+        xOffset = (handler.getGame().getWidth() / 2) + 49;
         yOffset = 5;
         g.drawImage(critterOfOpponent.getSpeciesIcon(), xOffset, yOffset,
                 (handler.getGame().getWidth() - xOffset - 5), ((handler.getGame().getHeight() / 3) + 20), null);
 
         Critter critterOfPlayer = ((BattleState)handler.getStateManager().getIState("BattleState")).getCritterOfPlayer();
         //player's critter
-        xOffset = ((handler.getGame().getWidth() / 2) - 35);
+        xOffset = ((handler.getGame().getWidth() / 2) - 36);
         yOffset = 5 + ((handler.getGame().getHeight() / 3) + 20) + 5;
         FontGrabber.renderString(g, critterOfPlayer.getNameColloquial(), xOffset, yOffset, 28, 28);
         yOffset += 32;
@@ -120,18 +119,18 @@ public class BattleStateMenu implements IState {
         FontGrabber.renderString(g, ":L" + critterOfPlayer.getLevel(), xOffset, yOffset, 28, 28);
         //player's critter's image
         yOffset = ((handler.getGame().getHeight() / 3) - 30);
-        xOffset = 5;
+        xOffset = 4;
         g.drawImage(critterOfPlayer.getSpeciesIcon(), xOffset, yOffset,
                 ((handler.getGame().getWidth() / 2) - 55), ((handler.getGame().getHeight() / 3) + 20), null);
 
         if (menuMatrix[yIndex][xIndex].equals("BattleStateFight")) {
-            g.drawImage(Assets.cursorSprite, 291, 423, 7 * 4, 7 * 4, null);
+            g.drawImage(Assets.cursorSprite, 290, 423, 7 * 4, 7 * 4, null);
         } else if (menuMatrix[yIndex][xIndex].equals("BattleStateCritterBeltList")) {
-            g.drawImage(Assets.cursorSprite, 484, 423, 7 * 4, 7 * 4, null);
+            g.drawImage(Assets.cursorSprite, 483, 423, 7 * 4, 7 * 4, null);
         } else if (menuMatrix[yIndex][xIndex].equals("BattleStateItemList")) {
-            g.drawImage(Assets.cursorSprite, 291, 484, 7 * 4, 7 * 4, null);
+            g.drawImage(Assets.cursorSprite, 290, 484, 7 * 4, 7 * 4, null);
         } else if (menuMatrix[yIndex][xIndex].equals("BattleStateRun")) {
-            g.drawImage(Assets.cursorSprite, 484, 484, 7 * 4, 7 * 4, null);
+            g.drawImage(Assets.cursorSprite, 483, 484, 7 * 4, 7 * 4, null);
         }
     }
 

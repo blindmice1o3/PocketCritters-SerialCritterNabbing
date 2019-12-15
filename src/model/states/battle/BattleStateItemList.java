@@ -77,8 +77,10 @@ public class BattleStateItemList implements IState {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.battleStateSpriteSheet, 0, 0, handler.getGame().getWidth(),
-                handler.getGame().getHeight(), 2, 146, 2+159, 146+145, null);
+        g.drawImage(Assets.backgroundBattleStateItemList, 0, 0,
+                handler.getGame().getWidth(), handler.getGame().getHeight(), null);
+//        g.drawImage(Assets.battleStateSpriteSheet, 0, 0, handler.getGame().getWidth(),
+//                handler.getGame().getHeight(), 2, 146, 2+160, 146+145, null);
     }
 
     @Override

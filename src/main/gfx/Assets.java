@@ -4,6 +4,7 @@ import main.utils.FontGrabber;
 import main.utils.ImageLoader;
 import model.tiles.Tile;
 
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -17,11 +18,11 @@ public class Assets {
     public static BufferedImage[][] overworldSpritesBufferedImageNestedArray;
 
     public static BufferedImage teamRocket, critterSpriteSheet, nabberSpriteSheet,
-            overworldSpritesSpriteSheet, indoorsHomeAndRoomSpriteSheet,
-            battleStateSpriteSheet, menuStateSpriteSheet, menuStateInfoSpriteSheet,
-            critterBallSprite, cursorSprite;
+            overworldSpritesSpriteSheet, critterBallSprite, cursorSprite;
 
-    public static BufferedImage backgroundCritterBeltList;
+    public static BufferedImage indoorsHomeAndRoomSpriteSheet, battleStateSpriteSheet, backgroundBattleStateIntro,
+            backgroundBattleStateMenu, backgroundBattleStateFight, backgroundBattleStateItemList,
+            backgroundCritterBeltList, menuStateSpriteSheet, menuStateInfoSpriteSheet;
 
     public static BufferedImage world, roomPlayer, homePlayer, homeRival, lab;
     public static BufferedImage computerWithKeyboard, keyboardFromComputer, gameConsole, television;
@@ -42,7 +43,26 @@ public class Assets {
         critterBallSprite = battleStateSpriteSheet.getSubimage(324, 269, 7, 7);
         cursorSprite = battleStateSpriteSheet.getSubimage(331, 270, 7, 7);
 
-        backgroundCritterBeltList = battleStateSpriteSheet.getSubimage(320, 2, 159, 145);
+        backgroundCritterBeltList = battleStateSpriteSheet.getSubimage(320, 2, 160, 145);
+        backgroundBattleStateIntro = battleStateSpriteSheet.getSubimage(2, 2, 160, 145);
+        backgroundBattleStateMenu = battleStateSpriteSheet.getSubimage(161, 2, 160, 145);
+        backgroundBattleStateFight = new BufferedImage(160, 145, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage backgroundBattleStateFightInitial =
+                battleStateSpriteSheet.getSubimage(161, 146, 160, 128);
+        Graphics2D g2d = backgroundBattleStateFight.createGraphics();
+        g2d.setColor(Color.GRAY);
+        g2d.fillRect(0, 0, 160, 17);
+        g2d.drawImage(backgroundBattleStateFightInitial, 0, 17, null);
+        g2d.dispose();
+        backgroundBattleStateItemList = new BufferedImage(160, 145, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage backgroundBattleStateItemListInitial =
+                battleStateSpriteSheet.getSubimage(2, 146, 160, 128);
+        Graphics g = backgroundBattleStateItemList.createGraphics();
+        g.setColor(Color.CYAN);
+        g.fillRect(0, 0, 160, 17);
+        g.drawImage(backgroundBattleStateItemListInitial, 0, 17, null);
+        g.dispose();
+
 
         world = ImageLoader.loadImage("/pokemon-gsc-kanto.png");
         roomPlayer = indoorsHomeAndRoomSpriteSheet.getSubimage(32, 8, 128, 128);

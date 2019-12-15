@@ -65,24 +65,24 @@ public class BattleStateIntro implements IState {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.battleStateSpriteSheet, 0, 0, handler.getGame().getWidth(),
-                handler.getGame().getHeight(), 2, 2, 2+159, 2+145, null);
+        g.drawImage(Assets.backgroundBattleStateIntro, 0, 0,
+                handler.getGame().getWidth(), handler.getGame().getHeight(), null);
 
         Critter critterOfOpponent = ((BattleState)handler.getStateManager().getIState("BattleState")).getCritterOfOpponent();
-        int xOffset = 10;
+        int xOffset = 9;
         int yOffset = 5;
         FontGrabber.renderString(g, critterOfOpponent.getNameColloquial(), xOffset, yOffset, 28, 28);
         yOffset += 32;
         xOffset += 110;
         FontGrabber.renderString(g, ":L" + critterOfOpponent.getLevel(), xOffset, yOffset, 28, 28);
-        xOffset = (handler.getGame().getWidth() / 2) + 50;
+        xOffset = (handler.getGame().getWidth() / 2) + 49;
         yOffset = 5;
         g.drawImage(critterOfOpponent.getSpeciesIcon(), xOffset, yOffset,
                 (handler.getGame().getWidth() - xOffset - 5), ((handler.getGame().getHeight() / 3) + 20), null);
 
-        FontGrabber.renderString(g, critterOfOpponent.getNameColloquial(), 175, 418, 37, 37);
+        FontGrabber.renderString(g, critterOfOpponent.getNameColloquial(), 174, 418, 37, 37);
 
-        int xFirstCritterBall = 360;
+        int xFirstCritterBall = 359;
         int yFirstCritterBall = 304;
         for (int i = 0; i < player.getCritterBeltList().size(); i++) {
             if (player.getCritterBeltList().get(i).getStatus() == Critter.StatusConditionNonVolatile.OK) {

@@ -29,7 +29,7 @@ public class BattleStateFight implements IState {
 
         index = 0;
 
-        xCursor = 162;
+        xCursor = 161;
         yCursor = 330;
     } // **** end BattleStateFight(Handler, Player) constructor ****
 
@@ -128,8 +128,10 @@ public class BattleStateFight implements IState {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.battleStateSpriteSheet, 0, 0, handler.getGame().getWidth(),
-                handler.getGame().getHeight(), 161, 146, 161+159, 146+145, null);
+        g.drawImage(Assets.backgroundBattleStateFight, 0, 0,
+                handler.getGame().getWidth(), handler.getGame().getHeight(), null);
+//        g.drawImage(Assets.battleStateSpriteSheet, 0, 0, handler.getGame().getWidth(),
+//                handler.getGame().getHeight(), 161, 146, 161+160, 146+145, null);
 
         Critter critterOfOpponent = ((BattleState)handler.getStateManager().getIState("BattleState")).getCritterOfOpponent();
         Critter critterOfPlayer = ((BattleState)handler.getStateManager().getIState("BattleState")).getCritterOfPlayer();
@@ -144,9 +146,9 @@ public class BattleStateFight implements IState {
         //CURRENTLY SELECTED MOVE (and its pp)
         if (movesModule.getMoves()[index] != 0) {
             nameMove = movesModule.lookUpMove(movesModule.getMoves()[index]).getType().toString();
-            FontGrabber.renderString(g, nameMove, 60, 240, 30, 30);
+            FontGrabber.renderString(g, nameMove, 59, 240, 30, 30);
             String ppCurrentAndBase = movesModule.getPpMoves()[index] + "/" + movesModule.lookUpMove(movesModule.getMoves()[index]).getPpBase();
-            FontGrabber.renderString(g, ppCurrentAndBase, 168, 270, 30, 30);
+            FontGrabber.renderString(g, ppCurrentAndBase, 167, 270, 30, 30);
         }
 
         //LIST OF MOVES
