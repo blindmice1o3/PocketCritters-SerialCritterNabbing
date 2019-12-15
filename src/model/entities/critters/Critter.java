@@ -47,6 +47,9 @@ public class Critter {
         int playerAttackEffective = statsModule.getStatsEffectiveMap().get(StatsModule.Type.ATTACK);
         int damage = ((((((2 * level) / 5) + 2) * power  * (playerAttackEffective/opponentDefenseEffective)) / 50) + 2);
 
+        System.out.println("damage: " + damage);
+        double damageAsDouble = ((((((2.0 * level) / 5.0) + 2.0) * power  * (((double)playerAttackEffective)/opponentDefenseEffective)) / 50.0) + 2.0);
+        System.out.println("damageAsDouble: " + damageAsDouble);
         System.out.println("EQUATION && CALCULATIONS FOR calculateDamage(power, opponentDefenseEffective)......");
         System.out.println("((((((2 * level) / 5) + 2) * power  * (playerAttackEffective/opponentDefenseEffective)) / 50) + 2) ??????");
         System.out.println("((2 * level) / 5): " + ((2 * level) / 5));
