@@ -12,6 +12,7 @@ import model.states.StateMachine;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 
 public class BattleStateFight implements IState {
 
@@ -130,8 +131,14 @@ public class BattleStateFight implements IState {
         g.drawImage(Assets.battleStateSpriteSheet, 0, 0, handler.getGame().getWidth(),
                 handler.getGame().getHeight(), 161, 146, 161+159, 146+145, null);
 
+        Critter critterOfOpponent = ((BattleState)handler.getStateManager().getIState("BattleState")).getCritterOfOpponent();
         Critter critterOfPlayer = ((BattleState)handler.getStateManager().getIState("BattleState")).getCritterOfPlayer();
         MovesModule movesModule = critterOfPlayer.getMovesModule();
+
+        String hpOpponent = "hpOpponent: " + critterOfOpponent.getHpEffectiveCurrent() + " of " + critterOfOpponent.getStatsModule().getStatsEffectiveMap().get(StatsModule.Type.HP);
+        String hpPlayer = "hpPlayer: " + critterOfPlayer.getHpEffectiveCurrent() + " of " + critterOfPlayer.getStatsModule().getStatsEffectiveMap().get(StatsModule.Type.HP);
+        FontGrabber.renderString(g, hpOpponent, 50, 50, 20, 20);
+        FontGrabber.renderString(g, hpPlayer, 300, 300, 20, 20);
 
         String nameMove = null;
         //CURRENTLY SELECTED MOVE (and its pp)
