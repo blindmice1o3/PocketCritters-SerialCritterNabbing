@@ -41,6 +41,22 @@ public class Critter {
         hpEffectiveCurrent = statsModule.getStatsEffectiveMap().get(StatsModule.Type.HP);
     } // **** end Critter(Handler, Species, int) constructor ****
 
+    public void doDamage(Critter opponentCritter, int damage) {
+        System.out.println("Critter class - opponentCritter's hpEffectiveCurrent PRIOR TO doDamage(Critter, int)'s code-block's body: " + opponentCritter.getHpEffectiveCurrent());
+        opponentCritter.takeDamage(damage);
+        System.out.println("Critter class - opponentCritter's hpEffectiveCurrent AFTER doDamage(Critter, int)'s code-block's body: " + opponentCritter.getHpEffectiveCurrent());
+    }
+
+    public void takeDamage(int damage) {
+        hpEffectiveCurrent -= damage;
+        System.out.println("Remaining hpEffectiveCurrent after takeDamage(int): " + hpEffectiveCurrent);
+
+        if (hpEffectiveCurrent < 0) {
+            System.out.println("SQUAWK!!!");
+            hpEffectiveCurrent = 0;
+        }
+    }
+
     public int calculateDamage(int power, int opponentDefenseEffective) {
         //TODO: attackEffective is used if the move's Type is PHYSICAL
         // if it's SPECIAL, use specialEffective.

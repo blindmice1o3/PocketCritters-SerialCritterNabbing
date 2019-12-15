@@ -104,6 +104,10 @@ public class BattleStateFight implements IState {
             System.out.println(critterOfPlayer.getNameColloquial() + "'s " +
                     movesModule.lookUpMove(idMove).toString() + " will do: " + damageEffective +
                     " damage to " + critterOfOpponent.getNameColloquial() + ".");
+
+            /////////////////////////////////////////////////////////////
+            critterOfPlayer.doDamage(critterOfOpponent, damageEffective);
+            /////////////////////////////////////////////////////////////
         }
         //bButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_PERIOD)) {
