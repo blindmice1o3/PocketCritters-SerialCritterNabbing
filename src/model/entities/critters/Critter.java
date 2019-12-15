@@ -46,6 +46,19 @@ public class Critter {
         // if it's SPECIAL, use specialEffective.
         int playerAttackEffective = statsModule.getStatsEffectiveMap().get(StatsModule.Type.ATTACK);
         int damage = ((((((2 * level) / 5) + 2) * power  * (playerAttackEffective/opponentDefenseEffective)) / 50) + 2);
+
+        System.out.println("EQUATION && CALCULATIONS FOR calculateDamage(power, opponentDefenseEffective)......");
+        System.out.println("((((((2 * level) / 5) + 2) * power  * (playerAttackEffective/opponentDefenseEffective)) / 50) + 2) ??????");
+        System.out.println("((2 * level) / 5): " + ((2 * level) / 5));
+        System.out.println("(((2 * level) / 5) + 2): " + (((2 * level) / 5) + 2));
+        System.out.println("((((2 * level) / 5) + 2) * power: " + ((((2 * level) / 5) + 2) * power));
+        System.out.println("(playerAttackEffective/opponentDefenseEffective): " + (playerAttackEffective/opponentDefenseEffective));
+        System.out.println("((((2 * level) / 5) + 2) * power  * (playerAttackEffective/opponentDefenseEffective)): " + ((((2 * level) / 5) + 2) * power  * (playerAttackEffective/opponentDefenseEffective)));
+        System.out.println("(((((2 * level) / 5) + 2) * power  * (playerAttackEffective/opponentDefenseEffective)) / 50): " + (((((2 * level) / 5) + 2) * power  * (playerAttackEffective/opponentDefenseEffective)) / 50));
+        System.out.println("****************************************************************************************************");
+        System.out.println("((((((2 * level) / 5) + 2) * power  * (playerAttackEffective/opponentDefenseEffective)) / 50) + 2): " + ((((((2 * level) / 5) + 2) * power  * (playerAttackEffective/opponentDefenseEffective)) / 50) + 2));
+        System.out.println("****************************************************************************************************");
+
         //TODO: everything before + (* Modifier)
         //Modifier == Targets * Weather * Badge * Critical * random * STAB * Type * Burn * other.
         return damage;
