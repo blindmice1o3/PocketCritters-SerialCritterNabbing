@@ -76,7 +76,8 @@ public class Player
         critterBeltList.add( new Critter(handler, Critter.Species.TOTIPOTENT_PUPPY, 6) );
         critterBeltList.add( new Critter(handler, Critter.Species.STONE_MONKEY, 7) );
         critterBeltList.add( new Critter(handler, Critter.Species.SPLASHILIC_TILAPIA, 8) );
-        critterBeltList.add( new Critter(handler, Critter.Species.THUNDER_MOUSE, 81) );
+        critterBeltList.add( new Critter(handler, Critter.Species.ROCK_GOLEM, 10) );
+//        critterBeltList.add( new Critter(handler, Critter.Species.THUNDER_MOUSE, 81) );
         critterBeltList.add( new Critter(handler, Critter.Species.COASTAL_GULL, 11) );
         critterBeltList.get(2).setStatus(Critter.StatusConditionNonVolatile.SLEEP);
         //////////////////////////////////////

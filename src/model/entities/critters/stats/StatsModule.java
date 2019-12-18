@@ -60,16 +60,14 @@ public class StatsModule {
         Random random = new Random();
         //IVs
         ivMap = new HashMap<Type, Integer>();
-        ivMap.put(Type.ATTACK, 8);
-        ivMap.put(Type.DEFENSE, 13);
-        ivMap.put(Type.SPECIAL, 9);
-        ivMap.put(Type.SPEED, 5);
-        /*
+//        ivMap.put(Type.ATTACK, 8);
+//        ivMap.put(Type.DEFENSE, 13);
+//        ivMap.put(Type.SPECIAL, 9);
+//        ivMap.put(Type.SPEED, 5);
         ivMap.put(Type.ATTACK, random.nextInt(16));
         ivMap.put(Type.DEFENSE, random.nextInt(16));
         ivMap.put(Type.SPEED, random.nextInt(16));
         ivMap.put(Type.SPECIAL, random.nextInt(16));
-        */
         ivMap.put(Type.HP,  ((ivMap.get(Type.ATTACK) % 2 == 1)    ? 8 : 0) +
                             ((ivMap.get(Type.DEFENSE) % 2 == 1)   ? 4 : 0) +
                             ((ivMap.get(Type.SPEED) % 2 == 1)     ? 2 : 0) +
@@ -77,18 +75,16 @@ public class StatsModule {
 
         //EVs (EP == effort points)
         evMap = new HashMap<Type, Integer>();
-        evMap.put(Type.ATTACK, 23140);
-        evMap.put(Type.DEFENSE, 17280);
-        evMap.put(Type.SPECIAL, 19625);
-        evMap.put(Type.SPEED, 24795);
-        evMap.put(Type.HP, 22850);
-        /*
+//        evMap.put(Type.ATTACK, 23140);
+//        evMap.put(Type.DEFENSE, 17280);
+//        evMap.put(Type.SPECIAL, 19625);
+//        evMap.put(Type.SPEED, 24795);
+//        evMap.put(Type.HP, 22850);
         evMap.put(Type.ATTACK, 0);
         evMap.put(Type.DEFENSE, 0);
         evMap.put(Type.SPEED, 0);
         evMap.put(Type.SPECIAL, 0);
         evMap.put(Type.HP, 0);
-        */
 
         //statsEffective (calculated stats, determined stats, NOT base stats)
         //NOTE: Type.HP uses a different formula than the other stats types.
