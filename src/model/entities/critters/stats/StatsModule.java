@@ -101,8 +101,28 @@ public class StatsModule {
     } // **** end StatsModule(Handler) constructor ****
 
     private int updateStatsEffective(Type statsType, int level) {
-        //TODO: BUG!! using getAttackBase() for all statsType!!!
-        int statsTypeEffective = (int)((((((species.getAttackBase() + ivMap.get(statsType)) * 2) + (Math.sqrt(evMap.get(statsType)) / 4)) * level) / 100) + 5);
+        int statsTypeEffective = 0;
+        int statsBase = 0;
+        switch (statsType) {
+            case ATTACK:
+                statsBase = species.getAttackBase();
+                break;
+            case DEFENSE:
+                statsBase = species.getDefenseBase();
+                break;
+            case SPEED:
+                statsBase = species.getSpeedBase();
+                break;
+            case SPECIAL:
+                statsBase = species.getSpecialBase();
+                break;
+            default:
+                System.out.println("StatsModule.updateStatsEffective(Type, int) switch(statsType) construct's default block.");
+                statsBase = 0;
+                break;
+        }
+
+        statsTypeEffective = (int)((((((statsBase + ivMap.get(statsType)) * 2) + (Math.sqrt(evMap.get(statsType)) / 4)) * level) / 100) + 5);
         return statsTypeEffective;
     }
 
