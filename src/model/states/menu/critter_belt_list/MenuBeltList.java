@@ -8,6 +8,7 @@ import model.entities.critters.Critter;
 import model.states.IState;
 import model.states.StateMachine;
 import model.states.menu.MenuState;
+import view.Cursor;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -21,21 +22,22 @@ public class MenuBeltList implements IState {
     private Player player;
 
     private int indexCritterBeltList;
-
-    private int xCursor, yCursor;
+    private Cursor cursor;
+    //private int xCursor, yCursor;
 
     public MenuBeltList(Handler handler, Player player) {
         this.handler = handler;
         this.player = player;
 
         indexCritterBeltList = 0;
-        updateCursorPosition();
+        cursor = new Cursor(3, 27, 60);
+//        updateCursorPosition();
     } // **** end MenuBeltList(Handler, Player) constructor ****
 
-    private void updateCursorPosition() {
+    /*private void updateCursorPosition() {
         xCursor = X_OFFSET_CURSOR;
         yCursor = Y_OFFSET_CURSOR + (indexCritterBeltList * 60);
-    }
+    }*/
 
     @Override
     public void tick(long timeElapsed) {
@@ -48,7 +50,7 @@ public class MenuBeltList implements IState {
                 indexCritterBeltList = (player.getCritterBeltList().size() - 1);
             }
 
-            updateCursorPosition();
+            cursor.updateCursorPosition(indexCritterBeltList);
         }
         //downButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) {
@@ -59,7 +61,7 @@ public class MenuBeltList implements IState {
                 indexCritterBeltList = 0;
             }
 
-            updateCursorPosition();
+            cursor.updateCursorPosition(indexCritterBeltList);
         }
         //bButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_PERIOD)) {
@@ -94,8 +96,8 @@ public class MenuBeltList implements IState {
                 ///////////////////////////////////////////////////////////////////////////////
                 //if in top part of the screen, set the new IState's yStart BELOW nameColloquial
                 //if in bottom part of screen, set the new IState's yStart ABOVE nameColloquial.
-                int yNewPanel = (yCursor < (handler.getGame().getWidth() / 3)) ?
-                        (yCursor+5) : (yCursor+5- MenuBeltListAction.HEIGHT-20-3);
+                int yNewPanel = (cursor.getY() < (handler.getGame().getWidth() / 3)) ?
+                        (cursor.getY()+5) : (cursor.getY()+5- MenuBeltListAction.HEIGHT-20-3);
                 ///////////////////////////////////////////////////////////////////////////////
 
                 int[] cursorPositionAndIndexCritterBeltList = { xNewPanel, yNewPanel, indexCritterBeltList };
@@ -139,7 +141,8 @@ public class MenuBeltList implements IState {
         }
 
         //CURSOR
-        g.drawImage(Assets.critterBallSprite, xCursor, yCursor, 20, 20, null);
+        cursor.render(g);
+//        g.drawImage(Assets.critterBallSprite, xCursor, yCursor, 20, 20, null);
     }
 
     @Override
