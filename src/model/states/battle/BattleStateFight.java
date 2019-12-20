@@ -12,7 +12,6 @@ import model.states.StateMachine;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
 
 public class BattleStateFight implements IState {
 
@@ -96,7 +95,7 @@ public class BattleStateFight implements IState {
             System.out.println("BattleStateFight.tick()... aButton");
 
             MovesModule movesModule = critterOfPlayer.getMovesModule();
-            int idMove = movesModule.getMoves()[index];
+            int idMove = movesModule.getMovesCurrent()[index];
             System.out.println("execute move: " + movesModule.lookUpMove(idMove));
 
             int power = movesModule.lookUpMove(idMove).getPower();
@@ -144,10 +143,10 @@ public class BattleStateFight implements IState {
 
         String nameMove = null;
         //CURRENTLY SELECTED MOVE (and its pp)
-        if (movesModule.getMoves()[index] != 0) {
-            nameMove = movesModule.lookUpMove(movesModule.getMoves()[index]).getType().toString();
+        if (movesModule.getMovesCurrent()[index] != 0) {
+            nameMove = movesModule.lookUpMove(movesModule.getMovesCurrent()[index]).getType().toString();
             FontGrabber.renderString(g, nameMove, 59, 240, 30, 30);
-            String ppCurrentAndBase = movesModule.getPpMoves()[index] + "/" + movesModule.lookUpMove(movesModule.getMoves()[index]).getPpBase();
+            String ppCurrentAndBase = movesModule.getPpMovesCurrent()[index] + "/" + movesModule.lookUpMove(movesModule.getMovesCurrent()[index]).getPpBase();
             FontGrabber.renderString(g, ppCurrentAndBase, 167, 270, 30, 30);
         }
 
@@ -155,7 +154,7 @@ public class BattleStateFight implements IState {
         int xOffset = xCursor + 35;
         int yOffset = 330;
         for (int i = 0; i < movesModule.getNumberMovesKnown(); i++) {
-            nameMove = movesModule.lookUpMove( movesModule.getMoves()[i] ).toString();
+            nameMove = movesModule.lookUpMove( movesModule.getMovesCurrent()[i] ).toString();
             FontGrabber.renderString(g, nameMove, xOffset, yOffset, 30, 30);
             yOffset += 30;
         }

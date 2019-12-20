@@ -210,8 +210,8 @@ public class MenuBeltListActionSummary implements IState {
                 MovesModule movesModule = critter.getMovesModule();
                 String nameMove = "-dash";
                 String ppInfoMove = "_underline_underline";
-                int[] moves = movesModule.getMoves();
-                int[] ppMoves = movesModule.getPpMoves();
+                int[] moves = movesModule.getMovesCurrent();
+                int[] ppMoves = movesModule.getPpMovesCurrent();
                 for (int i = 0; i < moves.length; i++) {
                     if (moves[i] != 0) {
                         nameMove = movesModule.lookUpMove(moves[i]).toString();
