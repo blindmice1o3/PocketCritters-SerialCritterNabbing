@@ -25,7 +25,7 @@ public class MenuBeltListAction implements IState {
     private Action currentAction;
 
     //initialized when enter(Object]) is called (tracks its background panel position).
-    private int xOffsetStart, yOffsetStart;
+    private int xPanel, yPanel;
     private final int xOffsetCursor, yOffsetCursor;
     //is relative to the current Action (the currentAction).
     private int xCursor, yCursor;
@@ -41,8 +41,8 @@ public class MenuBeltListAction implements IState {
     } // **** end MenuBeltListAction(Handler, Player) constructor ****
 
     private void updateCursorPosition() {
-        xCursor = xOffsetStart + xOffsetCursor;
-        yCursor = yOffsetStart + yOffsetCursor + (currentAction.ordinal() * 40);
+        xCursor = xPanel + xOffsetCursor;
+        yCursor = yPanel + yOffsetCursor + (currentAction.ordinal() * 40);
     }
 
     @Override
@@ -126,13 +126,13 @@ public class MenuBeltListAction implements IState {
 
         //PANEL
         g.setColor(Color.YELLOW);
-        g.fillRect(xOffsetStart, yOffsetStart, WIDTH, HEIGHT);
+        g.fillRect(xPanel, yPanel, WIDTH, HEIGHT);
 
         //LIST OF ACTIONS
         g.setColor(Color.BLUE);
-        int xString = xOffsetStart + xOffsetCursor + 20 + xOffsetCursor;
+        int xString = xPanel + xOffsetCursor + 20 + xOffsetCursor;
         for (int i = 0; i < Action.values().length; i++) {
-            int yString = yOffsetStart + yOffsetCursor + (i * 40);
+            int yString = yPanel + yOffsetCursor + (i * 40);
 
             String nameMenuElement = Action.values()[i].toString();
             FontGrabber.renderString(g, nameMenuElement, xString, yString, 20, 20);
@@ -149,8 +149,8 @@ public class MenuBeltListAction implements IState {
             if (args[0] instanceof int[]) {
                 int[] cursorPositionAndIndexCritterBeltList = (int[])args[0];
 
-                xOffsetStart = cursorPositionAndIndexCritterBeltList[0];
-                yOffsetStart = cursorPositionAndIndexCritterBeltList[1];
+                xPanel = cursorPositionAndIndexCritterBeltList[0];
+                yPanel = cursorPositionAndIndexCritterBeltList[1];
                 indexCritterBeltList = cursorPositionAndIndexCritterBeltList[2];
 
                 updateCursorPosition();
