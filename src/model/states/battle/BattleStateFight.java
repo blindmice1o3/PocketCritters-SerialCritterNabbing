@@ -15,47 +15,108 @@ import java.awt.event.KeyEvent;
 
 public class BattleStateFight implements IState {
 
+    public enum Turn { PLAYER, OPPONENT; }
+    public static final int X_CURSOR_SPAWN = 161, Y_CURSOR_SPAWN = 330;
+
     private Handler handler;
     private Player player;
 
+    private Turn turnCurrent;
     private int index;
-
     private int xCursor, yCursor;
+
+    private int decisionTicker;
+    private int decisionTickerTarget;
+    private boolean isFirstTick;
 
     public BattleStateFight(Handler handler, Player player) {
         this.handler = handler;
         this.player = player;
 
+        turnCurrent = Turn.PLAYER;
         index = 0;
+        xCursor = X_CURSOR_SPAWN;
+        yCursor = Y_CURSOR_SPAWN;
 
-        xCursor = 161;
-        yCursor = 330;
+        decisionTicker = 0;
+        decisionTickerTarget = 0;
+        isFirstTick = true;
     } // **** end BattleStateFight(Handler, Player) constructor ****
 
-    private void updateCursorPosition() {
-        switch(index) {
+    private int simulateTimeDeciding() {
+        //random number between [1-10], inclusive.
+        return (int)((Math.random() * 10) + 1);
+    }
+    private void doDecision() {
+        Critter critterOfOpponent = ((BattleState)handler.getStateManager().getIState("BattleState")).getCritterOfOpponent();
+        Critter critterOfPlayer = ((BattleState)handler.getStateManager().getIState("BattleState")).getCritterOfPlayer();
+
+        int numberOfMovesKnown = critterOfOpponent.getMovesModule().getNumberMovesKnown();
+
+        int indexDecision = 0;
+        indexDecision = (int)(Math.random() * numberOfMovesKnown); //random number between [0 to (numberOfMovesKnown-1)], inclusive.
+        System.out.println("BattleStateFight.doDecision() [opponent chooses move] indexDecision (should only be [0-1] for now): " + indexDecision);
+        switch (indexDecision) {
             case 0:
-                yCursor = 330;
-                break;
             case 1:
-                yCursor = 360;
+                int idMove = critterOfOpponent.getMovesModule().getMovesCurrent()[indexDecision];
+                int power = critterOfOpponent.getMovesModule().lookUpMove(idMove).getPower();
+                int defenseCritterOfPlayer = critterOfPlayer.getStatsModule().getStatsEffectiveMap().get(StatsModule.Type.DEFENSE);
+
+                int damage = critterOfOpponent.calculateDamage(power, defenseCritterOfPlayer);
+                critterOfOpponent.doDamage(critterOfPlayer, damage);
                 break;
             case 2:
-                yCursor = 390;
+                System.out.println("BattleStateFight.doDecision() switch (indexDecision) construct's case 2.");
                 break;
             case 3:
-                yCursor = 420;
+                System.out.println("BattleStateFight.doDecision() switch (indexDecision) construct's case 3.");
                 break;
             default:
-                System.out.println("BattleStateFight.updateCursorPosition() switch(index) construct's default block.");
+                System.out.println("BattleStateFight.doDecision() switch (indexDecision) construct's default block.");
                 break;
         }
     }
 
     @Override
     public void tick(long timeElapsed) {
-        //System.out.println("BattleStateFight.tick()");
+        switch(turnCurrent) {
+            case PLAYER:
+                getInput(); //turnCurrent is set to Turn.OPPONENT inside the aButton block.
 
+                break;
+            case OPPONENT:
+                //set the targeted-time
+                if (isFirstTick) {
+                    System.out.println("BattleStateFight.tick(long) switch (turnCurrent) construct's OPPONENT BLOCK.");
+                    decisionTickerTarget = (simulateTimeDeciding() * 60); //[1-10] * 60 will give 1-10 seconds.
+                    System.out.println("BattleStateFight.tick(long) decisionTickerTarget set to: " + decisionTickerTarget);
+                    isFirstTick = false;
+                } else {
+                    decisionTicker++;
+                    if (decisionTicker % 60 == 0) {
+                        System.out.println("OPPONENT decisionTicker: " + decisionTicker);
+                    }
+
+                    if (decisionTicker >= decisionTickerTarget) {
+                        doDecision();
+
+                        decisionTicker = 0;
+                        isFirstTick = true;
+                        ////////////////////////////
+                        turnCurrent = Turn.PLAYER;
+                        ////////////////////////////
+                    }
+                }
+
+                break;
+            default:
+                System.out.println("BattleStateFight.tick(long) switch(turnCurrent) construct's default block.");
+                break;
+        }
+    }
+
+    private void getInput() {
         Critter critterOfOpponent = ((BattleState)handler.getStateManager().getIState("BattleState")).getCritterOfOpponent();
         Critter critterOfPlayer = ((BattleState)handler.getStateManager().getIState("BattleState")).getCritterOfPlayer();
         //UP
@@ -107,6 +168,9 @@ public class BattleStateFight implements IState {
 
             /////////////////////////////////////////////////////////////
             critterOfPlayer.doDamage(critterOfOpponent, damageEffective);
+            ////////////////////////////
+            turnCurrent = Turn.OPPONENT;
+            ////////////////////////////
             /////////////////////////////////////////////////////////////
         }
         //bButton
@@ -122,6 +186,26 @@ public class BattleStateFight implements IState {
                 stateMachine.pop();
             }
             ///////////////////////////////
+        }
+    }
+
+    private void updateCursorPosition() {
+        switch(index) {
+            case 0:
+                yCursor = 330;
+                break;
+            case 1:
+                yCursor = 360;
+                break;
+            case 2:
+                yCursor = 390;
+                break;
+            case 3:
+                yCursor = 420;
+                break;
+            default:
+                System.out.println("BattleStateFight.updateCursorPosition() switch(index) construct's default block.");
+                break;
         }
     }
 

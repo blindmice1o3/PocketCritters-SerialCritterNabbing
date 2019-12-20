@@ -41,10 +41,12 @@ public class Critter {
         hpEffectiveCurrent = statsModule.getStatsEffectiveMap().get(StatsModule.Type.HP);
     } // **** end Critter(Handler, Species, int) constructor ****
 
-    public void doDamage(Critter opponentCritter, int damage) {
-        System.out.println("Critter class - opponentCritter's hpEffectiveCurrent PRIOR TO doDamage(Critter, int)'s code-block's body: " + opponentCritter.getHpEffectiveCurrent());
-        opponentCritter.takeDamage(damage);
-        System.out.println("Critter class - opponentCritter's hpEffectiveCurrent AFTER doDamage(Critter, int)'s code-block's body: " + opponentCritter.getHpEffectiveCurrent());
+    public void doDamage(Critter targetCritter, int damage) {
+        System.out.println(targetCritter.getNameColloquial() + "'s hpEffectiveCurrent PRIOR TO " +
+                "doDamage(Critter, int)'s code-block's body: " + targetCritter.getHpEffectiveCurrent());
+        targetCritter.takeDamage(damage);
+        System.out.println(targetCritter.getNameColloquial() + "'s hpEffectiveCurrent AFTER " +
+                "doDamage(Critter, int)'s code-block's body: " + targetCritter.getHpEffectiveCurrent());
     }
 
     public void takeDamage(int damage) {
