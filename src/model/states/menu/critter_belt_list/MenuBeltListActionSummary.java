@@ -5,6 +5,7 @@ import main.utils.FontGrabber;
 import model.entities.Player;
 import model.entities.critters.Critter;
 import model.entities.critters.moves.MovesModule;
+import model.entities.critters.stats.StatsModule;
 import model.states.IState;
 import model.states.StateMachine;
 import model.states.menu.MenuState;
@@ -112,7 +113,7 @@ public class MenuBeltListActionSummary implements IState {
                 String level = ":L" + critter.getLevel();
                 FontGrabber.renderString(g, level, xOffset+(xHalfScreen/2), yOffset+20, 20, 20);
                 //INSERT hp bar image
-                String hpCurrentAndMax = critter.getHpEffectiveCurrent() + "/" + critter.getSpecies().getHpBase();
+                String hpCurrentAndMax = critter.getHpEffectiveCurrent() + "/" + critter.getStatsModule().getStatsEffectiveMap().get(StatsModule.Type.HP);
                 int x = handler.getGame().getWidth()-(hpCurrentAndMax.length() * 20)-5;
                 FontGrabber.renderString(g, hpCurrentAndMax, x, yOffset+50, 20, 20);
                 String status = "STATUS/" + critter.getStatus().toString();
@@ -132,19 +133,19 @@ public class MenuBeltListActionSummary implements IState {
                 FontGrabber.renderString(g, "SPECIAL", xOffset, yOffset, 20, 20);
 
                 yOffset = yHalfScreen+5+20;
-                String attack = Integer.toString(critter.getSpecies().getAttackBase());
+                String attack = Integer.toString(critter.getStatsModule().getStatsEffectiveMap().get(StatsModule.Type.ATTACK));
                 xOffset = xHalfScreen-5-(attack.length() * 20);
                 FontGrabber.renderString(g, attack, xOffset, yOffset, 20, 20);
                 yOffset += 40;
-                String defense = Integer.toString(critter.getSpecies().getDefenseBase());
+                String defense = Integer.toString(critter.getStatsModule().getStatsEffectiveMap().get(StatsModule.Type.DEFENSE));
                 xOffset = xHalfScreen-5-(defense.length() * 20);
                 FontGrabber.renderString(g, defense, xOffset, yOffset, 20, 20);
                 yOffset += 40;
-                String speed = Integer.toString(critter.getSpecies().getSpeedBase());
+                String speed = Integer.toString(critter.getStatsModule().getStatsEffectiveMap().get(StatsModule.Type.SPEED));
                 xOffset = xHalfScreen-5-(speed.length() * 20);
                 FontGrabber.renderString(g, speed, xOffset, yOffset, 20, 20);
                 yOffset += 40;
-                String special = Integer.toString(critter.getSpecies().getSpecialBase());
+                String special = Integer.toString(critter.getStatsModule().getStatsEffectiveMap().get(StatsModule.Type.SPECIAL));
                 xOffset = xHalfScreen-5-(special.length() * 20);
                 FontGrabber.renderString(g, special, xOffset, yOffset, 20, 20);
                 //quadrant4

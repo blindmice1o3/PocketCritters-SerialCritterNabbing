@@ -48,33 +48,30 @@ public class BattleStateFight implements IState {
         return (int)((Math.random() * 10) + 1);
     }
     private void doDecision() {
-        Critter critterOfOpponent = ((BattleState)handler.getStateManager().getIState("BattleState")).getCritterOfOpponent();
-        Critter critterOfPlayer = ((BattleState)handler.getStateManager().getIState("BattleState")).getCritterOfPlayer();
+        Critter critterOfOpponent = ((BattleState) handler.getStateManager().getIState("BattleState")).getCritterOfOpponent();
+        Critter critterOfPlayer = ((BattleState) handler.getStateManager().getIState("BattleState")).getCritterOfPlayer();
 
         int numberOfMovesKnown = critterOfOpponent.getMovesModule().getNumberMovesKnown();
 
-        int indexDecision = 0;
-        indexDecision = (int)(Math.random() * numberOfMovesKnown); //random number between [0 to (numberOfMovesKnown-1)], inclusive.
+        int indexDecision = (int) (Math.random() * numberOfMovesKnown); //random number between [0 to (numberOfMovesKnown-1)], inclusive.
         System.out.println("BattleStateFight.doDecision() [opponent chooses move] indexDecision (should only be [0-1] for now): " + indexDecision);
-        switch (indexDecision) {
-            case 0:
-            case 1:
-                int idMove = critterOfOpponent.getMovesModule().getMovesCurrent()[indexDecision];
-                int power = critterOfOpponent.getMovesModule().lookUpMove(idMove).getPower();
-                int defenseCritterOfPlayer = critterOfPlayer.getStatsModule().getStatsEffectiveMap().get(StatsModule.Type.DEFENSE);
 
-                int damage = critterOfOpponent.calculateDamage(power, defenseCritterOfPlayer);
-                critterOfOpponent.doDamage(critterOfPlayer, damage);
-                break;
-            case 2:
-                System.out.println("BattleStateFight.doDecision() switch (indexDecision) construct's case 2.");
-                break;
-            case 3:
-                System.out.println("BattleStateFight.doDecision() switch (indexDecision) construct's case 3.");
-                break;
-            default:
-                System.out.println("BattleStateFight.doDecision() switch (indexDecision) construct's default block.");
-                break;
+        if (critterOfOpponent.getMovesModule().getPpMovesCurrent()[indexDecision] > 0) {
+            int idMove = critterOfOpponent.getMovesModule().getMovesCurrent()[indexDecision];
+            int power = critterOfOpponent.getMovesModule().lookUpMove(idMove).getPower();
+            int defenseCritterOfPlayer = critterOfPlayer.getStatsModule().getStatsEffectiveMap().get(StatsModule.Type.DEFENSE);
+
+            int damage = critterOfOpponent.calculateDamage(power, defenseCritterOfPlayer);
+            ////////////////////////////
+            critterOfOpponent.doDamage(critterOfPlayer, damage);
+            ////////////////////////////
+
+            ////////////////////////////
+            //DECREMENT ppCurrent of the move used.
+            critterOfOpponent.getMovesModule().decrementPpMovesCurrent(indexDecision);
+            ////////////////////////////
+        } else {
+            System.out.println("NOT ENOUGH ppCurrent!");
         }
     }
 
@@ -157,21 +154,29 @@ public class BattleStateFight implements IState {
 
             MovesModule movesModule = critterOfPlayer.getMovesModule();
             int idMove = movesModule.getMovesCurrent()[index];
-            System.out.println("execute move: " + movesModule.lookUpMove(idMove));
+            System.out.println("About to execute move: " + movesModule.lookUpMove(idMove));
 
-            int power = movesModule.lookUpMove(idMove).getPower();
-            int opponentDefenseEffective = critterOfOpponent.getStatsModule().getStatsEffectiveMap().get(StatsModule.Type.DEFENSE);
-            int damageEffective = critterOfPlayer.calculateDamage(power, opponentDefenseEffective);
-            System.out.println(critterOfPlayer.getNameColloquial() + "'s " +
-                    movesModule.lookUpMove(idMove).toString() + " will do: " + damageEffective +
-                    " damage to " + critterOfOpponent.getNameColloquial() + ".");
+            if (movesModule.getPpMovesCurrent()[index] > 0) {
+                int power = movesModule.lookUpMove(idMove).getPower();
+                int opponentDefenseEffective = critterOfOpponent.getStatsModule().getStatsEffectiveMap().get(StatsModule.Type.DEFENSE);
+                int damageEffective = critterOfPlayer.calculateDamage(power, opponentDefenseEffective);
+                System.out.println(critterOfPlayer.getNameColloquial() + "'s " +
+                        movesModule.lookUpMove(idMove).toString() + " will do: " + damageEffective +
+                        " damage to " + critterOfOpponent.getNameColloquial() + ".");
 
-            /////////////////////////////////////////////////////////////
-            critterOfPlayer.doDamage(critterOfOpponent, damageEffective);
-            ////////////////////////////
-            turnCurrent = Turn.OPPONENT;
-            ////////////////////////////
-            /////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////
+                critterOfPlayer.doDamage(critterOfOpponent, damageEffective);
+                /////////////////////////////////////////////////////////////
+                ////////////////////////////
+                //DECREMENT ppCurrent of the move used.
+                movesModule.decrementPpMovesCurrent(index);
+                ////////////////////////////
+                ////////////////////////////
+                turnCurrent = Turn.OPPONENT;
+                ////////////////////////////
+            } else {
+                System.out.println("NOT ENOUGH ppCurrent!");
+            }
         }
         //bButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_PERIOD)) {

@@ -164,6 +164,14 @@ public class MovesModule {
         return numberMovesKnown;
     }
 
+    public void decrementPpMovesCurrent(int index) {
+        ppMovesCurrent[index]--;
+
+        if (ppMovesCurrent[index] < 0) {
+            ppMovesCurrent[index] = 0;
+        }
+    }
+
     public int[] getMovesCurrent() { return movesCurrent; }
 
     public int[] getPpMovesCurrent() { return ppMovesCurrent; }
