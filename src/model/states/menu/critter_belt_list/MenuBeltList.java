@@ -16,7 +16,7 @@ import java.awt.image.BufferedImage;
 
 public class MenuBeltList implements IState {
 
-    public static final int X_OFFSET_CURSOR = 3, Y_OFFSET_CURSOR = 27;
+//    public static final int X_OFFSET_CURSOR = 3, Y_OFFSET_CURSOR = 27;
 
     private Handler handler;
     private Player player;
@@ -30,7 +30,8 @@ public class MenuBeltList implements IState {
         this.player = player;
 
         indexCritterBeltList = 0;
-        cursor = new Cursor(3, 27, 60);
+        cursor = new Cursor(3, 27, 60, 20, 20);
+        cursor.updateCursorPosition(indexCritterBeltList);
 //        updateCursorPosition();
     } // **** end MenuBeltList(Handler, Player) constructor ****
 
@@ -92,7 +93,7 @@ public class MenuBeltList implements IState {
                 StateMachine stateMachine = menuState.getStateMachine();
                 int widthSpeciesIcon = player.getCritterBeltList().get(indexCritterBeltList).getSpeciesIcon().getWidth();
 
-                int xNewPanel = (25 + widthSpeciesIcon + X_OFFSET_CURSOR);
+                int xNewPanel = (25 + widthSpeciesIcon + cursor.getxOffset());
                 ///////////////////////////////////////////////////////////////////////////////
                 //if in top part of the screen, set the new IState's yStart BELOW nameColloquial
                 //if in bottom part of screen, set the new IState's yStart ABOVE nameColloquial.

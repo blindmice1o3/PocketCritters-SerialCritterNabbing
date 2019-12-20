@@ -7,6 +7,7 @@ import model.entities.critters.Critter;
 import model.states.IState;
 import model.states.StateMachine;
 import model.states.menu.MenuState;
+import view.Cursor;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -19,14 +20,17 @@ public class MenuBeltListActionSwap implements IState {
     private int indexFirstCritterSelected;
 
     private int indexCurrentCritterSelected;
-    private int xCursor, yCursor;
+    private Cursor cursor;
+//    private int xCursor, yCursor;
 
     public MenuBeltListActionSwap(Handler handler, Player player) {
         this.handler = handler;
         this.player = player;
 
         indexCurrentCritterSelected = 0;
-        updateCursorPosition();
+        cursor = new Cursor(3 , 27, 60, 20, 20);
+        cursor.updateCursorPosition(indexCurrentCritterSelected);
+//        updateCursorPosition();
     } // **** end MenuBeltListActionSwap(Handler, Player) constructor ****
 
     @Override
@@ -44,7 +48,7 @@ public class MenuBeltListActionSwap implements IState {
                 indexCurrentCritterSelected = (player.getCritterBeltList().size() - 1);
             }
 
-            updateCursorPosition();
+            cursor.updateCursorPosition(indexCurrentCritterSelected);
         }
         //downButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) {
@@ -59,7 +63,7 @@ public class MenuBeltListActionSwap implements IState {
                 indexCurrentCritterSelected = 0;
             }
 
-            updateCursorPosition();
+            cursor.updateCursorPosition(indexCurrentCritterSelected);
         }
         //bButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_PERIOD)) {
@@ -110,10 +114,10 @@ public class MenuBeltListActionSwap implements IState {
         }
     }
 
-    private void updateCursorPosition() {
+    /*private void updateCursorPosition() {
         xCursor = MenuBeltList.X_OFFSET_CURSOR;
         yCursor = MenuBeltList.Y_OFFSET_CURSOR + (indexCurrentCritterSelected * 60);
-    }
+    }*/
 
     @Override
     public void render(Graphics g) {
@@ -122,7 +126,8 @@ public class MenuBeltListActionSwap implements IState {
         menuState.getStateMachine().getIState("MenuBeltList").render(g);
 
         //CURSOR
-        g.drawImage(Assets.critterBallSprite, xCursor, yCursor, 20, 20, null);
+        cursor.render(g);
+//        g.drawImage(Assets.critterBallSprite, xCursor, yCursor, 20, 20, null);
     }
 
     @Override
@@ -132,7 +137,7 @@ public class MenuBeltListActionSwap implements IState {
 
             if (indexFirstCritterSelected == 0) {
                 indexCurrentCritterSelected = 1;
-                updateCursorPosition();
+                cursor.updateCursorPosition(indexCurrentCritterSelected);
             }
         }
     }

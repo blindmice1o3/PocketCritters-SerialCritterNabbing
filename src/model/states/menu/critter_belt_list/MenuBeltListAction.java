@@ -6,6 +6,7 @@ import main.utils.FontGrabber;
 import model.entities.Player;
 import model.states.IState;
 import model.states.menu.MenuState;
+import view.Cursor;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -26,24 +27,27 @@ public class MenuBeltListAction implements IState {
 
     //initialized when enter(Object]) is called (tracks its background panel position).
     private int xPanel, yPanel;
-    private final int xOffsetCursor, yOffsetCursor;
+    //private final int xOffsetCursor, yOffsetCursor;
     //is relative to the current Action (the currentAction).
-    private int xCursor, yCursor;
+    private Cursor cursor;
+//    private int xCursor, yCursor;
 
     public MenuBeltListAction(Handler handler, Player player) {
         this.handler = handler;
         this.player = player;
 
-        xOffsetCursor = 5;
-        yOffsetCursor = 10;
+        //xOffsetCursor = 5;
+        //yOffsetCursor = 10;
 
         currentAction = Action.SUMMARY;
+
+        cursor = new Cursor(0, 0, 40, 20, 20);
     } // **** end MenuBeltListAction(Handler, Player) constructor ****
 
-    private void updateCursorPosition() {
+    /*private void updateCursorPosition() {
         xCursor = xPanel + xOffsetCursor;
         yCursor = yPanel + yOffsetCursor + (currentAction.ordinal() * 40);
-    }
+    }*/
 
     @Override
     public void tick(long timeElapsed) {
@@ -57,7 +61,7 @@ public class MenuBeltListAction implements IState {
                 currentAction = Action.values()[(Action.values().length - 1)];
             }
 
-            updateCursorPosition();
+            cursor.updateCursorPosition(currentAction.ordinal());
         }
         //downButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) {
@@ -69,7 +73,7 @@ public class MenuBeltListAction implements IState {
                 currentAction = Action.values()[0];
             }
 
-            updateCursorPosition();
+            cursor.updateCursorPosition(currentAction.ordinal());
         }
         //bButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_PERIOD)) {
@@ -130,16 +134,17 @@ public class MenuBeltListAction implements IState {
 
         //LIST OF ACTIONS
         g.setColor(Color.BLUE);
-        int xString = xPanel + xOffsetCursor + 20 + xOffsetCursor;
+        int xString = cursor.getxOffset() + 20 + 5;
         for (int i = 0; i < Action.values().length; i++) {
-            int yString = yPanel + yOffsetCursor + (i * 40);
+            int yString = cursor.getyOffset() + (i * 40);
 
             String nameMenuElement = Action.values()[i].toString();
             FontGrabber.renderString(g, nameMenuElement, xString, yString, 20, 20);
         }
 
         //CURSOR
-        g.drawImage(Assets.critterBallSprite, xCursor, yCursor, 20, 20, null);
+        cursor.render(g);
+//        g.drawImage(Assets.critterBallSprite, xCursor, yCursor, 20, 20, null);
 
     }
 
@@ -153,7 +158,9 @@ public class MenuBeltListAction implements IState {
                 yPanel = cursorPositionAndIndexCritterBeltList[1];
                 indexCritterBeltList = cursorPositionAndIndexCritterBeltList[2];
 
-                updateCursorPosition();
+                cursor.setxOffset(xPanel + 5);
+                cursor.setyOffset(yPanel + 10);
+                cursor.updateCursorPosition(currentAction.ordinal());
             }
         }
     }
