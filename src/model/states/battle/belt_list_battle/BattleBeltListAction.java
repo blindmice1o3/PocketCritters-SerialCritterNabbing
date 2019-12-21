@@ -87,15 +87,15 @@ public class BattleBeltListAction implements IState {
             Object[] args = { indexCritterBeltList };
             switch (currentAction) {
                 case SWAP:
-                    BattleBeltListActionSwap battleBeltListActionSwap = (BattleBeltListActionSwap)battleState.getStateMachine().getIState("BattleBeltListActionSwap");
+                    BattleBeltListActionSwap battleBeltListActionSwap = (BattleBeltListActionSwap) battleState.getStateMachine().getIState("BattleBeltListActionSwap");
                     ///////////////////////////////
-                    battleState.getStateMachine().push( battleBeltListActionSwap, args );
+                    battleState.getStateMachine().push(battleBeltListActionSwap, args);
                     ///////////////////////////////
                     break;
                 case SUMMARY:
-                    BattleBeltListActionSummary battleBeltListActionSummary = (BattleBeltListActionSummary)battleState.getStateMachine().getIState("BattleBeltListActionSummary");
+                    BattleBeltListActionSummary battleBeltListActionSummary = (BattleBeltListActionSummary) battleState.getStateMachine().getIState("BattleBeltListActionSummary");
                     ///////////////////////////////
-                    battleState.getStateMachine().push( battleBeltListActionSummary, args );
+                    battleState.getStateMachine().push(battleBeltListActionSummary, args);
                     ///////////////////////////////
                     break;
                 case CANCEL:

@@ -104,7 +104,7 @@ public class MenuBeltListActionSwap implements IState {
             player.setCritterBeltList(critterBeltListCopy);
             //pop self (MenuBeltListActionSwap).
             stateMachine.pop();
-            //pop self (MenuBeltListAction).
+            //pop (MenuBeltListAction).
             stateMachine.pop();
             //now MenuBeltList.
             ///////////////////////////////////////////////
@@ -124,7 +124,7 @@ public class MenuBeltListActionSwap implements IState {
     @Override
     public void enter(Object[] args) {
         if (args != null) {
-            indexFirstCritterSelected = (int) args[0];
+            indexFirstCritterSelected = (int)args[0];
 
 
             indexCurrentCritterSelected = indexFirstCritterSelected + 1;
