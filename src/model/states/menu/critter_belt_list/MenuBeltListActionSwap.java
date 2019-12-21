@@ -1,7 +1,6 @@
 package model.states.menu.critter_belt_list;
 
 import main.Handler;
-import main.gfx.Assets;
 import model.entities.Player;
 import model.entities.critters.Critter;
 import model.states.IState;
@@ -21,7 +20,6 @@ public class MenuBeltListActionSwap implements IState {
 
     private int indexCurrentCritterSelected;
     private Cursor cursor;
-//    private int xCursor, yCursor;
 
     public MenuBeltListActionSwap(Handler handler, Player player) {
         this.handler = handler;
@@ -30,7 +28,6 @@ public class MenuBeltListActionSwap implements IState {
         indexCurrentCritterSelected = 0;
         cursor = new Cursor(3 , 27, 60, 20, 20);
         cursor.updateCursorPosition(indexCurrentCritterSelected);
-//        updateCursorPosition();
     } // **** end MenuBeltListActionSwap(Handler, Player) constructor ****
 
     @Override
@@ -114,11 +111,6 @@ public class MenuBeltListActionSwap implements IState {
         }
     }
 
-    /*private void updateCursorPosition() {
-        xCursor = MenuBeltList.X_OFFSET_CURSOR;
-        yCursor = MenuBeltList.Y_OFFSET_CURSOR + (indexCurrentCritterSelected * 60);
-    }*/
-
     @Override
     public void render(Graphics g) {
         MenuState menuState = (MenuState)handler.getStateManager().getIState("MenuState");
@@ -127,18 +119,20 @@ public class MenuBeltListActionSwap implements IState {
 
         //CURSOR
         cursor.render(g);
-//        g.drawImage(Assets.critterBallSprite, xCursor, yCursor, 20, 20, null);
     }
 
     @Override
     public void enter(Object[] args) {
         if (args != null) {
-            indexFirstCritterSelected = (int)args[0];
+            indexFirstCritterSelected = (int) args[0];
 
-            if (indexFirstCritterSelected == 0) {
-                indexCurrentCritterSelected = 1;
-                cursor.updateCursorPosition(indexCurrentCritterSelected);
+
+            indexCurrentCritterSelected = indexFirstCritterSelected + 1;
+            if (indexCurrentCritterSelected > (player.getCritterBeltList().size() - 1)) {
+                indexCurrentCritterSelected = 0;
             }
+
+            cursor.updateCursorPosition(indexCurrentCritterSelected);
         }
     }
 

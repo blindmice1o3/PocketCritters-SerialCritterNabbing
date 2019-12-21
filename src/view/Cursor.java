@@ -6,14 +6,10 @@ import java.awt.*;
 
 public class Cursor {
 
-    /**
-     * xOffset will be (xPanel + xOffsetCursor).
-     * yOffset will be (yPanel + yOffsetCursor).
-     */
     private int xOffset, yOffset;
     private int lineHeight;
 
-    //is relative to the index of blahBlahCurrent.
+    //is relative to the currentIndexBlahBlah.
     private int x, y;
     private int width, height;
 
@@ -34,7 +30,6 @@ public class Cursor {
 
     public void render(Graphics g) {
         g.drawImage(Assets.cursorSprite, x, y, width, height, null);
-//        g.drawImage(Assets.critterBallSprite, x, y, 20, 20, null);
     }
 
     // GETTERS AND SETTERS

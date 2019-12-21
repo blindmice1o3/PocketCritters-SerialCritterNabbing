@@ -1,7 +1,6 @@
 package model.states.menu.critter_belt_list;
 
 import main.Handler;
-import main.gfx.Assets;
 import main.utils.FontGrabber;
 import model.entities.Player;
 import model.states.IState;
@@ -21,33 +20,24 @@ public class MenuBeltListAction implements IState {
 
     private Handler handler;
     private Player player;
-    private int indexCritterBeltList;
 
     private Action currentAction;
+    //is relative to the current Action (the currentAction).
+    private Cursor cursor;
 
     //initialized when enter(Object]) is called (tracks its background panel position).
     private int xPanel, yPanel;
-    //private final int xOffsetCursor, yOffsetCursor;
-    //is relative to the current Action (the currentAction).
-    private Cursor cursor;
-//    private int xCursor, yCursor;
+    //initialized when enter(Object]) is called, to be passed when pushing the next IState.
+    private int indexCritterBeltList;
 
     public MenuBeltListAction(Handler handler, Player player) {
         this.handler = handler;
         this.player = player;
 
-        //xOffsetCursor = 5;
-        //yOffsetCursor = 10;
-
         currentAction = Action.SUMMARY;
-
+        //place-holder for now (when instantiated)... actual xOffset and yOffset values assigned in enter(Object[]).
         cursor = new Cursor(0, 0, 40, 20, 20);
     } // **** end MenuBeltListAction(Handler, Player) constructor ****
-
-    /*private void updateCursorPosition() {
-        xCursor = xPanel + xOffsetCursor;
-        yCursor = yPanel + yOffsetCursor + (currentAction.ordinal() * 40);
-    }*/
 
     @Override
     public void tick(long timeElapsed) {
@@ -144,8 +134,6 @@ public class MenuBeltListAction implements IState {
 
         //CURSOR
         cursor.render(g);
-//        g.drawImage(Assets.critterBallSprite, xCursor, yCursor, 20, 20, null);
-
     }
 
     @Override

@@ -16,14 +16,11 @@ import java.awt.image.BufferedImage;
 
 public class MenuBeltList implements IState {
 
-//    public static final int X_OFFSET_CURSOR = 3, Y_OFFSET_CURSOR = 27;
-
     private Handler handler;
     private Player player;
 
     private int indexCritterBeltList;
     private Cursor cursor;
-    //private int xCursor, yCursor;
 
     public MenuBeltList(Handler handler, Player player) {
         this.handler = handler;
@@ -32,13 +29,7 @@ public class MenuBeltList implements IState {
         indexCritterBeltList = 0;
         cursor = new Cursor(3, 27, 60, 20, 20);
         cursor.updateCursorPosition(indexCritterBeltList);
-//        updateCursorPosition();
     } // **** end MenuBeltList(Handler, Player) constructor ****
-
-    /*private void updateCursorPosition() {
-        xCursor = X_OFFSET_CURSOR;
-        yCursor = Y_OFFSET_CURSOR + (indexCritterBeltList * 60);
-    }*/
 
     @Override
     public void tick(long timeElapsed) {
@@ -80,8 +71,7 @@ public class MenuBeltList implements IState {
             ///////////////////////////////
         }
         //aButton
-        //TODO: pushes MenuBeltListAction onto top of MenuState's stateManager.
-        //TODO: !!! pass in xCursor and yCursor (and indexCritterBeltList) as an int[] for Object[] args during enter(Object[]). !!!
+        //pass in xCursor and yCursor (and indexCritterBeltList) as an int[] for Object[] args during enter(Object[]).
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_COMMA)) {
             System.out.println("MenuBeltList.tick(long)... aButton");
             //for developer (to be removed later).
@@ -143,7 +133,6 @@ public class MenuBeltList implements IState {
 
         //CURSOR
         cursor.render(g);
-//        g.drawImage(Assets.critterBallSprite, xCursor, yCursor, 20, 20, null);
     }
 
     @Override

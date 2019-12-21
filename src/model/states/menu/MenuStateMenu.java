@@ -5,7 +5,6 @@ import main.gfx.Assets;
 import model.entities.Player;
 import model.states.IState;
 import model.states.StateMachine;
-import model.states.StateManager;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
