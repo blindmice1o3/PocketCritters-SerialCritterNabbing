@@ -5,6 +5,7 @@ import main.gfx.Assets;
 import main.utils.FontGrabber;
 import model.entities.Player;
 import model.entities.critters.Critter;
+import model.entities.critters.stats.StatsModule;
 import model.states.IState;
 import model.states.StateMachine;
 import model.states.menu.MenuState;
@@ -19,16 +20,16 @@ public class MenuBeltList implements IState {
     private Handler handler;
     private Player player;
 
-    private int indexCritterBeltList;
+    private int index;
     private Cursor cursor;
 
     public MenuBeltList(Handler handler, Player player) {
         this.handler = handler;
         this.player = player;
 
-        indexCritterBeltList = 0;
+        index = 0;
         cursor = new Cursor(3, 27, 60, 20, 20);
-        cursor.updateCursorPosition(indexCritterBeltList);
+        cursor.updateCursorPosition(index);
     } // **** end MenuBeltList(Handler, Player) constructor ****
 
     @Override
@@ -37,23 +38,23 @@ public class MenuBeltList implements IState {
         if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {
             System.out.println("MenuBeltList.tick(long)... upButton");
 
-            indexCritterBeltList--;
-            if (indexCritterBeltList < 0) {
-                indexCritterBeltList = (player.getCritterBeltList().size() - 1);
+            index--;
+            if (index < 0) {
+                index = (player.getCritterBeltList().size() - 1);
             }
 
-            cursor.updateCursorPosition(indexCritterBeltList);
+            cursor.updateCursorPosition(index);
         }
         //downButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) {
             System.out.println("MenuBeltList.tick(long)... downButton");
 
-            indexCritterBeltList++;
-            if (indexCritterBeltList > (player.getCritterBeltList().size() - 1)) {
-                indexCritterBeltList = 0;
+            index++;
+            if (index > (player.getCritterBeltList().size() - 1)) {
+                index = 0;
             }
 
-            cursor.updateCursorPosition(indexCritterBeltList);
+            cursor.updateCursorPosition(index);
         }
         //bButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_PERIOD)) {
@@ -71,17 +72,17 @@ public class MenuBeltList implements IState {
             ///////////////////////////////
         }
         //aButton
-        //pass in xCursor and yCursor (and indexCritterBeltList) as an int[] for Object[] args during enter(Object[]).
+        //pass in xCursor and yCursor (and index) as an int[] for Object[] args during enter(Object[]).
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_COMMA)) {
             System.out.println("MenuBeltList.tick(long)... aButton");
             //for developer (to be removed later).
-            Critter critter = player.getCritterBeltList().get(indexCritterBeltList);
+            Critter critter = player.getCritterBeltList().get(index);
             critter.getStatsModule().consoleOutIVsAndEVs( critter.getNameColloquial() );
 
             if (handler.getStateManager().getCurrentState() instanceof MenuState) {
                 MenuState menuState = (MenuState)handler.getStateManager().getCurrentState();
                 StateMachine stateMachine = menuState.getStateMachine();
-                int widthSpeciesIcon = player.getCritterBeltList().get(indexCritterBeltList).getSpeciesIcon().getWidth();
+                int widthSpeciesIcon = player.getCritterBeltList().get(index).getSpeciesIcon().getWidth();
 
                 int xNewPanel = (25 + widthSpeciesIcon + cursor.getxOffset());
                 ///////////////////////////////////////////////////////////////////////////////
@@ -91,7 +92,7 @@ public class MenuBeltList implements IState {
                         (cursor.getY()+5) : (cursor.getY()+5- MenuBeltListAction.HEIGHT-20-3);
                 ///////////////////////////////////////////////////////////////////////////////
 
-                int[] cursorPositionAndIndexCritterBeltList = { xNewPanel, yNewPanel, indexCritterBeltList };
+                int[] cursorPositionAndIndexCritterBeltList = { xNewPanel, yNewPanel, index};
                 Object[] args = { cursorPositionAndIndexCritterBeltList };
 
                 ///////////////////////////////////////////////////////////////////////////////
@@ -106,9 +107,8 @@ public class MenuBeltList implements IState {
     @Override
     public void render(Graphics g) {
         //BACKGROUND
-        g.drawImage(Assets.backgroundCritterBeltList,
-                0, 0, handler.getGame().getWidth(), handler.getGame().getHeight(),
-                0, 0, Assets.backgroundCritterBeltList.getWidth(), Assets.backgroundCritterBeltList.getHeight(), null);
+        g.drawImage(Assets.backgroundCritterBeltList, 0, 0,
+                handler.getGame().getWidth(), handler.getGame().getHeight(), null);
 
         //CritterBeltList
         BufferedImage speciesIcon = null;
@@ -119,14 +119,14 @@ public class MenuBeltList implements IState {
             speciesIcon = player.getCritterBeltList().get(i).getSpeciesIcon();
             String name = player.getCritterBeltList().get(i).getNameColloquial();
             String level = String.format("%02d", player.getCritterBeltList().get(i).getLevel());
-            String hpCurrent = String.format("%3d", player.getCritterBeltList().get(i).getHpEffectiveCurrent());
-            String hpBase = String.format("%3d", player.getCritterBeltList().get(i).getSpecies().getHpBase());
+            String hpEffectiveCurrent = String.format("%3d", player.getCritterBeltList().get(i).getHpEffectiveCurrent());
+            String hpEffectiveMax = String.format("%3d", player.getCritterBeltList().get(i).getStatsModule().getStatsEffectiveMap().get(StatsModule.Type.HP));
             ///////////////////////////////
             g.drawImage(speciesIcon, xOffset, yOffset, null);
             FontGrabber.renderString(g, name, (xOffset + speciesIcon.getWidth() + 5), (yOffset + 5), 20, 20);
             FontGrabber.renderString(g, level, (xOffset + 430), (yOffset + 2), 20, 20);
-            FontGrabber.renderString(g, hpCurrent, (xOffset + 430), (yOffset + 32), 20, 20);
-            FontGrabber.renderString(g, hpBase, (xOffset + 520), (yOffset + 32), 20, 20);
+            FontGrabber.renderString(g, hpEffectiveCurrent, (xOffset + 430), (yOffset + 32), 20, 20);
+            FontGrabber.renderString(g, hpEffectiveMax, (xOffset + 520), (yOffset + 32), 20, 20);
             ///////////////////////////////
             yOffset += 60;
         }
