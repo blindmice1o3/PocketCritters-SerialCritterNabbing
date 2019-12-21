@@ -1,21 +1,20 @@
-package model.states.menu.critter_belt_list;
+package model.states.battle.belt_list_battle;
 
 import main.Handler;
 import main.gfx.Assets;
 import main.utils.FontGrabber;
 import model.entities.Player;
-import model.entities.critters.Critter;
 import model.entities.critters.stats.StatsModule;
 import model.states.IState;
 import model.states.StateMachine;
-import model.states.menu.MenuState;
+import model.states.battle.BattleState;
 import view.Cursor;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
-public class MenuBeltList implements IState {
+public class BattleBeltList implements IState {
 
     private Handler handler;
     private Player player;
@@ -23,20 +22,19 @@ public class MenuBeltList implements IState {
     private int index;
     private Cursor cursor;
 
-    public MenuBeltList(Handler handler, Player player) {
+    public BattleBeltList(Handler handler, Player player) {
         this.handler = handler;
         this.player = player;
 
         index = 0;
         cursor = new Cursor(3, 27, 60, 20, 20);
-        cursor.updateCursorPosition(index);
-    } // **** end MenuBeltList(Handler, Player) constructor ****
+    } // **** end BattleBeltList(Handler, Player) constructor ****
 
     @Override
     public void tick(long timeElapsed) {
         //upButton
         if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {
-            System.out.println("MenuBeltList.tick(long)... upButton");
+            System.out.println("BattleBeltList.tick(long)... upButton");
 
             index--;
             if (index < 0) {
@@ -47,7 +45,7 @@ public class MenuBeltList implements IState {
         }
         //downButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) {
-            System.out.println("MenuBeltList.tick(long)... downButton");
+            System.out.println("BattleBeltList.tick(long)... downButton");
 
             index++;
             if (index > (player.getCritterBeltList().size() - 1)) {
@@ -58,30 +56,28 @@ public class MenuBeltList implements IState {
         }
         //bButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_PERIOD)) {
-            System.out.println("MenuBeltList.tick(long)... bButton");
+            System.out.println("BattleBeltList.tick(long)... bButton");
 
             ///////////////////////////////
-            if (handler.getStateManager().getCurrentState() instanceof MenuState) {
-                MenuState menuState = (MenuState)handler.getStateManager().getCurrentState();
-                StateMachine stateMachine = menuState.getStateMachine();
+            if (handler.getStateManager().getCurrentState() instanceof BattleState) {
+                BattleState battleState = (BattleState)handler.getStateManager().getCurrentState();
+                StateMachine stateMachine = battleState.getStateMachine();
 
-                //pop self (MenuBeltList).
+                //pop self (BattleBeltList).
                 stateMachine.pop();
-                //now MenuStateMenu.
+                //now BattleStateMenu.
             }
             ///////////////////////////////
         }
         //aButton
         //pass in xCursor and yCursor (and index) as an int[] for Object[] args during enter(Object[]).
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_COMMA)) {
-            System.out.println("MenuBeltList.tick(long)... aButton");
-            //for developer (to be removed later).
-            Critter critter = player.getCritterBeltList().get(index);
-            critter.getStatsModule().consoleOutIVsAndEVs( critter.getNameColloquial() );
+            System.out.println("BattleBeltList.tick(long)... aButton");
+            System.out.println("Critter selected: " + player.getCritterBeltList().get(index) );
 
-            if (handler.getStateManager().getCurrentState() instanceof MenuState) {
-                MenuState menuState = (MenuState)handler.getStateManager().getCurrentState();
-                StateMachine stateMachine = menuState.getStateMachine();
+            if (handler.getStateManager().getCurrentState() instanceof BattleState) {
+                BattleState battleState = (BattleState)handler.getStateManager().getCurrentState();
+                StateMachine stateMachine = battleState.getStateMachine();
                 int widthSpeciesIcon = player.getCritterBeltList().get(index).getSpeciesIcon().getWidth();
 
                 int xNewPanel = (25 + widthSpeciesIcon + cursor.getxOffset());
@@ -89,7 +85,7 @@ public class MenuBeltList implements IState {
                 //if in top part of the screen, set the new IState's yStart BELOW nameColloquial
                 //if in bottom part of screen, set the new IState's yStart ABOVE nameColloquial.
                 int yNewPanel = (cursor.getY() < (handler.getGame().getWidth() / 3)) ?
-                        (cursor.getY()+5) : (cursor.getY()+5- MenuBeltListAction.HEIGHT-20-3);
+                        (cursor.getY()+5) : (cursor.getY()+5-BattleBeltListAction.HEIGHT-20-3);
                 ///////////////////////////////////////////////////////////////////////////////
 
                 int[] cursorPositionAndIndexCritterBeltList = { xNewPanel, yNewPanel, index};
@@ -97,7 +93,7 @@ public class MenuBeltList implements IState {
 
                 ///////////////////////////////////////////////////////////////////////////////
                 stateMachine.push(
-                    stateMachine.getIState("MenuBeltListAction"), args
+                        stateMachine.getIState("BattleBeltListAction"), args
                 );
                 ///////////////////////////////////////////////////////////////////////////////
             }
@@ -145,4 +141,4 @@ public class MenuBeltList implements IState {
 
     }
 
-} // **** end MenuBeltList class ****
+} // **** end BattleBeltList class ****

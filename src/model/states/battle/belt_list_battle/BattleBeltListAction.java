@@ -1,21 +1,21 @@
-package model.states.menu.critter_belt_list;
+package model.states.battle.belt_list_battle;
 
 import main.Handler;
 import main.utils.FontGrabber;
 import model.entities.Player;
 import model.states.IState;
-import model.states.menu.MenuState;
+import model.states.battle.BattleState;
 import view.Cursor;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-public class MenuBeltListAction implements IState {
+public class BattleBeltListAction implements IState {
 
     public static final int WIDTH = 160, HEIGHT = 120;
 
     private enum Action {
-        SUMMARY, SWAP, CANCEL;
+        SWAP, SUMMARY, CANCEL;
     }
 
     private Handler handler;
@@ -30,20 +30,20 @@ public class MenuBeltListAction implements IState {
     //initialized when enter(Object]) is called, to be passed when pushing the next IState.
     private int indexCritterBeltList;
 
-    public MenuBeltListAction(Handler handler, Player player) {
+    public BattleBeltListAction(Handler handler, Player player) {
         this.handler = handler;
         this.player = player;
 
-        currentAction = Action.SUMMARY;
+        currentAction = Action.SWAP;
         //place-holder for now (when instantiated)... actual xOffset and yOffset values assigned in enter(Object[]).
         cursor = new Cursor(0, 0, 40, 20, 20);
-    } // **** end MenuBeltListAction(Handler, Player) constructor ****
+    } // **** end BattleBeltListAction(Handler, Player) constructor ****
 
     @Override
     public void tick(long timeElapsed) {
         //upButton
         if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {
-            System.out.println("MenuBeltListAction.tick(long)... upButton");
+            System.out.println("BattleBeltListAction.tick(long)... upButton");
 
             if ((currentAction.ordinal() - 1) >= 0) {
                 currentAction = Action.values()[(currentAction.ordinal() - 1)];
@@ -55,7 +55,7 @@ public class MenuBeltListAction implements IState {
         }
         //downButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)) {
-            System.out.println("MenuBeltListAction.tick(long)... downButton");
+            System.out.println("BattleBeltListAction.tick(long)... downButton");
 
             if ((currentAction.ordinal() + 1) <= (Action.values().length - 1)) {
                 currentAction = Action.values()[(currentAction.ordinal() + 1)];
@@ -67,46 +67,46 @@ public class MenuBeltListAction implements IState {
         }
         //bButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_PERIOD)) {
-            System.out.println("MenuBeltListAction.tick(long)... bButton");
+            System.out.println("BattleBeltListAction.tick(long)... bButton");
 
             ///////////////////////////////
-            if (handler.getStateManager().getCurrentState() instanceof MenuState) {
-                MenuState menuState = (MenuState) handler.getStateManager().getCurrentState();
-                //pop self (MenuBeltListAction).
-                menuState.getStateMachine().pop();
-                //now MenuBeltList.
+            if (handler.getStateManager().getCurrentState() instanceof BattleState) {
+                BattleState battleState = (BattleState) handler.getStateManager().getCurrentState();
+                //pop self (BattleBeltListAction).
+                battleState.getStateMachine().pop();
+                //now BattleBeltList.
             }
             ///////////////////////////////
         }
         //aButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_COMMA)) {
-            System.out.println("MenuBeltListAction.tick(long)... aButton");
+            System.out.println("BattleBeltListAction.tick(long)... aButton");
             System.out.println("currentAction: " + currentAction.toString() + ".");
 
-            MenuState menuState = (MenuState)handler.getStateManager().getIState("MenuState");
+            BattleState battleState = (BattleState)handler.getStateManager().getIState("BattleState");
             Object[] args = { indexCritterBeltList };
             switch (currentAction) {
-                case SUMMARY:
-                    MenuBeltListActionSummary menuBeltListActionSummary = (MenuBeltListActionSummary)menuState.getStateMachine().getIState("MenuBeltListActionSummary");
+                case SWAP:
+                    BattleBeltListActionSwap battleBeltListActionSwap = (BattleBeltListActionSwap)battleState.getStateMachine().getIState("BattleBeltListActionSwap");
                     ///////////////////////////////
-                    menuState.getStateMachine().push(menuBeltListActionSummary, args );
+                    battleState.getStateMachine().push( battleBeltListActionSwap, args );
                     ///////////////////////////////
                     break;
-                case SWAP:
-                    MenuBeltListActionSwap menuBeltListActionSwap = (MenuBeltListActionSwap)menuState.getStateMachine().getIState("MenuBeltListActionSwap");
+                case SUMMARY:
+                    BattleBeltListActionSummary battleBeltListActionSummary = (BattleBeltListActionSummary)battleState.getStateMachine().getIState("BattleBeltListActionSummary");
                     ///////////////////////////////
-                    menuState.getStateMachine().push( menuBeltListActionSwap, args );
+                    battleState.getStateMachine().push( battleBeltListActionSummary, args );
                     ///////////////////////////////
                     break;
                 case CANCEL:
                     ///////////////////////////////
-                    //pop self (MenuBeltListAction).
-                    menuState.getStateMachine().pop();
-                    //now MenuBeltList.
+                    //pop self (BattleBeltListAction).
+                    battleState.getStateMachine().pop();
+                    //now BattleBeltList.
                     ///////////////////////////////
                     break;
                 default:
-                    System.out.println("MenuBeltListAction.tick(long)... aButton's switch(currentAction) construct's default block.");
+                    System.out.println("BattleBeltListAction.tick(long)... aButton's switch(currentAction) construct's default block.");
                     break;
             }
         }
@@ -114,9 +114,9 @@ public class MenuBeltListAction implements IState {
 
     @Override
     public void render(Graphics g) {
-        MenuState menuState = (MenuState)handler.getStateManager().getIState("MenuState");
+        BattleState battleState = (BattleState)handler.getStateManager().getIState("BattleState");
         //re-draw the IState below this one as background.
-        menuState.getStateMachine().getIState("MenuBeltList").render(g);
+        battleState.getStateMachine().getIState("BattleBeltList").render(g);
 
         //PANEL
         g.setColor(Color.YELLOW);
@@ -158,4 +158,4 @@ public class MenuBeltListAction implements IState {
 
     }
 
-} // **** end MenuBeltListAction class ****
+} // **** end BattleBeltListAction class ****

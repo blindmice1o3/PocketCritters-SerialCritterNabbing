@@ -5,6 +5,10 @@ import model.entities.Player;
 import model.entities.critters.Critter;
 import model.states.IState;
 import model.states.StateMachine;
+import model.states.battle.belt_list_battle.BattleBeltList;
+import model.states.battle.belt_list_battle.BattleBeltListAction;
+import model.states.battle.belt_list_battle.BattleBeltListActionSummary;
+import model.states.battle.belt_list_battle.BattleBeltListActionSwap;
 
 import java.awt.*;
 
@@ -23,7 +27,10 @@ public class BattleState implements IState {
         this.handler = handler;
         this.player = player;
 
+        //TODO: random CritterFactory based on tile's x and y values compared to WorldMap's enum of City, Route, and Place.
         critterOfOpponent = new Critter(handler, Critter.Species.COASTAL_GULL, 6);
+
+        //TODO: reward/experience/leveling.
 
         initStateMachine();
     } // **** end BattleState(Handler, Player) constructor ****
@@ -35,7 +42,10 @@ public class BattleState implements IState {
         stateMachine.addIStateToCollection("BattleStateMenu", new BattleStateMenu(handler, player));
         stateMachine.addIStateToCollection("BattleStateFight", new BattleStateFight(handler, player));
         stateMachine.addIStateToCollection("BattleStateItemList", new BattleStateItemList(handler, player));
-        stateMachine.addIStateToCollection("BattleStateCritterBeltList", new BattleStateCritterBeltList(handler, player));
+        stateMachine.addIStateToCollection("BattleBeltList", new BattleBeltList(handler, player));
+        stateMachine.addIStateToCollection("BattleBeltListAction", new BattleBeltListAction(handler, player));
+        stateMachine.addIStateToCollection("BattleBeltListActionSwap", new BattleBeltListActionSwap(handler, player));
+        stateMachine.addIStateToCollection("BattleBeltListActionSummary", new BattleBeltListActionSummary(handler, player));
         stateMachine.addIStateToCollection("BattleStateRun", new BattleStateRun(handler, player));
         stateMachine.addIStateToCollection("BattleStateOutro", new BattleStateOutro(handler, player));
 

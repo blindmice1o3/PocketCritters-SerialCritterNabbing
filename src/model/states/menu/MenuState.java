@@ -4,10 +4,10 @@ import main.Handler;
 import model.entities.Player;
 import model.states.IState;
 import model.states.StateMachine;
-import model.states.menu.critter_belt_list.MenuBeltList;
-import model.states.menu.critter_belt_list.MenuBeltListAction;
-import model.states.menu.critter_belt_list.MenuBeltListActionSummary;
-import model.states.menu.critter_belt_list.MenuBeltListActionSwap;
+import model.states.menu.belt_list_menu.MenuBeltList;
+import model.states.menu.belt_list_menu.MenuBeltListAction;
+import model.states.menu.belt_list_menu.MenuBeltListActionSummary;
+import model.states.menu.belt_list_menu.MenuBeltListActionSwap;
 
 import java.awt.*;
 

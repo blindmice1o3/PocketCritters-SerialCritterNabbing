@@ -1,4 +1,4 @@
-package model.states.menu.critter_belt_list;
+package model.states.menu.belt_list_menu;
 
 import main.Handler;
 import main.utils.FontGrabber;

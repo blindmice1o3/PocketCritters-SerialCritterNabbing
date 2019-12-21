@@ -27,7 +27,7 @@ public class BattleStateMenu implements IState {
         yIndex = 0;
         menuMatrix = new String[2][2];
         menuMatrix[0][0] = "BattleStateFight";
-        menuMatrix[0][1] = "BattleStateCritterBeltList";
+        menuMatrix[0][1] = "BattleBeltList";
         menuMatrix[1][0] = "BattleStateItemList";
         menuMatrix[1][1] = "BattleStateRun";
     } // **** end BattleStateMenu(Handler, Player) constructor ****
@@ -125,7 +125,7 @@ public class BattleStateMenu implements IState {
 
         if (menuMatrix[yIndex][xIndex].equals("BattleStateFight")) {
             g.drawImage(Assets.cursorSprite, 290, 423, 7 * 4, 7 * 4, null);
-        } else if (menuMatrix[yIndex][xIndex].equals("BattleStateCritterBeltList")) {
+        } else if (menuMatrix[yIndex][xIndex].equals("BattleBeltList")) {
             g.drawImage(Assets.cursorSprite, 483, 423, 7 * 4, 7 * 4, null);
         } else if (menuMatrix[yIndex][xIndex].equals("BattleStateItemList")) {
             g.drawImage(Assets.cursorSprite, 290, 484, 7 * 4, 7 * 4, null);
