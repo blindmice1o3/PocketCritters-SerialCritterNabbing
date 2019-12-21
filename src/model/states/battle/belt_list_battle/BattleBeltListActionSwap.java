@@ -67,7 +67,6 @@ public class BattleBeltListActionSwap implements IState {
                 //pop (BattleBeltList).
                 stateMachine.pop();
                 //now BattleStateMenu.
-                stateMachine.push( stateMachine.getIState("BattleStateFight"), null );
                 ///////////////////////////////////////////////
             }
         }
