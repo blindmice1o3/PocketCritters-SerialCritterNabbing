@@ -37,7 +37,8 @@ public class Assets {
         nabberSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Yellow - Trainers.png");
         overworldSpritesSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Yellow - Overworld Characters.png");
         indoorsHomeAndRoomSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Yellow - Pallet Town.png");
-        battleStateSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Yellow - Battle Interface.png");
+        battleStateSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Yellow - Battle Interface (transparent and taller).png");
+//        battleStateSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Yellow - Battle Interface.png");
         menuStateSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Crystal - Start Menu.png");
         menuStateInfoSpriteSheet = ImageLoader.loadImage("/Game Boy GBC - Pokemon Yellow - Trainer Card.png");
         critterBallSprite = battleStateSpriteSheet.getSubimage(324, 269, 7, 7);
@@ -46,23 +47,26 @@ public class Assets {
         backgroundCritterBeltList = battleStateSpriteSheet.getSubimage(320, 2, 160, 145);
         backgroundBattleStateIntro = battleStateSpriteSheet.getSubimage(2, 2, 160, 145);
         backgroundBattleStateMenu = battleStateSpriteSheet.getSubimage(161, 2, 160, 145);
-        backgroundBattleStateFight = new BufferedImage(160, 145, BufferedImage.TYPE_INT_ARGB);
+        backgroundBattleStateFight = battleStateSpriteSheet.getSubimage(161, 147, 160, 145);
+        /*
         BufferedImage backgroundBattleStateFightInitial =
-                battleStateSpriteSheet.getSubimage(161, 146, 160, 128);
+
         Graphics2D g2d = backgroundBattleStateFight.createGraphics();
         g2d.setColor(Color.GRAY);
         g2d.fillRect(0, 0, 160, 17);
         g2d.drawImage(backgroundBattleStateFightInitial, 0, 17, null);
         g2d.dispose();
-        backgroundBattleStateItemList = new BufferedImage(160, 145, BufferedImage.TYPE_INT_ARGB);
+        */
+        backgroundBattleStateItemList = battleStateSpriteSheet.getSubimage(2, 147, 160, 145);
+        /*
         BufferedImage backgroundBattleStateItemListInitial =
-                battleStateSpriteSheet.getSubimage(2, 146, 160, 128);
+
         Graphics g = backgroundBattleStateItemList.createGraphics();
         g.setColor(Color.CYAN);
         g.fillRect(0, 0, 160, 17);
         g.drawImage(backgroundBattleStateItemListInitial, 0, 17, null);
         g.dispose();
-
+        */
 
         world = ImageLoader.loadImage("/pokemon-gsc-kanto.png");
         roomPlayer = indoorsHomeAndRoomSpriteSheet.getSubimage(32, 8, 128, 128);

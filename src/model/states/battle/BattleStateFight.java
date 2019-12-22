@@ -16,7 +16,7 @@ import java.awt.event.KeyEvent;
 public class BattleStateFight implements IState {
 
     public enum Turn { PLAYER, OPPONENT; }
-    public static final int X_CURSOR_SPAWN = 161, Y_CURSOR_SPAWN = 330;
+    public static final int X_CURSOR_SPAWN = 161, Y_CURSOR_SPAWN = 395;
 
     private Handler handler;
     private Player player;
@@ -197,16 +197,16 @@ public class BattleStateFight implements IState {
     private void updateCursorPosition() {
         switch(index) {
             case 0:
-                yCursor = 330;
+                yCursor = 395;
                 break;
             case 1:
-                yCursor = 360;
+                yCursor = 425;
                 break;
             case 2:
-                yCursor = 390;
+                yCursor = 455;
                 break;
             case 3:
-                yCursor = 420;
+                yCursor = 485;
                 break;
             default:
                 System.out.println("BattleStateFight.updateCursorPosition() switch(index) construct's default block.");
@@ -266,14 +266,14 @@ public class BattleStateFight implements IState {
         //CURRENTLY SELECTED MOVE (and its pp)
         if (movesModule.getMovesCurrent()[index] != 0) {
             nameMove = movesModule.lookUpMove(movesModule.getMovesCurrent()[index]).getType().toString();
-            FontGrabber.renderString(g, nameMove, 59, 240, 30, 30);
+            FontGrabber.renderString(g, nameMove, 59, 305, 30, 30);
             String ppCurrentAndBase = movesModule.getPpMovesCurrent()[index] + "/" + movesModule.lookUpMove(movesModule.getMovesCurrent()[index]).getPpBase();
-            FontGrabber.renderString(g, ppCurrentAndBase, 167, 270, 30, 30);
+            FontGrabber.renderString(g, ppCurrentAndBase, 165, 335, 30, 30);
         }
 
         //LIST OF MOVES
         int xOffset = xCursor + 35;
-        int yOffset = 330;
+        int yOffset = 395;
         for (int i = 0; i < movesModule.getNumberMovesKnown(); i++) {
             nameMove = movesModule.lookUpMove( movesModule.getMovesCurrent()[i] ).toString();
             FontGrabber.renderString(g, nameMove, xOffset, yOffset, 30, 30);
