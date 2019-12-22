@@ -228,7 +228,39 @@ public class BattleStateFight implements IState {
         String hpOpponent = "hpOpponent: " + critterOfOpponent.getHpEffectiveCurrent() + " of " + critterOfOpponent.getStatsModule().getStatsEffectiveMap().get(StatsModule.Type.HP);
         String hpPlayer = "hpPlayer: " + critterOfPlayer.getHpEffectiveCurrent() + " of " + critterOfPlayer.getStatsModule().getStatsEffectiveMap().get(StatsModule.Type.HP);
         FontGrabber.renderString(g, hpOpponent, 50, 50, 20, 20);
-        FontGrabber.renderString(g, hpPlayer, 300, 300, 20, 20);
+        FontGrabber.renderString(g, hpPlayer, 250, 200, 20, 20);
+
+        //hp bar opponent
+        int xHpBarBorderOpponent = 50;
+        int yHpBarBorderOpponent = 73;
+        int widthHpBarBorderOpponent = 200 + 4;
+        int heightHpBarBorderOpponent = 8;
+        int xHpBarOpponent = xHpBarBorderOpponent + 2;
+        int yHpBarOpponent = yHpBarBorderOpponent + 2;
+        int widthHpBarOpponent = (int)(((double)critterOfOpponent.getHpEffectiveCurrent() /
+                critterOfOpponent.getStatsModule().getStatsEffectiveMap().get(StatsModule.Type.HP)) * 200);
+        int heightHpBarOpponent = heightHpBarBorderOpponent - 4;
+        g.setColor(Color.GRAY);
+        g.fillRect(xHpBarBorderOpponent, yHpBarBorderOpponent, widthHpBarBorderOpponent, heightHpBarBorderOpponent);
+        g.setColor(Color.GREEN);
+        g.fillRect(xHpBarOpponent, yHpBarOpponent, widthHpBarOpponent, heightHpBarOpponent);
+
+        //hp bar player
+        int xHpBarBorderPlayer = 250;
+        int yHpBarBorderPlayer = 223;
+        int widthHpBarBorderPlayer = 200 + 4;
+        int heightHpBarBorderPlayer = 8;
+        int xHpBarPlayer = xHpBarBorderPlayer + 2;
+        int yHpBarPlayer = yHpBarBorderPlayer + 2;
+        int widthHpBarPlayer = (int)(((double)critterOfPlayer.getHpEffectiveCurrent() /
+                critterOfPlayer.getStatsModule().getStatsEffectiveMap().get(StatsModule.Type.HP)) * 200);
+        int heightHpBarPlayer = heightHpBarBorderPlayer - 4;
+        g.setColor(Color.GRAY);
+        g.fillRect(xHpBarBorderPlayer, yHpBarBorderPlayer, widthHpBarBorderPlayer, heightHpBarBorderPlayer);
+        g.setColor(Color.GREEN);
+        g.fillRect(xHpBarPlayer, yHpBarPlayer, widthHpBarPlayer, heightHpBarPlayer);
+
+
 
         String nameMove = null;
         //CURRENTLY SELECTED MOVE (and its pp)
