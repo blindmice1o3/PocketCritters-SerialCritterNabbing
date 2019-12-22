@@ -18,6 +18,7 @@ public class BattleBeltListActionSwap implements IState {
     private Player player;
 
     private int indexCurrentCritterSelected;
+    private boolean isBattling;
     private Cursor cursor;
 
     public BattleBeltListActionSwap(Handler handler, Player player) {
@@ -25,6 +26,7 @@ public class BattleBeltListActionSwap implements IState {
         this.player = player;
 
         indexCurrentCritterSelected = 0;
+        isBattling = false;
         cursor = new Cursor(3 , 27, 60, 20, 20);
         cursor.updateCursorPosition(indexCurrentCritterSelected);
     } // **** end BattleBeltListActionSwap(Handler, Player) constructor ****
@@ -56,18 +58,26 @@ public class BattleBeltListActionSwap implements IState {
                 BattleState battleState = (BattleState) handler.getStateManager().getCurrentState();
                 StateMachine stateMachine = battleState.getStateMachine();
 
-                ///////////////////////////////////////////////
+                Critter critterCurrentlyOut = battleState.getCritterOfPlayer();
                 Critter critterNext = player.getCritterBeltList().get(indexCurrentCritterSelected);
-                battleState.setCritterOfPlayer( critterNext );
 
-                //pop self (BattleBeltListActionSwap).
-                stateMachine.pop();
-                //pop (BattleBeltListAction).
-                stateMachine.pop();
-                //pop (BattleBeltList).
-                stateMachine.pop();
-                //now BattleStateMenu.
-                ///////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////
+                isBattling = (critterNext == critterCurrentlyOut) ? (true) : (false);
+                /////////////////////////////////////////////////////////////////////
+
+                if (!isBattling) {
+                    ///////////////////////////////////////////////
+                    battleState.setCritterOfPlayer(critterNext);
+
+                    //pop self (BattleBeltListActionSwap).
+                    stateMachine.pop();
+                    //pop (BattleBeltListAction).
+                    stateMachine.pop();
+                    //pop (BattleBeltList).
+                    stateMachine.pop();
+                    //now BattleStateMenu.
+                    ///////////////////////////////////////////////
+                }
             }
         }
     }
@@ -81,9 +91,19 @@ public class BattleBeltListActionSwap implements IState {
         g.setColor(Color.GRAY);
         g.fillRect(200, 200, 2*(handler.getGame().getWidth()-400), handler.getGame().getHeight()-400);
 
-        //TEXT
-        g.setColor(Color.GREEN);
-        FontGrabber.renderString(g, "aButton to confirm", 250, 225, 20, 20);
+        //TEXT (first line)
+        if (!isBattling) {
+            g.setColor(Color.GREEN);
+            FontGrabber.renderString(g, "aButton to confirm", 250, 225, 20, 20);
+        } else {
+            g.setColor(Color.CYAN);
+            FontGrabber.renderString(g,
+                    player.getCritterBeltList().get(indexCurrentCritterSelected).getNameColloquial() + " is ",
+                    250, 225, 10, 10);
+            FontGrabber.renderString(g, "CURRENTLY battling.",
+                    250, 237, 10, 10);
+        }
+        //TEXT (second line)
         g.setColor(Color.RED);
         FontGrabber.renderString(g, "bButton to cancel", 250, 250, 20, 20);
     }
@@ -98,7 +118,7 @@ public class BattleBeltListActionSwap implements IState {
 
     @Override
     public void exit() {
-
+        isBattling = false;
     }
 
 } // **** end BattleBeltListActionSwap class ****
