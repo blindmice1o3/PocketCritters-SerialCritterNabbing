@@ -70,7 +70,7 @@ public class MenuBeltListActionSummary implements IState {
                 case MOVES:
                     ///////////////////////////////
                     if (handler.getStateManager().getCurrentState() instanceof MenuState) {
-                        MenuState menuState = (MenuState) handler.getStateManager().getCurrentState();
+                        MenuState menuState = (MenuState)handler.getStateManager().getCurrentState();
                         StateMachine stateMachine = menuState.getStateMachine();
 
                         //pop self (MenuBeltListActionSummary).
@@ -225,53 +225,6 @@ public class MenuBeltListActionSummary implements IState {
                         yOffset += 20;
                     }
                 }
-                /*
-                if (movesModule.getIdMove1() != 0) {
-                    nameMove1 = movesModule.lookUpMove(movesModule.getIdMove1()).toString();
-                    ppInfoMove1 = "pp " + movesModule.getPpMove1() + "/" +
-                            movesModule.lookUpMove(movesModule.getIdMove1()).getPpBase();
-
-                }
-                FontGrabber.renderString(g, nameMove1, xOffset, yOffset, 20, 20);
-                yOffset += 20;
-                FontGrabber.renderString(g, ppInfoMove1, x, yOffset, 20, 20);
-                yOffset += 20;
-
-                String nameMove2 = "-";
-                String ppInfoMove2 = "__";
-                if (movesModule.getIdMove2() != 0) {
-                    nameMove2 = movesModule.lookUpMove(movesModule.getIdMove2()).toString();
-                    ppInfoMove2 = "pp " + movesModule.getPpMove2() + "/" +
-                            movesModule.lookUpMove(movesModule.getIdMove2()).getPpBase();
-                }
-                FontGrabber.renderString(g, nameMove2, xOffset, yOffset, 20, 20);
-                yOffset += 20;
-                FontGrabber.renderString(g, ppInfoMove2, x, yOffset, 20, 20);
-                yOffset += 20;
-
-                String nameMove3 = "-";
-                String ppInfoMove3 = "__";
-                if (movesModule.getIdMove3() != 0) {
-                    nameMove3 = movesModule.lookUpMove(movesModule.getIdMove3()).toString();
-                    ppInfoMove3 = "pp " + movesModule.getPpMove3() + "/" +
-                            movesModule.lookUpMove(movesModule.getIdMove3()).getPpBase();
-                }
-                FontGrabber.renderString(g, nameMove3, xOffset, yOffset, 20, 20);
-                yOffset += 20;
-                FontGrabber.renderString(g, ppInfoMove3, x, yOffset, 20, 20);
-                yOffset += 20;
-
-                String nameMove4 = "-";
-                String ppInfoMove4 = "__";
-                if (movesModule.getIdMove4() != 0) {
-                    nameMove4 = movesModule.lookUpMove(movesModule.getIdMove4()).toString();
-                    ppInfoMove4 = "pp " + movesModule.getPpMove4() + "/" +
-                            movesModule.lookUpMove(movesModule.getIdMove4()).getPpBase();
-                }
-                FontGrabber.renderString(g, nameMove4, xOffset, yOffset, 20, 20);
-                yOffset += 20;
-                FontGrabber.renderString(g, ppInfoMove4, x, yOffset, 20, 20);
-                */
 
                 break;
             default:
