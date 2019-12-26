@@ -70,8 +70,41 @@ public class BattleStateFight implements IState {
             //DECREMENT ppCurrent of the move used.
             critterOfOpponent.getMovesModule().decrementPpMovesCurrent(indexDecision);
             ////////////////////////////
+
+            decisionTicker = 0;
+            isFirstTick = true;
+            ////////////////////////////
+            turnCurrent = Turn.PLAYER;
+            ////////////////////////////
+
+            /////////////////////////////////
+            checkForFainted(critterOfPlayer);
+            /////////////////////////////////
         } else {
             System.out.println("NOT ENOUGH ppCurrent!");
+        }
+    }
+
+    /**
+     * Currently ends the battle, does NOT check the critterBeltList of player or opponent
+     * to see if other critters do not have their status set to FAINTED, and pops the
+     * BattleState instance off the top of StateManager's stateStack.
+     */
+    private void checkForFainted(Critter critterDamaged) {
+        if (critterDamaged.getStatus() == Critter.StatusConditionNonVolatile.FAINTED) {
+            System.out.println("BattleStateFight.checkForFainted(Critter): " +
+                    critterDamaged.getNameColloquial() + "had its status set to FAINTED.");
+
+            StateMachine battleStateMachine = ((BattleState)handler.getStateManager().getCurrentState()).getStateMachine();
+            //pop self (BattleStateFight).
+            battleStateMachine.pop();
+            //pop BattleStateMenu.
+            battleStateMachine.pop();
+            //now at BattleStateIntro (do NOT pop BattleStateIntro... error gets thrown: trying to tick top-of-stack of an empty stack).
+
+            //pop BattleState from StateManager's stateStack.
+            handler.getStateManager().pop();
+            //now in GameState.
         }
     }
 
@@ -80,7 +113,7 @@ public class BattleStateFight implements IState {
         switch(turnCurrent) {
             case PLAYER:
                 getInput(); //turnCurrent is set to Turn.OPPONENT inside the aButton block.
-
+                            //something like checkForWinner() will be called in aButton block.
                 break;
             case OPPONENT:
                 //set the targeted-time
@@ -97,12 +130,6 @@ public class BattleStateFight implements IState {
 
                     if (decisionTicker >= decisionTickerTarget) {
                         doDecision();
-
-                        decisionTicker = 0;
-                        isFirstTick = true;
-                        ////////////////////////////
-                        turnCurrent = Turn.PLAYER;
-                        ////////////////////////////
                     }
                 }
 
@@ -174,6 +201,10 @@ public class BattleStateFight implements IState {
                 ////////////////////////////
                 turnCurrent = Turn.OPPONENT;
                 ////////////////////////////
+
+                ///////////////////////////////////
+                checkForFainted(critterOfOpponent);
+                ///////////////////////////////////
             } else {
                 System.out.println("NOT ENOUGH ppCurrent!");
             }

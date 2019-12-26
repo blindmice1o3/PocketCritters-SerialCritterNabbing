@@ -55,7 +55,11 @@ public class Critter {
 
         if (hpEffectiveCurrent <= 0) {
             System.out.println("SQUAWK!!!");
+            System.out.println("(Critter.takeDamage(int) sets hpEffectiveCurrent to 0 if it's negative)");
+            ////////////////////////////////////////////
+            status = StatusConditionNonVolatile.FAINTED;
             hpEffectiveCurrent = 0;
+            ////////////////////////////////////////////
         }
     }
 
