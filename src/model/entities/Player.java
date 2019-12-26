@@ -7,6 +7,7 @@ import model.entities.critters.Critter;
 import model.entities.nabbers.INabber;
 import model.entities.nabbers.James;
 import model.entities.nabbers.Jessie;
+import model.items.CritterNet;
 import model.items.Item;
 import model.states.game.GameState;
 import model.states.game.world.WorldManager;
@@ -70,6 +71,9 @@ public class Player
         moveSpeed = Tile.WIDTH;
 
         inventory = new ArrayList<Item>();
+        //////////////////////////////////////
+        inventory.add( new CritterNet(handler) );
+        //////////////////////////////////////
         critterBeltList = new ArrayList<Critter>(6);
         //////////////////////////////////////
         critterBeltList.add( new Critter(handler, Critter.Species.DINO_SPROUTLING, 5) );
@@ -566,6 +570,8 @@ public class Player
     public void setDirectionFacing(DirectionFacing directionFacing) { this.directionFacing = directionFacing; }
 
     public ArrayList<Item> getInventory() { return inventory; }
+
+    public void setInventory(ArrayList<Item> inventory) { this.inventory = inventory; }
 
     public ArrayList<Critter> getCritterBeltList() { return critterBeltList; }
 

@@ -2,9 +2,9 @@ package model.items;
 
 import main.Handler;
 
-public class Item {
+public abstract class Item {
 
-    private Handler handler;
+    protected Handler handler;
 
     private Identifier identifier;
     private int quantity;
@@ -15,6 +15,12 @@ public class Item {
         this.identifier = identifier;
         quantity = 1;
     }
+
+    public abstract void execute();
+
+    public Identifier getIdentifier() { return identifier; }
+
+    public int getQuantity() { return quantity; }
 
     public enum Identifier {
         /*
@@ -34,6 +40,8 @@ public class Item {
         BAIL_BINER_ROPE,
         BICYCLE;
     }
+
+
 
     /*
     "In all core series games since Generation III, vitamins that affect stats increase a Pokémon's
