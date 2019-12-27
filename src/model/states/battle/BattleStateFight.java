@@ -93,7 +93,7 @@ public class BattleStateFight implements IState {
     private void checkForFainted(Critter critterDamaged) {
         if (critterDamaged.getStatus() == Critter.StatusConditionNonVolatile.FAINTED) {
             System.out.println("BattleStateFight.checkForFainted(Critter): " +
-                    critterDamaged.getNameColloquial() + "had its status set to FAINTED.");
+                    critterDamaged.getNameColloquial() + " had its status set to FAINTED.");
 
             StateMachine battleStateMachine = ((BattleState)handler.getStateManager().getCurrentState()).getStateMachine();
             //pop self (BattleStateFight).

@@ -153,29 +153,28 @@ public class BattleBeltListActionSummary implements IState {
                 yOffset = yHalfScreen+5;
                 String type1 = critter.getSpecies().getType1().toString();
                 String type2 = critter.getSpecies().getType2().toString();
-                FontGrabber.renderString(g, "TYPE1/", xOffset, yOffset, 20, 20);
+                FontGrabber.renderString(g, "Type 1/", xOffset, yOffset, 20, 20);
                 yOffset += 20;
                 xOffset += 20;
                 FontGrabber.renderString(g, type1, xOffset, yOffset, 20, 20);
                 yOffset += 20;
                 xOffset = xHalfScreen+5;
-                FontGrabber.renderString(g, "TYPE2/", xOffset, yOffset, 20, 20);
+                FontGrabber.renderString(g, "Type 2/", xOffset, yOffset, 20, 20);
                 yOffset += 20;
                 xOffset += 20;
                 FontGrabber.renderString(g, type2, xOffset, yOffset, 20, 20);
                 yOffset +=20;
                 xOffset = xHalfScreen+5;
-                FontGrabber.renderString(g, "IDNo/", xOffset, yOffset, 20, 20);
+                FontGrabber.renderString(g, "Colloquial Name/", xOffset, yOffset, 20, 20);
                 yOffset += 20;
                 xOffset += (20+20);
-                FontGrabber.renderString(g, Integer.toString(critter.hashCode()), xOffset, yOffset, 20, 20);
+                FontGrabber.renderString(g, critter.getNameColloquial(), xOffset, yOffset, 20, 20);
                 yOffset += 20;
                 xOffset = xHalfScreen+5;
-                FontGrabber.renderString(g, "OT/", xOffset, yOffset, 20, 20);
+                FontGrabber.renderString(g, "Original Trainer ID Number/", xOffset, yOffset, 20, 20);
                 yOffset += 20;
                 xOffset += (20+20);
-                //TODO: switch player.toString() to unimplemented Player.name
-                FontGrabber.renderString(g, player.toString(), xOffset, yOffset, 20, 20);
+                FontGrabber.renderString(g, Integer.toString(critter.getIdNumberOriginalTrainer()), xOffset, yOffset, 20, 20);
 
                 break;
             case MOVES:

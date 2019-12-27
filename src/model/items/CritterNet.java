@@ -3,6 +3,7 @@ package model.items;
 import main.Handler;
 import model.entities.critters.Critter;
 import model.entities.critters.stats.StatsModule;
+import model.states.StateMachine;
 import model.states.battle.BattleState;
 
 public class CritterNet extends Item {
@@ -24,30 +25,65 @@ public class CritterNet extends Item {
          guarantee capture with a Poké Ball, while lowering it to 1/2 will
          guarantee capture with a Great Ball.
      */
+    @Override
     public void execute() {
         System.out.println("CritterNet.execute().");
 
         if (handler.getStateManager().getCurrentState() instanceof BattleState) {
-            Critter critterOfOpponent = ((BattleState)handler.getStateManager().getIState("BattleState")).getCritterOfOpponent();
-            StatsModule statsModuleOfOpponent = critterOfOpponent.getStatsModule();
+            BattleState battleState = (BattleState)handler.getStateManager().getIState("BattleState");
+            Critter critterOfOpponent = battleState.getCritterOfOpponent();
 
-            int mValue = (int)(Math.random() * 256);
-            System.out.println("mValue: " + mValue);
+            if (critterOfOpponent.getIdNumberOriginalTrainer() == Critter.WILD) {
+                StatsModule statsModuleOfOpponent = critterOfOpponent.getStatsModule();
 
-            int fValue = (statsModuleOfOpponent.getStatsEffectiveMap().get(StatsModule.Type.HP) * 255 * 4) /
-                    (critterOfOpponent.getHpEffectiveCurrent() * 12);
+                int mValue = (int) (Math.random() * 256);
+                System.out.println("mValue: " + mValue);
 
-            //maybe Math.ceiling and Math.floor
-            if (fValue < 1) {
-                fValue = 1;
-            } else if (fValue > 255) {
-                fValue = 255;
-            }
+                int fValue = (statsModuleOfOpponent.getStatsEffectiveMap().get(StatsModule.Type.HP) * 255 * 4) /
+                        (critterOfOpponent.getHpEffectiveCurrent() * 12);
 
-            if (fValue >= mValue) {
-                System.out.println("CAUGHT!!!!");
-            } else {
-                System.out.println("AWWWW!!!!!");
+                //maybe Math.ceiling and Math.floor
+                if (fValue < 1) {
+                    fValue = 1;
+                } else if (fValue > 255) {
+                    fValue = 255;
+                }
+
+                if (fValue >= mValue) {
+                    System.out.println("CAUGHT!!!!");
+
+                    //add caught critter to player.critterBeltList.
+                    if (handler.getGame().getPlayer().getCritterBeltList().size() < 6) {
+                        int idNumberPlayer = handler.getGame().getPlayer().getIdNumber();
+
+                        //////////////////////////////////////////////////////////////////////////
+                        critterOfOpponent.setIdNumberOriginalTrainer( idNumberPlayer );
+                        handler.getGame().getPlayer().getCritterBeltList().add(critterOfOpponent);
+                        //////////////////////////////////////////////////////////////////////////
+                    }
+                    //move caught critter to storage/bank.
+                    else {
+                        System.out.println("CritterNet.execute() CAUGHT, but critterBeltList was at MAX... NEED TO IMPLEMENT SENDING TO STORAGE/BANK.");
+                    }
+
+
+
+                    StateMachine stateMachineBattleState = battleState.getStateMachine();
+                    //pop out of BattleStateItemList.
+                    stateMachineBattleState.pop();
+                    //pop out of BattleStateMenu.
+                    stateMachineBattleState.pop();
+                    //now at BattleStateIntro.
+
+                    //pop BattleState off the root (Game's stateManager).
+                    handler.getStateManager().pop();
+                    //should be in GameState at this point.
+                    System.out.println(handler.getStateManager().getCurrentState().getClass().getSimpleName());
+
+
+                } else {
+                    System.out.println("AWWWW!!!!!");
+                }
             }
         }
     }

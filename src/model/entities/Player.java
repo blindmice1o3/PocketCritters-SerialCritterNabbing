@@ -24,10 +24,23 @@ import java.util.Map;
 public class Player
         implements Serializable {
 
+    public static final int ID_MAX_PLUS_ONE = 65536;
     public enum DirectionFacing { LEFT, RIGHT, UP, DOWN; }
 
     protected transient Handler handler;
     private transient Map<String, Animation> anim;
+
+    private String name;
+/*
+ID number is a number that is assigned to a Trainer when they begin their Pokémon journey.
+It is used, in conjunction with the Trainer's name and gender,
+to identify whether the Pokémon is an outsider Pokémon by the games.
+
+Prior to Generation VII, Trainers have a five-digit number ranging from 0 to 65535.
+*/
+    private final int idNumber;
+    private int money;
+    private long timePlayed;
 
     private int x, y;
     private int xScreenPosition, yScreenPosition;
@@ -41,23 +54,22 @@ public class Player
     private ArrayList<Critter> critterBeltList;
     //////////////////////////////////////
     private transient ArrayList<INabber> nabberList;
-    //////////////////////////////////////
-
-    private String name;
-    private int money;
-    private int timePlayed;
-
     public void addINabber(INabber nabber) {
         nabberList.add(nabber);
     }
     public void removeINabber(INabber nabber) {
         nabberList.remove(nabber);
     }
+    //////////////////////////////////////
 
     public Player(Handler handler) {
         this.handler = handler;
-
         initAnimations();
+
+        name = "default";
+        idNumber = (int)(Math.random() * ID_MAX_PLUS_ONE);
+        money = 0;
+        timePlayed = 0;
 
         x = 1104;
         y = 3312;
@@ -86,11 +98,14 @@ public class Player
         critterBeltList.add( new Critter(handler, Critter.Species.DINO_SPROUTLING, 5) );
         critterBeltList.add( new Critter(handler, Critter.Species.TOTIPOTENT_PUPPY, 6) );
         critterBeltList.add( new Critter(handler, Critter.Species.STONE_MONKEY, 7) );
+        critterBeltList.get(2).setStatus(Critter.StatusConditionNonVolatile.SLEEP);
         critterBeltList.add( new Critter(handler, Critter.Species.SPLASHILIC_TILAPIA, 8) );
         critterBeltList.add( new Critter(handler, Critter.Species.ROCK_GOLEM, 10) );
 //        critterBeltList.add( new Critter(handler, Critter.Species.THUNDER_MOUSE, 81) );
-        critterBeltList.add( new Critter(handler, Critter.Species.COASTAL_GULL, 11) );
-        critterBeltList.get(2).setStatus(Critter.StatusConditionNonVolatile.SLEEP);
+//        critterBeltList.add( new Critter(handler, Critter.Species.COASTAL_GULL, 11) );
+        for (Critter critter : critterBeltList) {
+            critter.setIdNumberOriginalTrainer( idNumber );
+        }
         //////////////////////////////////////
         nabberList = new ArrayList<INabber>();
     } // **** end model.entities.Player() constructor ****
@@ -549,6 +564,8 @@ public class Player
     }
 
     // GETTERS & SETTERS
+
+    public int getIdNumber() { return idNumber; }
 
     public int getX() { return x; }
 

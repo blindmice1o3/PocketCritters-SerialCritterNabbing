@@ -6,39 +6,42 @@ import model.entities.critters.moves.MovesModule;
 import model.entities.critters.stats.StatsModule;
 
 import java.awt.image.BufferedImage;
-import java.util.Random;
 
 public class Critter {
 
+    public static final int WILD = 65536;
+
     private Handler handler;
-
     private Species species;
-    private String nameColloquial;
-
     private int level;
+
+    private String nameColloquial;
+    private int idNumberOriginalTrainer;
+
+    private MovesModule movesModule;
+    private StatsModule statsModule;
+
     private int expCurrent, expRewardedIfDefeated;
 
     private int hpEffectiveCurrent;
     private StatusConditionNonVolatile status;
 
-    private MovesModule movesModule;
-    private StatsModule statsModule;
-
     public Critter(Handler handler, Species species, int level) {
         this.handler = handler;
-
         this.species = species;
         this.level = level;
 
         nameColloquial = this.species.toString().replace('_', ' ');
-        status = StatusConditionNonVolatile.OK;
-        expCurrent = 0;
-        expRewardedIfDefeated = 10;
+        idNumberOriginalTrainer = WILD;
 
         movesModule = new MovesModule(handler);
         statsModule = new StatsModule(handler, this.species, this.level);
 
+        expCurrent = 0;
+        expRewardedIfDefeated = 10;
+
         hpEffectiveCurrent = statsModule.getStatsEffectiveMap().get(StatsModule.Type.HP);
+        status = StatusConditionNonVolatile.OK;
     } // **** end Critter(Handler, Species, int) constructor ****
 
     public void doDamage(Critter targetCritter, int damage) {
@@ -81,6 +84,8 @@ public class Critter {
         return damage;
     }
 
+    // GETTERS AND SETTERS
+
     public BufferedImage getSpeciesIcon() {
         return species.speciesIcon;
     }
@@ -88,6 +93,10 @@ public class Critter {
     public String getNameColloquial() {
         return nameColloquial;
     }
+
+    public int getIdNumberOriginalTrainer() { return idNumberOriginalTrainer; }
+
+    public void setIdNumberOriginalTrainer(int idNumberOriginalTrainer) { this.idNumberOriginalTrainer = idNumberOriginalTrainer; }
 
     public int getLevel() {
         return level;
