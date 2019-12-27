@@ -73,7 +73,7 @@ public class StatsModule {
                             ((ivMap.get(Type.SPEED) % 2 == 1)     ? 2 : 0) +
                             ((ivMap.get(Type.SPECIAL) % 2 == 1)   ? 1 : 0) );
 
-        //EVs (EP == effort points)
+        //EVs (EP == effort points) (Stat Experience, or "Stat Exp")
         evMap = new HashMap<Type, Integer>();
 //        evMap.put(Type.ATTACK, 23140);
 //        evMap.put(Type.DEFENSE, 17280);

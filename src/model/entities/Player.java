@@ -73,6 +73,13 @@ public class Player
         inventory = new ArrayList<Item>();
         //////////////////////////////////////
         inventory.add( new CritterNet(handler) );
+        inventory.add( new CritterNet(handler) );
+        inventory.add( new CritterNet(handler) );
+        inventory.add( new CritterNet(handler) );
+        inventory.add( new CritterNet(handler) );
+        inventory.add( new CritterNet(handler) );
+        inventory.add( new CritterNet(handler) );
+        inventory.add( new CritterNet(handler) );
         //////////////////////////////////////
         critterBeltList = new ArrayList<Critter>(6);
         //////////////////////////////////////

@@ -58,8 +58,6 @@ public class MenuStateItemList implements IState {
         g.fillRect(25, 25,
                 handler.getGame().getWidth() - 50, handler.getGame().getHeight() - 50);
 
-
-
         if (player.getInventory().size() > 0) {
             g.setColor(Color.CYAN);
             int xOffset = 25 + 20;
@@ -85,8 +83,6 @@ public class MenuStateItemList implements IState {
                 }
             }
         }
-
-
     }
 
     @Override
