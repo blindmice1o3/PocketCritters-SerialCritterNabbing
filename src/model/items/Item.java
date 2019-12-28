@@ -19,7 +19,11 @@ public abstract class Item {
 
     public abstract void execute(Critter targetedCritter);
 
+    // GETTERS AND SETTERS
+
     public Identifier getIdentifier() { return identifier; }
+
+    public boolean isActive() { return active; }
 
     public int getQuantity() { return quantity; }
 

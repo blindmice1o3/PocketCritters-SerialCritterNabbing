@@ -84,6 +84,8 @@ public class BattleStateItemList implements IState {
                 itemSelected.execute(critterSelected);
                 //////////////////////////////////////
             }
+
+            player.refreshInventory();
         }
         //bButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_PERIOD)) {

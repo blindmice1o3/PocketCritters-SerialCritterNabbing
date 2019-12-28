@@ -20,6 +20,7 @@ import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class Player
@@ -110,6 +111,17 @@ Prior to Generation VII, Trainers have a five-digit number ranging from 0 to 655
         //////////////////////////////////////
         nabberList = new ArrayList<INabber>();
     } // **** end model.entities.Player() constructor ****
+
+    public void refreshInventory() {
+        Iterator<Item> it = inventory.iterator();
+
+        while(it.hasNext()) {
+             Item item = it.next();
+             if (!item.isActive()) {
+                 it.remove();
+             }
+        }
+    }
 
     private void initAnimations() {
         anim = new HashMap<String, Animation>();

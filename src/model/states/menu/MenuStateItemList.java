@@ -64,6 +64,8 @@ public class MenuStateItemList implements IState {
                 itemSelected.execute(critterSelected);
                 //////////////////////////////////////
             }
+
+            player.refreshInventory();
         }
     }
 
