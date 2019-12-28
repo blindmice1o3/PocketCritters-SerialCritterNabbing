@@ -27,21 +27,21 @@ public class CritterNet extends Item {
          guarantee capture with a Great Ball.
      */
     @Override
-    public void execute() {
-        System.out.println("CritterNet.execute().");
+    public void execute(Critter targetedCritter) {
+        System.out.println("CritterNet.execute(Critter).");
 
         if (handler.getStateManager().getCurrentState() instanceof BattleState) {
             BattleState battleState = (BattleState)handler.getStateManager().getIState("BattleState");
-            Critter critterOfOpponent = battleState.getCritterOfOpponent();
 
-            if (critterOfOpponent.getIdNumberOriginalTrainer() == Critter.WILD) {
-                StatsModule statsModuleOfOpponent = critterOfOpponent.getStatsModule();
 
-                int mValue = (int) (Math.random() * 256);
+            if (targetedCritter.getIdNumberOriginalTrainer() == Critter.WILD) {
+                StatsModule statsModuleOfOpponent = targetedCritter.getStatsModule();
+
+                int mValue = (int)(Math.random() * 256);
                 System.out.println("mValue: " + mValue);
 
                 int fValue = (statsModuleOfOpponent.getStatsEffectiveMap().get(StatsModule.Type.HP) * 255 * 4) /
-                        (critterOfOpponent.getHpEffectiveCurrent() * 12);
+                        (targetedCritter.getHpEffectiveCurrent() * 12);
                 System.out.println("fValue: " + fValue);
 
                 //maybe Math.ceiling and Math.floor
@@ -55,30 +55,26 @@ public class CritterNet extends Item {
                 System.out.println("Is fValue >= mValue? " + isCaught);
 
                 if (isCaught) {
-                    System.out.println("CAUGHT!!!!");
+                    int idNumberPlayer = handler.getGame().getPlayer().getIdNumber();
+                    targetedCritter.setIdNumberOriginalTrainer( idNumberPlayer );
 
                     //add caught critter to player.critterBeltList.
                     if (handler.getGame().getPlayer().getCritterBeltList().size() < 6) {
-                        int idNumberPlayer = handler.getGame().getPlayer().getIdNumber();
-
+                        System.out.println("CritterNet.execute(Critter) NABBED: " + targetedCritter.getNameColloquial() + ", adding to critterBeltList.");
                         //////////////////////////////////////////////////////////////////////////
-                        critterOfOpponent.setIdNumberOriginalTrainer( idNumberPlayer );
-                        handler.getGame().getPlayer().getCritterBeltList().add(critterOfOpponent);
+                        handler.getGame().getPlayer().getCritterBeltList().add(targetedCritter);
                         //////////////////////////////////////////////////////////////////////////
                     }
                     //move caught critter to GameState.critterStorageSystem.
                     else {
-                        System.out.println("CritterNet.execute() CAUGHT, but critterBeltList was at MAX... SENDING TO GameState.critterStorageSystem.");
-                        int idNumberPlayer = handler.getGame().getPlayer().getIdNumber();
-
+                        System.out.println("CritterNet.execute(Critter) NABBE: " + targetedCritter.getNameColloquial() + ", but critterBeltList was at MAX... SENDING TO GameState.critterStorageSystem.");
                         //////////////////////////////////////////////////////////////////////////
-                        critterOfOpponent.setIdNumberOriginalTrainer(idNumberPlayer);
                         GameState gameState = (GameState) handler.getStateManager().getIState("GameState");
                         Critter[][] critterStorageSystem = gameState.getCritterStorageSystem();
 
                         for (int i = 0; i < GameState.MAX_NUMBER_OF_CRITTERS_PER_BOX; i++) {
                             if (critterStorageSystem[gameState.getIndexCurrentBox()][i] == null) {
-                                critterStorageSystem[gameState.getIndexCurrentBox()][i] = critterOfOpponent;
+                                critterStorageSystem[gameState.getIndexCurrentBox()][i] = targetedCritter;
                                 System.out.println("storing critter in: " + gameState.getIndexCurrentBox() + ", " + i);
                                 break;
                             }
@@ -103,7 +99,7 @@ public class CritterNet extends Item {
 
 
                 } else {
-                    System.out.println("AWWWW!!!!!");
+                    System.out.println("AWWWW, CritterNet was not able to nab: " + targetedCritter.getNameColloquial() + ".");
                 }
             }
         }

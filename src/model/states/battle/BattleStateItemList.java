@@ -4,6 +4,10 @@ import main.Handler;
 import main.gfx.Assets;
 import main.utils.FontGrabber;
 import model.entities.Player;
+import model.entities.critters.Critter;
+import model.items.CritterNet;
+import model.items.Item;
+import model.items.Potion;
 import model.states.IState;
 import model.states.StateMachine;
 import view.Cursor;
@@ -64,11 +68,22 @@ public class BattleStateItemList implements IState {
         //aButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_COMMA)) {
             System.out.println("BattleStateItemList.tick(long)... aButton");
+            Item itemSelected = player.getInventory().get(index);
+            System.out.println("Item selected for use: " + itemSelected);
 
-            System.out.println("Item selected for use: " + player.getInventory().get(index));
-            ///////////////////////////////////////////
-            player.getInventory().get(index).execute();
-            ///////////////////////////////////////////
+            Critter critterSelected = null;
+            //TODO: select target (opponent's or player's critter) based on which item is selected.
+            if (itemSelected instanceof CritterNet) {
+                critterSelected = ((BattleState)handler.getStateManager().getIState("BattleState")).getCritterOfOpponent();
+            } else if (itemSelected instanceof Potion) {
+                critterSelected = ((BattleState)handler.getStateManager().getIState("BattleState")).getCritterOfPlayer();
+            }
+
+            if (critterSelected != null) {
+                //////////////////////////////////////
+                itemSelected.execute(critterSelected);
+                //////////////////////////////////////
+            }
         }
         //bButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_PERIOD)) {

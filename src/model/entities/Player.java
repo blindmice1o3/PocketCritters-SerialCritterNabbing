@@ -9,6 +9,7 @@ import model.entities.nabbers.James;
 import model.entities.nabbers.Jessie;
 import model.items.CritterNet;
 import model.items.Item;
+import model.items.Potion;
 import model.states.game.GameState;
 import model.states.game.world.WorldManager;
 import model.states.game.world.WorldMap;
@@ -85,13 +86,13 @@ Prior to Generation VII, Trainers have a five-digit number ranging from 0 to 655
         inventory = new ArrayList<Item>();
         //////////////////////////////////////
         inventory.add( new CritterNet(handler) );
-        inventory.add( new CritterNet(handler) );
-        inventory.add( new CritterNet(handler) );
-        inventory.add( new CritterNet(handler) );
-        inventory.add( new CritterNet(handler) );
-        inventory.add( new CritterNet(handler) );
-        inventory.add( new CritterNet(handler) );
-        inventory.add( new CritterNet(handler) );
+        inventory.add( new Potion(handler) );
+        inventory.add( new Potion(handler) );
+        inventory.add( new Potion(handler) );
+        inventory.add( new Potion(handler) );
+        inventory.add( new Potion(handler) );
+        inventory.add( new Potion(handler) );
+        inventory.add( new Potion(handler) );
         //////////////////////////////////////
         critterBeltList = new ArrayList<Critter>(6);
         //////////////////////////////////////

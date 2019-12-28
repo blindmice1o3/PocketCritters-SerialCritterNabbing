@@ -1,22 +1,23 @@
 package model.items;
 
 import main.Handler;
+import model.entities.critters.Critter;
 
 public abstract class Item {
 
     protected Handler handler;
-
     private Identifier identifier;
+    protected boolean active;
     private int quantity;
 
     public Item(Handler handler, Identifier identifier){
         this.handler = handler;
-
         this.identifier = identifier;
+        active = true;
         quantity = 1;
     }
 
-    public abstract void execute();
+    public abstract void execute(Critter targetedCritter);
 
     public Identifier getIdentifier() { return identifier; }
 

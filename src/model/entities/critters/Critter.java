@@ -106,6 +106,8 @@ public class Critter {
         return hpEffectiveCurrent;
     }
 
+    public void setHpEffectiveCurrent(int hpEffectiveCurrent) { this.hpEffectiveCurrent = hpEffectiveCurrent; }
+
     public int getExpCurrent() { return expCurrent; }
 
     public MovesModule getMovesModule() { return movesModule; }

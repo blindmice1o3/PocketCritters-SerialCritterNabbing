@@ -4,6 +4,10 @@ import main.Handler;
 import main.gfx.Assets;
 import main.utils.FontGrabber;
 import model.entities.Player;
+import model.entities.critters.Critter;
+import model.items.CritterNet;
+import model.items.Item;
+import model.items.Potion;
 import model.states.IState;
 import model.states.StateMachine;
 
@@ -44,10 +48,22 @@ public class MenuStateItemList implements IState {
         //aButton
         else if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_COMMA)) {
             System.out.println("MenuStateItemList.tick(long)... aButton");
+            Item itemSelected = player.getInventory().get(indexCurrentItem);
+            System.out.println("Item selected for use: " + itemSelected);
 
-            ///////////////////////////////
-            player.getInventory().get(indexCurrentItem).execute();
-            ///////////////////////////////
+            Critter critterSelected = null;
+            //TODO: select target (opponent's or player's critter) based on which item is selected.
+            if (itemSelected instanceof CritterNet) {
+                System.out.println("CANNOT USE " + itemSelected.getIdentifier().toString() + " outside of BattleState.");
+            } else if (itemSelected instanceof Potion) {
+                critterSelected = player.getCritterBeltList().get(0);
+            }
+
+            if (critterSelected != null) {
+                //////////////////////////////////////
+                itemSelected.execute(critterSelected);
+                //////////////////////////////////////
+            }
         }
     }
 
