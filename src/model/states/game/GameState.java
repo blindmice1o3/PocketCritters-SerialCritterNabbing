@@ -1,6 +1,7 @@
 package model.states.game;
 
 import main.Handler;
+import model.entities.critters.Critter;
 import model.entities.nabbers.James;
 import model.entities.nabbers.Jessie;
 import model.entities.Player;
@@ -9,17 +10,27 @@ import model.states.game.world.WorldManager;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class GameState implements IState {
+
+    public static final int MAX_NUMBER_OF_BOXES = 12, MAX_NUMBER_OF_CRITTERS_PER_BOX = 20;
 
     private Handler handler;
 
     private WorldManager worldManager;
     private Player player, james, jessie;
 
+    private Critter[][] critterStorageSystem;
+    private int indexCurrentBox, indexCurrentCritterInBox;
+
     public GameState(Handler handler) {
         this.handler = handler;
         worldManager = new WorldManager(handler);
+
+        critterStorageSystem = new Critter[MAX_NUMBER_OF_BOXES][MAX_NUMBER_OF_CRITTERS_PER_BOX];
+        indexCurrentBox = 0;
+        indexCurrentCritterInBox = 0;
     } // **** end GameState(Handler) constructor ****
 
     @Override
@@ -117,5 +128,9 @@ public class GameState implements IState {
     public WorldManager getWorldManager() {
         return worldManager;
     }
+
+    public Critter[][] getCritterStorageSystem() { return critterStorageSystem; }
+
+    public int getIndexCurrentBox() { return indexCurrentBox; }
 
 } // **** end GameState class ****

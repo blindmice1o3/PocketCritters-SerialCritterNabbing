@@ -5,6 +5,7 @@ import model.entities.critters.Critter;
 import model.entities.critters.stats.StatsModule;
 import model.states.StateMachine;
 import model.states.battle.BattleState;
+import model.states.game.GameState;
 
 public class CritterNet extends Item {
 
@@ -41,6 +42,7 @@ public class CritterNet extends Item {
 
                 int fValue = (statsModuleOfOpponent.getStatsEffectiveMap().get(StatsModule.Type.HP) * 255 * 4) /
                         (critterOfOpponent.getHpEffectiveCurrent() * 12);
+                System.out.println("fValue: " + fValue);
 
                 //maybe Math.ceiling and Math.floor
                 if (fValue < 1) {
@@ -49,7 +51,10 @@ public class CritterNet extends Item {
                     fValue = 255;
                 }
 
-                if (fValue >= mValue) {
+                boolean isCaught = (fValue >= mValue);
+                System.out.println("Is fValue >= mValue? " + isCaught);
+
+                if (isCaught) {
                     System.out.println("CAUGHT!!!!");
 
                     //add caught critter to player.critterBeltList.
@@ -61,9 +66,25 @@ public class CritterNet extends Item {
                         handler.getGame().getPlayer().getCritterBeltList().add(critterOfOpponent);
                         //////////////////////////////////////////////////////////////////////////
                     }
-                    //move caught critter to storage/bank.
+                    //move caught critter to GameState.critterStorageSystem.
                     else {
-                        System.out.println("CritterNet.execute() CAUGHT, but critterBeltList was at MAX... NEED TO IMPLEMENT SENDING TO STORAGE/BANK.");
+                        System.out.println("CritterNet.execute() CAUGHT, but critterBeltList was at MAX... SENDING TO GameState.critterStorageSystem.");
+                        int idNumberPlayer = handler.getGame().getPlayer().getIdNumber();
+
+                        //////////////////////////////////////////////////////////////////////////
+                        critterOfOpponent.setIdNumberOriginalTrainer(idNumberPlayer);
+                        GameState gameState = (GameState) handler.getStateManager().getIState("GameState");
+                        Critter[][] critterStorageSystem = gameState.getCritterStorageSystem();
+
+                        for (int i = 0; i < GameState.MAX_NUMBER_OF_CRITTERS_PER_BOX; i++) {
+                            if (critterStorageSystem[gameState.getIndexCurrentBox()][i] == null) {
+                                critterStorageSystem[gameState.getIndexCurrentBox()][i] = critterOfOpponent;
+                                System.out.println("storing critter in: " + gameState.getIndexCurrentBox() + ", " + i);
+                                break;
+                            }
+
+                        }
+                        //////////////////////////////////////////////////////////////////////////
                     }
 
 
