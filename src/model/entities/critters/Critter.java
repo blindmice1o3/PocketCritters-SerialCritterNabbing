@@ -2,6 +2,7 @@ package model.entities.critters;
 
 import main.Handler;
 import main.gfx.Assets;
+import model.entities.critters.levels.ExpLookUpTable;
 import model.entities.critters.moves.MovesModule;
 import model.entities.critters.stats.StatsModule;
 
