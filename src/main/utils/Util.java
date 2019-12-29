@@ -91,7 +91,14 @@ public class Util {
     // going to convert that into an integer value of 5 ("5" -> 5).
     public static int parseInt(String number) {
         try {
-            return Integer.parseInt(number);
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < number.length(); i++) {
+                if ( !number.substring(i, (i+1)).equals(",") ) {
+                    sb.append(number.substring(i, (i+1)));
+                }
+            }
+
+            return Integer.parseInt(sb.toString());
         } catch (NumberFormatException ex) {
             // If we try to pass in a String that is not a number (like "ABC"), it'll throw an error.
             ex.printStackTrace();   // Print the error to the screen (that way we know something happened).
