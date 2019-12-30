@@ -38,7 +38,7 @@ public class StatsModule {
     /* private final int attackIV, defenseIV, speedIV, specialIV, hpIV; */
 
     //(EV == effort value [STATs EXPERIENCE]... EP == effort points)
-    private Map<Type, Integer> evMap;
+    private Map<Type, Float> evMap;
     /* private int attackEP, defenseEP, speedEP, specialEP, hpEP; */
 
     /* DETERMINATION OF STATS:
@@ -74,17 +74,17 @@ public class StatsModule {
                             ((ivMap.get(Type.SPECIAL) % 2 == 1)   ? 1 : 0) );
 
         //EVs (EP == effort points) (Stat Experience, or "Stat Exp")
-        evMap = new HashMap<Type, Integer>();
+        evMap = new HashMap<Type, Float>();
 //        evMap.put(Type.ATTACK, 23140);
 //        evMap.put(Type.DEFENSE, 17280);
 //        evMap.put(Type.SPECIAL, 19625);
 //        evMap.put(Type.SPEED, 24795);
 //        evMap.put(Type.HP, 22850);
-        evMap.put(Type.ATTACK, 0);
-        evMap.put(Type.DEFENSE, 0);
-        evMap.put(Type.SPEED, 0);
-        evMap.put(Type.SPECIAL, 0);
-        evMap.put(Type.HP, 0);
+        evMap.put(Type.ATTACK, 0f);
+        evMap.put(Type.DEFENSE, 0f);
+        evMap.put(Type.SPEED, 0f);
+        evMap.put(Type.SPECIAL, 0f);
+        evMap.put(Type.HP, 0f);
 
         //statsEffective (calculated stats, determined stats, NOT base stats)
         //NOTE: Type.HP uses a different formula than the other stats types.
@@ -154,7 +154,7 @@ public class StatsModule {
         return ivMap;
     }
 
-    public Map<Type, Integer> getEvMap() {
+    public Map<Type, Float> getEvMap() {
         return evMap;
     }
 
