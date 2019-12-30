@@ -61,6 +61,10 @@ public class ExpLookUpTable {
     }
 
     /*
+Base experience yield determines, as a function one-seventh of the level of the
+Pokémon and the type of battle it is engaged in, among other variables, how many
+experience points are awarded to its opponents when the Pokémon faints.
+
     Gain formula (https://bulbapedia.bulbagarden.net/wiki/Experience)
 
     The variables in these formulas evaluate as follows (presented in alphabetical order)...
@@ -107,6 +111,11 @@ Generation IV+ only: 1.7 if the Pokémon was gained in an international trade
 v is equal to...
 Generation VI+ only: 1.2 if the winning Pokémon is at or past the level where it would be able to evolve, but it has not
 1 otherwise
+
+
+
+
+Effort points are awarded equally to all Pokémon who participated in defeating a Pokémon. Though they are shared, each of the Pokémon will receive the standard amount of effort points.
      */
 
 } // **** end ExpLookUpTable class ****
