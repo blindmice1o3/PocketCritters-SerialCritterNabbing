@@ -32,6 +32,7 @@ public class WorldMap implements IWorld {
         public int getY1() { return y1; }
     }
 
+    //TODO: EncounterRate (https://gamefaqs.gamespot.com/gameboy/198314-pokemon-yellow-version-special-pikachu-edition/faqs/64175)
     public enum Route {
         ROUTE01(960, 2592, 1279, 3183),
         ROUTE02(800, 1664, 1119, 2015),
