@@ -3,6 +3,7 @@ package model.states.battle;
 import main.Handler;
 import main.gfx.Assets;
 import main.utils.FontGrabber;
+import main.utils.Util;
 import model.entities.Player;
 import model.entities.critters.Critter;
 import model.entities.critters.moves.MovesModule;
@@ -245,6 +246,8 @@ public class BattleStateFight implements IState {
         }
     }
 
+    int ticker = 0;
+    int tickerTarget = 30;
     @Override
     public void render(Graphics g) {
         g.drawImage(Assets.backgroundBattleStateFight, 0, 0,
@@ -256,7 +259,19 @@ public class BattleStateFight implements IState {
         Critter critterOfPlayer = ((BattleState)handler.getStateManager().getIState("BattleState")).getCritterOfPlayer();
         MovesModule movesModule = critterOfPlayer.getMovesModule();
 
-        String hpOpponent = "hpOpponent: " + critterOfOpponent.getHpEffectiveCurrent() + " of " + critterOfOpponent.getStatsModule().getStatsEffectiveMap().get(StatsModule.Type.HP);
+        int hpEffectiveCurrentOpponent = critterOfOpponent.getHpEffectiveCurrent();
+        int hpEffectiveMaxOpponent = critterOfOpponent.getStatsModule().getStatsEffectiveMap().get(StatsModule.Type.HP);
+        String hpOpponent = "hpOpponent: " + String.format("%3d", hpEffectiveCurrentOpponent) + " of " + String.format("%3d", hpEffectiveMaxOpponent);
+        ticker++;
+        //////////////////////////////////////////////////////////////
+        if (ticker == tickerTarget) {
+            System.out.println(critterOfOpponent.getHpEffectiveCurrent());
+            System.out.println(critterOfOpponent.getStatsModule().getStatsEffectiveMap().get(StatsModule.Type.HP));
+            System.out.println("hpOpponent's length is: " + hpOpponent.length());
+
+            ticker = 0;
+        }
+        //////////////////////////////////////////////////////////////
         String hpPlayer = "hpPlayer: " + critterOfPlayer.getHpEffectiveCurrent() + " of " + critterOfPlayer.getStatsModule().getStatsEffectiveMap().get(StatsModule.Type.HP);
         FontGrabber.renderString(g, hpOpponent, 50, 50, 20, 20);
         FontGrabber.renderString(g, hpPlayer, 250, 200, 20, 20);

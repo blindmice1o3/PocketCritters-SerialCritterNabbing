@@ -46,6 +46,7 @@ public class CritterNet extends Item {
     @Override
     public void execute(Critter targetedCritter) {
         System.out.println("CritterNet.execute(Critter).");
+        //TODO: factor in Species.catchRate and targetedCritter's status conditions.
 
         if (handler.getStateManager().getCurrentState() instanceof BattleState) {
             BattleState battleState = (BattleState)handler.getStateManager().getIState("BattleState");
