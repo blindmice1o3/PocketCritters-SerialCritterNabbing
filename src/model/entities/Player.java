@@ -4,6 +4,7 @@ import main.Handler;
 import main.gfx.Animation;
 import main.gfx.Assets;
 import model.entities.critters.Critter;
+import model.entities.critters.CritterMaker;
 import model.entities.nabbers.INabber;
 import model.entities.nabbers.James;
 import model.entities.nabbers.Jessie;
@@ -226,17 +227,21 @@ Prior to Generation VII, Trainers have a five-digit number ranging from 0 to 655
         }
     }
 
-    private void checkTallGrassTileCollision(TallGrassTile tile) {
+    private void checkTallGrassTileCollision(TallGrassTile tile, int x, int y) {
         if (tile.getCurrentPhase() == TallGrassTile.Phase.ACTIVE) {
             ///////////////////////////////////////////////////
             tile.setCurrentPhase(TallGrassTile.Phase.INACTIVE);
             ///////////////////////////////////////////////////
 
+            //TODO: CritterFactory to use x-y coordinates of TallGrassTile/Player to determine which Critter is encountered.
+            Critter critter = CritterMaker.generateCritter(x, y);
+            critter.setHandler(handler);
+
             //Random r = new Random();
 
             //if (r.nextInt(4) < 1) {
             //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-            Object[] args = { new Critter(handler, Critter.Species.COASTAL_GULL, 6) };
+            Object[] args = { critter };
             handler.getStateManager().push(
                     handler.getStateManager().getIState("BattleState"),
                     args);
@@ -415,10 +420,10 @@ Prior to Generation VII, Trainers have a five-digit number ranging from 0 to 655
                 //CHECKING TallGrassTile
                 if ( worldMap[((y+bounds.y) / Tile.HEIGHT)][tx] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's top-LEFT.");
-                    checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+bounds.y) / Tile.HEIGHT)][tx] );
+                    checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+bounds.y) / Tile.HEIGHT)][tx], (x+bounds.x+xDelta), (y+bounds.y) );
                 } else if ( worldMap[((y+bounds.y+bounds.height) / Tile.HEIGHT)][tx] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's bottom-LEFT.");
-                    checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+bounds.y+bounds.height) / Tile.HEIGHT)][tx] );
+                    checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+bounds.y+bounds.height) / Tile.HEIGHT)][tx], (x+bounds.x+xDelta), (y+bounds.y+bounds.height) );
                 }
 
                 //CHECKING TransferPoints
@@ -449,10 +454,10 @@ Prior to Generation VII, Trainers have a five-digit number ranging from 0 to 655
                 //CHECKING TallGrassTile
                 if ( worldMap[((y+bounds.y) / Tile.HEIGHT)][tx] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's top-RIGHT.");
-                    checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+bounds.y) / Tile.HEIGHT)][tx] );
+                    checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+bounds.y) / Tile.HEIGHT)][tx], (x+bounds.x+bounds.width+xDelta), (y+bounds.y) );
                 } else if ( worldMap[((y+bounds.y+bounds.height) / Tile.HEIGHT)][tx] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's bottom-RIGHT.");
-                    checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+bounds.y+bounds.height) / Tile.HEIGHT)][tx] );
+                    checkTallGrassTileCollision( (TallGrassTile)worldMap[((y+bounds.y+bounds.height) / Tile.HEIGHT)][tx], (x+bounds.x+bounds.width+xDelta), (y+bounds.y+bounds.height) );
                 }
 
                 //CHECKING TransferPoints
@@ -488,10 +493,10 @@ Prior to Generation VII, Trainers have a five-digit number ranging from 0 to 655
                 //CHECKING TallGrassTile
                 if ( worldMap[ty][((x+bounds.x) / Tile.WIDTH)] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's TOP-left.");
-                    checkTallGrassTileCollision( (TallGrassTile)worldMap[ty][((x+bounds.x) / Tile.WIDTH)] );
+                    checkTallGrassTileCollision( (TallGrassTile)worldMap[ty][((x+bounds.x) / Tile.WIDTH)], (x+bounds.x), (y+bounds.y+yDelta) );
                 } else if ( worldMap[ty][((x+bounds.x+bounds.width) / Tile.WIDTH)] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's TOP-right.");
-                    checkTallGrassTileCollision( (TallGrassTile)worldMap[ty][((x+bounds.x+bounds.width) / Tile.WIDTH)] );
+                    checkTallGrassTileCollision( (TallGrassTile)worldMap[ty][((x+bounds.x+bounds.width) / Tile.WIDTH)], (x+bounds.x+bounds.width), (y+bounds.y+yDelta) );
                 }
 
                 //CHECKING TransferPoints
@@ -522,10 +527,10 @@ Prior to Generation VII, Trainers have a five-digit number ranging from 0 to 655
                 //CHECKING TallGrassTile
                 if ( worldMap[ty][((x+bounds.x) / Tile.WIDTH)] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's BOTTOM-left.");
-                    checkTallGrassTileCollision( (TallGrassTile)worldMap[ty][((x+bounds.x) / Tile.WIDTH)] );
+                    checkTallGrassTileCollision( (TallGrassTile)worldMap[ty][((x+bounds.x) / Tile.WIDTH)], (x+bounds.x), (y+bounds.y+bounds.height+yDelta) );
                 } else if ( worldMap[ty][((x+bounds.x+bounds.width) / Tile.WIDTH)] instanceof TallGrassTile ) {
                     System.out.println("Checking grass tile to player's BOTTOM-right.");
-                    checkTallGrassTileCollision( (TallGrassTile)worldMap[ty][((x+bounds.x+bounds.width) / Tile.WIDTH)] );
+                    checkTallGrassTileCollision( (TallGrassTile)worldMap[ty][((x+bounds.x+bounds.width) / Tile.WIDTH)], (x+bounds.x+bounds.width), (y+bounds.y+bounds.height+yDelta) );
                 }
 
                 //CHECKING TransferPoints

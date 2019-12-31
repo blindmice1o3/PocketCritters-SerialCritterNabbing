@@ -50,7 +50,6 @@ public class StatsModule {
 
     //(statsEffective == calculated stats, determined stats, NOT base stats)
     private Map<Type, Integer> statsEffectiveMap;
-    /* private int attackEffective, defenseEffective, speedEffective, specialEffective, hpEffective; */
 
     public StatsModule(Handler handler, Critter.Species species, int level) {
         this.handler = handler;

@@ -22,7 +22,7 @@ public class Critter {
     private MovesModule movesModule;
     private StatsModule statsModule;
 
-    private int expCurrent, expRewardedIfDefeated;
+    private int expCurrent;
 
     private int hpEffectiveCurrent;
     private StatusConditionNonVolatile status;
@@ -39,7 +39,6 @@ public class Critter {
         statsModule = new StatsModule(handler, this.species, this.level);
 
         expCurrent = 0;
-        expRewardedIfDefeated = 10;
 
         hpEffectiveCurrent = statsModule.getStatsEffectiveMap().get(StatsModule.Type.HP);
         status = StatusConditionNonVolatile.OK;
@@ -86,6 +85,8 @@ public class Critter {
     }
 
     // GETTERS AND SETTERS
+
+    public void setHandler(Handler handler) { this.handler = handler; }
 
     public BufferedImage getSpeciesIcon() {
         return species.speciesIcon;
@@ -210,6 +211,7 @@ public class Critter {
             3.3	Stage multipliers
          */
 
+
         /* CATCH RATE
         The formula also takes into account the following factors:
 
@@ -219,26 +221,7 @@ public class Critter {
 
         Poké Balls that guarantee capture (the Master Ball) bypass the catching formula entirely.
          */
-/*
-Capture method (Generation I)
-The capture method in Generation I differs significantly from those of later generations. To determine whether a Pokémon is caught or not, the steps below are performed. If, at any point, the Pokémon is caught or breaks free, the steps following that point are not performed.
 
-If a Master Ball is used, the Pokémon is caught.
-Generate a random number, N, depending on the type of ball used.
-For a Poké Ball: 0 to 255.
-For a Great Ball: 0 to 200.
-Otherwise (Ultra Ball or Safari Ball): 0 to 150.
-The Pokémon is caught if...
-It is asleep or frozen and N is less than 25.
-It is paralyzed, burned, or poisoned and N is less than 12.
-Otherwise, if N minus the status threshold (above) is greater than the Pokémon's catch rate, the Pokémon breaks free.
-If not, generate a random value, M, between 0 and 255.
-Calculate f:
-f = (HPmax * 255 * 4) / (HPcurrent * Ball), where all divisions are rounded down to the nearest integer. The minimum value of f is 1 and its maximum value is 255. The value of Ball is 8 if a Great Ball is used or 12 otherwise.
-If f is greater than or equal to M, the Pokémon is caught. Otherwise, the Pokémon breaks free. In practical terms, lowering the target's HP to 1/3 of its maximum will guarantee capture with a Poké Ball, while lowering it to 1/2 will guarantee capture with a Great Ball.
-If the Pokémon broke free, the steps below are performed to determine how many times the ball will shake.
-... (see: https://bulbapedia.bulbagarden.net/wiki/Catch_rate)
- */
 
         Species(int id, Type type1, Type type2, int catchRate, int expYieldBase, ExpGroup expGroup,
                 float hpBase, float attackBase, float defenseBase, float speedBase, float specialBase) {
@@ -283,6 +266,12 @@ If the Pokémon broke free, the steps below are performed to determine how many 
                     break;
                 case 21: //COASTAL_GULL
                     speciesIcon = Assets.crittersBufferedImageNestedArray[1][8];
+                    break;
+                case 16: //MOTLEY_PIGEON
+                    speciesIcon = Assets.crittersBufferedImageNestedArray[1][3];
+                    break;
+                case 19: //COLONIAL_MOUSE
+                    speciesIcon = Assets.crittersBufferedImageNestedArray[1][6];
                     break;
                 default:
                     System.out.println("Critter.initSpeciesIcon() switch(id) construct's default block.");

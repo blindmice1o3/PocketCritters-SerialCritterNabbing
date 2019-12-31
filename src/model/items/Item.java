@@ -28,6 +28,7 @@ public abstract class Item {
     public int getQuantity() { return quantity; }
 
     public enum Identifier {
+        //TODO: single-use (consumable) items vs multi-use (non-consumable) items.
         /*
         HM == Hidden Machine
         TM == Technical Machine

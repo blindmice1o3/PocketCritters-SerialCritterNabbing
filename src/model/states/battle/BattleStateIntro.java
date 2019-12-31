@@ -23,7 +23,7 @@ public class BattleStateIntro implements IState {
 
     @Override
     public void tick(long timeElapsed) {
-        System.out.println("BattleStateIntro.tick()");
+        //System.out.println("BattleStateIntro.tick()");
 
         //UP
         if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {

@@ -34,7 +34,7 @@ public class BattleStateMenu implements IState {
 
     @Override
     public void tick(long timeElapsed) {
-        System.out.println("BattleStateMenu.tick()");
+        //System.out.println("BattleStateMenu.tick()");
 
         //UP
         if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)) {

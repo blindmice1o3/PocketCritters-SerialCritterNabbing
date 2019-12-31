@@ -27,8 +27,7 @@ public class BattleState implements IState {
         this.handler = handler;
         this.player = player;
 
-        //TODO: random CritterFactory based on tile's x and y values compared to WorldMap's enum of City, Route, and Place.
-        critterOfOpponent = new Critter(handler, Critter.Species.COASTAL_GULL, 6);
+        critterOfOpponent = null;
 
         //TODO: reward/experience/leveling.
 
@@ -67,6 +66,9 @@ public class BattleState implements IState {
         //initialize critterOfOpponent (the ACTUAL one [not a dummy/filler]).
         if (args != null) {
             if (args[0] instanceof Critter) {
+                System.out.println("BattleState.enter(Object[]) is NOT null and args[0] is a Critter.");
+
+                //TODO: random CritterFactory based on tile's x and y values compared to WorldMap's enum of City, Route, and Place.
                 critterOfOpponent = (Critter)args[0];
             }
         }
