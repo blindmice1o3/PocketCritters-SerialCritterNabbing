@@ -322,6 +322,8 @@ public class Critter
 
         public Type getType2() { return type2; }
 
+        public int getExpYieldBase() { return expYieldBase; }
+
         public int getHpBase() { return (int)hpBase; }
 
         public int getAttackBase() { return (int)attackBase; }

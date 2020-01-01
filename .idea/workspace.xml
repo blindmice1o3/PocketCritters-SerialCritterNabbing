@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fb96119b-76aa-4531-8c73-0e06b445031b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/default00001.bin" afterPath="$PROJECT_DIR$/default00001.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/entities/critters/stats/StatsModule.java" afterPath="$PROJECT_DIR$/src/model/entities/critters/stats/StatsModule.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/entities/critters/Critter.java" afterPath="$PROJECT_DIR$/src/model/entities/critters/Critter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/states/battle/BattleStateFight.java" afterPath="$PROJECT_DIR$/src/model/states/battle/BattleStateFight.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,47 +15,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SerializationDoer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/utils/SerializationDoer.java">
+      <file leaf-file-name="BattleState.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/states/battle/BattleState.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="108" column="66" lean-forward="false" selection-start-line="108" selection-start-column="66" selection-end-line="108" selection-end-column="66" />
-              <folding>
-                <element signature="e#4535#4544#0" expanded="true" />
-                <element signature="e#5190#5196#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Handler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/Handler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="13" column="29" lean-forward="true" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
-              <folding>
-                <element signature="e#291#292#0" expanded="true" />
-                <element signature="e#323#324#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameState.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/states/game/GameState.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="40" column="43" lean-forward="true" selection-start-line="40" selection-start-column="43" selection-end-line="40" selection-end-column="43" />
+            <state relative-caret-position="408">
+              <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="James.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/entities/nabbers/James.java">
+      <file leaf-file-name="BattleStateFight.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/model/states/battle/BattleStateFight.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="493">
+              <caret line="128" column="87" lean-forward="false" selection-start-line="128" selection-start-column="87" selection-end-line="128" selection-end-column="87" />
               <folding />
             </state>
           </provider>
@@ -74,18 +48,18 @@
       <file leaf-file-name="Critter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/entities/critters/Critter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="26" column="27" lean-forward="true" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
+            <state relative-caret-position="85">
+              <caret line="134" column="96" lean-forward="true" selection-start-line="134" selection-start-column="96" selection-end-line="134" selection-end-column="96" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StatsModule.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="StatsModule.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/entities/critters/stats/StatsModule.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="99" column="0" lean-forward="true" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
+            <state relative-caret-position="119">
+              <caret line="17" column="19" lean-forward="true" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -128,7 +102,6 @@
         <option value="$PROJECT_DIR$/src/model/items/CritterNet.java" />
         <option value="$PROJECT_DIR$/src/model/entities/critters/CritterMaker.java" />
         <option value="$PROJECT_DIR$/src/model/states/game/world/WorldMap.java" />
-        <option value="$PROJECT_DIR$/src/model/entities/critters/Critter.java" />
         <option value="$PROJECT_DIR$/src/model/entities/critters/moves/MovesModule.java" />
         <option value="$PROJECT_DIR$/src/model/items/Item.java" />
         <option value="$PROJECT_DIR$/src/model/entities/nabbers/INabber.java" />
@@ -149,7 +122,6 @@
         <option value="$PROJECT_DIR$/src/model/states/menu/belt_list_menu/MenuBeltListActionSummary.java" />
         <option value="$PROJECT_DIR$/src/model/states/menu/belt_list_menu/MenuBeltListActionSwap.java" />
         <option value="$PROJECT_DIR$/src/model/states/battle/BattleState.java" />
-        <option value="$PROJECT_DIR$/src/model/states/battle/BattleStateFight.java" />
         <option value="$PROJECT_DIR$/src/model/states/battle/BattleStateIntro.java" />
         <option value="$PROJECT_DIR$/src/model/states/battle/BattleStateItemList.java" />
         <option value="$PROJECT_DIR$/src/model/states/battle/BattleStateMenu.java" />
@@ -168,6 +140,8 @@
         <option value="$PROJECT_DIR$/src/main/utils/SerializationDoer.java" />
         <option value="$PROJECT_DIR$/src/model/entities/Player.java" />
         <option value="$PROJECT_DIR$/src/model/entities/critters/stats/StatsModule.java" />
+        <option value="$PROJECT_DIR$/src/model/entities/critters/Critter.java" />
+        <option value="$PROJECT_DIR$/src/model/states/battle/BattleStateFight.java" />
       </list>
     </option>
   </component>
@@ -700,8 +674,8 @@
         <state relative-caret-position="496">
           <caret line="76" column="5" lean-forward="false" selection-start-line="76" selection-start-column="5" selection-end-line="76" selection-end-column="5" />
           <folding>
-            <element signature="e#2592#2593#0" expanded="true" />
-            <element signature="e#2628#2629#0" expanded="true" />
+            <element signature="e#2592#2593#0" expanded="false" />
+            <element signature="e#2628#2629#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -711,8 +685,8 @@
         <state relative-caret-position="510">
           <caret line="54" column="5" lean-forward="false" selection-start-line="54" selection-start-column="5" selection-end-line="54" selection-end-column="5" />
           <folding>
-            <element signature="e#1274#1275#0" expanded="true" />
-            <element signature="e#1310#1311#0" expanded="true" />
+            <element signature="e#1274#1275#0" expanded="false" />
+            <element signature="e#1310#1311#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -722,8 +696,8 @@
         <state relative-caret-position="496">
           <caret line="118" column="5" lean-forward="false" selection-start-line="118" selection-start-column="5" selection-end-line="118" selection-end-column="5" />
           <folding>
-            <element signature="e#4015#4016#0" expanded="true" />
-            <element signature="e#4051#4052#0" expanded="true" />
+            <element signature="e#4015#4016#0" expanded="false" />
+            <element signature="e#4051#4052#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -733,10 +707,10 @@
         <state relative-caret-position="527">
           <caret line="87" column="5" lean-forward="false" selection-start-line="87" selection-start-column="5" selection-end-line="87" selection-end-column="5" />
           <folding>
-            <element signature="e#2580#2581#0" expanded="true" />
-            <element signature="e#2611#2612#0" expanded="true" />
-            <element signature="e#2669#2670#0" expanded="true" />
-            <element signature="e#2705#2706#0" expanded="true" />
+            <element signature="e#2580#2581#0" expanded="false" />
+            <element signature="e#2611#2612#0" expanded="false" />
+            <element signature="e#2669#2670#0" expanded="false" />
+            <element signature="e#2705#2706#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -746,8 +720,8 @@
         <state relative-caret-position="510">
           <caret line="147" column="5" lean-forward="false" selection-start-line="147" selection-start-column="5" selection-end-line="147" selection-end-column="5" />
           <folding>
-            <element signature="e#5232#5233#0" expanded="true" />
-            <element signature="e#5268#5269#0" expanded="true" />
+            <element signature="e#5232#5233#0" expanded="false" />
+            <element signature="e#5268#5269#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -757,8 +731,8 @@
         <state relative-caret-position="510">
           <caret line="57" column="5" lean-forward="false" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
           <folding>
-            <element signature="e#1422#1423#0" expanded="true" />
-            <element signature="e#1458#1459#0" expanded="true" />
+            <element signature="e#1422#1423#0" expanded="false" />
+            <element signature="e#1458#1459#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -768,8 +742,8 @@
         <state relative-caret-position="510">
           <caret line="57" column="5" lean-forward="false" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
           <folding>
-            <element signature="e#1447#1448#0" expanded="true" />
-            <element signature="e#1483#1484#0" expanded="true" />
+            <element signature="e#1447#1448#0" expanded="false" />
+            <element signature="e#1483#1484#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -779,10 +753,10 @@
         <state relative-caret-position="527">
           <caret line="88" column="5" lean-forward="false" selection-start-line="88" selection-start-column="5" selection-end-line="88" selection-end-column="5" />
           <folding>
-            <element signature="e#2579#2580#0" expanded="true" />
-            <element signature="e#2610#2611#0" expanded="true" />
-            <element signature="e#2668#2669#0" expanded="true" />
-            <element signature="e#2704#2705#0" expanded="true" />
+            <element signature="e#2579#2580#0" expanded="false" />
+            <element signature="e#2610#2611#0" expanded="false" />
+            <element signature="e#2668#2669#0" expanded="false" />
+            <element signature="e#2704#2705#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -827,17 +801,6 @@
           <folding>
             <element signature="e#5487#5488#0" expanded="true" />
             <element signature="e#5523#5524#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/states/battle/BattleStateFight.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="496">
-          <caret line="293" column="5" lean-forward="false" selection-start-line="293" selection-start-column="5" selection-end-line="293" selection-end-column="5" />
-          <folding>
-            <element signature="e#11896#11897#0" expanded="true" />
-            <element signature="e#11932#11933#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -948,8 +911,8 @@
         <state relative-caret-position="459">
           <caret line="60" column="5" lean-forward="false" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
           <folding>
-            <element signature="e#1644#1645#0" expanded="true" />
-            <element signature="e#1680#1681#0" expanded="true" />
+            <element signature="e#1644#1645#0" expanded="false" />
+            <element signature="e#1680#1681#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -959,8 +922,8 @@
         <state relative-caret-position="459">
           <caret line="60" column="5" lean-forward="false" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
           <folding>
-            <element signature="e#1621#1622#0" expanded="true" />
-            <element signature="e#1657#1658#0" expanded="true" />
+            <element signature="e#1621#1622#0" expanded="false" />
+            <element signature="e#1657#1658#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -970,8 +933,8 @@
         <state relative-caret-position="482">
           <caret line="60" column="5" lean-forward="false" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
           <folding>
-            <element signature="e#1608#1609#0" expanded="true" />
-            <element signature="e#1644#1645#0" expanded="true" />
+            <element signature="e#1608#1609#0" expanded="false" />
+            <element signature="e#1644#1645#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -981,17 +944,6 @@
         <state relative-caret-position="476">
           <caret line="30" column="8" lean-forward="false" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="8" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/states/battle/BattleState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="94" column="26" lean-forward="false" selection-start-line="94" selection-start-column="26" selection-end-line="94" selection-end-column="26" />
-          <folding>
-            <element signature="e#3579#3580#0" expanded="true" />
-            <element signature="e#3615#3616#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1030,8 +982,8 @@
         <state relative-caret-position="170">
           <caret line="108" column="66" lean-forward="false" selection-start-line="108" selection-start-column="66" selection-end-line="108" selection-end-column="66" />
           <folding>
-            <element signature="e#4535#4544#0" expanded="true" />
-            <element signature="e#5190#5196#0" expanded="true" />
+            <element signature="e#4535#4544#0" expanded="false" />
+            <element signature="e#5190#5196#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1068,18 +1020,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/states/battle/BattleState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/entities/critters/Critter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="26" column="27" lean-forward="true" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
+        <state relative-caret-position="85">
+          <caret line="134" column="96" lean-forward="true" selection-start-line="134" selection-start-column="96" selection-end-line="134" selection-end-column="96" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/entities/critters/stats/StatsModule.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="99" column="0" lean-forward="true" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
+        <state relative-caret-position="119">
+          <caret line="17" column="19" lean-forward="true" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/states/battle/BattleStateFight.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="128" column="87" lean-forward="false" selection-start-line="128" selection-start-column="87" selection-end-line="128" selection-end-column="87" />
           <folding />
         </state>
       </provider>
