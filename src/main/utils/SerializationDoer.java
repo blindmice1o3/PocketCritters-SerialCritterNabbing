@@ -6,6 +6,7 @@ import model.entities.Player;
 import model.entities.critters.Critter;
 import model.entities.nabbers.James;
 import model.entities.nabbers.Jessie;
+import model.items.Item;
 import model.states.game.GameState;
 
 import java.io.*;
@@ -80,7 +81,9 @@ public class SerializationDoer {
                 critter.getMovesModule().setHandler(handler);
                 critter.getStatsModule().setHandler(handler);
             }
-            //TODO: ITEMS/inventory.
+            for (Item item : player.getInventory()) {
+                item.setHandler(handler);
+            }
 
             ((GameState)handler.getStateManager().getIState("GameState")).setCritterStorageSystem( (Critter[][])os.readObject() );
             Critter[][] critterStorageSystem = ((GameState)handler.getStateManager().getIState("GameState")).getCritterStorageSystem();
