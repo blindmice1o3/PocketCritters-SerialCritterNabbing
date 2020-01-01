@@ -104,6 +104,8 @@ public class BattleStateItemList implements IState {
 
     @Override
     public void render(Graphics g) {
+        ((BattleState)handler.getStateManager().getIState("BattleState")).getStateMachine().getIState("BattleStateMenu").render(g);
+
         //BACKGROUND PANEL
         g.drawImage(Assets.backgroundBattleStateItemList, 0, 0,
                 handler.getGame().getWidth(), handler.getGame().getHeight(), null);
