@@ -273,6 +273,39 @@ public class Critter {
                 case 19: //COLONIAL_MOUSE
                     speciesIcon = Assets.crittersBufferedImageNestedArray[1][6];
                     break;
+                case 29: //FEMALE_LAPINE
+                    speciesIcon = Assets.crittersBufferedImageNestedArray[2][4];
+                    break;
+                case 32: //MALE_LAPINE
+                    speciesIcon = Assets.crittersBufferedImageNestedArray[2][7];
+                    break;
+                case 10: //HOOKAH_CATERPILLAR
+                    speciesIcon = Assets.crittersBufferedImageNestedArray[0][9];
+                    break;
+                case 13: //GRUB_LARVAE
+                    speciesIcon = Assets.crittersBufferedImageNestedArray[1][0];
+                    break;
+                case 27: //SAND_MOUSE
+                    speciesIcon = Assets.crittersBufferedImageNestedArray[2][2];
+                    break;
+                case 50: //GROUND_HOG
+                    speciesIcon = Assets.crittersBufferedImageNestedArray[4][1];
+                    break;
+                case 95: //LEGLESS_ROCK_LIZARD
+                    speciesIcon = Assets.crittersBufferedImageNestedArray[7][10];
+                    break;
+                case 23: //BEARHUG_PYTHON
+                    speciesIcon = Assets.crittersBufferedImageNestedArray[1][10];
+                    break;
+                case 52: //SMOKEY_KITTY
+                    speciesIcon = Assets.crittersBufferedImageNestedArray[4][3];
+                    break;
+                case 109: //GASEOUS_GOLEM
+                    speciesIcon = Assets.crittersBufferedImageNestedArray[9][0];
+                    break;
+                case 39: //KARAOKE_CREAMPUFF
+                    speciesIcon = Assets.crittersBufferedImageNestedArray[3][2];
+                    break;
                 default:
                     System.out.println("Critter.initSpeciesIcon() switch(id) construct's default block.");
                     System.out.println("THIS Critter is NOT listed in Critter.initSpeciesIcon()!!!");
