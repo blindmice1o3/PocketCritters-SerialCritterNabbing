@@ -96,7 +96,13 @@ public class WorldMap implements IWorld {
         //NON-SOLID TILES
         //Tall-Grass -> possible PocketMonster Encounter!
         walkableTileSpriteTargets.add(
-                Assets.world.getSubimage(1088, 3184, Tile.WIDTH, Tile.HEIGHT) ); //tall-grass
+                Assets.world.getSubimage(1088, 3184, Tile.WIDTH, Tile.HEIGHT) ); //tall-grass (ROUTE01)
+        walkableTileSpriteTargets.add(
+                Assets.world.getSubimage(864, 1760, Tile.WIDTH, Tile.HEIGHT) ); //tall-grass (ROUTE02)
+        walkableTileSpriteTargets.add(
+                Assets.world.getSubimage(800, 1184, Tile.WIDTH, Tile.HEIGHT) ); //tall-grass (Place.VIRIDIAN_FOREST [but more like Town.PEWTER_CITY's south])
+        walkableTileSpriteTargets.add(
+                Assets.world.getSubimage(1600, 928, Tile.WIDTH, Tile.HEIGHT) ); //tall-grass (ROUTE03)
 
         return walkableTileSpriteTargets;
     }
@@ -106,25 +112,25 @@ public class WorldMap implements IWorld {
 
         //SOLID TILES
         nonWalkableTileSpriteTargets.add(
-                Assets.world.getSubimage(960, 3376, Tile.WIDTH, Tile.HEIGHT) ); //fence-blue
+                Assets.world.getSubimage(960, 3376, Tile.WIDTH, Tile.HEIGHT) ); //fence-blue (Town.PALLET_TOWN)
         nonWalkableTileSpriteTargets.add(
-                Assets.world.getSubimage(1024, 3312, Tile.WIDTH, Tile.HEIGHT) ); //fence-brown
+                Assets.world.getSubimage(1024, 3312, Tile.WIDTH, Tile.HEIGHT) ); //fence-brown (Town.PALLET_TOWN)
         nonWalkableTileSpriteTargets.add(
-                Assets.world.getSubimage(1072, 3312, Tile.WIDTH, Tile.HEIGHT) ); //sign-post
+                Assets.world.getSubimage(1072, 3312, Tile.WIDTH, Tile.HEIGHT) ); //sign-post (Town.PALLET_TOWN)
         nonWalkableTileSpriteTargets.add(
-                Assets.world.getSubimage(1024, 3392, Tile.WIDTH, Tile.HEIGHT) ); //NW-shore
+                Assets.world.getSubimage(1024, 3392, Tile.WIDTH, Tile.HEIGHT) ); //NW-shore (Town.PALLET_TOWN)
         nonWalkableTileSpriteTargets.add(
-                Assets.world.getSubimage(1040, 3392, Tile.WIDTH, Tile.HEIGHT) ); //N-shore
+                Assets.world.getSubimage(1040, 3392, Tile.WIDTH, Tile.HEIGHT) ); //N-shore (Town.PALLET_TOWN)
         nonWalkableTileSpriteTargets.add(
-                Assets.world.getSubimage(1072, 3392, Tile.WIDTH, Tile.HEIGHT) ); //NE-shore
+                Assets.world.getSubimage(1072, 3392, Tile.WIDTH, Tile.HEIGHT) ); //NE-shore (Town.PALLET_TOWN)
         nonWalkableTileSpriteTargets.add(
-                Assets.world.getSubimage(1024, 3408, Tile.WIDTH, Tile.HEIGHT) ); //W-shore
+                Assets.world.getSubimage(1024, 3408, Tile.WIDTH, Tile.HEIGHT) ); //W-shore (Town.PALLET_TOWN)
         nonWalkableTileSpriteTargets.add(
-                Assets.world.getSubimage(1072, 3408, Tile.WIDTH, Tile.HEIGHT) ); //E-shore
+                Assets.world.getSubimage(1072, 3408, Tile.WIDTH, Tile.HEIGHT) ); //E-shore (Town.PALLET_TOWN)
         nonWalkableTileSpriteTargets.add(
-                Assets.world.getSubimage(976, 3152, Tile.WIDTH, Tile.HEIGHT) ); //Bush
+                Assets.world.getSubimage(976, 3152, Tile.WIDTH, Tile.HEIGHT) ); //Bush (Town.PALLET_TOWN)
 
-        // building_home, starting at x == 1024, y == 3216, width/number_of_columns == 4, height/number_of_rows == 3.
+        // building_home (Town.PALLET_TOWN), starting at x == 1024, y == 3216, width/number_of_columns == 4, height/number_of_rows == 3.
         ArrayList<BufferedImage> homeNoDoor = handler.getTileSpriteToRGBConverter().pullMultipleTiles(
                 Assets.world,1024, 3216, 4, 3);
         homeNoDoor.remove(9);
@@ -132,13 +138,13 @@ public class WorldMap implements IWorld {
                 homeNoDoor
         );
 
-        // building_home_roofTopOfSecondHome.
+        // building_home_roofTopOfSecondHome (Town.PALLET_TOWN).
         nonWalkableTileSpriteTargets.addAll(
                 handler.getTileSpriteToRGBConverter().pullMultipleTiles(
                         Assets.world,1152, 3216, 4, 1)
         );
 
-        //building_store, starting at x == 1120, y == 3296, width/number_of_columns == 6, height/number_of_rows == 4.
+        //building_store (Town.PALLET_TOWN), starting at x == 1120, y == 3296, width/number_of_columns == 6, height/number_of_rows == 4.
         ArrayList<BufferedImage> buildingStoreNoDoor = handler.getTileSpriteToRGBConverter().pullMultipleTiles(
                 Assets.world,1120, 3296, 6, 4);
         buildingStoreNoDoor.remove(20);
