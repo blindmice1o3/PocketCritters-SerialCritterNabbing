@@ -46,7 +46,7 @@ Prior to Generation VII, Trainers have a five-digit number ranging from 0 to 655
     private long timePlayed;
 
     private int x, y;
-    private int xScreenPosition, yScreenPosition;
+    private transient int xScreenPosition, yScreenPosition;
     private transient int xDelta, yDelta;
     protected transient int moveSpeed;
 
@@ -582,6 +582,8 @@ Prior to Generation VII, Trainers have a five-digit number ranging from 0 to 655
     }
 
     // GETTERS & SETTERS
+
+    public void setHandler(Handler handler) { this.handler = handler; }
 
     public int getIdNumber() { return idNumber; }
 

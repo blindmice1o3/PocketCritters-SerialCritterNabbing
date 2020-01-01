@@ -2,7 +2,10 @@ package model.entities.critters.moves;
 
 import main.Handler;
 
-public class MovesModule {
+import java.io.Serializable;
+
+public class MovesModule
+        implements Serializable {
 
     public enum Category {
         PHYSICAL,
@@ -127,7 +130,7 @@ public class MovesModule {
         public int getPriority() { return priority; }
     }
 
-    private Handler handler;
+    private transient Handler handler;
 
     //stores the idMove in index 0-3.
     private int[] movesCurrent;
@@ -172,10 +175,6 @@ public class MovesModule {
         }
     }
 
-    public int[] getMovesCurrent() { return movesCurrent; }
-
-    public int[] getPpMovesCurrent() { return ppMovesCurrent; }
-
     public Move lookUpMove(int idMove) {
         for (Move move : Move.values()) {
             if (idMove == move.id) {
@@ -185,5 +184,13 @@ public class MovesModule {
         //BY DEFAULT (if not one of the enum Move's value, return null.
         return null;
     }
+
+    // GETTERS AND SETTERS
+
+    public void setHandler(Handler handler) { this.handler = handler; }
+
+    public int[] getMovesCurrent() { return movesCurrent; }
+
+    public int[] getPpMovesCurrent() { return ppMovesCurrent; }
 
 } // **** end MovesModule class ****

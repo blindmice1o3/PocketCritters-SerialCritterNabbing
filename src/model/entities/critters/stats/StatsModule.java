@@ -3,15 +3,17 @@ package model.entities.critters.stats;
 import main.Handler;
 import model.entities.critters.Critter;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class StatsModule {
+public class StatsModule
+        implements Serializable {
 
     public enum Type { ATTACK, DEFENSE, SPEED, SPECIAL, HP; }
 
-    private Handler handler;
+    private transient Handler handler;
     private Critter.Species species;
     private int level;
 
@@ -148,6 +150,7 @@ public class StatsModule {
 
     // GETTERS AND SETTERS
 
+    public void setHandler(Handler handler) { this.handler = handler; }
 
     public Map<Type, Integer> getIvMap() {
         return ivMap;

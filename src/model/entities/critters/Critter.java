@@ -7,12 +7,14 @@ import model.entities.critters.moves.MovesModule;
 import model.entities.critters.stats.StatsModule;
 
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
-public class Critter {
+public class Critter
+        implements Serializable {
 
     public static final int WILD = 65536;
 
-    private Handler handler;
+    private transient Handler handler;
     private Species species;
     private int level;
 

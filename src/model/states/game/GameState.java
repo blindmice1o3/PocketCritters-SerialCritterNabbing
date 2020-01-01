@@ -131,6 +131,8 @@ public class GameState implements IState {
 
     public Critter[][] getCritterStorageSystem() { return critterStorageSystem; }
 
+    public void setCritterStorageSystem(Critter[][] critterStorageSystem) { this.critterStorageSystem = critterStorageSystem; }
+
     public int getIndexCurrentBox() { return indexCurrentBox; }
 
 } // **** end GameState class ****

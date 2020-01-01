@@ -3,9 +3,12 @@ package model.items;
 import main.Handler;
 import model.entities.critters.Critter;
 
-public abstract class Item {
+import java.io.Serializable;
 
-    protected Handler handler;
+public abstract class Item
+        implements Serializable {
+
+    protected transient Handler handler;
     private Identifier identifier;
     protected boolean active;
     private int quantity;
@@ -20,6 +23,8 @@ public abstract class Item {
     public abstract void execute(Critter targetedCritter);
 
     // GETTERS AND SETTERS
+
+    public void setHandler(Handler handler) { this.handler = handler; }
 
     public Identifier getIdentifier() { return identifier; }
 
