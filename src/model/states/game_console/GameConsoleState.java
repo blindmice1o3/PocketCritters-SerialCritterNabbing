@@ -55,4 +55,8 @@ public class GameConsoleState implements IState {
 
     }
 
+    // GETTERS AND SETTERS
+
+    public void setPlayer(Player player) { this.player = player; }
+
 } // **** end GameConsoleState class ****

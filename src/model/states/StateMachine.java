@@ -50,4 +50,5 @@ public class StateMachine {
     public IState getIState(String identifier) {
         return (stateCollection.containsKey(identifier)) ? (stateCollection.get(identifier)) : null;
     }
+
 } // **** end StateMachine class ****

@@ -55,4 +55,8 @@ public class ComputerState implements IState {
 
     }
 
+    // GETTERS AND SETTERS
+
+    public void setPlayer(Player player) { this.player = player; }
+
 } // **** end ComputerState class ****

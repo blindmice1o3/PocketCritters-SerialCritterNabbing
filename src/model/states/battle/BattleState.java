@@ -89,6 +89,8 @@ public class BattleState implements IState {
 
     // GETTERS AND SETTERS
 
+    public void setPlayer(Player player) { this.player = player; }
+
     public Critter getCritterOfOpponent() { return critterOfOpponent; }
 
     public Critter getCritterOfPlayer() { return critterOfPlayer; }

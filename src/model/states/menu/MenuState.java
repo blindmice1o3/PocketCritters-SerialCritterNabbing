@@ -65,6 +65,8 @@ public class MenuState implements IState {
 
     // GETTERS AND SETTERS
 
+    public void setPlayer(Player player) { this.player = player; }
+
     public StateMachine getStateMachine() { return stateMachine; }
 
 } // **** end MenuState class ****
