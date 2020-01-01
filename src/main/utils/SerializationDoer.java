@@ -105,6 +105,8 @@ public class SerializationDoer {
             Player player = handler.getGame().getPlayer();
             player.setHandler(handler);
             player.initAnimations();
+            player.setXScreenPosition( Player.X_SCREEN_POSITION );
+            player.setYScreenPosition( Player.Y_SCREEN_POSITION );
             player.setNabberList( (ArrayList<INabber>)os.readObject() );
             for (INabber nabber : player.getNabberList()) {
                 nabber.initAnimations();

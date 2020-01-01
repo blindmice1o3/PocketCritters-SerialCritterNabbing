@@ -28,6 +28,8 @@ public class Player
         implements Serializable {
 
     public static final int ID_MAX_PLUS_ONE = 65536;
+    public static final int X_SCREEN_POSITION = 288, Y_SCREEN_POSITION = 256;
+
     public enum DirectionFacing { LEFT, RIGHT, UP, DOWN; }
 
     protected transient Handler handler;
@@ -48,10 +50,10 @@ Prior to Generation VII, Trainers have a five-digit number ranging from 0 to 655
     private int x, y;
     private transient int xScreenPosition, yScreenPosition;
     private transient int xDelta, yDelta;
-    protected transient int moveSpeed;
+    protected int moveSpeed;
 
     private DirectionFacing directionFacing;
-    protected transient Rectangle bounds;
+    protected Rectangle bounds;
 
     private ArrayList<Item> inventory;
     private ArrayList<Critter> critterBeltList;
@@ -76,14 +78,13 @@ Prior to Generation VII, Trainers have a five-digit number ranging from 0 to 655
 
         x = 1104;
         y = 3312;
-        xScreenPosition = 288;
-        yScreenPosition = 256;
+        xScreenPosition = X_SCREEN_POSITION;
+        yScreenPosition = Y_SCREEN_POSITION;
+        moveSpeed = Tile.WIDTH;
 
         directionFacing = DirectionFacing.DOWN;
         //bounds = new Rectangle(0, 0, Tile.WIDTH, Tile.HEIGHT);
         bounds = new Rectangle(0+1, 0+1, Tile.WIDTH-2, Tile.HEIGHT-2);
-
-        moveSpeed = Tile.WIDTH;
 
         inventory = new ArrayList<Item>();
         //////////////////////////////////////
@@ -595,6 +596,10 @@ Prior to Generation VII, Trainers have a five-digit number ranging from 0 to 655
 
     public void setY(int y) { this.y = y; }
 
+    public void setXScreenPosition(int xScreenPosition) { this.xScreenPosition = xScreenPosition; }
+
+    public void setYScreenPosition(int yScreenPosition) { this.yScreenPosition = yScreenPosition; }
+
     public int getXDelta() { return xDelta; }
 
     public void setXDelta(int xDelta) {
@@ -608,6 +613,8 @@ Prior to Generation VII, Trainers have a five-digit number ranging from 0 to 655
     }
 
     public int getMoveSpeed() { return moveSpeed; }
+
+    public void setMoveSpeed(int moveSpeed) { this.moveSpeed = moveSpeed; }
 
     public DirectionFacing getDirectionFacing() { return directionFacing; }
 
