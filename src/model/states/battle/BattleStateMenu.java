@@ -189,4 +189,9 @@ public class BattleStateMenu implements IState {
 
     }
 
+    @Override
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
 } // **** end BattleStateMenu class ****

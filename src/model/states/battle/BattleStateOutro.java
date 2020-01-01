@@ -134,4 +134,9 @@ public class BattleStateOutro implements IState {
 
     }
 
+    @Override
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
 } // **** end BattleStateOutro class ****

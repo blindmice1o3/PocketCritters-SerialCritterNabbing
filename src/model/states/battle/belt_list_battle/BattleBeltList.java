@@ -141,4 +141,9 @@ public class BattleBeltList implements IState {
 
     }
 
+    @Override
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
 } // **** end BattleBeltList class ****

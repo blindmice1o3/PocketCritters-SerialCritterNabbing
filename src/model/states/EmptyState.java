@@ -1,5 +1,7 @@
 package model.states;
 
+import model.entities.Player;
+
 import java.awt.*;
 
 public class EmptyState implements IState {
@@ -21,6 +23,11 @@ public class EmptyState implements IState {
 
     @Override
     public void exit() {
+
+    }
+
+    @Override
+    public void setPlayer(Player player) {
 
     }
 

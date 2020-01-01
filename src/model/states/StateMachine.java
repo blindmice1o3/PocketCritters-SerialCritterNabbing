@@ -1,6 +1,7 @@
 package model.states;
 
 import main.Handler;
+import model.entities.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,6 +50,12 @@ public class StateMachine {
 
     public IState getIState(String identifier) {
         return (stateCollection.containsKey(identifier)) ? (stateCollection.get(identifier)) : null;
+    }
+
+    public void setPlayerForAllIState(Player player) {
+        for (IState state : stateCollection.values()) {
+            state.setPlayer(player);
+        }
     }
 
 } // **** end StateMachine class ****

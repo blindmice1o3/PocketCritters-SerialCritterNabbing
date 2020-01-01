@@ -142,4 +142,9 @@ public class MenuStateMenu implements IState {
 
     }
 
+    @Override
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
 } // **** end MenuStateMenu class ****

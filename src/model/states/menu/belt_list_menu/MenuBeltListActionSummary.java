@@ -244,4 +244,9 @@ public class MenuBeltListActionSummary implements IState {
 
     }
 
+    @Override
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
 } // **** end MenuBeltListActionSummary class ****

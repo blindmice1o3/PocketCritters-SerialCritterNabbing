@@ -113,4 +113,9 @@ public class MenuStateItemList implements IState {
 
     }
 
+    @Override
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
 } // **** end MenuStateItemList class ****

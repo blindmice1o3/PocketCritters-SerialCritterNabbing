@@ -71,4 +71,9 @@ public class MenuStateCritterDex implements IState {
 
     }
 
+    @Override
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
 } // **** end MenuStateCritterDex class ****

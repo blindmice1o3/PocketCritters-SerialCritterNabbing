@@ -52,4 +52,9 @@ public class MenuStatePlayerStats implements IState {
 
     }
 
+    @Override
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
 } // **** end MenuStatePlayerStats class ****

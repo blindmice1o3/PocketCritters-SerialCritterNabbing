@@ -9,6 +9,7 @@ import model.entities.nabbers.James;
 import model.entities.nabbers.Jessie;
 import model.items.Item;
 import model.states.IState;
+import model.states.StateMachine;
 import model.states.battle.BattleState;
 import model.states.computer.ComputerState;
 import model.states.game.GameState;
@@ -45,8 +46,21 @@ public class SerializationDoer {
             os.writeObject( handler.getGame().getGameCamera() );
             os.writeObject( handler.getGame().getPlayer() );
             os.writeObject( handler.getGame().getPlayer().getNabberList() );
-            os.writeObject( handler.getGame().getPlayer().getCritterBeltList() );
-            os.writeObject( handler.getGame().getPlayer().getInventory() );
+
+            int sizeCritterBeltList = handler.getGame().getPlayer().getCritterBeltList().size();
+            os.writeInt( sizeCritterBeltList );
+            for (int i = 0; i < sizeCritterBeltList; i++) {
+                os.writeObject( handler.getGame().getPlayer().getCritterBeltList().get(i) );
+            }
+
+            int sizeInventory = handler.getGame().getPlayer().getInventory().size();
+            os.writeInt( sizeInventory );
+            for (int i = 0; i < sizeInventory; i++) {
+                os.writeObject( handler.getGame().getPlayer().getInventory().get(i) );
+            }
+
+            //os.writeObject( handler.getGame().getPlayer().getCritterBeltList() );
+            //os.writeObject( handler.getGame().getPlayer().getInventory() );
             os.writeObject( ((GameState)handler.getStateManager().getIState("GameState")).getCritterStorageSystem() );
 
 //            os.writeObject( handler.getGame().getJames() );
@@ -102,23 +116,41 @@ public class SerializationDoer {
                     ((Jessie)nabber).setHandler(handler);
                 }
             }
-            player.setCritterBeltList( (ArrayList<Critter>)os.readObject() );
+
+            ArrayList<Critter> newCritterBeltList = new ArrayList<Critter>(6);
+            int sizeCritterBeltList = os.readInt();
+            for (int i = 0; i < sizeCritterBeltList; i++) {
+                newCritterBeltList.add( (Critter)os.readObject() );
+            }
+            //player.setCritterBeltList( (ArrayList<Critter>)os.readObject() );
+            player.setCritterBeltList( newCritterBeltList );
             for (Critter critter : player.getCritterBeltList()) {
                 critter.setHandler(handler);
                 critter.getMovesModule().setHandler(handler);
                 critter.getStatsModule().setHandler(handler);
             }
-            player.setInventory( (ArrayList<Item>)os.readObject() );
+
+            ArrayList<Item> newInventory = new ArrayList<Item>();
+            int sizeInventory = os.readInt();
+            for (int i = 0; i < sizeInventory; i++) {
+                newInventory.add( (Item)os.readObject() );
+            }
+            //player.setInventory( (ArrayList<Item>)os.readObject() );
+            player.setInventory( newInventory );
             for (Item item : player.getInventory()) {
                 item.setHandler(handler);
             }
 
-            ((GameState)handler.getStateManager().getIState("GameState")).setPlayer( player );
-            ((BattleState)handler.getStateManager().getIState("BattleState")).setPlayer( player );
-            ((MenuState)handler.getStateManager().getIState("MenuState")).setPlayer( player );
-            ((ComputerState)handler.getStateManager().getIState("ComputerState")).setPlayer( player );
-            ((GameConsoleState)handler.getStateManager().getIState("GameConsoleState")).setPlayer( player );
-            ((TelevisionState)handler.getStateManager().getIState("TelevisionState")).setPlayer( player );
+            handler.getStateManager().getIState("GameState").setPlayer( player );
+            handler.getStateManager().getIState("BattleState").setPlayer( player );
+            StateMachine battleStateMachine = ((BattleState)handler.getStateManager().getIState("BattleState")).getStateMachine();
+            battleStateMachine.setPlayerForAllIState( player );
+            handler.getStateManager().getIState("MenuState").setPlayer( player );
+            StateMachine menuStateMachine = ((MenuState)handler.getStateManager().getIState("MenuState")).getStateMachine();
+            menuStateMachine.setPlayerForAllIState( player );
+            handler.getStateManager().getIState("ComputerState").setPlayer( player );
+            handler.getStateManager().getIState("GameConsoleState").setPlayer( player );
+            handler.getStateManager().getIState("TelevisionState").setPlayer( player );
 
             ((GameState)handler.getStateManager().getIState("GameState")).setCritterStorageSystem( (Critter[][])os.readObject() );
             Critter[][] critterStorageSystem = ((GameState)handler.getStateManager().getIState("GameState")).getCritterStorageSystem();

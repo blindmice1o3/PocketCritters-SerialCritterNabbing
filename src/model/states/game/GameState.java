@@ -123,9 +123,12 @@ public class GameState implements IState {
 
     }
 
-    // GETTERS AND SETTERS
+    @Override
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 
-    public void setPlayer(Player player) { this.player = player; }
+    // GETTERS AND SETTERS
 
     public WorldManager getWorldManager() {
         return worldManager;

@@ -141,4 +141,9 @@ public class MenuBeltListActionSwap implements IState {
 
     }
 
+    @Override
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
 } // **** end MenuBeltListActionSwap class ****

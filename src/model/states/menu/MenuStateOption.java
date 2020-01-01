@@ -52,4 +52,9 @@ public class MenuStateOption implements IState {
 
     }
 
+    @Override
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
 } // **** end MenuStateOption class ****

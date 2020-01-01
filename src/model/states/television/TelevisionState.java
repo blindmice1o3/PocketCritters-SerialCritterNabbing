@@ -55,8 +55,9 @@ public class TelevisionState implements IState {
 
     }
 
-    // GETTERS AND SETTERS
-
-    public void setPlayer(Player player) { this.player = player; }
+    @Override
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 
 } // **** end TelevisionState class ****

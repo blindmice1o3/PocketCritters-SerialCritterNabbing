@@ -82,4 +82,9 @@ public class MenuStateLoad implements IState {
         pressed = false;
     }
 
+    @Override
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
 } // **** end MenuStateLoad class ****

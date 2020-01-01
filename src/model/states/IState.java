@@ -1,5 +1,7 @@
 package model.states;
 
+import model.entities.Player;
+
 import java.awt.*;
 
 public interface IState {
@@ -11,5 +13,7 @@ public interface IState {
     void enter(Object[] args);
 
     void exit();
+
+    void setPlayer(Player player);
 
 }

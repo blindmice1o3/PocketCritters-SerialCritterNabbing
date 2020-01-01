@@ -145,4 +145,9 @@ public class MenuBeltList implements IState {
 
     }
 
+    @Override
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
 } // **** end MenuBeltList class ****

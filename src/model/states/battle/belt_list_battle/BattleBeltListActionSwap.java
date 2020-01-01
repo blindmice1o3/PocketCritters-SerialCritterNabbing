@@ -121,4 +121,9 @@ public class BattleBeltListActionSwap implements IState {
         isBattling = false;
     }
 
+    @Override
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
 } // **** end BattleBeltListActionSwap class ****

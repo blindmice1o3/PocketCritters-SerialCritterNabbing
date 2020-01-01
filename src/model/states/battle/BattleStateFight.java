@@ -288,4 +288,9 @@ public class BattleStateFight implements IState {
 
     }
 
+    @Override
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
 } // **** end BattleStateFight class ****

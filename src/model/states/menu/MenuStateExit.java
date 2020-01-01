@@ -49,4 +49,9 @@ public class MenuStateExit implements IState {
 
     }
 
+    @Override
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
 } // **** end MenuStateExit class ****

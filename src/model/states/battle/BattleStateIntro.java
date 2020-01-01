@@ -121,4 +121,9 @@ public class BattleStateIntro implements IState {
 
     }
 
+    @Override
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
 } // **** end BattleStateIntro ****

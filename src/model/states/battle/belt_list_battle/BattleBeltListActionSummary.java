@@ -244,4 +244,9 @@ public class BattleBeltListActionSummary implements IState {
 
     }
 
+    @Override
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
 } // **** end BattleBeltListActionSummary class ****

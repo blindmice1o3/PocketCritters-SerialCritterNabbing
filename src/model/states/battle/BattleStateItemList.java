@@ -145,4 +145,9 @@ public class BattleStateItemList implements IState {
 
     }
 
+    @Override
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
 } // **** end BattleStateItemList class ****
