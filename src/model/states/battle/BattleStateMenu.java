@@ -181,7 +181,11 @@ public class BattleStateMenu implements IState {
 
     @Override
     public void enter(Object[] args) {
+        Critter critterOfOpponent = ((BattleState)handler.getStateManager().getIState("BattleState")).getCritterOfOpponent();
+        Critter critterOfPlayer = ((BattleState)handler.getStateManager().getIState("BattleState")).getCritterOfPlayer();
 
+        System.out.println("critterOfOpponent is in ExpGroup " + critterOfOpponent.getSpecies().getExpGroup().toString() + " with expCurrent: " + critterOfOpponent.getExpCurrent());
+        System.out.println("critterOfPlayer is in ExpGroup " + critterOfPlayer.getSpecies().getExpGroup().toString() + " with expCurrent: " + critterOfPlayer.getExpCurrent());
     }
 
     @Override

@@ -40,7 +40,24 @@ public class Critter
         movesModule = new MovesModule(handler);
         statsModule = new StatsModule(handler, this.species, this.level);
 
-        expCurrent = 0;
+        switch (species.getExpGroup()) {
+            case FAST:
+                expCurrent = ExpLookUpTable.expByLevelFast.get(level);
+                break;
+            case MEDIUM_FAST:
+                expCurrent = ExpLookUpTable.expByLevelMediumFast.get(level);
+                break;
+            case MEDIUM_SLOW:
+                expCurrent = ExpLookUpTable.expByLevelMediumSlow.get(level);
+                break;
+            case SLOW:
+                expCurrent = ExpLookUpTable.expByLevelSlow.get(level);
+                break;
+            default:
+                System.out.println("Critter's constructor switch(ExpGroup)'s default block.");
+                break;
+
+        }
 
         hpEffectiveCurrent = statsModule.getStatsEffectiveMap().get(StatsModule.Type.HP);
         status = StatusConditionNonVolatile.OK;
@@ -323,6 +340,8 @@ public class Critter
         public Type getType2() { return type2; }
 
         public int getExpYieldBase() { return expYieldBase; }
+
+        public ExpGroup getExpGroup() { return expGroup; }
 
         public int getHpBase() { return (int)hpBase; }
 
