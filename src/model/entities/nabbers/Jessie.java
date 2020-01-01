@@ -36,7 +36,8 @@ public class Jessie extends Player
         initAnimations();
     }
 
-    private void initAnimations() {
+    @Override
+    public void initAnimations() {
         anim = new HashMap<String, Animation>();
 
         anim.put("up", new Animation(150, Assets.jessieUp));

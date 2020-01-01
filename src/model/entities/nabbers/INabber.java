@@ -5,6 +5,7 @@ import model.entities.critters.Critter;
 import java.awt.*;
 
 public interface INabber {
+    void initAnimations();
     void tick();
     void render(Graphics g);
     void nab(Critter critter);

@@ -40,7 +40,8 @@ public class James extends Player
         rand = new Random();
     }
 
-    private void initAnimations() {
+    @Override
+    public void initAnimations() {
         anim = new HashMap<String, Animation>();
 
         anim.put("up", new Animation(150, Assets.jamesUp));
@@ -239,5 +240,7 @@ public class James extends Player
     public void setY(int y) {
         this.y = y;
     }
+
+    public void setRand(Random rand) { this.rand = rand; }
 
 } // **** end James class ****

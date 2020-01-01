@@ -124,7 +124,7 @@ Prior to Generation VII, Trainers have a five-digit number ranging from 0 to 655
         }
     }
 
-    private void initAnimations() {
+    public void initAnimations() {
         anim = new HashMap<String, Animation>();
 
         anim.put("down", new Animation(120, Assets.pikachuDown));
@@ -612,6 +612,14 @@ Prior to Generation VII, Trainers have a five-digit number ranging from 0 to 655
     public DirectionFacing getDirectionFacing() { return directionFacing; }
 
     public void setDirectionFacing(DirectionFacing directionFacing) { this.directionFacing = directionFacing; }
+
+    public ArrayList<INabber> getNabberList() {
+        return nabberList;
+    }
+
+    public void setNabberList(ArrayList<INabber> nabberList) {
+        this.nabberList = nabberList;
+    }
 
     public ArrayList<Item> getInventory() { return inventory; }
 

@@ -4,12 +4,15 @@ import main.Handler;
 import main.gfx.GameCamera;
 import model.entities.Player;
 import model.entities.critters.Critter;
+import model.entities.nabbers.INabber;
 import model.entities.nabbers.James;
 import model.entities.nabbers.Jessie;
 import model.items.Item;
 import model.states.game.GameState;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class SerializationDoer {
 
@@ -35,6 +38,9 @@ public class SerializationDoer {
             os.writeObject( handler.getGame().getGameCamera() );
             os.writeObject( handler.getGame().getPlayer() );
             os.writeObject( ((GameState)handler.getStateManager().getIState("GameState")).getCritterStorageSystem() );
+            os.writeObject( handler.getGame().getPlayer().getNabberList() );
+            os.writeObject( handler.getGame().getPlayer().getCritterBeltList() );
+            os.writeObject( handler.getGame().getPlayer().getInventory() );
 //            os.writeObject( handler.getGame().getJames() );
 //            os.writeObject( handler.getGame().getJessie() );
 
@@ -76,6 +82,8 @@ public class SerializationDoer {
 
             Player player = handler.getGame().getPlayer();
             player.setHandler(handler);
+            player.initAnimations();
+            ((GameState)handler.getStateManager().getIState("GameState")).setPlayer( player );
             for (Critter critter : player.getCritterBeltList()) {
                 critter.setHandler(handler);
                 critter.getMovesModule().setHandler(handler);
@@ -94,6 +102,20 @@ public class SerializationDoer {
                     }
                 }
             }
+
+            handler.getGame().getPlayer().setNabberList( (ArrayList<INabber>)os.readObject() );
+            for (INabber nabber : player.getNabberList()) {
+                nabber.initAnimations();
+
+                if (nabber instanceof James) {
+                    ((James)nabber).setHandler(handler);
+                    ((James)nabber).setRand( new Random() );
+                } else if (nabber instanceof Jessie) {
+                    ((Jessie)nabber).setHandler(handler);
+                }
+            }
+            handler.getGame().getPlayer().setCritterBeltList( (ArrayList<Critter>)os.readObject() );
+            handler.getGame().getPlayer().setInventory( (ArrayList<Item>)os.readObject() );
 //            handler.getGame().setJames( (James)os.readObject() );
 //            handler.getGame().setJessie( (Jessie)os.readObject() );
 
