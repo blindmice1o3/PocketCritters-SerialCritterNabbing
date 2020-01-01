@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fb96119b-76aa-4531-8c73-0e06b445031b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PocketCritters-SerialCritterNabbing/Game Boy GBC - Pokemon Yellow - Battle Interface (transparent and taller).png" afterPath="$PROJECT_DIR$/out/production/PocketCritters-SerialCritterNabbing/Game Boy GBC - Pokemon Yellow - Battle Interface (transparent and taller).png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PocketCritters-SerialCritterNabbing/model/states/battle/BattleStateFight.class" afterPath="$PROJECT_DIR$/out/production/PocketCritters-SerialCritterNabbing/model/states/battle/BattleStateFight.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PocketCritters-SerialCritterNabbing/model/states/battle/BattleStateItemList.class" afterPath="$PROJECT_DIR$/out/production/PocketCritters-SerialCritterNabbing/model/states/battle/BattleStateItemList.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PocketCritters-SerialCritterNabbing/model/states/battle/BattleStateMenu.class" afterPath="$PROJECT_DIR$/out/production/PocketCritters-SerialCritterNabbing/model/states/battle/BattleStateMenu.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/PocketCritters-SerialCritterNabbing/model/states/battle/belt_list_battle/BattleBeltList.class" afterPath="$PROJECT_DIR$/out/production/PocketCritters-SerialCritterNabbing/model/states/battle/belt_list_battle/BattleBeltList.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/Game Boy GBC - Pokemon Yellow - Battle Interface (transparent and taller).png" afterPath="$PROJECT_DIR$/res/Game Boy GBC - Pokemon Yellow - Battle Interface (transparent and taller).png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/states/battle/BattleStateFight.java" afterPath="$PROJECT_DIR$/src/model/states/battle/BattleStateFight.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/states/battle/BattleStateItemList.java" afterPath="$PROJECT_DIR$/src/model/states/battle/BattleStateItemList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/states/battle/BattleStateMenu.java" afterPath="$PROJECT_DIR$/src/model/states/battle/BattleStateMenu.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/states/game/world/WorldMap.java" afterPath="$PROJECT_DIR$/src/model/states/game/world/WorldMap.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,26 +24,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BattleStateMenu.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/model/states/battle/BattleStateMenu.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="169" column="0" lean-forward="true" selection-start-line="169" selection-start-column="0" selection-end-line="169" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BattleStateFight.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/model/states/battle/BattleStateFight.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="266" column="0" lean-forward="true" selection-start-line="266" selection-start-column="0" selection-end-line="266" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="CritterMaker.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/entities/critters/CritterMaker.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -65,11 +36,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WorldMap.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="WorldMap.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/model/states/game/world/WorldMap.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="105" column="0" lean-forward="true" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
+            <state relative-caret-position="493">
+              <caret line="195" column="10" lean-forward="false" selection-start-line="195" selection-start-column="10" selection-end-line="195" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -156,12 +127,12 @@
         <option value="$PROJECT_DIR$/src/model/states/battle/BattleStateIntro.java" />
         <option value="$PROJECT_DIR$/src/model/items/CritterNet.java" />
         <option value="$PROJECT_DIR$/src/model/entities/critters/CritterMaker.java" />
-        <option value="$PROJECT_DIR$/src/model/states/game/world/WorldMap.java" />
         <option value="$PROJECT_DIR$/src/model/entities/critters/Critter.java" />
         <option value="$PROJECT_DIR$/src/model/states/battle/belt_list_battle/BattleBeltList.java" />
         <option value="$PROJECT_DIR$/src/model/states/battle/BattleStateItemList.java" />
         <option value="$PROJECT_DIR$/src/model/states/battle/BattleStateFight.java" />
         <option value="$PROJECT_DIR$/src/model/states/battle/BattleStateMenu.java" />
+        <option value="$PROJECT_DIR$/src/model/states/game/world/WorldMap.java" />
       </list>
     </option>
   </component>
@@ -886,14 +857,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/states/game/world/WorldMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="105" column="0" lean-forward="true" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/entities/critters/CritterMaker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="139">
@@ -901,14 +864,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/entities/critters/Critter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="309" column="78" lean-forward="true" selection-start-line="309" selection-start-column="78" selection-end-line="309" selection-end-column="78" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -966,6 +921,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="169" column="0" lean-forward="true" selection-start-line="169" selection-start-column="0" selection-end-line="169" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/entities/critters/Critter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="309" column="78" lean-forward="true" selection-start-line="309" selection-start-column="78" selection-end-line="309" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/states/game/world/WorldMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="195" column="10" lean-forward="false" selection-start-line="195" selection-start-column="10" selection-end-line="195" selection-end-column="10" />
           <folding />
         </state>
       </provider>
