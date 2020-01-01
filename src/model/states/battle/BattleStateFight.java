@@ -246,8 +246,10 @@ public class BattleStateFight implements IState {
         }
     }
 
+    /*
     int ticker = 0;
     int tickerTarget = 30;
+    */
     @Override
     public void render(Graphics g) {
         g.drawImage(Assets.backgroundBattleStateFight, 0, 0,
@@ -262,6 +264,7 @@ public class BattleStateFight implements IState {
         int hpEffectiveCurrentOpponent = critterOfOpponent.getHpEffectiveCurrent();
         int hpEffectiveMaxOpponent = critterOfOpponent.getStatsModule().getStatsEffectiveMap().get(StatsModule.Type.HP);
         String hpOpponent = "hpOpponent: " + String.format("%3d", hpEffectiveCurrentOpponent) + " of " + String.format("%3d", hpEffectiveMaxOpponent);
+        /*
         ticker++;
         //////////////////////////////////////////////////////////////
         if (ticker == tickerTarget) {
@@ -272,10 +275,15 @@ public class BattleStateFight implements IState {
             ticker = 0;
         }
         //////////////////////////////////////////////////////////////
-        String hpPlayer = "hpPlayer: " + critterOfPlayer.getHpEffectiveCurrent() + " of " + critterOfPlayer.getStatsModule().getStatsEffectiveMap().get(StatsModule.Type.HP);
+        */
+        int hpEffectiveCurrentPlayer = critterOfPlayer.getHpEffectiveCurrent();
+        int hpEffectiveMaxPlayer = critterOfPlayer.getStatsModule().getStatsEffectiveMap().get(StatsModule.Type.HP);
+        String hpPlayer = "hpPlayer: " + String.format("%3d", hpEffectiveCurrentPlayer) + " of " + String.format("%3d", hpEffectiveMaxPlayer);
+//        String hpPlayer = "hpPlayer: " + critterOfPlayer.getHpEffectiveCurrent() + " of " + critterOfPlayer.getStatsModule().getStatsEffectiveMap().get(StatsModule.Type.HP);
+        //////////////////////////////////////////////////////////////
         FontGrabber.renderString(g, hpOpponent, 50, 50, 20, 20);
         FontGrabber.renderString(g, hpPlayer, 250, 200, 20, 20);
-
+        //////////////////////////////////////////////////////////////
         //hp bar opponent
         int xHpBarBorderOpponent = 50;
         int yHpBarBorderOpponent = 73;
