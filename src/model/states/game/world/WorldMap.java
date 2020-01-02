@@ -108,56 +108,29 @@ public class WorldMap implements IWorld {
     }
 
     private ArrayList<BufferedImage> initNonWalkableTileSpriteTargets() {
+        //SOLID TILES
         ArrayList<BufferedImage> nonWalkableTileSpriteTargets = new ArrayList<BufferedImage>();
 
-        //SOLID TILES
-        nonWalkableTileSpriteTargets.add(
-                Assets.world.getSubimage(960, 3376, Tile.WIDTH, Tile.HEIGHT) ); //fence-blue (Town.PALLET_TOWN)
-        nonWalkableTileSpriteTargets.add(
-                Assets.world.getSubimage(1024, 3312, Tile.WIDTH, Tile.HEIGHT) ); //fence-brown (Town.PALLET_TOWN)
-        nonWalkableTileSpriteTargets.add(
-                Assets.world.getSubimage(1072, 3312, Tile.WIDTH, Tile.HEIGHT) ); //sign-post (Town.PALLET_TOWN)
-        nonWalkableTileSpriteTargets.add(
-                Assets.world.getSubimage(1024, 3392, Tile.WIDTH, Tile.HEIGHT) ); //NW-shore (Town.PALLET_TOWN)
-        nonWalkableTileSpriteTargets.add(
-                Assets.world.getSubimage(1040, 3392, Tile.WIDTH, Tile.HEIGHT) ); //N-shore (Town.PALLET_TOWN)
-        nonWalkableTileSpriteTargets.add(
-                Assets.world.getSubimage(1072, 3392, Tile.WIDTH, Tile.HEIGHT) ); //NE-shore (Town.PALLET_TOWN)
-        nonWalkableTileSpriteTargets.add(
-                Assets.world.getSubimage(1024, 3408, Tile.WIDTH, Tile.HEIGHT) ); //W-shore (Town.PALLET_TOWN)
-        nonWalkableTileSpriteTargets.add(
-                Assets.world.getSubimage(1072, 3408, Tile.WIDTH, Tile.HEIGHT) ); //E-shore (Town.PALLET_TOWN)
-        nonWalkableTileSpriteTargets.add(
-                Assets.world.getSubimage(976, 3152, Tile.WIDTH, Tile.HEIGHT) ); //Bush (Town.PALLET_TOWN)
+        ////Town.PALLET_TOWN///////////////////////////////////////////////////////////////////////////////////////////
 
         nonWalkableTileSpriteTargets.add(
-                Assets.world.getSubimage(992, 2400, Tile.WIDTH, Tile.HEIGHT) ); //W-building_window (Town.VIRIDIAN_CITY)
+                Assets.world.getSubimage(960, 3376, Tile.WIDTH, Tile.HEIGHT) );     //fence-blue (Town.PALLET_TOWN)
         nonWalkableTileSpriteTargets.add(
-                Assets.world.getSubimage(1040, 2400, Tile.WIDTH, Tile.HEIGHT) ); //E-building_window (Town.VIRIDIAN_CITY)
+                Assets.world.getSubimage(1024, 3312, Tile.WIDTH, Tile.HEIGHT) );    //fence-brown (Town.PALLET_TOWN)
         nonWalkableTileSpriteTargets.add(
-                Assets.world.getSubimage(1024, 2416, Tile.WIDTH, Tile.HEIGHT) ); //building_pokecenter_sign (Town.VIRIDIAN_CITY)
+                Assets.world.getSubimage(1072, 3312, Tile.WIDTH, Tile.HEIGHT) );    //sign-post (Town.PALLET_TOWN)
         nonWalkableTileSpriteTargets.add(
-                Assets.world.getSubimage(1120, 2320, Tile.WIDTH, Tile.HEIGHT) ); //building_pokemart_sign (Town.VIRIDIAN_CITY)
-
+                Assets.world.getSubimage(1024, 3392, Tile.WIDTH, Tile.HEIGHT) );    //NW-shore (Town.PALLET_TOWN)
         nonWalkableTileSpriteTargets.add(
-                Assets.world.getSubimage(640, 2512, Tile.WIDTH, Tile.HEIGHT) ); //S-mountain (ROUTE22)
+                Assets.world.getSubimage(1040, 3392, Tile.WIDTH, Tile.HEIGHT) );    //N-shore (Town.PALLET_TOWN)
         nonWalkableTileSpriteTargets.add(
-                Assets.world.getSubimage(688, 2512, Tile.WIDTH, Tile.HEIGHT) ); //SE-mountain (ROUTE22)
+                Assets.world.getSubimage(1072, 3392, Tile.WIDTH, Tile.HEIGHT) );    //NE-shore (Town.PALLET_TOWN)
         nonWalkableTileSpriteTargets.add(
-                Assets.world.getSubimage(688, 2496, Tile.WIDTH, Tile.HEIGHT) ); //E-mountain (ROUTE22)
+                Assets.world.getSubimage(1024, 3408, Tile.WIDTH, Tile.HEIGHT) );    //W-shore (Town.PALLET_TOWN)
         nonWalkableTileSpriteTargets.add(
-                Assets.world.getSubimage(640, 2496, Tile.WIDTH, Tile.HEIGHT) ); //CENTER-mountain (ROUTE22)
+                Assets.world.getSubimage(1072, 3408, Tile.WIDTH, Tile.HEIGHT) );    //E-shore (Town.PALLET_TOWN)
         nonWalkableTileSpriteTargets.add(
-                Assets.world.getSubimage(688, 2304, Tile.WIDTH, Tile.HEIGHT) ); //NE-mountain (ROUTE22)
-        nonWalkableTileSpriteTargets.add(
-                Assets.world.getSubimage(624, 2304, Tile.WIDTH, Tile.HEIGHT) ); //N-mountain (ROUTE22)
-        nonWalkableTileSpriteTargets.add(
-                Assets.world.getSubimage(608, 2304, Tile.WIDTH, Tile.HEIGHT) ); //NW-mountain (ROUTE22)
-        nonWalkableTileSpriteTargets.add(
-                Assets.world.getSubimage(608, 2320, Tile.WIDTH, Tile.HEIGHT) ); //W-mountain (ROUTE22)
-        nonWalkableTileSpriteTargets.add(
-                Assets.world.getSubimage(576, 2224, Tile.WIDTH, Tile.HEIGHT) ); //SW-mountain (ROUTE22)
-
+                Assets.world.getSubimage(976, 3152, Tile.WIDTH, Tile.HEIGHT) );     //bush (Town.PALLET_TOWN)
 
         // building_home (Town.PALLET_TOWN), starting at x == 1024, y == 3216, width/number_of_columns == 4, height/number_of_rows == 3.
         ArrayList<BufferedImage> homeNoDoor = handler.getTileSpriteToRGBConverter().pullMultipleTiles(
@@ -181,6 +154,17 @@ public class WorldMap implements IWorld {
                 buildingStoreNoDoor
         );
 
+        ////Town.VIRIDIAN_CITY/////////////////////////////////////////////////////////////////////////////////////////
+
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(992, 2400, Tile.WIDTH, Tile.HEIGHT) );     //W-building_window (Town.VIRIDIAN_CITY)
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(1040, 2400, Tile.WIDTH, Tile.HEIGHT) );    //E-building_window (Town.VIRIDIAN_CITY)
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(1024, 2416, Tile.WIDTH, Tile.HEIGHT) );    //building_pokecenter_sign (Town.VIRIDIAN_CITY)
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(1120, 2320, Tile.WIDTH, Tile.HEIGHT) );    //building_pokemart_sign (Town.VIRIDIAN_CITY)
+
         //building_no_door (Town.VIRIDIAN_CITY), starting at x == 960, y == 2080, width/number_of_columns == 4, height/number_of_rows == 2.
         ArrayList<BufferedImage> buildingNoDoor = handler.getTileSpriteToRGBConverter().pullMultipleTiles(
                 Assets.world,960, 2080, 4, 2);
@@ -202,6 +186,53 @@ public class WorldMap implements IWorld {
         nonWalkableTileSpriteTargets.addAll(
                 buildingGym
         );
+
+        ////ROUTE22////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(640, 2512, Tile.WIDTH, Tile.HEIGHT) ); //S-mountain (ROUTE22)
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(688, 2512, Tile.WIDTH, Tile.HEIGHT) ); //SE-mountain (ROUTE22)
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(688, 2496, Tile.WIDTH, Tile.HEIGHT) ); //E-mountain (ROUTE22)
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(640, 2496, Tile.WIDTH, Tile.HEIGHT) ); //CENTER-mountain (ROUTE22)
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(688, 2304, Tile.WIDTH, Tile.HEIGHT) ); //NE-mountain (ROUTE22)
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(624, 2304, Tile.WIDTH, Tile.HEIGHT) ); //N-mountain (ROUTE22)
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(608, 2304, Tile.WIDTH, Tile.HEIGHT) ); //NW-mountain (ROUTE22)
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(608, 2320, Tile.WIDTH, Tile.HEIGHT) ); //W-mountain (ROUTE22)
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(576, 2224, Tile.WIDTH, Tile.HEIGHT) ); //SW-mountain (ROUTE22)
+
+        ////ROUTE02////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(800, 2000, Tile.WIDTH, Tile.HEIGHT) ); //bush (ROUTE02)
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(912, 1968, Tile.WIDTH, Tile.HEIGHT) ); //sign-post (ROUTE02)
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(896, 1984, Tile.WIDTH, Tile.HEIGHT) ); //fence-brown (ROUTE02)
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(800, 1680, Tile.WIDTH, Tile.HEIGHT) ); //fence-blue (ROUTE02)
+
+        ////Place.VIRIDIAN_FOREST//////////////////////////////////////////////////////////////////////////////////////
+
+        // building_house (Place.VIRIDIAN_FOREST), starting at x == 1024, y == 1376, width/number_of_columns == 4, height/number_of_rows == 2.
+        ArrayList<BufferedImage> houseNoDoor = handler.getTileSpriteToRGBConverter().pullMultipleTiles(
+                Assets.world,1024, 1376, 4, 2);
+        houseNoDoor.remove(5);
+        nonWalkableTileSpriteTargets.addAll(
+                houseNoDoor
+        );
+
+        //TODO: building_guard_house on EAST of VIRIDIAN_FOREST
+
+        ////Town.PEWTER_CITY///////////////////////////////////////////////////////////////////////////////////////////
+
 
 
         return nonWalkableTileSpriteTargets;
