@@ -143,7 +143,7 @@ public class BattleState implements IState {
         critterUnfainted.getStatsModule().incrementEV(StatsModule.Type.SPEED, evSpeed);
 
         System.out.println("BattleState.awardLoot(Critter critterUnfainted) level-before-checkLevelUp() is " + critterUnfainted.getLevel() + ".");
-        critterUnfainted.checkLevelUp();
+        critterUnfainted.checkLevelUpRecursive(critterUnfainted.getLevel());
     }
 
     // GETTERS AND SETTERS

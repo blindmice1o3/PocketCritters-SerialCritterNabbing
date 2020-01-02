@@ -107,36 +107,38 @@ public class Critter
         expCurrent += amount;
     }
 
-    public void checkLevelUp() {
+    public void checkLevelUpRecursive(int levelCheck) {
+        //break condition
         switch (species.getExpGroup()) {
             case FAST:
-                if (expCurrent >= ExpLookUpTable.expByLevelFast.get( (level+1) )) {
-                    level++;
-                    System.out.println("Critter.checkLevelUp(): LEVEL-UP!!! new level is " + level + ".");
+                if (expCurrent < ExpLookUpTable.expByLevelFast.get( (level+1) )) {
+                    return;
                 }
                 break;
             case MEDIUM_FAST:
-                if (expCurrent >= ExpLookUpTable.expByLevelMediumFast.get( (level+1) )) {
-                    level++;
-                    System.out.println("Critter.checkLevelUp(): LEVEL-UP!!! new level is " + level + ".");
+                if (expCurrent < ExpLookUpTable.expByLevelMediumFast.get( (level+1) )) {
+                    return;
                 }
                 break;
             case MEDIUM_SLOW:
-                if (expCurrent >= ExpLookUpTable.expByLevelMediumSlow.get( (level+1) )) {
-                    level++;
-                    System.out.println("Critter.checkLevelUp(): LEVEL-UP!!! new level is " + level + ".");
+                if (expCurrent < ExpLookUpTable.expByLevelMediumSlow.get( (level+1) )) {
+                    return;
                 }
                 break;
             case SLOW:
-                if (expCurrent >= ExpLookUpTable.expByLevelSlow.get( (level+1) )) {
-                    level++;
-                    System.out.println("Critter.checkLevelUp(): LEVEL-UP!!! new level is " + level + ".");
+                if (expCurrent < ExpLookUpTable.expByLevelSlow.get( (level+1) )) {
+                    return;
                 }
                 break;
             default:
-                System.out.println("Critter.checkLevelUp(): switch(ExpGroup)'s default block.");
+                System.out.println("Critter.checkLevelUpRecursive(int): switch(ExpGroup)'s default block.");
                 break;
         }
+
+        level++;
+        System.out.println("Critter.checkLevelUpRecursive(int): LEVEL-UP!!! new level is " + level + ".");
+
+        checkLevelUpRecursive(level);
     }
 
     // GETTERS AND SETTERS
