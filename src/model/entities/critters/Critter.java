@@ -103,6 +103,10 @@ public class Critter
         return damage;
     }
 
+    public void incrementExpCurrent(int amount) {
+        expCurrent += amount;
+    }
+
     // GETTERS AND SETTERS
 
     public void setHandler(Handler handler) { this.handler = handler; }

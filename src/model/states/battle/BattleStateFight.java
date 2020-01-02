@@ -86,29 +86,6 @@ public class BattleStateFight implements IState {
         }
     }
 
-    private int calculateExpYieldEffective(Critter critterFainted) {
-        Critter critterOfPlayer = ((BattleState)handler.getStateManager().getIState("BattleState")).getCritterOfPlayer();
-
-        int expYieldEffective = 0;
-
-        //trainer-battle is 1.5f, wild-encounter is 1f.
-        float battleType = (critterFainted.getIdNumberOriginalTrainer() == Critter.WILD) ? (1f) : (1.5f);
-        float originalTrainer = (critterOfPlayer.getIdNumberOriginalTrainer() == player.getIdNumber()) ? (1f) : (1.5f);
-        int expYieldBase = critterFainted.getSpecies().getExpYieldBase();
-        int notHoldingEgg = 1;
-        int levelOfFaintedCritter = critterFainted.getLevel();
-        int noExpPowerPoint = 1;
-        int noAffectionFeature = 1;
-        int notPastEvolveLevel = 1;
-        //TODO: track numberCrittersBattled.
-        int numberCrittersBattled = 1;
-
-        expYieldEffective = (int)((battleType * originalTrainer * expYieldBase * notHoldingEgg * levelOfFaintedCritter *
-                noExpPowerPoint * noAffectionFeature * notPastEvolveLevel) / (7 * numberCrittersBattled));
-
-        return expYieldEffective;
-    }
-
     /**
      * Currently ends the battle, does NOT check the critterBeltList of player or opponent
      * to see if other critters do not have their status set to FAINTED, and pops the
@@ -119,14 +96,13 @@ public class BattleStateFight implements IState {
             System.out.println("BattleStateFight.checkForFainted(Critter): " +
                     critterDamaged.getNameColloquial() + " had its status set to FAINTED.");
 
-            //TODO: award loot (expYieldEffective and the different evExp).
-            int expYieldEffective = calculateExpYieldEffective(critterDamaged);
-            System.out.println("BattleStateFight.checkForFainted(Critter): expYieldEffective is " + expYieldEffective + ".");
-            System.out.println("evHP: " + critterDamaged.getSpecies().getHpBase() + ".");
-            System.out.println("evAttack: " + critterDamaged.getSpecies().getAttackBase() + ".");
-            System.out.println("evDefense: " + critterDamaged.getSpecies().getDefenseBase() + ".");
-            System.out.println("evSpecial: " + critterDamaged.getSpecies().getSpecialBase() + ".");
-            System.out.println("evSpeed: " + critterDamaged.getSpecies().getSpeedBase() + ".");
+            //TODO: (HAVE TO SPLIT AMONGST all BATTLE PARTICIPANTS), but for now... just whoever's in BattleState.
+            BattleState battleState = (BattleState)handler.getStateManager().getIState("BattleState");
+            Critter critterWinnerWinnerChickenDinner =
+                    (battleState.getCritterOfPlayer() != critterDamaged) ?
+                            (battleState.getCritterOfPlayer()) : (battleState.getCritterOfOpponent());
+            battleState.awardLoot(critterWinnerWinnerChickenDinner);
+
 
             StateMachine battleStateMachine = ((BattleState)handler.getStateManager().getCurrentState()).getStateMachine();
             //pop self (BattleStateFight).
