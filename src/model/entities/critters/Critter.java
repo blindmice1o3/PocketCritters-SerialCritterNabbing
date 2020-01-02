@@ -107,6 +107,38 @@ public class Critter
         expCurrent += amount;
     }
 
+    public void checkLevelUp() {
+        switch (species.getExpGroup()) {
+            case FAST:
+                if (expCurrent >= ExpLookUpTable.expByLevelFast.get( (level+1) )) {
+                    level++;
+                    System.out.println("Critter.checkLevelUp(): LEVEL-UP!!! new level is " + level + ".");
+                }
+                break;
+            case MEDIUM_FAST:
+                if (expCurrent >= ExpLookUpTable.expByLevelMediumFast.get( (level+1) )) {
+                    level++;
+                    System.out.println("Critter.checkLevelUp(): LEVEL-UP!!! new level is " + level + ".");
+                }
+                break;
+            case MEDIUM_SLOW:
+                if (expCurrent >= ExpLookUpTable.expByLevelMediumSlow.get( (level+1) )) {
+                    level++;
+                    System.out.println("Critter.checkLevelUp(): LEVEL-UP!!! new level is " + level + ".");
+                }
+                break;
+            case SLOW:
+                if (expCurrent >= ExpLookUpTable.expByLevelSlow.get( (level+1) )) {
+                    level++;
+                    System.out.println("Critter.checkLevelUp(): LEVEL-UP!!! new level is " + level + ".");
+                }
+                break;
+            default:
+                System.out.println("Critter.checkLevelUp(): switch(ExpGroup)'s default block.");
+                break;
+        }
+    }
+
     // GETTERS AND SETTERS
 
     public void setHandler(Handler handler) { this.handler = handler; }

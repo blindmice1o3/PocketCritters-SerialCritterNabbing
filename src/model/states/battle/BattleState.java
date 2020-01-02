@@ -141,6 +141,9 @@ public class BattleState implements IState {
         critterUnfainted.getStatsModule().incrementEV(StatsModule.Type.DEFENSE, evDefense);
         critterUnfainted.getStatsModule().incrementEV(StatsModule.Type.SPECIAL, evSpecial);
         critterUnfainted.getStatsModule().incrementEV(StatsModule.Type.SPEED, evSpeed);
+
+        System.out.println("BattleState.awardLoot(Critter critterUnfainted) level-before-checkLevelUp() is " + critterUnfainted.getLevel() + ".");
+        critterUnfainted.checkLevelUp();
     }
 
     // GETTERS AND SETTERS
