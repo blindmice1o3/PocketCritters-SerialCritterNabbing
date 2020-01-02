@@ -279,6 +279,22 @@ public class WorldMap implements IWorld {
                 buildingGymPewter
         );
 
+        // building_critter_center (Town.PEWTER_CITY),  starting at x == 832, y == 928, width/number_of_columns == 4, height/number_of_rows == 4.
+        ArrayList<BufferedImage> buildingCritterCenter = handler.getTileSpriteToRGBConverter().pullMultipleTiles(
+                Assets.world,832, 928, 4, 4);
+        buildingCritterCenter.remove(13);
+        nonWalkableTileSpriteTargets.addAll(
+                buildingCritterCenter
+        );
+
+        // building_critter_mart (Town.PEWTER_CITY),  starting at x == 992, y == 800, width/number_of_columns == 4, height/number_of_rows == 4.
+        ArrayList<BufferedImage> buildingCritterMart = handler.getTileSpriteToRGBConverter().pullMultipleTiles(
+                Assets.world,992, 800, 4, 4);
+        buildingCritterMart.remove(13);
+        nonWalkableTileSpriteTargets.addAll(
+                buildingCritterMart
+        );
+
         return nonWalkableTileSpriteTargets;
     }
 
