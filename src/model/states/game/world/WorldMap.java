@@ -179,12 +179,12 @@ public class WorldMap implements IWorld {
                 buildingDoorRoof
         );
 
-        //building_gym (Town.VIRIDIAN_CITY), starting at x == 1088, y == 2080, width/number_of_columns == 6, height/number_of_rows == 4.
-        ArrayList<BufferedImage> buildingGym = handler.getTileSpriteToRGBConverter().pullMultipleTiles(
+        //building_gym_viridian (Town.VIRIDIAN_CITY), starting at x == 1088, y == 2080, width/number_of_columns == 6, height/number_of_rows == 4.
+        ArrayList<BufferedImage> buildingGymViridian = handler.getTileSpriteToRGBConverter().pullMultipleTiles(
                 Assets.world,1088, 2080, 6, 4);
-        buildingGym.remove(22);
+        buildingGymViridian.remove(22);
         nonWalkableTileSpriteTargets.addAll(
-                buildingGym
+                buildingGymViridian
         );
 
         ////ROUTE22////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -221,19 +221,63 @@ public class WorldMap implements IWorld {
 
         ////Place.VIRIDIAN_FOREST//////////////////////////////////////////////////////////////////////////////////////
 
-        // building_house (Place.VIRIDIAN_FOREST), starting at x == 1024, y == 1376, width/number_of_columns == 4, height/number_of_rows == 2.
-        ArrayList<BufferedImage> houseNoDoor = handler.getTileSpriteToRGBConverter().pullMultipleTiles(
+        // house_door_viridian_forest (Place.VIRIDIAN_FOREST), starting at x == 1024, y == 1376, width/number_of_columns == 4, height/number_of_rows == 2.
+        ArrayList<BufferedImage> houseDoorViridianForest = handler.getTileSpriteToRGBConverter().pullMultipleTiles(
                 Assets.world,1024, 1376, 4, 2);
-        houseNoDoor.remove(5);
+        houseDoorViridianForest.remove(5);
         nonWalkableTileSpriteTargets.addAll(
-                houseNoDoor
+                houseDoorViridianForest
         );
 
-        //TODO: building_guard_house on EAST of VIRIDIAN_FOREST
+        // building_guard_house_viridian_forest (Place.VIRIDIAN_FOREST), starting at x == 1024, y == 1600, width/number_of_columns == 6, height/number_of_rows == 4.
+        ArrayList<BufferedImage> buildingGuardHouseViridianForest = handler.getTileSpriteToRGBConverter().pullMultipleTiles(
+                Assets.world,1024, 1600, 6, 4);
+        buildingGuardHouseViridianForest.remove(19);
+        nonWalkableTileSpriteTargets.addAll(
+                buildingGuardHouseViridianForest
+        );
+
+        //TODO: mountain/cave EAST of VIRIDIAN_FOREST
 
         ////Town.PEWTER_CITY///////////////////////////////////////////////////////////////////////////////////////////
 
+        // building_museum_west (Town.PEWTER_CITY), starting at x == 800, y == 608, width/number_of_columns == 8, height/number_of_rows == 6.
+        ArrayList<BufferedImage> buildingMuseumWest = handler.getTileSpriteToRGBConverter().pullMultipleTiles(
+                Assets.world,800, 608, 8, 6);
+        nonWalkableTileSpriteTargets.addAll(
+                buildingMuseumWest
+        );
 
+        // building_museum_east (Town.PEWTER_CITY), starting at x == 928, y == 608, width/number_of_columns == 6, height/number_of_rows == 4.
+        ArrayList<BufferedImage> buildingMuseumEast = handler.getTileSpriteToRGBConverter().pullMultipleTiles(
+                Assets.world,928, 608, 6, 4);
+        nonWalkableTileSpriteTargets.addAll(
+                buildingMuseumEast
+        );
+
+        // house_door_north (Town.PEWTER_CITY), starting at x == 1088, y == 768, width/number_of_columns == 4, height/number_of_rows == 2.
+        ArrayList<BufferedImage> houseDoorNorth = handler.getTileSpriteToRGBConverter().pullMultipleTiles(
+                Assets.world,1088, 768, 4, 2);
+        houseDoorNorth.remove(5);
+        nonWalkableTileSpriteTargets.addAll(
+                houseDoorNorth
+        );
+
+        // house_door_south (Town.PEWTER_CITY), starting at x == 736, y == 1024, width/number_of_columns == 4, height/number_of_rows == 2.
+        ArrayList<BufferedImage> houseDoorSouth = handler.getTileSpriteToRGBConverter().pullMultipleTiles(
+                Assets.world,736, 1024, 4, 2);
+        houseDoorSouth.remove(5);
+        nonWalkableTileSpriteTargets.addAll(
+                houseDoorSouth
+        );
+
+        // building_gym_pewter (Town.PEWTER_CITY), starting at x == 832, y == 800, width/number_of_columns == 6, height/number_of_rows == 4.
+        ArrayList<BufferedImage> buildingGymPewter = handler.getTileSpriteToRGBConverter().pullMultipleTiles(
+                Assets.world,832, 800, 6, 4);
+        buildingGymPewter.remove(22);
+        nonWalkableTileSpriteTargets.addAll(
+                buildingGymPewter
+        );
 
         return nonWalkableTileSpriteTargets;
     }
