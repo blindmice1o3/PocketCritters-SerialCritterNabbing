@@ -237,7 +237,24 @@ public class WorldMap implements IWorld {
                 buildingGuardHouseViridianForest
         );
 
-        //TODO: mountain/cave EAST of VIRIDIAN_FOREST
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(960, 1216, Tile.WIDTH, Tile.HEIGHT) );     //NW-mountain (Place.VIRIDIAN_FOREST)
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(960, 1232, Tile.WIDTH, Tile.HEIGHT) );     //W-mountain (Place.VIRIDIAN_FOREST)
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(960, 1264, Tile.WIDTH, Tile.HEIGHT) );     //SW-mountain (Place.VIRIDIAN_FOREST)
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(976, 1264, Tile.WIDTH, Tile.HEIGHT) );     //S-mountain (Place.VIRIDIAN_FOREST)
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(1072, 1264, Tile.WIDTH, Tile.HEIGHT) );    //SE-mountain (Place.VIRIDIAN_FOREST)
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(1072, 1248, Tile.WIDTH, Tile.HEIGHT) );    //E-mountain (Place.VIRIDIAN_FOREST)
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(976, 1248, Tile.WIDTH, Tile.HEIGHT) );     //CENTER-mountain (Place.VIRIDIAN_FOREST)
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(1072, 1216, Tile.WIDTH, Tile.HEIGHT) );    //NE-mountain (Place.VIRIDIAN_FOREST)
+        nonWalkableTileSpriteTargets.add(
+                Assets.world.getSubimage(976, 1216, Tile.WIDTH, Tile.HEIGHT) );     //N-mountain (Place.VIRIDIAN_FOREST)
 
         ////Town.PEWTER_CITY///////////////////////////////////////////////////////////////////////////////////////////
 
