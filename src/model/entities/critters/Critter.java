@@ -136,6 +136,7 @@ public class Critter
         }
 
         level++;
+        //TODO: update Stats Effective for all stats-type.
         System.out.println("Critter.checkLevelUpRecursive(int): LEVEL-UP!!! new level is " + level + ".");
 
         checkLevelUpRecursive(level);
