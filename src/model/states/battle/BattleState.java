@@ -142,12 +142,19 @@ public class BattleState implements IState {
         critterUnfainted.getStatsModule().incrementEV(StatsModule.Type.SPECIAL, evSpecial);
         critterUnfainted.getStatsModule().incrementEV(StatsModule.Type.SPEED, evSpeed);
 
-        int levelCurrent = critterUnfainted.getStatsModule().getLevelCurrent();
-        System.out.println("BattleState.awardLoot(Critter critterUnfainted) level-before-checkLevelUp() is " + levelCurrent + ".");
-        int levelNext = levelCurrent + 1;
+        //TODO: update HP Effective (Critter.hpCurrent).
+        int levelBaseline = critterUnfainted.getStatsModule().getLevelCurrent();
+        System.out.println("BattleState.awardLoot(Critter critterUnfainted) level-before-checkLevelUp() is " + levelBaseline + ".");
+        int levelNext = (critterUnfainted.getStatsModule().getLevelCurrent() + 1);
         ///////////////////////////////////////////////////////////////////
         critterUnfainted.getStatsModule().checkLevelUpRecursive(levelNext);
         ///////////////////////////////////////////////////////////////////
+        int levelAfterCheckLevelUpRecursive = critterUnfainted.getStatsModule().getLevelCurrent();
+
+        //if an actual level-up event occurred, set hpEffectiveCurrent to its new max hp.
+        if (levelBaseline != levelAfterCheckLevelUpRecursive) {
+            critterUnfainted.setHpEffectiveCurrent( critterUnfainted.getStatsModule().getStatsEffectiveMap().get(StatsModule.Type.HP) );
+        }
     }
 
     // GETTERS AND SETTERS

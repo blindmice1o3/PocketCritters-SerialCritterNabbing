@@ -214,19 +214,18 @@ public class StatsModule
                 break;
             default:
                 System.out.println("StatsModule.checkLevelUpRecursive(int): switch(ExpGroup)'s default block.");
-                break;
+                return;
         }
 
         levelCurrent++;
-        //TODO: update Stats Effective for all stats-type.
+        //update Stats Effective for all stats-type.
         for (Type statsType : Type.values()) {
             if (statsType == Type.HP) {
-                continue;
+                updateHpEffective();
+            } else {
+                updateStatsEffective(statsType);
             }
-
-            updateStatsEffective(statsType);
         }
-        //TODO: update HP Effective (Critter.hpCurrent).
 
         System.out.println("StatsModule.checkLevelUpRecursive(int): LEVEL-UP!!! new level is " + levelCurrent + ".");
 
