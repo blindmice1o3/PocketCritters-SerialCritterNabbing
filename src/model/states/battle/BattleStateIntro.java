@@ -74,7 +74,7 @@ public class BattleStateIntro implements IState {
         FontGrabber.renderString(g, critterOfOpponent.getNameColloquial(), xOffset, yOffset, 28, 28);
         yOffset += 32;
         xOffset += 110;
-        FontGrabber.renderString(g, ":L" + critterOfOpponent.getLevel(), xOffset, yOffset, 28, 28);
+        FontGrabber.renderString(g, ":L" + critterOfOpponent.getStatsModule().getLevelCurrent(), xOffset, yOffset, 28, 28);
         xOffset = (handler.getGame().getWidth() / 2) + 49;
         yOffset = 5;
         g.drawImage(critterOfOpponent.getSpeciesIcon(), xOffset, yOffset,

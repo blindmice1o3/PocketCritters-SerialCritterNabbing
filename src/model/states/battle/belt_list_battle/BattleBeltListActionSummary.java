@@ -110,7 +110,7 @@ public class BattleBeltListActionSummary implements IState {
                 xOffset = xHalfScreen-50;
                 yOffset = 5;
                 FontGrabber.renderString(g, name, xOffset, yOffset, 20, 20);
-                String level = ":L" + critter.getLevel();
+                String level = ":L" + critter.getStatsModule().getLevelCurrent();
                 FontGrabber.renderString(g, level, xOffset+(xHalfScreen/2), yOffset+20, 20, 20);
                 //INSERT hp bar image
                 String hpCurrentAndMax = critter.getHpEffectiveCurrent() + "/" + critter.getStatsModule().getStatsEffectiveMap().get(StatsModule.Type.HP);
@@ -188,7 +188,7 @@ public class BattleBeltListActionSummary implements IState {
                 yOffset += 20;
                 FontGrabber.renderString(g, "EXP POINTS", xOffset, yOffset, 20, 20);
                 yOffset += 20;
-                String expCurrent = Integer.toString(critter.getExpCurrent());
+                String expCurrent = Integer.toString(critter.getStatsModule().getExpCurrent());
                 x = handler.getGame().getWidth()-(expCurrent.length() * 20)-5;
                 FontGrabber.renderString(g, expCurrent, x, yOffset, 20, 20);
                 yOffset += 20;
@@ -196,7 +196,7 @@ public class BattleBeltListActionSummary implements IState {
                 yOffset += 20;
                 //TODO: "experience group list.txt" look-up table for expNextLevel.
                 //String levelUp = (/*TODO: look-up table for expNextLevel*/ - critter.getExpCurrent()) + "to :L" + (critter.getLevel() + 1);
-                String levelUp = "otw to :L" + (critter.getLevel() + 1);
+                String levelUp = "otw to :L" + (critter.getStatsModule().getLevelCurrent() + 1);
                 x = handler.getGame().getWidth()-(levelUp.length() * 20)-5;
                 FontGrabber.renderString(g, levelUp, x, yOffset, 20, 20);
                 //quadrant3 AND quadrant4

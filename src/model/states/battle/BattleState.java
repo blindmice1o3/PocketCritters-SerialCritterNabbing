@@ -101,7 +101,7 @@ public class BattleState implements IState {
         float originalTrainer = (critterOfPlayer.getIdNumberOriginalTrainer() == player.getIdNumber()) ? (1f) : (1.5f);
         int expYieldBase = critterFainted.getSpecies().getExpYieldBase();
         int notHoldingEgg = 1;
-        int levelOfFaintedCritter = critterFainted.getLevel();
+        int levelOfFaintedCritter = critterFainted.getStatsModule().getLevelCurrent();
         int noExpPowerPoint = 1;
         int noAffectionFeature = 1;
         int notPastEvolveLevel = 1;
@@ -129,21 +129,25 @@ public class BattleState implements IState {
         int evSpeed = critterFainted.getSpecies().getSpeedBase();
 
         System.out.println("expYieldEffective is " + expYieldEffective + ".");
-        System.out.println("evHP: " + critterFainted.getSpecies().getHpBase() + ".");
-        System.out.println("evAttack: " + critterFainted.getSpecies().getAttackBase() + ".");
-        System.out.println("evDefense: " + critterFainted.getSpecies().getDefenseBase() + ".");
-        System.out.println("evSpecial: " + critterFainted.getSpecies().getSpecialBase() + ".");
-        System.out.println("evSpeed: " + critterFainted.getSpecies().getSpeedBase() + ".");
+        System.out.println("evHP: " + evHP + ".");
+        System.out.println("evAttack: " + evAttack + ".");
+        System.out.println("evDefense: " + evDefense + ".");
+        System.out.println("evSpecial: " + evSpecial + ".");
+        System.out.println("evSpeed: " + evSpeed + ".");
 
-        critterUnfainted.incrementExpCurrent(expYieldEffective);
+        critterUnfainted.getStatsModule().incrementExpCurrent(expYieldEffective);
         critterUnfainted.getStatsModule().incrementEV(StatsModule.Type.HP, evHP);
         critterUnfainted.getStatsModule().incrementEV(StatsModule.Type.ATTACK, evAttack);
         critterUnfainted.getStatsModule().incrementEV(StatsModule.Type.DEFENSE, evDefense);
         critterUnfainted.getStatsModule().incrementEV(StatsModule.Type.SPECIAL, evSpecial);
         critterUnfainted.getStatsModule().incrementEV(StatsModule.Type.SPEED, evSpeed);
 
-        System.out.println("BattleState.awardLoot(Critter critterUnfainted) level-before-checkLevelUp() is " + critterUnfainted.getLevel() + ".");
-        critterUnfainted.checkLevelUpRecursive(critterUnfainted.getLevel());
+        int levelCurrent = critterUnfainted.getStatsModule().getLevelCurrent();
+        System.out.println("BattleState.awardLoot(Critter critterUnfainted) level-before-checkLevelUp() is " + levelCurrent + ".");
+        int levelNext = levelCurrent + 1;
+        ///////////////////////////////////////////////////////////////////
+        critterUnfainted.getStatsModule().checkLevelUpRecursive(levelNext);
+        ///////////////////////////////////////////////////////////////////
     }
 
     // GETTERS AND SETTERS

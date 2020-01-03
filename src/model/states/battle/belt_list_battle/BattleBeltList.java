@@ -114,7 +114,7 @@ public class BattleBeltList implements IState {
         for (int i = 0; i < numberOfCritters; i++) {
             speciesIcon = player.getCritterBeltList().get(i).getSpeciesIcon();
             String name = player.getCritterBeltList().get(i).getNameColloquial();
-            String level = String.format("%02d", player.getCritterBeltList().get(i).getLevel());
+            String level = String.format("%02d", player.getCritterBeltList().get(i).getStatsModule().getLevelCurrent());
             String hpEffectiveCurrent = String.format("%3d", player.getCritterBeltList().get(i).getHpEffectiveCurrent());
             String hpEffectiveMax = String.format("%3d", player.getCritterBeltList().get(i).getStatsModule().getStatsEffectiveMap().get(StatsModule.Type.HP));
             ///////////////////////////////

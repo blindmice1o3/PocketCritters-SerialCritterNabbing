@@ -106,7 +106,7 @@ public class BattleStateMenu implements IState {
         FontGrabber.renderString(g, critterOfOpponent.getNameColloquial(), xOffset, yOffset, 28, 28);
         yOffset += 32;
         xOffset += 80;
-        FontGrabber.renderString(g, ":L" + critterOfOpponent.getLevel(), xOffset, yOffset, 24, 24);
+        FontGrabber.renderString(g, ":L" + critterOfOpponent.getStatsModule().getLevelCurrent(), xOffset, yOffset, 24, 24);
         //opponent's critter's image
         xOffset = (handler.getGame().getWidth() / 2) + 49;
         yOffset = 5;
@@ -140,7 +140,7 @@ public class BattleStateMenu implements IState {
         FontGrabber.renderString(g, critterOfPlayer.getNameColloquial(), xOffset, yOffset, 28, 28);
         yOffset += 32;
         xOffset += 110;
-        FontGrabber.renderString(g, ":L" + critterOfPlayer.getLevel(), xOffset, yOffset, 28, 28);
+        FontGrabber.renderString(g, ":L" + critterOfPlayer.getStatsModule().getLevelCurrent(), xOffset, yOffset, 28, 28);
         //player's critter's image
         yOffset = ((handler.getGame().getHeight() / 3) - 30);
         xOffset = 4;
@@ -184,8 +184,8 @@ public class BattleStateMenu implements IState {
         Critter critterOfOpponent = ((BattleState)handler.getStateManager().getIState("BattleState")).getCritterOfOpponent();
         Critter critterOfPlayer = ((BattleState)handler.getStateManager().getIState("BattleState")).getCritterOfPlayer();
 
-        System.out.println("critterOfOpponent is in ExpGroup " + critterOfOpponent.getSpecies().getExpGroup().toString() + " with expCurrent: " + critterOfOpponent.getExpCurrent());
-        System.out.println("critterOfPlayer is in ExpGroup " + critterOfPlayer.getSpecies().getExpGroup().toString() + " with expCurrent: " + critterOfPlayer.getExpCurrent());
+        System.out.println("critterOfOpponent is in ExpGroup " + critterOfOpponent.getSpecies().getExpGroup().toString() + " with expCurrent: " + critterOfOpponent.getStatsModule().getExpCurrent());
+        System.out.println("critterOfPlayer is in ExpGroup " + critterOfPlayer.getSpecies().getExpGroup().toString() + " with expCurrent: " + critterOfPlayer.getStatsModule().getExpCurrent());
     }
 
     @Override

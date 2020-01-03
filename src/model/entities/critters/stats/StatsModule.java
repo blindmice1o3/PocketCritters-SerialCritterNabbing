@@ -2,6 +2,7 @@ package model.entities.critters.stats;
 
 import main.Handler;
 import model.entities.critters.Critter;
+import model.entities.critters.levels.ExpLookUpTable;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -15,7 +16,8 @@ public class StatsModule
 
     private transient Handler handler;
     private Critter.Species species;
-    private int level;
+    private int levelCurrent;
+    private int expCurrent;
 
     /* statsIV: Each of these is used to determine their associated stat, with
     the hpIV determined from the IVs stored for the other four.
@@ -44,8 +46,8 @@ public class StatsModule
     /* private int attackEP, defenseEP, speedEP, specialEP, hpEP; */
 
     /* DETERMINATION OF STATS:
-        hp =        ( ((((base + iv) * 2) + (sqrt(ev) / 4)) * level) / 100 ) + level + 10
-        otherStat = ( ((((base + iv) * 2) + (sqrt(ev) / 4)) * level) / 100 ) + 5
+        hp =        ( ((((base + iv) * 2) + (sqrt(ev) / 4)) * levelCurrent) / 100 ) + levelCurrent + 10
+        otherStat = ( ((((base + iv) * 2) + (sqrt(ev) / 4)) * levelCurrent) / 100 ) + 5
         damage = ((((((2 * Level) / 5) + 2) * Power  * (A/D)) / 50) + 2) * Modifier
             Modifier == Targets * Weather * Badge * Critical * random * STAB * Type * Burn * other. */
     // STATS (attackBase, defenseBase, speedBase, and specialBase can be found in Critter.Species)
@@ -53,10 +55,28 @@ public class StatsModule
     //(statsEffective == calculated stats, determined stats, NOT base stats)
     private Map<Type, Integer> statsEffectiveMap;
 
-    public StatsModule(Handler handler, Critter.Species species, int level) {
+    public StatsModule(Handler handler, Critter.Species species, int levelCurrent) {
         this.handler = handler;
         this.species = species;
-        this.level = level;
+        this.levelCurrent = levelCurrent;
+
+        switch (this.species.getExpGroup()) {
+            case FAST:
+                expCurrent = ExpLookUpTable.expByLevelFast.get(this.levelCurrent);
+                break;
+            case MEDIUM_FAST:
+                expCurrent = ExpLookUpTable.expByLevelMediumFast.get(this.levelCurrent);
+                break;
+            case MEDIUM_SLOW:
+                expCurrent = ExpLookUpTable.expByLevelMediumSlow.get(this.levelCurrent);
+                break;
+            case SLOW:
+                expCurrent = ExpLookUpTable.expByLevelSlow.get(this.levelCurrent);
+                break;
+            default:
+                System.out.println("StatsModule's constructor switch(ExpGroup)'s default block.");
+                break;
+        }
 
         Random random = new Random();
         //IVs
@@ -88,15 +108,20 @@ public class StatsModule
         evMap.put(Type.SPECIAL, 0);
         evMap.put(Type.HP, 0);
 
+        initStatsEffectiveMap();
+    } // **** end StatsModule(Handler) constructor ****
+
+    private void initStatsEffectiveMap() {
         //statsEffective (calculated stats, determined stats, NOT base stats)
         //NOTE: Type.HP uses a different formula than the other stats types.
         statsEffectiveMap = new HashMap<Type, Integer>();
-        statsEffectiveMap.put(Type.ATTACK, updateStatsEffective(Type.ATTACK, this.level));
-        statsEffectiveMap.put(Type.DEFENSE, updateStatsEffective(Type.DEFENSE, this.level));
-        statsEffectiveMap.put(Type.SPEED, updateStatsEffective(Type.SPEED, this.level));
-        statsEffectiveMap.put(Type.SPECIAL, updateStatsEffective(Type.SPECIAL, this.level));
-        statsEffectiveMap.put(Type.HP, updateHpEffective(this.level));
-    } // **** end StatsModule(Handler) constructor ****
+
+        updateStatsEffective(Type.ATTACK);
+        updateStatsEffective(Type.DEFENSE);
+        updateStatsEffective(Type.SPEED);
+        updateStatsEffective(Type.SPECIAL);
+        updateHpEffective();
+    }
 
     public void incrementEV(Type evType, int awardedEV) {
         int newValue = (evMap.get(evType) + awardedEV);
@@ -107,8 +132,7 @@ public class StatsModule
         evMap.put( evType, newValue );
     }
 
-    private int updateStatsEffective(Type statsType, int level) {
-        int statsTypeEffective = 0;
+    public void updateStatsEffective(Type statsType) {
         int statsBase = 0;
         switch (statsType) {
             case ATTACK:
@@ -124,18 +148,21 @@ public class StatsModule
                 statsBase = species.getSpecialBase();
                 break;
             default:
-                System.out.println("StatsModule.updateStatsEffective(Type, int) switch(statsType) construct's default block.");
+                System.out.println("StatsModule.updateStatsEffective(Type) switch(statsType) construct's default block.");
                 statsBase = 0;
                 break;
         }
 
-        statsTypeEffective = (int)((((((statsBase + ivMap.get(statsType)) * 2) + (Math.sqrt(evMap.get(statsType)) / 4)) * level) / 100) + 5);
-        return statsTypeEffective;
+        int statsTypeEffective = (int)((((((statsBase + ivMap.get(statsType)) * 2) + (Math.sqrt(evMap.get(statsType)) / 4)) * levelCurrent) / 100) + 5);
+
+
+        statsEffectiveMap.put(statsType, statsTypeEffective);
     }
 
-    private int updateHpEffective(int level) {
-        int hpEffective = (int)((((((species.getHpBase() + ivMap.get(Type.HP)) * 2) + (Math.sqrt( evMap.get(Type.HP) ) / 4)) * level) / 100) + level + 10);
-        return hpEffective;
+    private void updateHpEffective() {
+        int hpEffective = (int)((((((species.getHpBase() + ivMap.get(Type.HP)) * 2) + (Math.sqrt( evMap.get(Type.HP) ) / 4)) * levelCurrent) / 100) + levelCurrent + 10);
+
+        statsEffectiveMap.put(Type.HP, hpEffective);
     }
 
     public void consoleOutIVsAndEVs(String nameColloquial) {
@@ -158,9 +185,61 @@ public class StatsModule
         System.out.println(nameColloquial + "'s hpEffectiev: " + statsEffectiveMap.get(Type.HP) + ".");
     }
 
+    public void incrementExpCurrent(int amount) {
+        expCurrent += amount;
+    }
+
+    public void checkLevelUpRecursive(int levelNext) {
+        //break condition
+        switch (species.getExpGroup()) {
+            case FAST:
+                if (expCurrent < ExpLookUpTable.expByLevelFast.get( levelNext )) {
+                    return;
+                }
+                break;
+            case MEDIUM_FAST:
+                if (expCurrent < ExpLookUpTable.expByLevelMediumFast.get( levelNext )) {
+                    return;
+                }
+                break;
+            case MEDIUM_SLOW:
+                if (expCurrent < ExpLookUpTable.expByLevelMediumSlow.get( levelNext )) {
+                    return;
+                }
+                break;
+            case SLOW:
+                if (expCurrent < ExpLookUpTable.expByLevelSlow.get( levelNext )) {
+                    return;
+                }
+                break;
+            default:
+                System.out.println("StatsModule.checkLevelUpRecursive(int): switch(ExpGroup)'s default block.");
+                break;
+        }
+
+        levelCurrent++;
+        //TODO: update Stats Effective for all stats-type.
+        for (Type statsType : Type.values()) {
+            if (statsType == Type.HP) {
+                continue;
+            }
+
+            updateStatsEffective(statsType);
+        }
+        //TODO: update HP Effective (Critter.hpCurrent).
+
+        System.out.println("StatsModule.checkLevelUpRecursive(int): LEVEL-UP!!! new level is " + levelCurrent + ".");
+
+        checkLevelUpRecursive(levelCurrent);
+    }
+
     // GETTERS AND SETTERS
 
     public void setHandler(Handler handler) { this.handler = handler; }
+
+    public int getLevelCurrent() { return levelCurrent; }
+
+    public int getExpCurrent() { return expCurrent; }
 
     public Map<Type, Integer> getIvMap() {
         return ivMap;

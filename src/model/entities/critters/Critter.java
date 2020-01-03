@@ -2,7 +2,6 @@ package model.entities.critters;
 
 import main.Handler;
 import main.gfx.Assets;
-import model.entities.critters.levels.ExpLookUpTable;
 import model.entities.critters.moves.MovesModule;
 import model.entities.critters.stats.StatsModule;
 
@@ -16,7 +15,6 @@ public class Critter
 
     private transient Handler handler;
     private Species species;
-    private int level;
 
     private String nameColloquial;
     private int idNumberOriginalTrainer;
@@ -24,40 +22,18 @@ public class Critter
     private MovesModule movesModule;
     private StatsModule statsModule;
 
-    private int expCurrent;
-
     private int hpEffectiveCurrent;
     private StatusConditionNonVolatile status;
 
     public Critter(Handler handler, Species species, int level) {
         this.handler = handler;
         this.species = species;
-        this.level = level;
 
         nameColloquial = this.species.toString().replace('_', ' ');
         idNumberOriginalTrainer = WILD;
 
         movesModule = new MovesModule(handler);
-        statsModule = new StatsModule(handler, this.species, this.level);
-
-        switch (species.getExpGroup()) {
-            case FAST:
-                expCurrent = ExpLookUpTable.expByLevelFast.get(level);
-                break;
-            case MEDIUM_FAST:
-                expCurrent = ExpLookUpTable.expByLevelMediumFast.get(level);
-                break;
-            case MEDIUM_SLOW:
-                expCurrent = ExpLookUpTable.expByLevelMediumSlow.get(level);
-                break;
-            case SLOW:
-                expCurrent = ExpLookUpTable.expByLevelSlow.get(level);
-                break;
-            default:
-                System.out.println("Critter's constructor switch(ExpGroup)'s default block.");
-                break;
-
-        }
+        statsModule = new StatsModule(handler, this.species, level);
 
         hpEffectiveCurrent = statsModule.getStatsEffectiveMap().get(StatsModule.Type.HP);
         status = StatusConditionNonVolatile.OK;
@@ -89,7 +65,7 @@ public class Critter
         //TODO: attackEffective is used if the move's Type is PHYSICAL
         // if it's SPECIAL, use specialEffective.
         int playerAttackEffective = statsModule.getStatsEffectiveMap().get(StatsModule.Type.ATTACK);
-        int damage = (int)((((((2f * level) / 5) + 2) * power * ((float)playerAttackEffective/opponentDefenseEffective)) / 50) + 2);
+        int damage = (int)((((((2f * statsModule.getLevelCurrent()) / 5) + 2) * power * ((float)playerAttackEffective/opponentDefenseEffective)) / 50) + 2);
 
         /*
         System.out.println("damage: " + damage);
@@ -101,45 +77,6 @@ public class Critter
         //TODO: everything before + (* Modifier)
         //Modifier == Targets * Weather * Badge * Critical * random * STAB * Type * Burn * other.
         return damage;
-    }
-
-    public void incrementExpCurrent(int amount) {
-        expCurrent += amount;
-    }
-
-    public void checkLevelUpRecursive(int levelCheck) {
-        //break condition
-        switch (species.getExpGroup()) {
-            case FAST:
-                if (expCurrent < ExpLookUpTable.expByLevelFast.get( (level+1) )) {
-                    return;
-                }
-                break;
-            case MEDIUM_FAST:
-                if (expCurrent < ExpLookUpTable.expByLevelMediumFast.get( (level+1) )) {
-                    return;
-                }
-                break;
-            case MEDIUM_SLOW:
-                if (expCurrent < ExpLookUpTable.expByLevelMediumSlow.get( (level+1) )) {
-                    return;
-                }
-                break;
-            case SLOW:
-                if (expCurrent < ExpLookUpTable.expByLevelSlow.get( (level+1) )) {
-                    return;
-                }
-                break;
-            default:
-                System.out.println("Critter.checkLevelUpRecursive(int): switch(ExpGroup)'s default block.");
-                break;
-        }
-
-        level++;
-        //TODO: update Stats Effective for all stats-type.
-        System.out.println("Critter.checkLevelUpRecursive(int): LEVEL-UP!!! new level is " + level + ".");
-
-        checkLevelUpRecursive(level);
     }
 
     // GETTERS AND SETTERS
@@ -158,17 +95,11 @@ public class Critter
 
     public void setIdNumberOriginalTrainer(int idNumberOriginalTrainer) { this.idNumberOriginalTrainer = idNumberOriginalTrainer; }
 
-    public int getLevel() {
-        return level;
-    }
-
     public int getHpEffectiveCurrent() {
         return hpEffectiveCurrent;
     }
 
     public void setHpEffectiveCurrent(int hpEffectiveCurrent) { this.hpEffectiveCurrent = hpEffectiveCurrent; }
-
-    public int getExpCurrent() { return expCurrent; }
 
     public MovesModule getMovesModule() { return movesModule; }
 
