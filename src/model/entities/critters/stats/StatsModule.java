@@ -194,21 +194,25 @@ public class StatsModule
         switch (species.getExpGroup()) {
             case FAST:
                 if (expCurrent < ExpLookUpTable.expByLevelFast.get( levelNext )) {
+                    System.out.println("StatsModule.checkLevelUpRecursive(int): switch(ExpGroup)'s ExpGroup.FAST break-condition.");
                     return;
                 }
                 break;
             case MEDIUM_FAST:
                 if (expCurrent < ExpLookUpTable.expByLevelMediumFast.get( levelNext )) {
+                    System.out.println("StatsModule.checkLevelUpRecursive(int): switch(ExpGroup)'s ExpGroup.MEDIUM_FAST break-condition.");
                     return;
                 }
                 break;
             case MEDIUM_SLOW:
                 if (expCurrent < ExpLookUpTable.expByLevelMediumSlow.get( levelNext )) {
+                    System.out.println("StatsModule.checkLevelUpRecursive(int): switch(ExpGroup)'s ExpGroup.MEDIUM_SLOW break-condition.");
                     return;
                 }
                 break;
             case SLOW:
                 if (expCurrent < ExpLookUpTable.expByLevelSlow.get( levelNext )) {
+                    System.out.println("StatsModule.checkLevelUpRecursive(int): switch(ExpGroup)'s ExpGroup.SLOW break-condition.");
                     return;
                 }
                 break;
@@ -217,7 +221,9 @@ public class StatsModule
                 return;
         }
 
+        System.out.println("StatsModule.checkLevelUpRecursive(int), level PRIOR to incrementing: " + levelCurrent);
         levelCurrent++;
+        System.out.println("StatsModule.checkLevelUpRecursive(int), level AFTER to incrementing: " + levelCurrent);
         //update Stats Effective for all stats-type.
         for (Type statsType : Type.values()) {
             if (statsType == Type.HP) {
@@ -227,9 +233,10 @@ public class StatsModule
             }
         }
 
-        System.out.println("StatsModule.checkLevelUpRecursive(int): LEVEL-UP!!! new level is " + levelCurrent + ".");
-
-        checkLevelUpRecursive(levelCurrent);
+        int levelNextRecursive = (levelCurrent + 1);
+        ////RECURSIVE-CALL//////////////////
+        checkLevelUpRecursive(levelNextRecursive);
+        ////////////////////////////////////
     }
 
     // GETTERS AND SETTERS

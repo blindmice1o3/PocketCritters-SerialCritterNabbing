@@ -3,6 +3,7 @@ package model.states.battle;
 import main.Handler;
 import model.entities.Player;
 import model.entities.critters.Critter;
+import model.entities.critters.levels.ExpLookUpTable;
 import model.entities.critters.stats.StatsModule;
 import model.states.IState;
 import model.states.StateMachine;
@@ -127,13 +128,64 @@ public class BattleState implements IState {
         int evDefense = critterFainted.getSpecies().getDefenseBase();
         int evSpecial = critterFainted.getSpecies().getSpecialBase();
         int evSpeed = critterFainted.getSpecies().getSpeedBase();
+        System.out.println("critterFainted's expYieldEffective is " + expYieldEffective + ".");
+        System.out.println("critterFainted's evHP: " + evHP + ".");
+        System.out.println("critterFainted's evAttack: " + evAttack + ".");
+        System.out.println("critterFainted's evDefense: " + evDefense + ".");
+        System.out.println("critterFainted's evSpecial: " + evSpecial + ".");
+        System.out.println("critterFainted's evSpeed: " + evSpeed + ".");
 
-        System.out.println("expYieldEffective is " + expYieldEffective + ".");
-        System.out.println("evHP: " + evHP + ".");
-        System.out.println("evAttack: " + evAttack + ".");
-        System.out.println("evDefense: " + evDefense + ".");
-        System.out.println("evSpecial: " + evSpecial + ".");
-        System.out.println("evSpeed: " + evSpeed + ".");
+        System.out.println("//////////////////////////////////////////////////");
+
+        int expUnfaintedCurrent = critterUnfainted.getStatsModule().getExpCurrent();
+        Critter.ExpGroup expGroupUnfainted = critterUnfainted.getSpecies().getExpGroup();
+
+        int levelBaselineUnfainted = critterUnfainted.getStatsModule().getLevelCurrent();
+        int expUnfaintedLevelBaseline = 0;
+        switch (expGroupUnfainted) {
+            case FAST:
+                expUnfaintedLevelBaseline = ExpLookUpTable.expByLevelFast.get(levelBaselineUnfainted);
+                break;
+            case MEDIUM_FAST:
+                expUnfaintedLevelBaseline = ExpLookUpTable.expByLevelMediumFast.get(levelBaselineUnfainted);
+                break;
+            case MEDIUM_SLOW:
+                expUnfaintedLevelBaseline = ExpLookUpTable.expByLevelMediumSlow.get(levelBaselineUnfainted);
+                break;
+            case SLOW:
+                expUnfaintedLevelBaseline = ExpLookUpTable.expByLevelSlow.get(levelBaselineUnfainted);
+                break;
+            default:
+                System.out.println("BattleState.awardLoot(), switch(ExpGroup) construct's default block for levelBaselineUnfainted.");
+                break;
+        }
+
+        int levelNextUnfainted = (critterUnfainted.getStatsModule().getLevelCurrent() + 1);
+        int expUnfaintedLevelNext = 0;
+        switch (expGroupUnfainted) {
+            case FAST:
+                expUnfaintedLevelNext = ExpLookUpTable.expByLevelFast.get(levelNextUnfainted);
+                break;
+            case MEDIUM_FAST:
+                expUnfaintedLevelNext = ExpLookUpTable.expByLevelMediumFast.get(levelNextUnfainted);
+                break;
+            case MEDIUM_SLOW:
+                expUnfaintedLevelNext = ExpLookUpTable.expByLevelMediumSlow.get(levelNextUnfainted);
+                break;
+            case SLOW:
+                expUnfaintedLevelNext = ExpLookUpTable.expByLevelSlow.get(levelNextUnfainted);
+                break;
+            default:
+                System.out.println("BattleState.awardLoot(), switch(ExpGroup) construct's default block for levelNextUnfainted.");
+                break;
+        }
+        System.out.println("BattleState.awardLoot(Critter critterUnfainted) level-PRIOR-TO-incrementing expYieldEffective is " +
+                levelBaselineUnfainted + " for ExpGroup: " + expGroupUnfainted);
+        System.out.println("//////////////////////////////////////////////////");
+        System.out.println("expUnfaintedLevelBaseline: " + expUnfaintedLevelBaseline);
+        System.out.println("expUnfaintedCurrent: " + expUnfaintedCurrent);
+        System.out.println("expUnfaintedLevelNext: " + expUnfaintedLevelNext);
+        System.out.println("//////////////////////////////////////////////////");
 
         critterUnfainted.getStatsModule().incrementExpCurrent(expYieldEffective);
         critterUnfainted.getStatsModule().incrementEV(StatsModule.Type.HP, evHP);
@@ -143,16 +195,18 @@ public class BattleState implements IState {
         critterUnfainted.getStatsModule().incrementEV(StatsModule.Type.SPEED, evSpeed);
 
         //TODO: update HP Effective (Critter.hpCurrent).
-        int levelBaseline = critterUnfainted.getStatsModule().getLevelCurrent();
-        System.out.println("BattleState.awardLoot(Critter critterUnfainted) level-before-checkLevelUp() is " + levelBaseline + ".");
-        int levelNext = (critterUnfainted.getStatsModule().getLevelCurrent() + 1);
         ///////////////////////////////////////////////////////////////////
-        critterUnfainted.getStatsModule().checkLevelUpRecursive(levelNext);
+        critterUnfainted.getStatsModule().checkLevelUpRecursive(levelNextUnfainted);
         ///////////////////////////////////////////////////////////////////
         int levelAfterCheckLevelUpRecursive = critterUnfainted.getStatsModule().getLevelCurrent();
 
+        int expUnfaintedAfterCheckLevelUpRecursive = critterUnfainted.getStatsModule().getExpCurrent();
+        System.out.println("BattleState.awardLoot(Critter critterUnfainted) level-AFTER-incrementing expYieldEffective AND checkLevelUpRecursive(int) is " +
+                levelAfterCheckLevelUpRecursive + " for ExpGroup: " + expGroupUnfainted);
+        System.out.println("expUnfaintedAfterCheckLevelUpRecursive: " + expUnfaintedAfterCheckLevelUpRecursive);
+
         //if an actual level-up event occurred, set hpEffectiveCurrent to its new max hp.
-        if (levelBaseline != levelAfterCheckLevelUpRecursive) {
+        if (levelBaselineUnfainted != levelAfterCheckLevelUpRecursive) {
             critterUnfainted.setHpEffectiveCurrent( critterUnfainted.getStatsModule().getStatsEffectiveMap().get(StatsModule.Type.HP) );
         }
     }
