@@ -130,6 +130,16 @@ public class MovesModule
         public int getPriority() { return priority; }
     }
 
+/*
+https://gamefaqs.gamespot.com/gameboy/198314-pokemon-yellow-version-special-pikachu-edition/faqs/64175
+
+Learning Moves
+--------------
+Each Pokemon can learn moves in the following ways. Be sure to check out
+section L05; 'Pokedex +' which covers the individual instances of move learning
+for every species of Pokemon.
+*/
+
     private transient Handler handler;
 
     //stores the idMove in index 0-3.

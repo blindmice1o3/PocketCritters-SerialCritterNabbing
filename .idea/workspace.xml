@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fb96119b-76aa-4531-8c73-0e06b445031b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/entities/critters/stats/StatsModule.java" afterPath="$PROJECT_DIR$/src/model/entities/critters/stats/StatsModule.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/entities/critters/moves/MovesModule.java" afterPath="$PROJECT_DIR$/src/model/entities/critters/moves/MovesModule.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -55,11 +54,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StatsModule.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="StatsModule.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/entities/critters/stats/StatsModule.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="374">
               <caret line="230" column="0" lean-forward="false" selection-start-line="230" selection-start-column="0" selection-end-line="230" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MovesModule.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/model/entities/critters/moves/MovesModule.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="140" column="0" lean-forward="false" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -101,7 +110,6 @@
         <option value="$PROJECT_DIR$/src/model/entities/critters/levels/ExpLookUpTable.java" />
         <option value="$PROJECT_DIR$/src/model/items/CritterNet.java" />
         <option value="$PROJECT_DIR$/src/model/entities/critters/CritterMaker.java" />
-        <option value="$PROJECT_DIR$/src/model/entities/critters/moves/MovesModule.java" />
         <option value="$PROJECT_DIR$/src/model/items/Item.java" />
         <option value="$PROJECT_DIR$/src/model/entities/nabbers/INabber.java" />
         <option value="$PROJECT_DIR$/src/model/entities/nabbers/Jessie.java" />
@@ -142,6 +150,7 @@
         <option value="$PROJECT_DIR$/src/model/states/menu/belt_list_menu/MenuBeltList.java" />
         <option value="$PROJECT_DIR$/src/model/states/battle/BattleState.java" />
         <option value="$PROJECT_DIR$/src/model/entities/critters/stats/StatsModule.java" />
+        <option value="$PROJECT_DIR$/src/model/entities/critters/moves/MovesModule.java" />
       </list>
     </option>
   </component>
@@ -290,6 +299,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="model" type="462c0819:PsiDirectoryNode" />
               <item name="states" type="462c0819:PsiDirectoryNode" />
+              <item name="computer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PocketCritters-SerialCritterNabbing" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PocketCritters-SerialCritterNabbing" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="states" type="462c0819:PsiDirectoryNode" />
               <item name="game" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -307,6 +324,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="model" type="462c0819:PsiDirectoryNode" />
               <item name="states" type="462c0819:PsiDirectoryNode" />
+              <item name="game_console" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PocketCritters-SerialCritterNabbing" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PocketCritters-SerialCritterNabbing" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="states" type="462c0819:PsiDirectoryNode" />
               <item name="menu" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -317,6 +342,14 @@
               <item name="states" type="462c0819:PsiDirectoryNode" />
               <item name="menu" type="462c0819:PsiDirectoryNode" />
               <item name="belt_list_menu" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PocketCritters-SerialCritterNabbing" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PocketCritters-SerialCritterNabbing" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="states" type="462c0819:PsiDirectoryNode" />
+              <item name="television" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="PocketCritters-SerialCritterNabbing" type="b2602c69:ProjectViewProjectNode" />
@@ -595,13 +628,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/entities/critters/moves/MovesModule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="138" column="0" lean-forward="true" selection-start-line="138" selection-start-column="0" selection-end-line="138" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -942,6 +968,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="230" column="0" lean-forward="false" selection-start-line="230" selection-start-column="0" selection-end-line="230" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/entities/critters/moves/MovesModule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="140" column="0" lean-forward="false" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
           <folding />
         </state>
       </provider>
