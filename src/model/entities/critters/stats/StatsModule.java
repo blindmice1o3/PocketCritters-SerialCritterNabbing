@@ -228,6 +228,7 @@ public class StatsModule
         for (Type statsType : Type.values()) {
             if (statsType == Type.HP) {
                 updateHpEffective();
+                //TODO: hpEffectiveCurrent set to hpMax if level-up occurred... move from end of BattleState.awardLoot() to here.
             } else {
                 updateStatsEffective(statsType);
             }
