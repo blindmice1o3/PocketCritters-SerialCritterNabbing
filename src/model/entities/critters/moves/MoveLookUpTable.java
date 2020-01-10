@@ -11,7 +11,14 @@ public class MoveLookUpTable {
 
     private Handler handler;
 
-    private Map<Integer, Move> moveLookUpTable;
+    private ArrayList<String> nameBank;
+    private ArrayList<String> typeBank;
+    private ArrayList<String> categoryBank;
+    private ArrayList<String> ppBaseBank;
+    private ArrayList<String> powerBank;
+    private ArrayList<String> accuracyBank;
+
+    private Map<String, Move> moveLookUpTable;
 
     public MoveLookUpTable(Handler handler) {
         this.handler = handler;
@@ -33,12 +40,12 @@ public class MoveLookUpTable {
 
         System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 
-        ArrayList<String> nameBank = new ArrayList<String>();
-        ArrayList<String> typeBank = new ArrayList<String>();
-        ArrayList<String> categoryBank = new ArrayList<String>();
-        ArrayList<String> ppBaseBank = new ArrayList<String>();
-        ArrayList<String> powerBank = new ArrayList<String>();
-        ArrayList<String> accuracyBank = new ArrayList<String>();
+        nameBank = new ArrayList<String>();
+        typeBank = new ArrayList<String>();
+        categoryBank = new ArrayList<String>();
+        ppBaseBank = new ArrayList<String>();
+        powerBank = new ArrayList<String>();
+        accuracyBank = new ArrayList<String>();
 
         int indexStart = 10;
         for (int i = indexStart; i < rawDataAfterSplitCalled.length; i++) {
@@ -79,7 +86,7 @@ public class MoveLookUpTable {
 
         int idNumber = 1;
         //////////////////////////////////////////////////////////////////////
-        moveLookUpTable = new HashMap<Integer, Move>();
+        moveLookUpTable = new HashMap<String, Move>();
         //////////////////////////////////////////////////////////////////////
         for (int i = 0; i < nameBank.size(); i++) {
             Move.Type type = parseType(typeBank.get(i));
@@ -90,26 +97,25 @@ public class MoveLookUpTable {
 
             Move move = new Move(idNumber, nameBank.get(i), type, category, ppBase, power, accuracy);
             ///////////////////////////////
-            moveLookUpTable.put(idNumber, move);
+            moveLookUpTable.put(nameBank.get(i), move);
             ///////////////////////////////
             idNumber++;
         }
 
-        for (int i = 0; i < moveLookUpTable.keySet().size(); i++) {
+        for (String name : moveLookUpTable.keySet()) {
             System.out.println("-------------------------------");
-            System.out.println("@@@ " + (i+1) + " @@@");
-            System.out.println("@@@ " + moveLookUpTable.get(i+1).getName() + " @@@");
-            System.out.println("@@@ " + moveLookUpTable.get(i+1).getType().toString() + " @@@");
-            System.out.println("@@@ " + moveLookUpTable.get(i+1).getCategory().toString() + " @@@");
-            System.out.println("@@@ ppBase: " + moveLookUpTable.get(i+1).getPpBase() + " @@@");
-            System.out.println("@@@ power: " + moveLookUpTable.get(i+1).getPower() + " @@@");
-            System.out.println("@@@ accuracy: " + moveLookUpTable.get(i+1).getAccuracy() + " @@@");
+            System.out.println("@@@ " + name + "'s name: " + moveLookUpTable.get(name).getName());
+            System.out.println("@@@ " + name + "'s type: " + moveLookUpTable.get(name).getType());
+            System.out.println("@@@ " + name + "'s category: " + moveLookUpTable.get(name).getCategory());
+            System.out.println("@@@ " + name + "'s ppBase: " + moveLookUpTable.get(name).getPpBase());
+            System.out.println("@@@ " + name + "'s power: " + moveLookUpTable.get(name).getPower());
+            System.out.println("@@@ " + name + "'s accuracy: " + moveLookUpTable.get(name).getAccuracy());
             System.out.println("-------------------------------");
         }
     }
 
-    public Move getMove(int idNumber) {
-        return moveLookUpTable.get(idNumber);
+    public Move getMove(String name) {
+        return moveLookUpTable.get(name);
     }
 
     private Move.Type parseType(String typeAsString) {
