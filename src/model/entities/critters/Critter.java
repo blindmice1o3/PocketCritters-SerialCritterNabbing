@@ -65,8 +65,13 @@ public class Critter
         //TODO: attackEffective is used if the move's Type is PHYSICAL
         // if it's SPECIAL, use specialEffective.
         int playerAttackEffective = statsModule.getStatsEffectiveMap().get(StatsModule.Type.ATTACK);
-        int damage = (int)((((((2f * statsModule.getLevelCurrent()) / 5) + 2) * power * ((float)playerAttackEffective/opponentDefenseEffective)) / 50) + 2);
-
+        int damage = 0;
+        if (power != 0) {
+            damage = (int) ((((((2f * statsModule.getLevelCurrent()) / 5) + 2) * power * ((float) playerAttackEffective / opponentDefenseEffective)) / 50) + 2);
+        } else {
+            System.out.println("Critter.calculateDamage(int, int) has power as 0... MIGHT BE A fixed-damage Move !!!");
+            //TODO: go through MoveLookUpTable for moves like SuperFang (idNumber == 162) which may have fixed-damage value.
+        }
         /*
         System.out.println("damage: " + damage);
         float damageAsFloat = ((((((2f * level) / 5) + 2) * power * (((float)playerAttackEffective)/opponentDefenseEffective)) / 50) + 2);

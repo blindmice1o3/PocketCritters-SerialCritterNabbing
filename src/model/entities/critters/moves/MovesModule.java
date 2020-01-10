@@ -1,8 +1,11 @@
 package model.entities.critters.moves;
 
 import main.Handler;
+import main.utils.Util;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class MovesModule
         implements Serializable {
@@ -149,7 +152,6 @@ for every species of Pokemon.
 
     public MovesModule(Handler handler) {
         this.handler = handler;
-
 
         //for now, everyone starts with TACKLE and QUICK_ATTACK (and positions 3 and 4 are suppose to be "null"/unassigned/default is 0).
         movesCurrent = new int[4];

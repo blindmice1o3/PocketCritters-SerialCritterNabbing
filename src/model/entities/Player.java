@@ -238,6 +238,8 @@ Prior to Generation VII, Trainers have a five-digit number ranging from 0 to 655
             Critter critter = CritterMaker.generateCritter(x, y);
             critter.setHandler(handler);
 
+
+
             //Random r = new Random();
 
             //if (r.nextInt(4) < 1) {

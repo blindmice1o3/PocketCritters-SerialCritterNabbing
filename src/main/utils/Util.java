@@ -93,12 +93,25 @@ public class Util {
         try {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < number.length(); i++) {
-                if ( !number.substring(i, (i+1)).equals(",") ) {
+                if ( number.substring(i, (i+1)).equals(",") ) {
+                    continue;
+                } else if ( number.substring(i, (i+1)).equals("%") ) {
+                    continue;
+                } else if ( number.substring(i, (i+1)).equals("*") ) {
+                    continue;
+                } else if ( number.substring(i, (i+1)).equals("�") ) {
+                    continue;
+                } else {
                     sb.append(number.substring(i, (i+1)));
                 }
             }
 
-            return Integer.parseInt(sb.toString());
+            int returner = 0;
+            if (sb.toString().length() >= 1) {
+                returner = Integer.parseInt(sb.toString());;
+            }
+
+            return returner;
         } catch (NumberFormatException ex) {
             // If we try to pass in a String that is not a number (like "ABC"), it'll throw an error.
             ex.printStackTrace();   // Print the error to the screen (that way we know something happened).

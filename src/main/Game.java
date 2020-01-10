@@ -5,6 +5,7 @@ import main.input.KeyManager;
 import main.gfx.Assets;
 import main.utils.SerializationDoer;
 import model.entities.critters.levels.ExpLookUpTable;
+import model.entities.critters.moves.MoveLookUpTable;
 import model.entities.nabbers.INabber;
 import model.entities.nabbers.James;
 import model.entities.nabbers.Jessie;
@@ -23,6 +24,7 @@ public class Game implements Runnable {
     private boolean running = false;
 
     private TileSpriteToRGBConverter tileSpriteToRGBConverter;
+    private MoveLookUpTable moveLookUpTable;
     private StateManager stateManager;
     private GameCamera gameCamera;
     private Displayer displayer;
@@ -69,6 +71,7 @@ public class Game implements Runnable {
     private void init() {
         Assets.init();
         ExpLookUpTable.initExpLookUpTable();
+        moveLookUpTable = new MoveLookUpTable(handler);
 
         keyManager = new KeyManager();
         gameCamera = new GameCamera(960, 3184, 1279, 3455);
