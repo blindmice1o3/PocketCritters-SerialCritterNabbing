@@ -1,0 +1,58 @@
+Bulbasaur (1)
+0  Tackle
+1  Growl
+ 7  LeechSeed
+13  VineWhip
+20  PoisonPowder
+27  RazorLeaf
+34  Growth
+41  SleepPowder
+48  SolarBeam
+
+Pikachu (25)
+0  ThunderShock
+1  Growl
+6   TailWhip
+8   ThunderWave
+11  QuickAttack
+15  DoubleTeam
+20  Slam
+26  Thunderbolt
+33  Agility
+41  Thunder
+50  LightScreen
+
+Eevee (133)
+0  Tackle
+1  TailWhip
+8   SandAttack
+16  Growl
+23  QuickAttack
+30  Bite
+36  FocusEnergy
+42  TakeDown
+
+Mankey (56)
+0  Scratch
+1  Leer
+ 9  LowKick
+15  KarateChop
+21  FurySwipes
+27  FocusEnergy
+33  SeismicToss
+39  Thrash
+45  Screech
+
+Magikarp (129)
+0  Splash
+15  Tackle
+
+Geodude (74)
+0  Tackle
+11   DefenseCurl
+16   RockThrow
+21  Selfdestruct
+26  Harden
+31  Earthquake
+36  Explosion
+

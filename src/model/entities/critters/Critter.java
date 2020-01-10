@@ -7,6 +7,8 @@ import model.entities.critters.stats.StatsModule;
 
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Critter
         implements Serializable {
@@ -148,8 +150,10 @@ public class Critter
         private final ExpGroup expGroup;
         //stats
         private final float hpBase, attackBase, defenseBase, speedBase, specialBase;
-        //icon (method initializes speciesIcon with switch construct based on int id)
+        //icon (method initializes speciesIcon with switch construct based on int id of Species)
         private BufferedImage speciesIcon;
+        //level -> moveName (method initializes naturalMoves with switch construct based on int id of Species)
+        private Map<Integer, String> naturalMoves;
         /*
         A Pokémon's stats are derived values, based on the Pokémon's
         level, EVs (effort values), IVs (individual values), base stats,
@@ -235,6 +239,197 @@ public class Critter
 
             //BufferedImage speciesIcon
             initSpeciesIcon();
+
+            //Map<Integer, String> naturalMoves
+            initNaturalMoves();
+        }
+
+        //intentionally public in case HashMap<Integer, String> has to be re-initialized after loading.
+        public void initNaturalMoves() {
+            naturalMoves = new HashMap<Integer, String>();
+
+            switch(id) {
+                case 25: //THUNDER_MOUSE
+                    naturalMoves.put(0, "ThunderShock");
+                    naturalMoves.put(1, "Growl");
+                    naturalMoves.put(6, "TailWhip");
+                    naturalMoves.put(8, "ThunderWave");
+                    naturalMoves.put(11, "QuickAttack");
+                    naturalMoves.put(15, "DoubleTeam");
+                    naturalMoves.put(20, "Slam");
+                    naturalMoves.put(26, "Thunderbolt");
+                    naturalMoves.put(33, "Agility");
+                    naturalMoves.put(41, "Thunder");
+                    naturalMoves.put(50, "LightScreen");
+                    break;
+                case 1: //DINO_SPROUTLING
+                    naturalMoves.put(0, "Tackle");
+                    naturalMoves.put(1, "Growl");
+                    naturalMoves.put(7, "LeechSeed");
+                    naturalMoves.put(13, "VineWhip");
+                    naturalMoves.put(20, "PoisonPowder");
+                    naturalMoves.put(27, "RazorLeaf");
+                    naturalMoves.put(34, "Growth");
+                    naturalMoves.put(41, "SleepPowder");
+                    naturalMoves.put(48, "SolarBeam");
+                    break;
+                case 133: //TOTIPOTENT_PUPPY
+                    naturalMoves.put(0, "Tackle");
+                    naturalMoves.put(1, "TailWhip");
+                    naturalMoves.put(8, "SandAttack");
+                    naturalMoves.put(16, "Growl");
+                    naturalMoves.put(23, "QuickAttack");
+                    naturalMoves.put(30, "Bite");
+                    naturalMoves.put(36, "FocusEnergy");
+                    naturalMoves.put(42, "TakeDown");
+                    break;
+                case 56: //STONE_MONKEY
+                    naturalMoves.put(0, "Scratch");
+                    naturalMoves.put(1, "Leer");
+                    naturalMoves.put(9, "LowKick");
+                    naturalMoves.put(15, "KarateChop");
+                    naturalMoves.put(21, "FurySwipes");
+                    naturalMoves.put(27, "FocusEnergy");
+                    naturalMoves.put(33, "SeismicToss");
+                    naturalMoves.put(39, "Thrash");
+                    naturalMoves.put(45, "Screech");
+                    break;
+                case 129: //SPLASHILIC_TILAPIA
+                    naturalMoves.put(0, "Splash");
+                    naturalMoves.put(15, "Tackle");
+                    break;
+                case 74: //ROCK_GOLEM
+                    naturalMoves.put(0, "Tackle");
+                    naturalMoves.put(11, "DefenseCurl");
+                    naturalMoves.put(16, "RockThrow");
+                    naturalMoves.put(21, "Selfdestruct");
+                    naturalMoves.put(26, "Harden");
+                    naturalMoves.put(31, "Earthquake");
+                    naturalMoves.put(36, "Explosion");
+                    break;
+                case 21: //COASTAL_GULL
+                    naturalMoves.put(0, "Peak");
+                    naturalMoves.put(1, "Growl");
+                    naturalMoves.put(9, "Leer");
+                    naturalMoves.put(15, "FuryAttack");
+                    naturalMoves.put(22, "MirrorMove");
+                    naturalMoves.put(29, "DrillPeck");
+                    naturalMoves.put(36, "Agility");
+                    break;
+                case 16: //MOTLEY_PIGEON
+                    naturalMoves.put(0, "Gust");
+                    naturalMoves.put(5, "SandAttack");
+                    naturalMoves.put(12, "QuickAttack");
+                    naturalMoves.put(19, "Whirlwind");
+                    naturalMoves.put(28, "WingAttack");
+                    naturalMoves.put(36, "Agility");
+                    naturalMoves.put(44, "MirrorMove");
+                    break;
+                case 19: //COLONIAL_MOUSE
+                    naturalMoves.put(0, "Tackle");
+                    naturalMoves.put(1, "TailWhip");
+                    naturalMoves.put(7, "QuickAttack");
+                    naturalMoves.put(14, "HyperFang");
+                    naturalMoves.put(23, "FocusEnergy");
+                    naturalMoves.put(34, "SuperFang");
+                    break;
+                case 29: //FEMALE_LAPINE
+                    naturalMoves.put(0, "Growl");
+                    naturalMoves.put(1, "Tackle");
+                    naturalMoves.put(8, "Scratch");
+                    naturalMoves.put(12, "DoubleKick");
+                    naturalMoves.put(17, "PoisonSting");
+                    naturalMoves.put(23, "TailWhip");
+                    naturalMoves.put(30, "Bite");
+                    naturalMoves.put(38, "FurySwipes");
+                    break;
+                case 32: //MALE_LAPINE
+                    naturalMoves.put(0, "Leer");
+                    naturalMoves.put(1, "Tackle");
+                    naturalMoves.put(8, "HornAttack");
+                    naturalMoves.put(12, "DoubleKick");
+                    naturalMoves.put(17, "PoisonSting");
+                    naturalMoves.put(23, "FocusEnergy");
+                    naturalMoves.put(30, "FuryAttack");
+                    naturalMoves.put(38, "HornDrill");
+                    break;
+                case 10: //HOOKAH_CATERPILLAR
+                    naturalMoves.put(0, "Tackle");
+                    naturalMoves.put(1, "StringShot");
+                    break;
+                case 13: //GRUB_LARVAE
+                    naturalMoves.put(0, "PoisonSting");
+                    naturalMoves.put(1, "StringShot");
+                    break;
+                case 27: //SAND_MOUSE
+                    naturalMoves.put(0, "Scratch");
+                    naturalMoves.put(10, "SandAttack");
+                    naturalMoves.put(17, "Slash");
+                    naturalMoves.put(24, "PoisonSting");
+                    naturalMoves.put(31, "Swift");
+                    naturalMoves.put(38, "FurySwipes");
+                    break;
+                case 50: //GROUND_HOG
+                    naturalMoves.put(0, "Scratch");
+                    naturalMoves.put(15, "Growl");
+                    naturalMoves.put(19, "Dig");
+                    naturalMoves.put(24, "SandAttack");
+                    naturalMoves.put(31, "Slash");
+                    naturalMoves.put(40, "Earthquake");
+                    break;
+                case 95: //LEGLESS_ROCK_LIZARD
+                    naturalMoves.put(0, "Tackle");
+                    naturalMoves.put(1, "Screech");
+                    naturalMoves.put(15, "Bind");
+                    naturalMoves.put(19, "RockThrow");
+                    naturalMoves.put(25, "Rage");
+                    naturalMoves.put(33, "Slam");
+                    naturalMoves.put(43, "Harden");
+                    break;
+                case 23: //BEARHUG_PYTHON
+                    naturalMoves.put(0, "Wrap");
+                    naturalMoves.put(1, "Leer");
+                    naturalMoves.put(10, "PoisonSting");
+                    naturalMoves.put(17, "Bite");
+                    naturalMoves.put(24, "Glare");
+                    naturalMoves.put(31, "Screech");
+                    naturalMoves.put(38, "Acid");
+                    break;
+                case 52: //SMOKEY_KITTY
+                    naturalMoves.put(0, "Scratch");
+                    naturalMoves.put(1, "Growl");
+                    naturalMoves.put(12, "Bite");
+                    naturalMoves.put(17, "PayDay");
+                    naturalMoves.put(24, "Screech");
+                    naturalMoves.put(33, "FurySwipes");
+                    naturalMoves.put(44, "Slash");
+                    break;
+                case 109: //GASEOUS_GOLEM
+                    naturalMoves.put(0, "Tackle");
+                    naturalMoves.put(1, "Smog");
+                    naturalMoves.put(32, "Sludge");
+                    naturalMoves.put(37, "SmokeScreen");
+                    naturalMoves.put(40, "Selfdestruct");
+                    naturalMoves.put(45, "Haze");
+                    naturalMoves.put(48, "Explosion");
+                    break;
+                case 39: //KARAOKE_CREAMPUFF
+                    naturalMoves.put(0, "Sing");
+                    naturalMoves.put(9, "Pound");
+                    naturalMoves.put(14, "Disable");
+                    naturalMoves.put(19, "DefenseCurl");
+                    naturalMoves.put(24, "DoubleSlap");
+                    naturalMoves.put(29, "Rest");
+                    naturalMoves.put(34, "BodySlam");
+                    naturalMoves.put(39, "DoubleEdge");
+                    break;
+                //TODO: finish Species.naturalMoves
+                default:
+                    System.out.println("Critter.initNaturalMoves() switch(id) construct's default block.");
+                    naturalMoves.put(0, "Splash");
+                    naturalMoves.put(1, "Struggle");
+                    break;
+            }
         }
 
         //intentionally public in case BufferedImage has to be re-initialized after loading.
@@ -307,6 +502,10 @@ public class Critter
                     break;
             }
         }
+
+        // GETTERS AND SETTERS
+
+        public Map<Integer, String> getNaturalMoves() { return naturalMoves; }
 
         public int getId() { return id; }
 

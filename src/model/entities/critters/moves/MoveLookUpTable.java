@@ -112,6 +112,10 @@ public class MoveLookUpTable {
             System.out.println("@@@ " + name + "'s accuracy: " + moveLookUpTable.get(name).getAccuracy());
             System.out.println("-------------------------------");
         }
+
+        for (int i = 0; i < nameBank.size(); i++) {
+            System.out.println(nameBank.get(i));
+        }
     }
 
     public Move getMove(String name) {

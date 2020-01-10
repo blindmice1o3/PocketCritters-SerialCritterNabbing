@@ -1,0 +1,177 @@
+Bulbasaur (1)
+0  Tackle
+1  Growl
+ 7  LeechSeed
+13  VineWhip
+20  PoisonPowder
+27  RazorLeaf
+34  Growth
+41  SleepPowder
+48  SolarBeam
+
+Pikachu (25)
+0  ThunderShock
+1  Growl
+6   TailWhip
+8   ThunderWave
+11  QuickAttack
+15  DoubleTeam
+20  Slam
+26  Thunderbolt
+33  Agility
+41  Thunder
+50  LightScreen
+
+Eevee (133)
+0  Tackle
+1  TailWhip
+8   SandAttack
+16  Growl
+23  QuickAttack
+30  Bite
+36  FocusEnergy
+42  TakeDown
+
+Mankey (56)
+0  Scratch
+1  Leer
+ 9  LowKick
+15  KarateChop
+21  FurySwipes
+27  FocusEnergy
+33  SeismicToss
+39  Thrash
+45  Screech
+
+Magikarp (129)
+0  Splash
+15  Tackle
+
+Geodude (74)
+0  Tackle
+11   DefenseCurl
+16   RockThrow
+21  Selfdestruct
+26  Harden
+31  Earthquake
+36  Explosion
+
+Spearow (21)
+0  Peck
+1  Growl
+ 9  Leer
+15 FuryAttack
+22 MirrorMove
+29 DrillPeck
+36 Agility
+
+Pidgey (16)
+0 Gust
+5  SandAttack
+12  QuickAttack
+19  Whirlwind
+28  WingAttack
+36  Agility
+44  MirrorMove
+
+Rattata (19)
+0  Tackle
+1  TailWhip
+ 7   QuickAttack
+14  HyperFang
+23  FocusEnergy
+34  SuperFang
+
+Nidoran F (29)
+0  Growl
+1  Tackle
+ 8   Scratch
+12  DoubleKick
+17  PoisonSting
+23  TailWhip
+30  Bite
+38  FurySwipes
+
+Nidoran M (32)
+0  Leer
+1  Tackle
+8   HornAttack
+12  DoubleKick
+17  PoisonSting
+23  FocusEnergy
+30  FuryAttack
+38  HornDrill
+
+Caterpie (10)
+0  Tackle
+1  StringShot
+
+Weedle (13)
+0  PoisonSting
+1  StringShot
+
+Sandshrew (27)
+0  Scratch
+10  SandAttack
+17  Slash
+24  PoisonSting
+31  Swift
+38  FurySwipes
+
+Diglett (50)
+0  Scratch
+15   Growl
+19  Dig
+24  SandAttack
+31  Slash
+40  Earthquake
+
+Onix (95)
+0  Tackle
+1  Screech
+15  Bind
+19  RockThrow
+25  Rage
+33  Slam
+43  Harden
+
+Ekans (23)
+0  Wrap
+1  Leer
+10  PoisonSting
+17  Bite
+24  Glare
+31   Screech
+38  Acid
+
+Meowth (52)
+0  Scratch
+1  Growl
+12  Bite
+17  PayDay
+24  Screech
+33  FurySwipes
+44  Slash
+
+Koffing (109)
+0  Tackle
+1  Smog
+32  Sludge
+37  SmokeScreen
+40  Selfdestruct
+45  Haze
+48  Explosion
+
+///////////////////////////////////////////////////////////////
+
+Jigglypuff (39)
+0  Sing
+ 9   Pound
+14  Disable
+19  DefenseCurl
+24  DoubleSlap
+29  Rest
+34  BodySlam
+39  DoubleEdge
+
+

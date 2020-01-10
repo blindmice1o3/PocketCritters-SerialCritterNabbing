@@ -37,7 +37,7 @@
 35	Wrap	Normal	Physical	Tough	20	15	90%*	I
 36	TakeDown	Normal	Physical	Tough	20	90	85%	I
 37	Thrash	Normal	Physical	Tough	10*	120*	100%	I
-38	Double-Edge	Normal	Physical	Tough	15	120*	100%	I
+38	DoubleEdge	Normal	Physical	Tough	15	120*	100%	I
 39	TailWhip	Normal	Status	Cute	30	—	100%	I
 40	PoisonSting	Poison	Physical	Clever	35	15	100%	I
 41	Twineedle	Bug	Physical	Cool	20	25	100%	I
@@ -119,7 +119,7 @@
 117	Bide	Normal	Physical	Tough	10	—	—*	I
 118	Metronome	Normal	Status	Cute	10	—	—	I
 119	MirrorMove	Flying	Status	Clever	20	—	—	I
-120	Self-Destruct	Normal	Physical	Beautiful	5	200*	100%	I
+120	SelfDestruct	Normal	Physical	Beautiful	5	200*	100%	I
 121	EggBomb	Normal	Physical	Cute	10	100	75%	I
 122	Lick	Ghost	Physical	Cute	30	30*	100%	I
 123	Smog	Poison	Special	Tough	20	30*	70%	I
@@ -134,7 +134,7 @@
 132	Constrict	Normal	Physical	Tough	35	10	100%	I
 133	Amnesia	Psychic	Status	Cute	20	—	—	I
 134	Kinesis	Psychic	Status	Clever	15	—	80%	I
-135	Soft-Boiled	Normal	Status	Cute	10	—	—	I
+135	SoftBoiled	Normal	Status	Cute	10	—	—	I
 136	HighJumpKick	Fighting	Physical	Cool	10*	130*	90%	I
 137	Glare	Normal	Status	Tough	30	—	100%*	I
 138	DreamEater	Psychic	Special	Clever	15	100	100%	I
