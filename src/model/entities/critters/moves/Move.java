@@ -2,30 +2,6 @@ package model.entities.critters.moves;
 
 public class Move {
 
-    public enum Category {
-        PHYSICAL,
-        SPECIAL,
-        STATUS;
-    }
-
-    public enum Type {
-        BUG,
-        DRAGON,
-        ELECTRIC,
-        FIGHTING,
-        FIRE,
-        FLYING,
-        GHOST,
-        GRASS,
-        GROUND,
-        ICE,
-        NORMAL,
-        PSYCHIC,
-        POISON,
-        ROCK,
-        WATER;
-    }
-
     private int id;
     private String name;
     private Type type;
@@ -72,6 +48,30 @@ public class Move {
 
     public int getAccuracy() {
         return accuracy;
+    }
+
+    public enum Category {
+        PHYSICAL,
+        SPECIAL,
+        STATUS;
+    }
+
+    public enum Type {
+        BUG,
+        DRAGON,
+        ELECTRIC,
+        FIGHTING,
+        FIRE,
+        FLYING,
+        GHOST,
+        GRASS,
+        GROUND,
+        ICE,
+        NORMAL,
+        PSYCHIC,
+        POISON,
+        ROCK,
+        WATER;
     }
 
 } // **** end Move class ****

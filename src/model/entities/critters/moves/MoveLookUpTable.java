@@ -18,6 +18,11 @@ public class MoveLookUpTable {
     private ArrayList<String> powerBank;
     private ArrayList<String> accuracyBank;
 
+    /**
+     * Never mind the chaotic far-from-optimized-ness of this class,
+     * moveLookUpTable and getMove(String) should be the main-
+     * (perhaps, sole-) focus of this class.
+     */
     private Map<String, Move> moveLookUpTable;
 
     public MoveLookUpTable(Handler handler) {
