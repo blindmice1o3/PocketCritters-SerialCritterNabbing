@@ -32,7 +32,7 @@ public class MoveLookUpTable {
     } // **** end MoveLookUpTable(Handler) constructor ***8
 
     public void initMoveLookUpTable() {
-        String rawDataFromTextFile = Util.loadFileAsString("res/listOfMovesGen1CopiedAndPastedFromWebsite.txt");
+        String rawDataFromTextFile = Util.loadFileAsString("listOfMovesGen1CopiedAndPastedFromWebsite.txt");
         System.out.println(rawDataFromTextFile);
         System.out.println("*****************************************************");
         String[] rawDataAfterSplitCalled = rawDataFromTextFile.split("\\s+");

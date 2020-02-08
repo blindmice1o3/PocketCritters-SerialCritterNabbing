@@ -16,7 +16,7 @@ public class ExpLookUpTable {
 
     //called in Game.init().
     public static void initExpLookUpTable() {
-        String wholeFile = Util.loadFileAsString("res/experience group list.txt");
+        String wholeFile = Util.loadFileAsString("experience group list.txt");
         System.out.println(wholeFile);
         //expLookUpTable = new int[][];
 
