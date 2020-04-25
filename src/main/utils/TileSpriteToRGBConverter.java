@@ -21,7 +21,7 @@ public class TileSpriteToRGBConverter {
     private static BufferedImage worldBackground;
 
     public TileSpriteToRGBConverter() {
-        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        //@VERIFIER@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         //TODO: This section is for Android Studio's version of PocketCrittersCartridge.
         //TODO: Instead of parsing the world map image for each run, create something similar to rgbTileFarm.
 //        String wholeFile = Util.loadFileAsString("tiles_world_map.txt");
@@ -45,9 +45,12 @@ public class TileSpriteToRGBConverter {
         return returner;
     }
 
-    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    //@GENERATOR@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     //TODO: This section is for Android Studio's version of PocketCrittersCartridge.
     //TODO: Instead of parsing the world map image for each run, create something similar to rgbTileFarm.
+    /**
+     * Invoked within generateTileMapForCollisionDetection().
+     */
     private void generateStringMapFileForCollisionDetection(int[][][] rgbImage) {
         // Create file to store tile map data (similar to Assets.rgbTileFarm, but not with pixels)
         String fileFullName = "C:\\Users\\James\\Downloads\\tiles_world_map.txt";
@@ -63,10 +66,15 @@ public class TileSpriteToRGBConverter {
             e.printStackTrace();
         }
 
-        System.out.println("y == rgbImage.length: " + rgbImage.length);
-        System.out.println("x == rgbImage[0].length: " + rgbImage[0].length);
-        // Translate the generated TileType[][] into String to be stored in a file.
+        // Transcribe the generated int[][][] into String to be stored in a file.
+        // (The first two elements [width and height values] are NOT a part of the map)
         StringBuilder sb = new StringBuilder();
+        //////////////////////////////////////////////////////
+        System.out.println("y (aka heightInTiles) == rgbImage.length: " + rgbImage.length);
+        System.out.println("x (aka widthInTiles) == rgbImage[0].length: " + rgbImage[0].length);
+        sb.append(rgbImage[0].length + " ");
+        sb.append(rgbImage.length + " \n");
+        //////////////////////////////////////////////////////
         for (int y = 0; y < rgbImage.length; y++) {
             for (int x = 0; x < rgbImage[y].length; x++) {
                 if (rgbImage[y][x][0] == 1) {
@@ -114,7 +122,7 @@ public class TileSpriteToRGBConverter {
         System.out.println("TileSpriteToRGBConverter.generateTileMapForCollisionDetection(BufferedImage)'s heightWorld: " + heightNumberOfTile);
 
 
-        //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        //@INVOKER@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         //TODO: This section is for Android Studio's version of PocketCrittersCartridge.
         //TODO: Instead of parsing the world map image for each run, create something similar to rgbTileFarm.
 //        if (worldBackground == Assets.world) {
