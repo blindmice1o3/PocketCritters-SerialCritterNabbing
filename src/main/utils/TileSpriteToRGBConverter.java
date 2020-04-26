@@ -24,6 +24,7 @@ public class TileSpriteToRGBConverter {
         //@VERIFIER@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         //TODO: This section is for Android Studio's version of PocketCrittersCartridge.
         //TODO: Instead of parsing the world map image for each run, create something similar to rgbTileFarm.
+        //String wholeFile = Util.loadFileAsString("tiles_world_map_3x8.txt");
 //        String wholeFile = Util.loadFileAsString("tiles_world_map.txt");
 //        System.out.println(wholeFile);
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -52,55 +53,78 @@ public class TileSpriteToRGBConverter {
      * Invoked within generateTileMapForCollisionDetection().
      */
     private void generateStringMapFileForCollisionDetection(int[][][] rgbImage) {
-        // Create file to store tile map data (similar to Assets.rgbTileFarm, but not with pixels)
-        String fileFullName = "C:\\Users\\James\\Downloads\\tiles_world_map.txt";
-        try {
-            File tilesWorldMap = new File(fileFullName);
-            if (tilesWorldMap.createNewFile()) {
-                System.out.println("TileMap.initTilesPocketCritters() CREATED NEW FILE: " + tilesWorldMap.getName());
-            } else {
-                System.out.println("TileMap.initTilesPocketCritters() FILE ALREADY EXISTS.");
-            }
-        } catch (IOException e) {
-            System.out.println("TileMap.initTilesPocketCritters() AN ERROR OCCURRED WHILE CREATING A FILE.");
-            e.printStackTrace();
-        }
+        for (int ySection = 0; ySection < 10; ySection++) {
+            for (int xSection = 0; xSection < 10; xSection++) {
+                ////////////////////////////////////////////////////////////////////////////////////////////
+                //DIVIDE INTO 10x10 SECTIONS//////////////////////////
+                int xStart = xSection * (rgbImage[ySection].length / 10);
+                int yStart = ySection * (rgbImage.length / 10);
+                int xEnd = (xSection + 1) * (rgbImage[ySection].length / 10);
+                int yEnd = (ySection + 1) * (rgbImage.length / 10);
+                String fileNameCropped = "tiles_world_map_" + (xSection+1) + "x" + (ySection+1) + ".txt";
+                System.out.println(fileNameCropped);
+                //////////////////////////////////////////////////////
 
-        // Transcribe the generated int[][][] into String to be stored in a file.
-        // (The first two elements [width and height values] are NOT a part of the map)
-        StringBuilder sb = new StringBuilder();
-        //////////////////////////////////////////////////////
-        System.out.println("y (aka heightInTiles) == rgbImage.length: " + rgbImage.length);
-        System.out.println("x (aka widthInTiles) == rgbImage[0].length: " + rgbImage[0].length);
-        sb.append(rgbImage[0].length + " ");
-        sb.append(rgbImage.length + " \n");
-        //////////////////////////////////////////////////////
-        for (int y = 0; y < rgbImage.length; y++) {
-            for (int x = 0; x < rgbImage[y].length; x++) {
-                if (rgbImage[y][x][0] == 1) {
-                    sb.append("1 ");    //SolidTile
-                } else if (rgbImage[y][x][0] == 0) {
-                    sb.append("0 ");    //NonSolidTile
-                } else if (rgbImage[y][x][0] == 2) {
-                    sb.append("2 ");    //TallGrassTile
-                } else if (rgbImage[y][x][0] == 9) {
-                    sb.append("9 ");    //NullTile (blank tile)
+                // Create file to store tile map data (similar to Assets.rgbTileFarm, but not with pixels)
+                String fileFullName = "C:\\Users\\James\\Downloads\\worldmap10x10\\" + fileNameCropped;
+                //String fileFullName = "C:\\Users\\James\\Downloads\\tiles_world_map.txt";
+                try {
+                    File tilesWorldMap = new File(fileFullName);
+                    if (tilesWorldMap.createNewFile()) {
+                        System.out.println("TileMap.initTilesPocketCritters() CREATED NEW FILE: " + tilesWorldMap.getName());
+                    } else {
+                        System.out.println("TileMap.initTilesPocketCritters() FILE ALREADY EXISTS.");
+                    }
+                } catch (IOException e) {
+                    System.out.println("TileMap.initTilesPocketCritters() AN ERROR OCCURRED WHILE CREATING A FILE.");
+                    e.printStackTrace();
                 }
+
+                // Transcribe the generated int[][][] into String to be stored in a file.
+                // (The first two elements [width and height values] are NOT a part of the map)
+                StringBuilder sb = new StringBuilder();
+                //////////////////////////////////////////////////////
+                System.out.println("x (aka widthInTiles) == xEnd - xStart: " + (xEnd - xStart));
+                System.out.println("y (aka heightInTiles) == yEnd - yStart: " + (yEnd - yStart));
+                sb.append((xEnd - xStart) + " ");
+                sb.append((yEnd - yStart) + " \n");
+//                System.out.println("x (aka widthInTiles) == rgbImage[0].length: " + rgbImage[0].length);
+//                System.out.println("y (aka heightInTiles) == rgbImage.length: " + rgbImage.length);
+//                sb.append(rgbImage[0].length + " ");
+//                sb.append(rgbImage.length + " \n");
+                //////////////////////////////////////////////////////
+                for (int y = yStart; y < yEnd; y++) {
+                    for (int x = xStart; x < xEnd; x++) {
+                        //for (int y = 0; y < rgbImage.length; y++) {
+                        //    for (int x = 0; x < rgbImage[y].length; x++) {
+                        if (rgbImage[y][x][0] == 1) {
+                            sb.append("1 ");    //SolidTile
+                        } else if (rgbImage[y][x][0] == 0) {
+                            sb.append("0 ");    //NonSolidTile
+                        } else if (rgbImage[y][x][0] == 2) {
+                            sb.append("2 ");    //TallGrassTile
+                        } else if (rgbImage[y][x][0] == 9) {
+                            sb.append("9 ");    //NullTile (blank tile)
+                        }
+                    }
+                    sb.append("\n");
+                }
+
+                // Write to file (store the tile map data)
+                FileWriter fileWriter = null;
+                try {
+                    fileWriter = new FileWriter(fileFullName);
+                    fileWriter.write(sb.toString());
+                    fileWriter.close();
+                    System.out.println("TileMap.initTilesPocketCritters() SUCCESSFULLY WROTE TO THE FILE.");
+                } catch (IOException e) {
+                    System.out.println("TileMap.initTilesPocketCritters() AN ERROR OCCURED WHILE WRITING TO FILE.");
+                    e.printStackTrace();
+                }
+                ///////////////////////////////////////////////////////////////////////////////////////////
             }
-            sb.append("\n");
         }
 
-        // Write to file (store the tile map data)
-        FileWriter fileWriter = null;
-        try {
-            fileWriter = new FileWriter(fileFullName);
-            fileWriter.write(sb.toString());
-            fileWriter.close();
-            System.out.println("TileMap.initTilesPocketCritters() SUCCESSFULLY WROTE TO THE FILE.");
-        } catch (IOException e) {
-            System.out.println("TileMap.initTilesPocketCritters() AN ERROR OCCURED WHILE WRITING TO FILE.");
-            e.printStackTrace();
-        }
     }
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
