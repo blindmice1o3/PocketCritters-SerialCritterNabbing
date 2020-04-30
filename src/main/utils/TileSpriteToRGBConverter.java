@@ -46,6 +46,88 @@ public class TileSpriteToRGBConverter {
         return returner;
     }
 
+    //@GENERATOR_FOR_INDOORS_UNBORDERED@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    //TODO: This section is for Android Studio's version of PocketCrittersCartridge.
+    //TODO: Instead of parsing the world map image for each run, create something similar to rgbTileFarm.
+    /**
+     * Invoked within generateTileMapForCollisionDetection().
+     */
+    private void generateStringMapFileIndoorsUnbordered(int[][][] rgbImage, String fileName) {
+        String fileFullName = "C:\\Users\\James\\Downloads\\" + fileName;
+
+        // Create file to store tile map data (similar to Assets.rgbTileFarm, but not with pixels)
+        try {
+            File tilesWorldMap = new File(fileFullName);
+            if (tilesWorldMap.createNewFile()) {
+                System.out.println("TileSpriteToRGBConverter.generateStringMapFileIndoorsUnbordered(int[][][], String) CREATED NEW FILE: " + tilesWorldMap.getName());
+            } else {
+                System.out.println("TileSpriteToRGBConverter.generateStringMapFileIndoorsUnbordered(int[][][], String) FILE ALREADY EXISTS.");
+            }
+        } catch (IOException e) {
+            System.out.println("TileSpriteToRGBConverter.generateStringMapFileIndoorsUnbordered(int[][][], String) AN ERROR OCCURRED WHILE CREATING A FILE.");
+            e.printStackTrace();
+        }
+
+        // Transcribe the generated int[][][] into String to be stored in a file.
+        // (The first two elements [width and height values] are NOT a part of the map)
+        StringBuilder sb = new StringBuilder();
+        /////////////////////////////////////
+        //!!!@@@@@Because it's UNBORDERED, should surround with solid border@@@@@!!!
+        int widthInTile = rgbImage[0].length;
+        int heightInTile = rgbImage.length;
+        System.out.println("widthInTile: " + widthInTile);
+        System.out.println("heightInTile: " + heightInTile);
+        sb.append((widthInTile+2) + " ");
+        sb.append((heightInTile+2) + " \n");
+        /////////////////////////////////////
+
+        //HORIZONTAL BORDER (TOP)
+        for (int x = 0; x < (widthInTile+2); x++) {
+            sb.append("1 ");    //SolidTile (solid border)
+        }
+        sb.append("\n");
+
+        for (int y = 0; y < heightInTile; y++) {
+            sb.append("1 ");    //VERTICAL BORDER (LEFT)
+
+            //ACTUAL IMAGE CONVERSION (NOT BORDER)
+            for (int x = 0; x < widthInTile; x++) {
+                if (rgbImage[y][x][0] == 1) {
+                    sb.append("1 ");    //SolidTile (actual solid tile [e.g. table, shelf])
+                } else if (rgbImage[y][x][0] == 0) {
+                    sb.append("0 ");    //NonSolidTile
+                } else if (rgbImage[y][x][0] == 2) {
+                    sb.append("2 ");    //TallGrassTile/UNIQUE_TILES //TODO: indoors?
+                } else if (rgbImage[y][x][0] == 9) {
+                    sb.append("9 ");    //NullTile (blank tile) //TODO: indoors?
+                } else {
+                    sb.append("8");     //!!!@@@@@USED FOR ANOMALIES@@@@@!!!
+                }
+            }
+
+            sb.append("1 \n");  //VERTICAL BORDER (RIGHT)
+        }
+        //HORIZONTAL BORDER (BOTTOM)
+        for (int x = 0; x < (widthInTile+2); x++) {
+            sb.append("1 ");    //SolidTile (solid border)
+        }
+
+        // Write to file (store the tile map data)
+        FileWriter fileWriter = null;
+        try {
+            fileWriter = new FileWriter(fileFullName);
+            fileWriter.write(sb.toString());
+            fileWriter.close();
+            System.out.println("TileSpriteToRGBConverter.generateStringMapFileIndoorsUnbordered(int[][][], String) SUCCESSFULLY WROTE TO THE FILE.");
+        } catch (IOException e) {
+            System.out.println("TileSpriteToRGBConverter.generateStringMapFileIndoorsUnbordered(int[][][], String) AN ERROR OCCURED WHILE WRITING TO FILE.");
+            e.printStackTrace();
+        }
+    }
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
     //@GENERATOR@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     //TODO: This section is for Android Studio's version of PocketCrittersCartridge.
     //TODO: Instead of parsing the world map image for each run, create something similar to rgbTileFarm.
@@ -151,6 +233,22 @@ public class TileSpriteToRGBConverter {
         //TODO: Instead of parsing the world map image for each run, create something similar to rgbTileFarm.
 //        if (worldBackground == Assets.world) {
 //            generateStringMapFileForCollisionDetection(rgbImage);
+//        }
+
+//        if (worldBackground == Assets.homePlayer) {
+//            generateStringMapFileIndoorsUnbordered(rgbImage, "tile_home01.txt");
+//        }
+
+//        if (worldBackground == Assets.roomPlayer) {
+//            generateStringMapFileIndoorsUnbordered(rgbImage, "tile_home02.txt");
+//        }
+
+//        if (worldBackground == Assets.homeRival) {
+//            generateStringMapFileIndoorsUnbordered(rgbImage, "tile_home_rival.txt");
+//        }
+
+//        if (worldBackground == Assets.lab) {
+//            generateStringMapFileIndoorsUnbordered(rgbImage, "tile_lab.txt");
 //        }
         //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
