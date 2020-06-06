@@ -1,0 +1,36 @@
+pokemon-gsc-kanto.png
+
+WIDTH
+4480 / 16 = 280-tile
+
+HEIGHT
+4320 / 16 = 270-tile
+
+//GameCamera (initial position)
+TOP LEFT starting town's blue border tile.
+(960, 3184)
+//GameCamera (initial values)
+(960, 3184, 1279, 3455)
+
+960 / 16 = 60th tile
+3184 / 16 =199th tile
+
+//Player (spawning position)
+(1104, 3312)
+1104 / 16 = 69
+3312 / 16 = 207
+
+//doorHomePlayer (transfer point)
+(1040, 3248)
+1040 / 16 = 65
+3248 / 16 = 203
+
+//doorHomeRival (transfer point)
+(1168, 3248)
+1168 / 16 = 73
+3248 / 16 = 203
+
+//doorLab (transfer point)
+(1152, 3344)
+1152 / 16 = 72
+3344 / 16 = 209

@@ -1,0 +1,40 @@
+TeamRocket.png
+
+jamesDown0
+236, 24, 12, 16
+
+jamesDown1
+236, 42, 12, 15
+
+jamesUp0
+250, 24, 12, 16
+
+jamesUp1
+250, 42, 12, 15
+
+jamesLeft0
+264, 24, 11, 16
+
+jamesLeft1
+264, 42, 11, 15
+
+
+
+jessieDown0
+235, 93, 15, 16
+
+jessieDown1
+235, 111, 15, 15
+
+jessieUp0
+252, 93, 15, 16
+
+jessieUp1
+252, 111, 15, 15
+
+jessieLeft0
+269, 93, 15, 16
+
+jessieLeft1
+269, 111, 15, 15
+

@@ -1,0 +1,43 @@
+roomPlayer (32, 8, 128, 128) 8x8
+homePlayer (168, 8, 128, 128) 8x8
+    transferPointToWorldMap(200, 120, 32, 16) 2x1
+homeRival (304, 9, 128, 128) 8x8
+lab (23, 544, 160, 192) 10x12
+
+23, 544
+182, 735
+160,192
+
+
+32, 8
+159 135
+
++1, +1
+
+
+
+200 - 168 = 32
+120 - 8 = 112
+
+32 / 16 = 2 tile in
+112 / 16 = 7 tile down
+
+
+
+
+game screen
+(640, 544)
+40x34
+home background
+14 * Tile.WIDTH = 14 * 16 = 224
+
+player screen position
+288, 256
+288 / 16 = 18
+256 / 16 = 16
+player position
+3 * Tile.WIDTH = 3 * 16 = 48
+
+
+
+
